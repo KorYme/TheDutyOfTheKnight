@@ -21,7 +21,6 @@ public class CameraFollow : MonoBehaviour
     {
         if (collision.tag == "Player" && !heroStats.invicibility)
         {
-            Debug.Log("Sorti");
             if (Mathf.Abs(player.transform.position.x-mainCamera.transform.position.x)> Mathf.Abs(player.transform.position.y - mainCamera.transform.position.y))
             {
                 if (player.transform.position.x - mainCamera.transform.position.x<0)

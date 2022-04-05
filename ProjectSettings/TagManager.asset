@@ -19,6 +19,10 @@ TagManager:
   - Explosion
   - TheBigGrid
   - Room
+  - North
+  - South
+  - East
+  - West
   layers:
   - Default
   - TransparentFX

@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
         heroAbility.fireUnlocked = false;
         heroAbility.earthUnlocked = false;
         heroAbility.windUnlocked = false;
-
     }
 
     private void FixedUpdate()
@@ -71,7 +70,6 @@ public class GameManager : MonoBehaviour
         mainCamera.SetActive(false);
         player.transform.position = new Vector3(-100, 101.5059f, 0);
         allEnemies = GameObject.FindGameObjectsWithTag("Enemies");
-        spawnRoomOut = false;
         spawnRoomOut = false;
     }
 
@@ -177,6 +175,7 @@ public class GameManager : MonoBehaviour
             //Ouvrir les portes
             OpenOrCloseTheDoors(true);
             Debug.Log("DOORS OPEN");
+            //Add a opening doors sound
         }
         else
         {
@@ -209,13 +208,5 @@ public class GameManager : MonoBehaviour
             }
             OpenOrCloseTheDoors(false);
         }
-    }
-
-    /// <summary>
-    /// Heros death
-    /// </summary>
-    public void HeroDeath()
-    {
-        
     }
 }
