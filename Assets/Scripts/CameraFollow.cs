@@ -7,7 +7,8 @@ public class CameraFollow : MonoBehaviour
     private GameObject mainCamera;
     private GameObject player;
     private HeroStats heroStats;
-    public static Vector2 playerCoordinates;
+    public Vector2 playerCoordinates;
+    public RoomManager roomManager;
 
     private void Start()
     {
@@ -15,6 +16,7 @@ public class CameraFollow : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         heroStats = player.GetComponent<HeroStats>();
         playerCoordinates = new Vector2(LevelGenerator.spawnX, LevelGenerator.spawnY);
+        roomManager = Camera.main.GetComponent<RoomManager>();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -56,8 +58,7 @@ public class CameraFollow : MonoBehaviour
                 }
             }
             Debug.Log(playerCoordinates);
-            GameManager.instance.AreEnemiesIn();
+            roomManager.AreEnemiesIn();
         }
     }
-
 }

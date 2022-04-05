@@ -7,6 +7,12 @@ public class EnemyStats : MonoBehaviour
     public float enemyHP = 100;
     public float enemyDamage = 10;
     private bool dead = false;
+    private RoomManager roomManager;
+
+    private void Start()
+    {
+        roomManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<RoomManager>();
+    }
 
     private void FixedUpdate()
     {
@@ -17,7 +23,7 @@ public class EnemyStats : MonoBehaviour
             GetComponent<CapsuleCollider2D>().enabled = false;
             SendMessage("StopMoving");
             Destroy(this.gameObject, 2.5f);
-            GameManager.instance.CheckEnemiesStillIn();
+            roomManager.CheckEnemiesStillIn();
         }
         if (this.GetComponent<Collider2D>().IsTouching(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>()))
         {

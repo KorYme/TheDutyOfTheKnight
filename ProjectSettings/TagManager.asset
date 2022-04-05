@@ -23,6 +23,7 @@ TagManager:
   - South
   - East
   - West
+  - GameManager
   layers:
   - Default
   - TransparentFX

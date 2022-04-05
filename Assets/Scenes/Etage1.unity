@@ -252,9 +252,11 @@ GameObject:
   - component: {fileID: 132324576}
   - component: {fileID: 132324575}
   - component: {fileID: 132324577}
+  - component: {fileID: 132324578}
+  - component: {fileID: 132324579}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -271,16 +273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e5bd170e6d5de4dbed47345d994526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRoomOut: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  closedDoorsMask:
-    serializedVersion: 2
-    m_Bits: 256
-  openedDoorsMask:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!4 &132324576
 Transform:
   m_ObjectHideFlags: 0
@@ -313,6 +305,50 @@ MonoBehaviour:
   nbShopAsked: 1
   nbAbilityAsked: 1
   nbRoomsAsked: 7
+--- !u!114 &132324578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132324574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02433d01322bc746a09f66df3bfa0d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnRoomOut: 0
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  closedDoorsMask:
+    serializedVersion: 2
+    m_Bits: 0
+  openedDoorsMask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &132324579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132324574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02433d01322bc746a09f66df3bfa0d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnRoomOut: 0
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  closedDoorsMask:
+    serializedVersion: 2
+    m_Bits: 0
+  openedDoorsMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &360544761
 GameObject:
   m_ObjectHideFlags: 0
@@ -933,6 +969,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afdff621609ad28448a2f631d3d38e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCoordinates: {x: 0, y: 0}
+  roomManager: {fileID: 0}
 --- !u!1 &570202707
 GameObject:
   m_ObjectHideFlags: 0
