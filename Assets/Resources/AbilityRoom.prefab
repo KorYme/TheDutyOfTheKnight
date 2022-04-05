@@ -4906,7 +4906,7 @@ GameObject:
   - component: {fileID: 4351578755917145199}
   - component: {fileID: 2475958271771273678}
   - component: {fileID: 3464322641896834535}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: ClosedDoors
   m_TagString: ClosedDoors
   m_Icon: {fileID: 0}
@@ -5329,8 +5329,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4868272348727034246}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.14, y: -0.26, z: 0}
-  m_LocalScale: {x: 11.6163, y: 4.1562, z: 1}
+  m_LocalPosition: {x: 3.5495, y: -1.6524, z: 0}
+  m_LocalScale: {x: 1.5843302, y: 1.371327, z: 1}
   m_Children: []
   m_Father: {fileID: 1957154237866620651}
   m_RootOrder: 1
@@ -5661,7 +5661,7 @@ GameObject:
   - component: {fileID: 4354520080457074993}
   - component: {fileID: 2309459989425948755}
   - component: {fileID: 1941420740564842254}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: OpeningDoors
   m_TagString: OpeningDoors
   m_Icon: {fileID: 0}
@@ -6576,7 +6576,7 @@ GameObject:
   - component: {fileID: 1367171585447520006}
   - component: {fileID: 7179846568448371804}
   - component: {fileID: 384001562249644953}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FloorOnlyDoors
   m_TagString: Untagged
   m_Icon: {fileID: 0}

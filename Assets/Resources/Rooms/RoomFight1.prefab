@@ -976,7 +976,7 @@ GameObject:
   - component: {fileID: 4638482671647895481}
   - component: {fileID: 4638482671647895480}
   - component: {fileID: 4638482671647895483}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: ClosedDoors
   m_TagString: ClosedDoors
   m_Icon: {fileID: 0}
@@ -5213,7 +5213,7 @@ GameObject:
   - component: {fileID: 4638482672689228355}
   - component: {fileID: 4638482672689228353}
   - component: {fileID: 4638482672689228352}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FloorOnlyDoors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5760,7 +5760,7 @@ GameObject:
   - component: {fileID: 4638482673316323947}
   - component: {fileID: 4638482673316323946}
   - component: {fileID: 4638482673316323957}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: OpeningDoors
   m_TagString: OpeningDoors
   m_Icon: {fileID: 0}

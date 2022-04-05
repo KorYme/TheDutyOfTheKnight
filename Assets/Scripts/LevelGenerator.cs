@@ -23,11 +23,16 @@ public class LevelGenerator : MonoBehaviour
     private GameObject bossRoom;
     private GameObject abilityRoom;
 
+    private void Awake()
+    {
+        CenteringSpawn(spawnCentered);
+        CameraFollow.playerCoordinates = new Vector2(LevelGenerator.spawnX, LevelGenerator.spawnY);
+    }
+
     private void Start()
     {
         InitializingValue();
         FillRoomList();
-        CenteringSpawn(spawnCentered);
         CreatingLevel();
     }
 
@@ -152,7 +157,7 @@ public class LevelGenerator : MonoBehaviour
         return count;
     }
 
-    List<string> WhichRoundAround(int height, int width)
+    public List<string> WhichRoundAround(int height, int width)
     {
         List<string> cardinalsPoints = new List<string>();
         if (height > 0 ? level[height - 1, width] != "Null" : false)

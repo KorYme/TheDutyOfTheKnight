@@ -6,12 +6,11 @@ public class RoomManager : MonoBehaviour
 {
     private HeroAbility heroAbility;
     private CameraFollow cameraFollow;
+    private LevelGenerator levelGenerator;
     private GameObject player;
     private GameObject spawnCamera;
     private GameObject mainCamera;
     private GameObject[] allEnemies;
-    private GameObject[] closedDoors;
-    private GameObject[] openedDoors;
     private Collider2D[] theClosedDoorsHere;
     private Collider2D[] theOpenedDoorsHere;
     private Collider2D[] insideEnemies;
@@ -28,7 +27,6 @@ public class RoomManager : MonoBehaviour
         heroAbility = GameObject.FindGameObjectWithTag("Player").GetComponent<HeroAbility>();
         InitiateValues();
         ActivateOrDesactivateEnemies(false);
-        DoorsHaveToBeOpened();
         heroAbility.fireUnlocked = false;
         heroAbility.earthUnlocked = false;
         heroAbility.windUnlocked = false;
@@ -56,7 +54,8 @@ public class RoomManager : MonoBehaviour
         player.transform.position = new Vector3(-100, 101.5059f, 0);
         allEnemies = GameObject.FindGameObjectsWithTag("Enemies");
         spawnRoomOut = false;
-        cameraFollow = Camera.main.GetComponent<CameraFollow>();
+        cameraFollow = mainCamera.GetComponent<CameraFollow>();
+        levelGenerator = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelGenerator>();
     }
 
     /// <summary>
@@ -75,67 +74,40 @@ public class RoomManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Open all doors at the beginning of the game
-    /// </summary>
-    public void DoorsHaveToBeOpened()
-    {
-        closedDoors = GameObject.FindGameObjectsWithTag("ClosedDoors");
-        foreach (var item in closedDoors)
-        {
-            item.SetActive(false);
-        }
-        openedDoors = GameObject.FindGameObjectsWithTag("OpeningDoors");
-        foreach (var item in openedDoors)
-        {
-            item.SetActive(true);
-        }
-    }
-
-    /// <summary>
     /// Open or close the doors
     /// </summary>
     /// <param name="that">If true open the doors else close them</param>
     private void OpenOrCloseTheDoors(bool that)
     {
         //Take all the doors in this room
-        foreach (var item in openedDoors)
-        {
-            item.SetActive(true);
-        }
         theOpenedDoorsHere = Physics2D.OverlapBoxAll(camPos, camSize, 0f, openedDoorsMask);
-        foreach (var item in openedDoors)
-        {
-            item.SetActive(false);
-        }
-        foreach (var item in closedDoors)
-        {
-            item.SetActive(true);
-        }
         theClosedDoorsHere = Physics2D.OverlapBoxAll(camPos, camSize, 0f, closedDoorsMask);
-        foreach (var item in closedDoors)
-        {
-            item.SetActive(false);
-        }
         //And desactivate the chosen ones
-        // TO DO => List<string> cardinalsPoints = new List<string>();
-        foreach (var item in theOpenedDoorsHere)
+        List<string> cardinalsPoints = levelGenerator.WhichRoundAround((int)CameraFollow.playerCoordinates.x, (int)CameraFollow.playerCoordinates.y);
+        if (that)
         {
-            if (that)
+            //Ouvre seulement les portes découlants vers d'autres salles
+            foreach (var item in theOpenedDoorsHere)
             {
-                if (true)
-                {
-
-                }
+                item.gameObject.SetActive(cardinalsPoints.Contains(item.tag));
+            }
+            foreach (var item in theClosedDoorsHere)
+            {
+                item.gameObject.SetActive(!cardinalsPoints.Contains(item.tag));
+            }
+        }
+        else
+        {
+            //Close Everything
+            foreach (var item in theOpenedDoorsHere)
+            {
+                Debug.Log(item.name);
+                item.gameObject.SetActive(false);
+            }
+            foreach (var item in theClosedDoorsHere)
+            {
                 item.gameObject.SetActive(true);
             }
-            else
-            {
-
-            }
-        }
-        foreach (var item in theClosedDoorsHere)
-        {
-            item.gameObject.SetActive(!that);
         }
     }
 
@@ -193,13 +165,13 @@ public class RoomManager : MonoBehaviour
         ActivateOrDesactivateEnemies(false);
         if (insideEnemies.Length == 0)
         {
-            Debug.Log("NO ENEMY DETECTED");
-            Debug.Log("DOORS OPEN");
+            //Debug.Log("NO ENEMY DETECTED");
+            //Debug.Log("DOORS OPEN");
             OpenOrCloseTheDoors(true);
         }
         else
         {
-            Debug.Log("ENEMY DETECTED");
+            //Debug.Log("ENEMY DETECTED");
             foreach (var item in insideEnemies)
             {
                 item.gameObject.SetActive(true);
