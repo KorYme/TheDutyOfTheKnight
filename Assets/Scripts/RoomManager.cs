@@ -45,7 +45,7 @@ public class RoomManager : MonoBehaviour
     /// </summary>
     public void InitiateValues()
     {
-        camSize = new Vector2(20.5391769f, 12.3463593f);
+        camSize = new Vector2(17.8162708f, 9.53441048f);
         player = GameObject.FindGameObjectWithTag("Player");
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         spawnCamera = GameObject.FindGameObjectWithTag("SpawnCamera");

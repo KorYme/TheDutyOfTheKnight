@@ -20,7 +20,7 @@ public class CameraFollow : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player" && !heroStats.invicibility)
+        if (collision.tag == "Player")
         {
             if (Mathf.Abs(player.transform.position.x-mainCamera.transform.position.x)> Mathf.Abs(player.transform.position.y - mainCamera.transform.position.y))
             {
@@ -30,7 +30,7 @@ public class CameraFollow : MonoBehaviour
                     player.transform.position = new Vector3(player.transform.position.x-3, player.transform.position.y,0);
                     mainCamera.transform.position = new Vector3(mainCamera.transform.position.x - 20, mainCamera.transform.position.y, -10);
                     playerCoordinates.x--;
-                } 
+                }
                 else
                 {
                     //Gauche
