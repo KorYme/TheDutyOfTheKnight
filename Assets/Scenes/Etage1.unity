@@ -300,7 +300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelHeight: 5
   levelWidth: 5
-  spawnCentered: 0
+  spawnCentered: 1
   nbShopAsked: 1
   nbAbilityAsked: 1
   nbRoomsAsked: 7
