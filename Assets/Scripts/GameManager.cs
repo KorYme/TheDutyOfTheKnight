@@ -20,5 +20,4 @@ public class GameManager : MonoBehaviour
         Debug.Log("The game starts !");
     }
 
-
 }

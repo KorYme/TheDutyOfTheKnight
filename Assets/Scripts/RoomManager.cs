@@ -10,7 +10,8 @@ public class RoomManager : MonoBehaviour
     private GameObject player;
     private GameObject spawnCamera;
     private GameObject mainCamera;
-    private GameObject[] allEnemies;
+    private GameObject[] allMonsters;
+    private Collider2D[] allSpawner;
     private Collider2D[] theClosedDoorsHere;
     private Collider2D[] theOpenedDoorsHere;
     private Collider2D[] insideEnemies;
@@ -21,12 +22,13 @@ public class RoomManager : MonoBehaviour
     public LayerMask enemyLayer;
     public LayerMask closedDoorsMask;
     public LayerMask openedDoorsMask;
+    public LayerMask spawner;
 
     void Start()
     {
         heroAbility = GameObject.FindGameObjectWithTag("Player").GetComponent<HeroAbility>();
         InitiateValues();
-        ActivateOrDesactivateEnemies(false);
+        //ActivateOrDesactivateEnemies(false);
         heroAbility.fireUnlocked = false;
         heroAbility.earthUnlocked = false;
         heroAbility.windUnlocked = false;
@@ -52,26 +54,38 @@ public class RoomManager : MonoBehaviour
         spawnCamera.SetActive(true);
         mainCamera.SetActive(false);
         player.transform.position = new Vector3(-100, 101.5059f, 0);
-        allEnemies = GameObject.FindGameObjectsWithTag("Enemies");
         spawnRoomOut = false;
         cameraFollow = mainCamera.GetComponent<CameraFollow>();
         levelGenerator = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelGenerator>();
+        allMonsters = Resources.LoadAll<GameObject>("Monsters");
     }
 
     /// <summary>
     /// Activate every enemy if true else desactivate them
     /// </summary>
     /// <param name="that">Activate the monsters if true or not if false</param>
-    public void ActivateOrDesactivateEnemies(bool that)
+    /*public void ActivateOrDesactivateEnemies(bool that)
     {
-        foreach (var enemy in allEnemies)
+        foreach (var enemy in allSpawner)
         {
             if (enemy != null)
             {
                 enemy.SetActive(that);
             }
         }
+    }*/
+
+    public void ActivateEnemies()
+    {
+        camPos = mainCamera.transform.position;
+        allSpawner = Physics2D.OverlapBoxAll(camPos, camSize, 0f, spawner);
+        foreach (var item in allSpawner)
+        {
+            GameObject enemy = Instantiate(allMonsters[Random.Range(0, allMonsters.Length)], item.transform.position, Quaternion.identity, GameObject.FindGameObjectWithTag("TheBigGrid").transform);
+            Destroy(item);
+        }
     }
+
 
     /// <summary>
     /// Open or close the doors
@@ -86,6 +100,7 @@ public class RoomManager : MonoBehaviour
         List<string> cardinalsPoints = levelGenerator.WhichRoundAround((int)CameraFollow.playerCoordinates.x, (int)CameraFollow.playerCoordinates.y);
         if (that)
         {
+            //Door Sound
             //Ouvre seulement les portes découlants vers d'autres salles
             foreach (var item in theOpenedDoorsHere)
             {
@@ -145,7 +160,6 @@ public class RoomManager : MonoBehaviour
             //Ouvrir les portes
             OpenOrCloseTheDoors(true);
             Debug.Log("DOORS OPEN");
-            //Add a opening doors sound
         }
         else
         {
@@ -160,18 +174,18 @@ public class RoomManager : MonoBehaviour
     public void AreEnemiesIn()
     {
         camPos = mainCamera.transform.position;
-        ActivateOrDesactivateEnemies(true);
+        //ActivateOrDesactivateEnemies(true);
         insideEnemies = Physics2D.OverlapBoxAll(camPos, camSize, 0f, enemyLayer);
-        ActivateOrDesactivateEnemies(false);
+        //ActivateOrDesactivateEnemies(false);
         if (insideEnemies.Length == 0)
         {
-            //Debug.Log("NO ENEMY DETECTED");
-            //Debug.Log("DOORS OPEN");
+            Debug.Log("NO ENEMY DETECTED");
+            Debug.Log("DOORS OPEN");
             OpenOrCloseTheDoors(true);
         }
         else
         {
-            //Debug.Log("ENEMY DETECTED");
+            Debug.Log("ENEMY DETECTED");
             foreach (var item in insideEnemies)
             {
                 item.gameObject.SetActive(true);

@@ -298,12 +298,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b6a057e10934884d8e5e081356bbaab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelHeight: 5
-  levelWidth: 5
+  levelHeight: 4
+  levelWidth: 4
   spawnCentered: 1
   nbShopAsked: 1
   nbAbilityAsked: 1
-  nbRoomsAsked: 7
+  nbRoomsAsked: 5
 --- !u!114 &132324578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,6 +326,9 @@ MonoBehaviour:
   openedDoorsMask:
     serializedVersion: 2
     m_Bits: 512
+  spawner:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &360544761
 GameObject:
   m_ObjectHideFlags: 0

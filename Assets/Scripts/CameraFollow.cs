@@ -56,6 +56,7 @@ public class CameraFollow : MonoBehaviour
                     playerCoordinates.y++;
                 }
             }
+            roomManager.ActivateEnemies();
             roomManager.AreEnemiesIn();
         }
     }
