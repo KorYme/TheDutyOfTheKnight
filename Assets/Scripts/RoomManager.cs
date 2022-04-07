@@ -52,7 +52,7 @@ public class RoomManager : MonoBehaviour
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         spawnCamera = GameObject.FindGameObjectWithTag("SpawnCamera");
         spawnCamera.SetActive(true);
-        mainCamera.SetActive(false);
+        Camera.main.gameObject.SetActive(false);
         player.transform.position = new Vector3(-100, 101.5059f, 0);
         spawnRoomOut = false;
         cameraFollow = mainCamera.GetComponent<CameraFollow>();
@@ -61,31 +61,44 @@ public class RoomManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Activate every enemy if true else desactivate them
+    /// Check if the player is touching the ladder and is pressing E
     /// </summary>
-    /// <param name="that">Activate the monsters if true or not if false</param>
-    /*public void ActivateOrDesactivateEnemies(bool that)
+    public void LadderScript()
     {
-        foreach (var enemy in allSpawner)
+        if (GameObject.FindGameObjectWithTag("Ladder1").GetComponent<Collider2D>().IsTouching(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>()))
         {
-            if (enemy != null)
+            if (Input.GetKey(KeyCode.E))
             {
-                enemy.SetActive(that);
+                mainCamera.SetActive(true);
+                heroAbility.windUnlocked = true;
+                heroAbility.earthUnlocked = true;
+                heroAbility.fireUnlocked = true;
+                spawnCamera.SetActive(false);
+                player.transform.position = new Vector3(0, 0, 0);
+                spawnRoomOut = true;
+                ChangingRoom();
             }
-        }
-    }*/
-
-    public void ActivateEnemies()
-    {
-        camPos = mainCamera.transform.position;
-        allSpawner = Physics2D.OverlapBoxAll(camPos, camSize, 0f, spawner);
-        foreach (var item in allSpawner)
-        {
-            GameObject enemy = Instantiate(allMonsters[Random.Range(0, allMonsters.Length)], item.transform.position, Quaternion.identity, GameObject.FindGameObjectWithTag("TheBigGrid").transform);
-            Destroy(item);
         }
     }
 
+    public void ChangingRoom()
+    {
+        camPos = Camera.main.transform.position;
+        theOpenedDoorsHere = Physics2D.OverlapBoxAll(camPos, camSize, 0f, openedDoorsMask);
+        theClosedDoorsHere = Physics2D.OverlapBoxAll(camPos, camSize, 0f, closedDoorsMask);
+        ActivateEnemies();
+        AreEnemiesIn();
+    }
+
+    public void ActivateEnemies()
+    {
+        allSpawner = Physics2D.OverlapBoxAll(camPos, camSize, 0f, spawner);
+        foreach (var item in allSpawner)
+        {
+            GameObject enemy = Instantiate(allMonsters[Random.Range(0, allMonsters.Length)], item.transform.position, Quaternion.identity);
+            Destroy(item.gameObject);
+        }
+    }
 
     /// <summary>
     /// Open or close the doors
@@ -93,9 +106,6 @@ public class RoomManager : MonoBehaviour
     /// <param name="that">If true open the doors else close them</param>
     private void OpenOrCloseTheDoors(bool that)
     {
-        //Take all the doors in this room
-        theOpenedDoorsHere = Physics2D.OverlapBoxAll(camPos, camSize, 0f, openedDoorsMask);
-        theClosedDoorsHere = Physics2D.OverlapBoxAll(camPos, camSize, 0f, closedDoorsMask);
         //And desactivate the chosen ones
         List<string> cardinalsPoints = levelGenerator.WhichRoundAround((int)CameraFollow.playerCoordinates.x, (int)CameraFollow.playerCoordinates.y);
         if (that)
@@ -116,7 +126,6 @@ public class RoomManager : MonoBehaviour
             //Close Everything
             foreach (var item in theOpenedDoorsHere)
             {
-                Debug.Log(item.name);
                 item.gameObject.SetActive(false);
             }
             foreach (var item in theClosedDoorsHere)
@@ -128,42 +137,19 @@ public class RoomManager : MonoBehaviour
 
 
     /// <summary>
-    /// Check if the player is touching the ladder and is pressing E
-    /// </summary>
-    public void LadderScript()
-    {
-        if (GameObject.FindGameObjectWithTag("Ladder1").GetComponent<Collider2D>().IsTouching(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>()))
-        {
-            if (Input.GetKey(KeyCode.E))
-            {
-                mainCamera.SetActive(true);
-                heroAbility.windUnlocked = true;
-                heroAbility.earthUnlocked = true;
-                heroAbility.fireUnlocked = true;
-                spawnCamera.SetActive(false);
-                player.transform.position = new Vector3(0, 0, 0);
-                spawnRoomOut = true;
-                AreEnemiesIn();
-            }
-        }
-    }
-
-    /// <summary>
     /// Check if at least one enemy is still in this room
     /// </summary>
     public void CheckEnemiesStillIn()
     {
-        camPos = mainCamera.transform.position;
         enemiesIn = Physics2D.OverlapBox(camPos, camSize, 0f, enemyLayer);
         if (enemiesIn == null)
         {
             //Ouvrir les portes
             OpenOrCloseTheDoors(true);
-            Debug.Log("DOORS OPEN");
         }
         else
         {
-            //Else uniquement utile pour debug
+            //Else only useful to debug
             Debug.Log("ENEMIES REMAINING");
         }
     }
@@ -179,13 +165,10 @@ public class RoomManager : MonoBehaviour
         //ActivateOrDesactivateEnemies(false);
         if (insideEnemies.Length == 0)
         {
-            Debug.Log("NO ENEMY DETECTED");
-            Debug.Log("DOORS OPEN");
             OpenOrCloseTheDoors(true);
         }
         else
         {
-            Debug.Log("ENEMY DETECTED");
             foreach (var item in insideEnemies)
             {
                 item.gameObject.SetActive(true);

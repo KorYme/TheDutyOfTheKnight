@@ -108,6 +108,7 @@ public class LevelGenerator : MonoBehaviour
                 }
             }
         }
+        AstarPath.active.Scan();
     }
 
     int HowManyRoundAround(int height, int width)

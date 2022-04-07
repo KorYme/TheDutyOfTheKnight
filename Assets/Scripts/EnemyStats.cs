@@ -34,7 +34,6 @@ public class EnemyStats : MonoBehaviour
     public void TakeDamage(int damage)
     {
         enemyHP -= damage;
-        Debug.Log(enemyHP);
         StartCoroutine(Stagger());
     }
 
