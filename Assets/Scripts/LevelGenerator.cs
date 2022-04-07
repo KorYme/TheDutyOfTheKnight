@@ -25,20 +25,25 @@ public class LevelGenerator : MonoBehaviour
 
     private void Awake()
     {
+        InitializingValue();
         CenteringSpawn(spawnCentered);
         CameraFollow.playerCoordinates = new Vector2(LevelGenerator.spawnX, LevelGenerator.spawnY);
     }
 
     private void Start()
     {
-        InitializingValue();
         FillRoomList();
         CreatingLevel();
     }
 
     void InitializingValue()
     {
-        totalNumberRoomsAsked = totalNumberRoomsAsked > levelHeight * levelWidth ? levelHeight * levelWidth : 2 + nbRoomsAsked + nbShopAsked + nbAbilityAsked;
+        totalNumberRoomsAsked = 2 + nbRoomsAsked + nbShopAsked + nbAbilityAsked;
+        while (totalNumberRoomsAsked > levelHeight * levelWidth)
+        {
+            levelHeight++;
+            levelWidth++;
+        }
         totalNumberRoomsCreated = 0;
         abilityRoomCreated = 0;
         shopRoomCreated = 0;
@@ -85,42 +90,12 @@ public class LevelGenerator : MonoBehaviour
             int width = Random.Range(0, levelWidth);
             if (HowManyRoundAround(height, width) > 0 && level[height, width] == "Null")
             {
-                int thisRoom = Random.Range(0, totalNumberRoomsAsked);
-                if (totalNumberRoomsAsked - totalNumberRoomsCreated == nbShopAsked - shopRoomCreated + nbAbilityAsked - abilityRoomCreated)
-                {
-                    if (abilityRoomCreated < nbAbilityAsked)
-                    {
-                        level[height, width] = "Ability";
-                        abilityRoomCreated++;
-                        totalNumberRoomsCreated++;
-                    }
-                    else
-                    {
-                        level[height, width] = "Shop";
-                        shopRoomCreated++;
-                        totalNumberRoomsCreated++;
-                    }
-                }
-                else if (thisRoom == 0 && abilityRoomCreated == 0)
-                {
-                    level[height, width] = "Ability";
-                    abilityRoomCreated++;
-                    totalNumberRoomsCreated++;
-                }
-                else if (thisRoom <= nbShopAsked && shopRoomCreated < nbShopAsked)
-                {
-                    level[height, width] = "Shop";
-                    shopRoomCreated++;
-                    totalNumberRoomsCreated++;
-                }
-                else if ((abilityRoomCreated == 1 && shopRoomCreated == nbShopAsked) || (thisRoom >= nbShopAsked))
-                {
-                    totalNumberRoomsCreated++;
-                    level[height, width] = "Room";
-                }
+                level[height, width] = "Room";
+                totalNumberRoomsCreated++;
             }
         }
         PlacingBossRoom();
+        PlacingOtherRooms();
         for (int i = 0; i < levelHeight; i++)
         {
             for (int y = 0; y < levelWidth; y++)
@@ -229,5 +204,29 @@ public class LevelGenerator : MonoBehaviour
         }
         Vector2 bossRoom = coordinates[Random.Range(0,coordinates.Count)];
         level[(int)bossRoom.x,(int)bossRoom.y] = "Boss";
+    }
+
+    void PlacingOtherRooms()
+    {
+        while (nbAbilityAsked>abilityRoomCreated)
+        {
+            int height = Random.Range(0, levelHeight);
+            int width = Random.Range(0, levelWidth);
+            if (level[height, width] == "Room")
+            {
+                level[height, width] = "Ability";
+                abilityRoomCreated++;
+            }
+        }
+        while (nbShopAsked>shopRoomCreated)
+        {
+            int height = Random.Range(0, levelHeight);
+            int width = Random.Range(0, levelWidth);
+            if (level[height, width] == "Room")
+            {
+                level[height, width] = "Shop";
+                shopRoomCreated++;
+            }
+        }
     }
 }
