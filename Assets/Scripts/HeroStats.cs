@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HeroStats : MonoBehaviour
 {
-    //Main stats
+    [Header("Main Stats")]
     public int heroHP = 100;
     public int heroMaxHealth = 100;
     public int heroAttaque = 20;
@@ -12,20 +12,20 @@ public class HeroStats : MonoBehaviour
     public float flashDelay;
     public float invicibilityDelay;
     public bool invicibility;
-    
-    //Abilities stats
+
+    [Header("Abilities Stats")]
     public float fireDamage;
     public float shieldDamage = 25f;
     public float shieldDuration = 3f;
     public float dashDamage = 50f;
     public float explosionDamage = 100f;
     
-    //Gamemode parameters
+    [Header("Gamemode Parameters")]
+    public bool nightmareMode;
     public int capHeroLow = 5;
-    public bool modeCauchemar;
     private bool heroLow;
 
-    //GameObjects and Components
+    [Header("GameObjects and Components")]
     private HealthBar healthBar;
     public SpriteRenderer graphics;
 
@@ -36,8 +36,8 @@ public class HeroStats : MonoBehaviour
         healthBar.InitializeHealthBar(heroMaxHealth);
 
         invicibility = false;
-        //Vérifie si le mode "Cauchemar" est activé (A REVOIR)
-        if (modeCauchemar)
+        //Check if the nightmare mode
+        if (nightmareMode)
         {
             heroMaxHealth = 1;
         }
@@ -51,7 +51,7 @@ public class HeroStats : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Double l'attaque du héros si celui-ci est low
+        //Totalement à revoir
         if (heroHP <= capHeroLow && !(heroLow))
         {
             heroLow = true;

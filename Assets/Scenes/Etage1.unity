@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAAAIIew8AGzSXgIAABQFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VE1z2jAQ/SuMzk3HJqRAb61DSA8EJqSTiy+ytcYaZMmjDz6S4b93JdvYpdNTlLdv3779MJ+ES1NDbpVeas5WigH5PiL+Tb6M+uAznOhOyS3/gI7zzpktPYkGziu1XCEe+zSjKrCa5z/kTnhyhKCTvFC6WrAdJMpYg3BBhQEMaWV9tkToc0RO+Odu7lPO+BpP/esDX/NodMFnDtKC7qkdsaM1LCdzQasamLfck8eTjh7PGqLEdlpO9HXi9ZUQ3LRuiD3XoduE1sZhL0hgnGJ3wYIXK4HvSuu1h8nrojBgW4qm50eucUiNKvmpmslV1OwbbwcqnK8zux8HV43o6p/4XRzChVbVc1c3jnwNW/J8/0rPOTV2MNoh/Ngbj8OIjlTsaSbgvQT5opZaOckwaLXzqc7A+LH/99paUkK+7/HG6g3o6v8vyPdwCd2fEsGr7Dp5BLZChXmH9YPG3fxCw+E4TCuBqHfx28Ab3Q2vqA08cW0shtoupbeXKac9lSzCzHw3ziZKSwhwa7oGSYU9b1DG3q7wJjYoexN5ov57aYu3se4zuEkJcM+PopvQRh2vyzKlOq7AlGtnBZfQm/aBF5xToqRsLmw4ky5t63RB80HaznH292mRLM6zKC9mUxY9TGYPs7sMWPHtIY7uMzqJ5vMpCbfHJfZJxaYx2o4HtyZ7cYl35hXfSlhqWodbZ5oel/yjUoOBc1moba4B5LrJv9oGjSXwq2QLxnE8W7CWy7Bt8pkSofI9sPQqlIY+FyeradqrpKTmB2U9kpIk/GqkxMPXS95oOHA4+uKd2IVc/gBQSwMEFAAACAgAAAgh7NKOIyltAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTXUVBKL0osyCgGihiCOKWZKSB2tFKSYXKSQXKahXmKgamJhamFblJqSpqZqaGBcVKiiYGlpblSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAAAgh7DwAbNJeAgAAFAUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAAgh7NKOIyltAAAAeAAAAAkAJAAAAAAAAAAAAAAAqwIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABjAwAAAAA=
+    dataString: UEsDBBQAAAgIAAAIIeyoTn28XgIAABUFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VE1z2jAQ/SuMzk3HJqRAb61DSA8EJqSTiy+ytcYaZMmjDz6S4b93JdvYpdNTlLdv3779MJ+ES1NDbpVeas5WigH5PiL+Tb6M+uAznOhOyS3/gI7zzpktPYkGziu1XCEe+zSjKrCa5z/kTnhyhKCTvFC6WrAdJMpYg3BBhQEMaWV9tkToc0RO+Odu7lPO+BpP/esDX/NodMFnDtKC7qkdsaM1LCdzQasamLfck8eTjh7PGqLEdlpO9HXi9ZUQ3LRuiD3XoduE1sZhL0hgnGJ3wYIXK4HvSuu1h8nrojBgW4qm50eucUiNKvmpmslV1OwbbwcqnK8zux8HV43o6p/4XRzChVbVc1c3jnwNW/J8/0rPOTV2MNoh/Ngbj8OIjlTsaSbgvQT5opZaOckwaLXzqc7A+LH/99paUkK+7/HG6g3o6v8vyPdwCd2fEsGr7Dp5BLZChXmH9YPG3fxCw+E4TCuBqHfx28Ab3Q2vqA08cW0shtoupbeXKac9lSzCzHw3ziZKSwhwa7oGSYU9b1DG3q7wJjYoexN5ov57aYu3se4zuEkJcM+PopvQRh2vyzKlOq7AlGtnBZfQm/aBF5xToqRsLmw4ky5t63RB80HaznH292mRLM6zKC9mUxY9TGYPs7sMWPHtIY7uMzqJ5vMpCbfHJfZJxaYx2o4HtyZ7cYl35hXfSlhqWodbZ5oel/yjUkN7XBZqm2sAuW4Err5BYw38LNmCcZzPFqzlMqybfKZEqHwPLL1WTEOji5PVNO1VUlLzg7IeSUkSfjZS4uHrKW80HDgcffFO7EIufwBQSwMEFAAACAgAAAgh7NKOIyltAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTXUVBKL0osyCgGihiCOKWZKSB2tFKSYXKSQXKahXmKgamJhamFblJqSpqZqaGBcVKiiYGlpblSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAAAgh7KhOfbxeAgAAFQUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAAgh7NKOIyltAAAAeAAAAAkAJAAAAAAAAAAAAAAAqwIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABjAwAAAAA=
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -253,6 +253,7 @@ GameObject:
   - component: {fileID: 132324575}
   - component: {fileID: 132324577}
   - component: {fileID: 132324578}
+  - component: {fileID: 132324579}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -329,6 +330,25 @@ MonoBehaviour:
   spawner:
     serializedVersion: 2
     m_Bits: 4096
+--- !u!114 &132324579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132324574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ae7dbbd3d835d45a7e74ca4734565b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects:
+  - {fileID: 2086663700}
+  - {fileID: 132324574}
+  - {fileID: 8769692}
+  - {fileID: 60747672}
+  - {fileID: 401620109}
+  - {fileID: 360544761}
 --- !u!1 &360544761
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,8 +697,8 @@ MonoBehaviour:
   shieldDuration: 3
   dashDamage: 50
   explosionDamage: 100
+  nightmareMode: 0
   capHeroLow: 5
-  modeCauchemar: 0
   graphics: {fileID: 401620116}
 --- !u!50 &401620114
 Rigidbody2D:
@@ -801,7 +821,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a3c67acd923b20499decdb3983eea39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heroStats: {fileID: 0}
   windUnlocked: 1
   fireUnlocked: 1
   earthUnlocked: 1
@@ -817,6 +836,7 @@ MonoBehaviour:
   KeyExplosion: 49
   KeyDash: 50
   KeyShieldDamage: 51
+  heroStats: {fileID: 0}
   FireBall: {fileID: 6067577561094456797, guid: 65a52fbba66c01944926e1304f11631f, type: 3}
   fireBallSpeed: 3
   damagingShield: 0

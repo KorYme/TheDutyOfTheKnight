@@ -14,10 +14,11 @@ public class GameManager : MonoBehaviour
 
         instance = this;
     }
-    //Check if the game starts
+    /// <summary>
+    /// Check if the game starts
+    /// </summary>
     public void InitGame ()
     {
         Debug.Log("The game starts !");
     }
-
 }

@@ -4,24 +4,22 @@ using UnityEngine;
 
 public class HeroAbility : MonoBehaviour
 {
-    public HeroStats heroStats;
-
-    //Ability unlocked
+    [Header("Ability unlocked")]
     public bool windUnlocked;
     public bool fireUnlocked;
     public bool earthUnlocked;
 
-    //Cooldowns states
+    [Header("Cooldowns states")]
     public bool windInCooldown;
     public bool fireInCooldown;
     public bool earthInCooldown;
 
-    //Cooldowns times
+    [Header("Cooldowns times")]
     public float cooldownWind;
     public float cooldownFire;
     public float cooldownEarth;
 
-    //KeyCodes
+    [Header("KeyCodes")]
     public KeyCode KeyFire = KeyCode.A;
     public KeyCode KeyWind = KeyCode.Mouse1;
     public KeyCode KeyEarth = KeyCode.Space;
@@ -29,6 +27,8 @@ public class HeroAbility : MonoBehaviour
     public KeyCode KeyDash = KeyCode.Alpha2;
     public KeyCode KeyShieldDamage = KeyCode.Alpha3;
 
+    [Header("To Define Values")]
+    public HeroStats heroStats;
     public GameObject FireBall;
     public float fireBallSpeed;
     public bool damagingShield;

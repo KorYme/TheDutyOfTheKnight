@@ -5,18 +5,20 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour
 {
     public string[,] level;
+    [Header("")]
     public int levelHeight;
     public int levelWidth;
     public bool spawnCentered;
     public int nbShopAsked;
     public int nbAbilityAsked;
     public int nbRoomsAsked;
+    public static int spawnX;
+    public static int spawnY;
+
     private int totalNumberRoomsAsked;
     private int totalNumberRoomsCreated;
     private int abilityRoomCreated;
     private int shopRoomCreated;
-    public static int spawnX;
-    public static int spawnY;
     private GameObject[] allRooms;
     private GameObject spawnRoom;
     private GameObject shopRoom;
@@ -28,11 +30,11 @@ public class LevelGenerator : MonoBehaviour
         InitializingValue();
         CenteringSpawn(spawnCentered);
         CameraFollow.playerCoordinates = new Vector2(LevelGenerator.spawnX, LevelGenerator.spawnY);
+        FillRoomList();
     }
 
     private void Start()
     {
-        FillRoomList();
         CreatingLevel();
     }
 
@@ -72,7 +74,7 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    void CreatingLevel()
+    public void CreatingLevel()
     {
         level = new string[levelHeight, levelWidth];
         for (int i = 0; i < levelHeight; i++)
