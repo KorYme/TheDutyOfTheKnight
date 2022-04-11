@@ -6,7 +6,7 @@ using UnityEngine;
 public class KeepForNextScene : MonoBehaviour
 {
     public GameObject[] objects;
-    private int levelNumber;
+    //private int levelNumber;
 
     private void Awake()
     {
@@ -14,16 +14,17 @@ public class KeepForNextScene : MonoBehaviour
         {
             DontDestroyOnLoad(item);
         }
-        levelNumber = 1;
+        //levelNumber = 1;
     }
 
     void FixedUpdate()
     {
         //Need modifications
+        /*
         if (Input.GetKeyDown(KeyCode.G))
         {
             levelNumber++;
             SceneManager.LoadScene("Etage" + levelNumber.ToString());
-        }
+        }*/
     }
 }

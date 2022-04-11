@@ -49,10 +49,10 @@ public class HeroAbility : MonoBehaviour
         transform.Find("DashLane").GetComponent<TrailRenderer>().enabled = false;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         //Check if the player clicked on an ability key
-        if (Input.GetKeyDown(KeyFire) && fireUnlocked && !fireInCooldown)
+        if (Input.GetKey(KeyFire) && fireUnlocked && !fireInCooldown)
         {
             FireAbility();
             StartCoroutine(CooldownAbilityFire());

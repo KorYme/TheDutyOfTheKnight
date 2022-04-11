@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour
 {
     public string[,] level;
-    [Header("")]
+    [Header("Level Parameters")]
     public int levelHeight;
     public int levelWidth;
     public bool spawnCentered;
