@@ -24,6 +24,9 @@ TagManager:
   - East
   - West
   - GameManager
+  - FireTotem
+  - EarthTotem
+  - WindTotem
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,18 @@ public class HeroMovement : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     private Animator animator;
 
+    public static HeroMovement instance;
+
+    //Instance
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogError("More than one HeroMovement instance in the game !");
+        }
+        instance = this;
+    }
+
     //Initialization
     private void Start()
     {
@@ -29,5 +41,5 @@ public class HeroMovement : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
     }
 
-    
+
 }
