@@ -10,6 +10,7 @@ public class RoomManager : MonoBehaviour
     private GameObject player;
     private GameObject spawnCamera;
     private GameObject mainCamera;
+    public GameObject[] allBosses;
     private GameObject[] allMonsters;
     private Collider2D[] allSpawner;
     private Collider2D[] theClosedDoorsHere;
@@ -95,9 +96,18 @@ public class RoomManager : MonoBehaviour
         allSpawner = Physics2D.OverlapBoxAll(camPos, camSize, 0f, spawner);
         foreach (var item in allSpawner)
         {
-            GameObject enemy = Instantiate(allMonsters[Random.Range(0, allMonsters.Length)], item.transform.position, Quaternion.identity);
-            Destroy(item.gameObject);
+            if (item.tag == "SpawnBoss")
+            {
+                GameObject Boss = Instantiate(allBosses[Random.Range(0, allBosses.Length)], item.transform.position, Quaternion.identity);
+                Destroy(item.gameObject);
+            }
+            else
+            {
+                GameObject enemy = Instantiate(allMonsters[Random.Range(0, allMonsters.Length)], item.transform.position, Quaternion.identity);
+                Destroy(item.gameObject);
+            }
         }
+
     }
 
     /// <summary>

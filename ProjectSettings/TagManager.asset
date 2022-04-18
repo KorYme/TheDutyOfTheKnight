@@ -27,6 +27,8 @@ TagManager:
   - FireTotem
   - EarthTotem
   - WindTotem
+  - Boss
+  - SpawnBoss
   layers:
   - Default
   - TransparentFX

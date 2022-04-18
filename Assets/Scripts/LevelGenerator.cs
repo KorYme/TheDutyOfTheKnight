@@ -96,7 +96,9 @@ public class LevelGenerator : MonoBehaviour
                 totalNumberRoomsCreated++;
             }
         }
-        PlacingBossRoom();
+        //Tests Boss
+        level[spawnX,spawnY + 1] = "Boss";
+        //PlacingBossRoom();
         PlacingOtherRooms();
         for (int i = 0; i < levelHeight; i++)
         {

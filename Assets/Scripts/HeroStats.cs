@@ -5,9 +5,9 @@ using UnityEngine;
 public class HeroStats : MonoBehaviour
 {
     [Header("Main Stats")]
-    public int heroHP = 100;
-    public int heroMaxHealth = 100;
-    public int heroAttaque = 20;
+    public float heroHP = 100;
+    public float heroMaxHealth = 100f;
+    public float heroAttaque = 20f;
     public float speed = 250f;
     public float flashDelay;
     public float invicibilityDelay;
@@ -22,12 +22,24 @@ public class HeroStats : MonoBehaviour
     
     [Header("Gamemode Parameters")]
     public bool nightmareMode;
-    public int capHeroLow = 5;
+    public float capHeroLow = 5;
     private bool heroLow;
 
     [Header("GameObjects and Components")]
     private HealthBar healthBar;
     public SpriteRenderer graphics;
+
+    public static HeroStats instance;
+    private void Awake()
+    {
+        instance = null;
+        if (instance != null)
+        {
+            Debug.LogError("More than one heroStats instance in the game !");
+        }
+
+        instance = this;
+    }
 
     void Start()
     {
@@ -68,7 +80,7 @@ public class HeroStats : MonoBehaviour
         }
     }
 
-    private void TakeDamageHero(int damage)
+    public void TakeDamageHero(float damage)
     {
         if (!invicibility)
         {
