@@ -45,7 +45,6 @@ public class BossFight : MonoBehaviour
         {
             canChange = false;
             bossAbility1 = false;
-            
         }
         else if (canChange)
         {
@@ -115,16 +114,17 @@ public class BossFight : MonoBehaviour
         healthBoss -= damage;
         Debug.Log("Le boss a encore " + healthBoss.ToString());
 
-        if (healthBossInitial/ 2>= healthBoss)
+        if (healthBossInitial/2 >= healthBoss)
             animator.SetBool("Phase2", true);
 
-        if (healthBoss <=0)
+        if (healthBoss <= 0)
             IsDying();
     }
 
 
     void IsDying()
     {
+        canChange = false;
         animator.SetTrigger("Death");
     }
 

@@ -29,6 +29,10 @@ TagManager:
   - WindTotem
   - Boss
   - SpawnBoss
+  - CDHit
+  - CDEarth
+  - CDWind
+  - CDFire
   layers:
   - Default
   - TransparentFX

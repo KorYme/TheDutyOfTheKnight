@@ -123,7 +123,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   damageHitBoss: 50
-  healthBoss: 1000
+  healthBoss: 1
   canChange: 1
   invulnerable: 0
   bossSpeed: 1

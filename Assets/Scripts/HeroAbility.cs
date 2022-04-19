@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HeroAbility : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class HeroAbility : MonoBehaviour
 
     [Header("To Define Values")]
     public HeroStats heroStats;
+    public CoolDownManager coolDownManager;
     public GameObject FireBall;
     public float fireBallSpeed;
     public bool damagingShield;
@@ -39,10 +41,22 @@ public class HeroAbility : MonoBehaviour
     public GameObject Explosion;
 
 
+    public static HeroAbility instance;
+    private void Awake()
+    {
+        instance = null;
+        if (instance != null)
+        {
+            Debug.LogError("More than one HeroAbility instance in the game !");
+        }
+
+        instance = this;
+    }
+
+
     private void Start()
     {
         //Initialization
-        heroStats = GameObject.FindGameObjectWithTag("Player").GetComponent<HeroStats>();
         GameObject.FindGameObjectWithTag("Shield").GetComponent<SpriteRenderer>().enabled = false;
         GameObject.FindGameObjectWithTag("Shield").GetComponent<CircleCollider2D>().enabled = false;
         damagingShield = false;
@@ -56,34 +70,43 @@ public class HeroAbility : MonoBehaviour
         {
             FireAbility();
             StartCoroutine(CooldownAbilityFire());
+            coolDownManager.ResetCoolDown("Fire");
         }
         else if (Input.GetKey(KeyWind) && windUnlocked && !windInCooldown)
         {
             WindAbility();
             StartCoroutine(CooldownAbilityWind());
+            coolDownManager.ResetCoolDown("Wind");
         }
         else if (Input.GetKey(KeyEarth) && earthUnlocked && !earthInCooldown)
         {
             EarthAbility();
             StartCoroutine(CooldownAbilityEarth());
+            coolDownManager.ResetCoolDown("Earth");
         }
         else if (Input.GetKey(KeyExplosion) && earthUnlocked && windUnlocked && !earthInCooldown && !windInCooldown)
         {
             ExplosionAbility();
             StartCoroutine(CooldownAbilityEarth());
+            coolDownManager.ResetCoolDown("Earth");
             StartCoroutine(CooldownAbilityWind());
+            coolDownManager.ResetCoolDown("Wind");
         }
         else if (Input.GetKey(KeyDash) && fireUnlocked && windUnlocked && !fireInCooldown && !windInCooldown)
         {
             DashAbility();
             StartCoroutine(CooldownAbilityFire());
+            coolDownManager.ResetCoolDown("Fire");
             StartCoroutine(CooldownAbilityWind());
+            coolDownManager.ResetCoolDown("Wind");
         }
         else if (Input.GetKey(KeyShieldDamage) && fireUnlocked && earthUnlocked && !fireInCooldown && !earthInCooldown)
         {
             ShieldDamageAbility();
             StartCoroutine(CooldownAbilityFire());
+            coolDownManager.ResetCoolDown("Fire");
             StartCoroutine(CooldownAbilityEarth());
+            coolDownManager.ResetCoolDown("Earth");
         }
     }
 

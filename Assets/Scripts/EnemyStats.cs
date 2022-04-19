@@ -6,15 +6,17 @@ public class EnemyStats : MonoBehaviour
 {
     public float enemyHP = 100;
     public float enemyDamage = 10;
-    private bool dead = false;
-    private RoomManager roomManager;
+    protected bool dead = false;
+    protected RoomManager roomManager;
 
-    private void Start()
+    protected virtual void Start()
+    //void Start()
     {
         roomManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<RoomManager>();
-    }
+    }   
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
+    //private void FixedUpdate()
     {
         if (enemyHP <= 0 && !dead)
         {
@@ -37,7 +39,7 @@ public class EnemyStats : MonoBehaviour
         StartCoroutine(Stagger());
     }
 
-    IEnumerator Stagger()
+    protected IEnumerator Stagger()
     {
         this.transform.Find("Graphics").GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
         yield return new WaitForSeconds(0.1f);

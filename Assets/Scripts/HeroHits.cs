@@ -14,7 +14,7 @@ public class HeroHits : MonoBehaviour
     private float horizontalCursor;
     private float verticalCursor;
     private Camera cam;
-    private bool reloadTime;
+    public bool reloadTime;
     
     //Points System
     public string direction;
@@ -28,7 +28,6 @@ public class HeroHits : MonoBehaviour
         heroStats = GameObject.FindGameObjectWithTag("Player").GetComponent<HeroStats>();
         cam = GameObject.FindGameObjectWithTag("SpawnCamera").GetComponent<Camera>();
         reloadTime = false;
-        
     }
 
     void FixedUpdate()
@@ -90,14 +89,30 @@ public class HeroHits : MonoBehaviour
         reloadTime = true;
 
         //Detect enemies in range of attack
+        //Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(GameObject.FindGameObjectWithTag(direction).transform.position, heroRange, enemyLayers);
+        //foreach (Collider2D enemy in hitEnemies)
+        //{
+        //    if (enemy.tag == "Enemies" || enemy.tag == "Boss")
+        //    {
+        //    enemy.SendMessage("TakeDamage", heroStats.heroAttaque);
+        //    }
+        //}
+    }
+
+    void HasHitted()
+    {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(GameObject.FindGameObjectWithTag(direction).transform.position, heroRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
             if (enemy.tag == "Enemies" || enemy.tag == "Boss")
             {
-            enemy.SendMessage("TakeDamage", heroStats.heroAttaque);
+                enemy.SendMessage("TakeDamage", heroStats.heroAttaque);
             }
         }
+    }
+
+    void HasEndedHit()
+    {
         StartCoroutine(WaitShoot());
     }
 
@@ -105,7 +120,7 @@ public class HeroHits : MonoBehaviour
     {
         // Là on dit au script de patienter pendant l'animation de coup
         // On a fini d'attendre donc on repasse reloadTime en false, donc on va pouvoir taper à nouveau
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.5f);
         reloadTime = false;
     }
 }
