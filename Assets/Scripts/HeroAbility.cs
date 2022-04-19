@@ -69,44 +69,26 @@ public class HeroAbility : MonoBehaviour
         if (Input.GetKey(KeyFire) && fireUnlocked && !fireInCooldown)
         {
             FireAbility();
-            StartCoroutine(CooldownAbilityFire());
-            coolDownManager.ResetCoolDown("Fire");
         }
         else if (Input.GetKey(KeyWind) && windUnlocked && !windInCooldown)
         {
             WindAbility();
-            StartCoroutine(CooldownAbilityWind());
-            coolDownManager.ResetCoolDown("Wind");
         }
         else if (Input.GetKey(KeyEarth) && earthUnlocked && !earthInCooldown)
         {
             EarthAbility();
-            StartCoroutine(CooldownAbilityEarth());
-            coolDownManager.ResetCoolDown("Earth");
         }
         else if (Input.GetKey(KeyExplosion) && earthUnlocked && windUnlocked && !earthInCooldown && !windInCooldown)
         {
             ExplosionAbility();
-            StartCoroutine(CooldownAbilityEarth());
-            coolDownManager.ResetCoolDown("Earth");
-            StartCoroutine(CooldownAbilityWind());
-            coolDownManager.ResetCoolDown("Wind");
         }
         else if (Input.GetKey(KeyDash) && fireUnlocked && windUnlocked && !fireInCooldown && !windInCooldown)
         {
             DashAbility();
-            StartCoroutine(CooldownAbilityFire());
-            coolDownManager.ResetCoolDown("Fire");
-            StartCoroutine(CooldownAbilityWind());
-            coolDownManager.ResetCoolDown("Wind");
         }
         else if (Input.GetKey(KeyShieldDamage) && fireUnlocked && earthUnlocked && !fireInCooldown && !earthInCooldown)
         {
             ShieldDamageAbility();
-            StartCoroutine(CooldownAbilityFire());
-            coolDownManager.ResetCoolDown("Fire");
-            StartCoroutine(CooldownAbilityEarth());
-            coolDownManager.ResetCoolDown("Earth");
         }
     }
 
@@ -155,10 +137,13 @@ public class HeroAbility : MonoBehaviour
     /// </summary>
     void FireAbility()
     {
+        StartCoroutine(CooldownAbilityFire());
+        coolDownManager.ResetCoolDown("Fire");
         Debug.Log("Fire");
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 mouseDirection = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
-
+        if (mouseDirection == Vector2.zero)
+            mouseDirection = Vector2.up;
         GameObject bulletLaunch = Instantiate(FireBall, transform.position, new Quaternion(mouseDirection.x, mouseDirection.y,0,90)); 
         bulletLaunch.GetComponent<FireBall>().direction = mouseDirection.normalized;
         bulletLaunch.GetComponent<FireBall>().fireBallSpeed = fireBallSpeed;
@@ -169,6 +154,8 @@ public class HeroAbility : MonoBehaviour
     /// </summary>
     void EarthAbility()
     {
+        StartCoroutine(CooldownAbilityEarth());
+        coolDownManager.ResetCoolDown("Earth");
         Debug.Log("Earth");
         GameObject.FindGameObjectWithTag("Shield").GetComponent<SpriteRenderer>().color = new Color(88, 255, 0);
         StartCoroutine(ShieldDuration());
@@ -181,12 +168,10 @@ public class HeroAbility : MonoBehaviour
     {
         if (CanUTP())
         {
+            StartCoroutine(CooldownAbilityWind());
+            coolDownManager.ResetCoolDown("Wind");
             Debug.Log("Wind");
             transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x,Camera.main.ScreenToWorldPoint(Input.mousePosition).y,0);
-        }
-        else
-        {
-            windInCooldown = false;
         }
     }
 
@@ -197,6 +182,10 @@ public class HeroAbility : MonoBehaviour
     {
         if (CanUTP())
         {
+            StartCoroutine(CooldownAbilityEarth());
+            coolDownManager.ResetCoolDown("Earth");
+            StartCoroutine(CooldownAbilityWind());
+            coolDownManager.ResetCoolDown("Wind");
             Debug.Log("Explosionnnnnnnnnn");
             transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
             GameObject explosion = Instantiate(Explosion, transform.position, Quaternion.identity);
@@ -205,11 +194,6 @@ public class HeroAbility : MonoBehaviour
             {
                 item.gameObject.SendMessage("TakeDamage",heroStats.explosionDamage);
             }
-        }
-        else
-        {
-            windInCooldown = false;
-            earthInCooldown = false;
         }
     }
 
@@ -220,6 +204,10 @@ public class HeroAbility : MonoBehaviour
     {
         if (CanUTP())
         {
+            StartCoroutine(CooldownAbilityFire());
+            coolDownManager.ResetCoolDown("Fire");
+            StartCoroutine(CooldownAbilityWind());
+            coolDownManager.ResetCoolDown("Wind");
             Debug.Log("Dash");
             StartCoroutine(TrailRenderer());
             cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -229,11 +217,6 @@ public class HeroAbility : MonoBehaviour
             }
             transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
         }
-        else
-        {
-            windInCooldown = false;
-            fireInCooldown = false;
-        }
     }
 
     /// <summary>
@@ -241,6 +224,10 @@ public class HeroAbility : MonoBehaviour
     /// </summary>
     void ShieldDamageAbility()
     {
+        StartCoroutine(CooldownAbilityFire());
+        coolDownManager.ResetCoolDown("Fire");
+        StartCoroutine(CooldownAbilityEarth());
+        coolDownManager.ResetCoolDown("Earth");
         Debug.Log("Shield");
         damagingShield = true;
         GameObject.FindGameObjectWithTag("Shield").GetComponent<SpriteRenderer>().color = new Color(255,0,0);
