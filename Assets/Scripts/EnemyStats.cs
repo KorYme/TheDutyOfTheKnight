@@ -10,13 +10,11 @@ public class EnemyStats : MonoBehaviour
     protected RoomManager roomManager;
 
     protected virtual void Start()
-    //void Start()
     {
         roomManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<RoomManager>();
-    }   
+    }
 
     protected virtual void FixedUpdate()
-    //private void FixedUpdate()
     {
         if (enemyHP <= 0 && !dead)
         {

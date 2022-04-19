@@ -14,7 +14,7 @@ public class CoolDownManager : MonoBehaviour
     Text textCDEarth;
     Text textCDWind;
     Text textCDFire;
-
+    private HeroHits heroHits;
 
 
     [Header("All CoolDown Images")]
@@ -29,6 +29,7 @@ public class CoolDownManager : MonoBehaviour
     {
         InitializeAllObjects();
         InitializeCD();
+        heroHits = GameObject.FindGameObjectWithTag("Player").GetComponent<HeroHits>();
     }
 
     void InitializeAllObjects()
@@ -58,6 +59,15 @@ public class CoolDownManager : MonoBehaviour
 
     void CheckCD()
     {
+        if (heroHits.isInReloadTime)
+        {
+            imageCDHit.fillAmount -= 1 / (heroHits.reloadTime + 0.6f) * Time.fixedDeltaTime;
+            //textCDHit.text = Mathf.Floor((heroHits.reloadTime + 0.6f) * imageCDEarth.fillAmount).ToString();
+        }
+        else
+        {
+            textCDHit.text = "";
+        }
         if (HeroAbility.instance.earthInCooldown)
         {
             imageCDEarth.fillAmount -= 1 / (HeroAbility.instance.cooldownEarth + HeroStats.instance.shieldDuration) * Time.fixedDeltaTime;

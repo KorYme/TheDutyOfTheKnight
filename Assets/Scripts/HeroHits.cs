@@ -14,11 +14,13 @@ public class HeroHits : MonoBehaviour
     private float horizontalCursor;
     private float verticalCursor;
     private Camera cam;
-    public bool reloadTime;
-    
+    public float reloadTime;
+    public bool isInReloadTime;
+
     //Points System
     public string direction;
     private HeroStats heroStats;
+    private CoolDownManager coolDownManager;
     
 
     void Start()
@@ -27,7 +29,8 @@ public class HeroHits : MonoBehaviour
         animator = GetComponent<Animator>();
         heroStats = GameObject.FindGameObjectWithTag("Player").GetComponent<HeroStats>();
         cam = GameObject.FindGameObjectWithTag("SpawnCamera").GetComponent<Camera>();
-        reloadTime = false;
+        isInReloadTime = false;
+        coolDownManager = GameObject.FindGameObjectWithTag("CoolDownManager").GetComponent<CoolDownManager>();
     }
 
     void FixedUpdate()
@@ -75,8 +78,8 @@ public class HeroHits : MonoBehaviour
             }
         }
 
-        //Lance le système d'attaque si le joueur n'est pas en reloadTime
-        if (Input.GetMouseButton(0) && !reloadTime)
+        //Lance le système d'attaque si le joueur n'est pas en isInReloadTime
+        if (Input.GetMouseButton(0) && !isInReloadTime)
         {
             Attack();
         }
@@ -86,17 +89,8 @@ public class HeroHits : MonoBehaviour
     {
         //Play the hit animation
         animator.SetTrigger("Hitting");
-        reloadTime = true;
-
-        //Detect enemies in range of attack
-        //Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(GameObject.FindGameObjectWithTag(direction).transform.position, heroRange, enemyLayers);
-        //foreach (Collider2D enemy in hitEnemies)
-        //{
-        //    if (enemy.tag == "Enemies" || enemy.tag == "Boss")
-        //    {
-        //    enemy.SendMessage("TakeDamage", heroStats.heroAttaque);
-        //    }
-        //}
+        isInReloadTime = true;
+        coolDownManager.ResetCoolDown("Hit");
     }
 
     void HasHitted()
@@ -119,8 +113,8 @@ public class HeroHits : MonoBehaviour
     IEnumerator WaitShoot()
     {
         // Là on dit au script de patienter pendant l'animation de coup
-        // On a fini d'attendre donc on repasse reloadTime en false, donc on va pouvoir taper à nouveau
-        yield return new WaitForSeconds(0.5f);
-        reloadTime = false;
+        // On a fini d'attendre donc on repasse isInReloadTime en false, donc on va pouvoir taper à nouveau
+        yield return new WaitForSeconds(reloadTime);
+        isInReloadTime = false;
     }
 }
