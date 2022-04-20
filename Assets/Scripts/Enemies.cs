@@ -13,6 +13,7 @@ public class Enemies : MonoBehaviour
     public float enemyDamage = 0f;
     public float enemySpeed = 0f;
     public SpriteRenderer sprite;
+    public bool invulnerable = false;
     public bool isTouchDamage = true;
     protected bool dead = false;
 
@@ -26,21 +27,29 @@ public class Enemies : MonoBehaviour
         DamagingHero();
     }
 
-    void DamagingHero()
+    protected virtual void DamagingHero()
     {
         if (isTouchDamage && this.GetComponent<Collider2D>().IsTouching(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>()))
         {
             GameObject.FindGameObjectWithTag("Player").SendMessage("TakeDamageHero", enemyDamage);
+        }
+    }
+    protected virtual void TakeDamage(float damage)
+    {
+        if (!invulnerable)
+        {
+            enemyHP -= damage;
+            StartCoroutine(Stagger());
         }
         if (enemyHP <= 0 && !dead)
         {
             IsDying();
         }
     }
-    protected virtual void TakeDamage(float damage)
+
+    protected virtual void ToggleInvulnerability()
     {
-        enemyHP -= damage;
-        StartCoroutine(Stagger());
+        invulnerable = !invulnerable;
     }
 
     protected IEnumerator Stagger()

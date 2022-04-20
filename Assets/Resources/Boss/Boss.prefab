@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 667516612553251089}
   - component: {fileID: 4173808660998626093}
   - component: {fileID: 857200692401778530}
-  - component: {fileID: 8853735945585561083}
   m_Layer: 7
   m_Name: Boss
   m_TagString: Boss
@@ -121,14 +120,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHP: 100
   enemyDamage: 30
-  enemySpeed: 1
+  enemySpeed: 2
   sprite: {fileID: 8527362896048348524}
+  invulnerable: 0
   isTouchDamage: 0
   playerLayer:
     serializedVersion: 2
     m_Bits: 1024
   canChange: 1
-  invulnerable: 0
 --- !u!70 &857200692401778530
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -145,27 +144,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.028280668, y: -0.058328927}
   m_Size: {x: 0.30712402, y: 0.5722553}
   m_Direction: 0
---- !u!50 &8853735945585561083
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 306401054567032145}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
 --- !u!1 &1749179488648688230
 GameObject:
   m_ObjectHideFlags: 0

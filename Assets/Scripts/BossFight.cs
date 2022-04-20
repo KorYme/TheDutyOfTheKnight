@@ -9,39 +9,29 @@ public class BossFight : Enemies
     public LayerMask playerLayer;
     Transform hitPoint1;
     Transform hitPoint2;
-    Rigidbody2D rb;
     private Animator animator;
 
     [Header ("Other Variables")]
     public bool canChange = true;
-    public bool invulnerable = false;
     private bool bossAbility1;
     private float healthBossInitial;
 
     protected override void Start()
     {
+        base.Start();
         healthBossInitial = enemyHP;
         player = GameObject.FindGameObjectWithTag("Player");
         hitPoint1 = this.transform.Find("HitPoint1");
         hitPoint2 = this.transform.Find("HitPoint2");
         animator = this.GetComponent<Animator>();
         bossAbility1 = false;
-        rb = GetComponent<Rigidbody2D>();
-        roomManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<RoomManager>();
-    }
-
-    private void Update()
-    {
-        if (canChange)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, enemySpeed * Time.fixedDeltaTime);
-        }
+        canChange = false;
     }
 
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        if (bossAbility1)
+        if (bossAbility1 && canChange)
         {
             canChange = false;
             bossAbility1 = false;
@@ -58,6 +48,11 @@ public class BossFight : Enemies
         bossAbility1 = true;
         yield return new WaitForSeconds(10f);
         PhaseManager();
+    }
+
+    void StartFight()
+    {
+        canChange = true;
     }
 
     void DirectionBoss()
