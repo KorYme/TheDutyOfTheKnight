@@ -119,14 +119,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e08f8827bf90f5448e45d29cf6875ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyHP: 10
+  enemyDamage: 30
+  enemySpeed: 1
+  sprite: {fileID: 8527362896048348524}
+  isTouchDamage: 0
   playerLayer:
     serializedVersion: 2
     m_Bits: 1024
-  damageHitBoss: 50
-  healthBoss: 1
   canChange: 1
   invulnerable: 0
-  bossSpeed: 1
 --- !u!70 &857200692401778530
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

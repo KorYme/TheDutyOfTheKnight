@@ -10,7 +10,6 @@ public class CoolDownManager : MonoBehaviour
     Image imageCDEarth;
     Image imageCDWind;
     Image imageCDFire;
-    Text textCDHit;
     Text textCDEarth;
     Text textCDWind;
     Text textCDFire;
@@ -22,7 +21,6 @@ public class CoolDownManager : MonoBehaviour
     public GameObject CDEarthUI;
     public GameObject CDWindUI;
     public GameObject CDFireUI;
-
 
 
     private void Start()
@@ -38,7 +36,6 @@ public class CoolDownManager : MonoBehaviour
         imageCDEarth = CDEarthUI.transform.Find("CoolDown").GetComponent<Image>();
         imageCDWind = CDWindUI.transform.Find("CoolDown").GetComponent<Image>();
         imageCDFire = CDFireUI.transform.Find("CoolDown").GetComponent<Image>();
-        textCDHit = CDHitUI.transform.Find("Text").GetComponent<Text>();
         textCDEarth = CDEarthUI.transform.Find("Text").GetComponent<Text>();
         textCDWind = CDWindUI.transform.Find("Text").GetComponent<Text>();
         textCDFire = CDFireUI.transform.Find("Text").GetComponent<Text>();
@@ -62,11 +59,6 @@ public class CoolDownManager : MonoBehaviour
         if (heroHits.isInReloadTime)
         {
             imageCDHit.fillAmount -= 1 / (heroHits.reloadTime + 0.6f) * Time.fixedDeltaTime;
-            //textCDHit.text = Mathf.Floor((heroHits.reloadTime + 0.6f) * imageCDEarth.fillAmount).ToString();
-        }
-        else
-        {
-            textCDHit.text = "";
         }
         if (HeroAbility.instance.earthInCooldown)
         {

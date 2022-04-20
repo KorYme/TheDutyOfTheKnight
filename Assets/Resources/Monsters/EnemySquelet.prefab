@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5246515340352671688}
   - component: {fileID: 5246515340352671689}
   - component: {fileID: 5246515340352671690}
+  - component: {fileID: 2049015943969668350}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -102,6 +103,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2049015943969668350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5246515340352671687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e05e8de5cb2daf418cbe637f6999e55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5246515340966911304
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,11 +124,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5246515340966911308}
+  - component: {fileID: 5246515340966911311}
   - component: {fileID: 5246515340966911307}
   - component: {fileID: 5246515340966911306}
   - component: {fileID: 5246515340966911305}
-  - component: {fileID: 5246515340966911309}
-  - component: {fileID: 5246515340966911311}
+  - component: {fileID: 3700938285255288295}
   m_Layer: 7
   m_Name: EnemySquelet
   m_TagString: Enemies
@@ -138,6 +151,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &5246515340966911311
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5246515340966911304}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0
 --- !u!114 &5246515340966911307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,7 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 8972941505054025957, guid: 9108042d340f72c43b203695310abe86, type: 3}
---- !u!114 &5246515340966911309
+--- !u!114 &3700938285255288295
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -231,24 +260,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5246515340966911304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dbecbf0a3c9a3b43958bb1ac20b7692, type: 3}
+  m_Script: {fileID: 11500000, guid: 1bb3d07b298e34946b251bc5c30e21fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHP: 100
   enemyDamage: 10
---- !u!70 &5246515340966911311
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5246515340966911304}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1}
-  m_Direction: 0
+  enemySpeed: 1
+  sprite: {fileID: 5246515340352671689}
+  isTouchDamage: 1

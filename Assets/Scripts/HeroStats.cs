@@ -45,7 +45,7 @@ public class HeroStats : MonoBehaviour
     {
         heroHP = heroMaxHealth;
         healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>();
-        healthBar.InitializeHealthBar(heroMaxHealth);
+        healthBar.InitializeHealthBar(heroMaxHealth, heroHP);
 
         invicibility = false;
         //Check if the nightmare mode

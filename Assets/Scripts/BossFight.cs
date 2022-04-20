@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossFight : MonoBehaviour
+public class BossFight : Enemies
 {
     GameObject player;
 
@@ -10,37 +10,37 @@ public class BossFight : MonoBehaviour
     Transform hitPoint1;
     Transform hitPoint2;
     Rigidbody2D rb;
-
-    public float damageHitBoss;
-    public float healthBoss;
-    public bool canChange = true;
-    public bool invulnerable = false;
-    public float bossSpeed;
-    bool bossAbility1;
-    float healthBossInitial;
     private Animator animator;
 
-    private void Start()
+    [Header ("Other Variables")]
+    public bool canChange = true;
+    public bool invulnerable = false;
+    private bool bossAbility1;
+    private float healthBossInitial;
+
+    protected override void Start()
     {
-        healthBossInitial = healthBoss;
+        healthBossInitial = enemyHP;
         player = GameObject.FindGameObjectWithTag("Player");
         hitPoint1 = this.transform.Find("HitPoint1");
         hitPoint2 = this.transform.Find("HitPoint2");
         animator = this.GetComponent<Animator>();
         bossAbility1 = false;
         rb = GetComponent<Rigidbody2D>();
+        roomManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<RoomManager>();
     }
 
     private void Update()
     {
         if (canChange)
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, bossSpeed * Time.fixedDeltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, enemySpeed * Time.fixedDeltaTime);
         }
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
         if (bossAbility1)
         {
             canChange = false;
@@ -49,11 +49,7 @@ public class BossFight : MonoBehaviour
         else if (canChange)
         {
             DirectionBoss();
-            if (Physics2D.OverlapCircle(hitPoint1.position, 1.5f, playerLayer) != null)
-            {
-                canChange = false;
-                animator.SetTrigger("Attack");
-            }
+            IsPlayerInRange();
         }
     }
 
@@ -74,7 +70,16 @@ public class BossFight : MonoBehaviour
         {
             this.transform.eulerAngles = new Vector3(0, 0, 0);
         }
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, bossSpeed * Time.fixedDeltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, enemySpeed * Time.fixedDeltaTime);
+    }
+
+    void IsPlayerInRange()
+    {
+        if (Physics2D.OverlapCircle(hitPoint1.position, 1.5f, playerLayer) != null)
+        {
+            canChange = false;
+            animator.SetTrigger("Attack");
+        }
     }
 
     void IdleAnimation()
@@ -91,14 +96,14 @@ public class BossFight : MonoBehaviour
     { 
         
         if (Physics2D.OverlapCircle(hitPoint1.position, 1.6f, playerLayer) != null)
-            HeroStats.instance.TakeDamageHero(damageHitBoss);
+            HeroStats.instance.TakeDamageHero(enemyDamage);
     }
 
     void AttackBoss2()
     {
 
         if (Physics2D.OverlapCircle(hitPoint2.position, 1.15f, playerLayer) != null)
-            HeroStats.instance.TakeDamageHero(damageHitBoss);   
+            HeroStats.instance.TakeDamageHero(enemyDamage);   
     }
 
     void BossAbility()
@@ -107,30 +112,32 @@ public class BossFight : MonoBehaviour
         //Instantiate little fireball
     }
 
-    void TakeDamage(float damage)
+    protected override void TakeDamage(float damage)
     {
         if (invulnerable)
             return;
-        healthBoss -= damage;
-        Debug.Log("Le boss a encore " + healthBoss.ToString());
+        base.TakeDamage(damage);
+        Debug.Log("Le boss a encore " + enemyHP.ToString());
 
-        if (healthBossInitial/2 >= healthBoss)
+        if (healthBossInitial/2 >= enemyHP)
             animator.SetBool("Phase2", true);
 
-        if (healthBoss <= 0)
+        if (enemyHP <= 0)
             IsDying();
     }
 
 
-    void IsDying()
+    protected override void IsDying()
     {
         canChange = false;
         animator.SetTrigger("Death");
+        base.IsDying();
     }
 
-    void Die()
+    protected override void Die()
     {
         animator.ResetTrigger("Death");
-        Destroy(gameObject);
+        base.Die();
+        roomManager.CheckEnemiesStillIn();
     }
 }

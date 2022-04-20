@@ -243,6 +243,12 @@ namespace Pathfinding {
 			return;
         }
 
+		public void Move(float speed)
+        {
+			maxSpeed = speed;
+			return;
+		}
+
 		/// <summary>\copydoc Pathfinding::IAstarAI::GetRemainingPath</summary>
 		public void GetRemainingPath (List<Vector3> buffer, out bool stale) {
 			buffer.Clear();

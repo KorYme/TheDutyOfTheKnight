@@ -98,9 +98,9 @@ public class HeroHits : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(GameObject.FindGameObjectWithTag(direction).transform.position, heroRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
-            if (enemy.tag == "Enemies" || enemy.tag == "Boss")
+            if (enemy.GetComponent<Enemies>())
             {
-                enemy.SendMessage("TakeDamage", heroStats.heroAttaque);
+                enemy.GetComponent<Enemies>().SendMessage("TakeDamage", heroStats.heroAttaque);
             }
         }
     }
