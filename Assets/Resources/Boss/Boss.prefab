@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e08f8827bf90f5448e45d29cf6875ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHP: 10
+  enemyHP: 100
   enemyDamage: 30
   enemySpeed: 1
   sprite: {fileID: 8527362896048348524}
