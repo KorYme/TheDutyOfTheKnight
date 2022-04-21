@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class FireBall : MonoBehaviour
 {
-    public Vector2 direction;
+    private HeroStats heroStats;
+
+    [Header ("Variables FireBall")]
     public float fireBallSpeed;
-    public HeroStats heroStats;
+    public LayerMask obstacles;
+    public LayerMask targets;
+    public Vector2 direction;
 
     private void Start()
     {
@@ -29,11 +33,11 @@ public class FireBall : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 6 || collision.gameObject.layer == 8 || collision.gameObject.layer == 9)
+        if (obstacles == (obstacles | (1 << collision.gameObject.layer)))
         {
             Destroy(gameObject);
         }
-        else if (collision.gameObject.layer == 7)
+        else if (targets == (targets | (1 << collision.gameObject.layer)))
         {
             collision.gameObject.SendMessage("TakeDamage", heroStats.fireDamage);
             Destroy(gameObject);

@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class BossFight : Enemies
 {
-    GameObject player;
-
     public LayerMask playerLayer;
+    public GameObject reaperBullet;
+    public GameObject reaperMinion;
     Transform hitPoint1;
     Transform hitPoint2;
-    private Animator animator;
+
+    [Header("Boss Variables")]
+    public float reaperFireBallSpeed;
+    public float reaperMinionBallSpeed;
+    public float reaperFireBallDamage;
+    public float reaperMinionBallDamage;
+    public float multiplierSpeedPhase2;
+    public float multiplierDamagePhase2;
 
     [Header ("Other Variables")]
-    public bool canChange = true;
+    public bool canMove;
     private bool bossAbility1;
     private float healthBossInitial;
 
@@ -20,23 +27,22 @@ public class BossFight : Enemies
     {
         base.Start();
         healthBossInitial = enemyHP;
-        player = GameObject.FindGameObjectWithTag("Player");
-        hitPoint1 = this.transform.Find("HitPoint1");
-        hitPoint2 = this.transform.Find("HitPoint2");
-        animator = this.GetComponent<Animator>();
+        hitPoint1 = transform.Find("HitPoint1");
+        hitPoint2 = transform.Find("HitPoint2");
+        animator = GetComponent<Animator>();
         bossAbility1 = false;
-        canChange = false;
+        canMove = false;
+        StartCoroutine(PhaseManager());
     }
 
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        if (bossAbility1 && canChange)
+        if (bossAbility1 && canMove)
         {
-            canChange = false;
-            bossAbility1 = false;
+            BossAbility1();
         }
-        else if (canChange)
+        else if (canMove)
         {
             DirectionBoss();
             IsPlayerInRange();
@@ -45,14 +51,14 @@ public class BossFight : Enemies
 
     IEnumerator PhaseManager()
     {
-        bossAbility1 = true;
         yield return new WaitForSeconds(10f);
-        PhaseManager();
+        bossAbility1 = true;
+        StartCoroutine(PhaseManager());
     }
 
     void StartFight()
     {
-        canChange = true;
+        canMove = true;
     }
 
     void DirectionBoss()
@@ -72,14 +78,15 @@ public class BossFight : Enemies
     {
         if (Physics2D.OverlapCircle(hitPoint1.position, 1.5f, playerLayer) != null)
         {
-            canChange = false;
+            canMove = false;
             animator.SetTrigger("Attack");
         }
     }
 
     void IdleAnimation()
     {
-        canChange = true;
+        canMove = true;
+        invulnerable = false;
     }
 
     void HasAttacked()
@@ -88,8 +95,7 @@ public class BossFight : Enemies
     }
 
     void AttackBoss1()
-    { 
-        
+    {
         if (Physics2D.OverlapCircle(hitPoint1.position, 1.6f, playerLayer) != null)
             HeroStats.instance.TakeDamageHero(enemyDamage);
     }
@@ -98,35 +104,53 @@ public class BossFight : Enemies
     {
 
         if (Physics2D.OverlapCircle(hitPoint2.position, 1.15f, playerLayer) != null)
-            HeroStats.instance.TakeDamageHero(enemyDamage);   
+            HeroStats.instance.TakeDamageHero(enemyDamage);
     }
 
-    void BossAbility()
+    /// <summary>
+    /// The boss launches 9 bullets which deals damage to the player
+    /// The bullet spawn on the boss transform and go in a cardinal direction
+    /// </summary>
+    void BossAbility1()
     {
-        //Arrêter le mouvement
-        //Instantiate little fireball
+        canMove = false;
+        bossAbility1 = false;
+        //Launch Animation
+        for (int i = -1; i < 2; i++)
+        {
+            for (int y = -1; y < 2; y++)
+            {
+                if (y != 0 || i != 0)
+                {
+                    GameObject bulletLaunch = Instantiate(reaperBullet, transform.position, Quaternion.identity);
+                    bulletLaunch.GetComponent<ReaperBullet>().direction = new Vector2(i,y);
+                }
+            }
+        }
     }
 
     protected override void TakeDamage(float damage)
     {
-        if (invulnerable)
-            return;
         base.TakeDamage(damage);
-        Debug.Log("Le boss a encore " + enemyHP.ToString());
-
-        if (healthBossInitial/2 >= enemyHP)
+        if (healthBossInitial/2 >= enemyHP && !dead)
             animator.SetBool("Phase2", true);
-
-        if (enemyHP <= 0)
-            IsDying();
     }
 
+    protected void Phase2()
+    {
+        canMove = false;
+        invulnerable = true;
+        enemySpeed *= multiplierSpeedPhase2;
+        animator.speed *= multiplierSpeedPhase2;
+        enemyDamage *= multiplierDamagePhase2;
+    }
 
     protected override void IsDying()
     {
-        canChange = false;
+        animator.speed /= multiplierSpeedPhase2;
+        dead = true;
+        canMove = false;
         animator.SetTrigger("Death");
-        base.IsDying();
     }
 
     protected override void Die()

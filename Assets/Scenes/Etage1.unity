@@ -273,7 +273,7 @@ MonoBehaviour:
   m_FillMethod: 4
   m_FillAmount: 0
   m_FillClockwise: 0
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &22656538
@@ -476,7 +476,7 @@ MonoBehaviour:
   spawnRoomOut: 0
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 8320
   closedDoorsMask:
     serializedVersion: 2
     m_Bits: 256
@@ -873,7 +873,7 @@ MonoBehaviour:
   heroRange: 1
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 8320
   worldPosition: {x: 0, y: 0, z: 0}
   reloadTime: 0.3
   isInReloadTime: 0
@@ -929,13 +929,13 @@ MonoBehaviour:
   flashDelay: 0.15
   invicibilityDelay: 2
   invicibility: 0
-  fireDamage: 75
+  fireDamage: 50
   shieldDamage: 25
   shieldDuration: 3
   dashDamage: 50
   explosionDamage: 100
   nightmareMode: 0
-  capHeroLow: 5
+  capHeroLow: 10
   graphics: {fileID: 401620116}
 --- !u!50 &401620114
 Rigidbody2D:
@@ -1078,7 +1078,7 @@ MonoBehaviour:
   FireBall: {fileID: 6067577561094456797, guid: 65a52fbba66c01944926e1304f11631f, type: 3}
   fireBallSpeed: 7
   damagingShield: 0
-  tailleRadius: 0.15
+  radiusCharacter: 0
   cursorPosition: {x: 0, y: 0, z: 0}
   enemyLayer:
     serializedVersion: 2
@@ -1743,7 +1743,7 @@ MonoBehaviour:
   m_FillMethod: 4
   m_FillAmount: 0
   m_FillClockwise: 0
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1058260640
@@ -2092,7 +2092,7 @@ MonoBehaviour:
   m_FillMethod: 4
   m_FillAmount: 0
   m_FillClockwise: 0
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1302156997
@@ -3695,7 +3695,7 @@ MonoBehaviour:
   m_FillMethod: 4
   m_FillAmount: 0
   m_FillClockwise: 0
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1827365532

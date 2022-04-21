@@ -26,8 +26,8 @@ public class HeroStats : MonoBehaviour
     private bool heroLow;
 
     [Header("GameObjects and Components")]
-    private HealthBar healthBar;
     public SpriteRenderer graphics;
+    private HealthBar healthBar;
 
     public static HeroStats instance;
     private void Awake()

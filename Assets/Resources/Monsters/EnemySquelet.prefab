@@ -267,4 +267,6 @@ MonoBehaviour:
   enemyDamage: 10
   enemySpeed: 1
   sprite: {fileID: 5246515340352671689}
+  animator: {fileID: 5246515340352671690}
+  invulnerable: 0
   isTouchDamage: 1

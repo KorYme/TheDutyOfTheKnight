@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 667516612553251089}
   - component: {fileID: 4173808660998626093}
   - component: {fileID: 857200692401778530}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Boss
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -118,15 +118,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e08f8827bf90f5448e45d29cf6875ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHP: 100
+  enemyHP: 75
   enemyDamage: 30
   enemySpeed: 2
   sprite: {fileID: 8527362896048348524}
+  animator: {fileID: 667516612553251089}
   invulnerable: 0
   isTouchDamage: 0
   playerLayer:
     serializedVersion: 2
     m_Bits: 1024
+  reaperBullet: {fileID: 8896610446740735514, guid: ac3f49c778f3a5a40b66c24992279a2e, type: 3}
+  reaperMinion: {fileID: 8203106886454101171, guid: 989c3eb7594e6ef4dbf87053ce81d2d9, type: 3}
+  reaperFireBallSpeed: 0
+  reaperMinionBallSpeed: 0
+  multiplierSpeedPhase2: 1.5
+  multiplierDamagePhase2: 1.3
   canChange: 1
 --- !u!70 &857200692401778530
 CapsuleCollider2D:
@@ -156,7 +163,7 @@ GameObject:
   m_Layer: 0
   m_Name: HitPoint2
   m_TagString: Untagged
-  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -186,7 +193,7 @@ GameObject:
   m_Layer: 0
   m_Name: HitPoint1
   m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

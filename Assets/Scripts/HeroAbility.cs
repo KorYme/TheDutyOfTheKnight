@@ -34,7 +34,7 @@ public class HeroAbility : MonoBehaviour
     public float fireBallSpeed;
     public bool damagingShield;
     private Collider2D[] tpZone;
-    public float tailleRadius;
+    public float radiusCharacter;
     public Vector3 cursorPosition;
     public LayerMask enemyLayer;
     public GameObject Explosion;
@@ -138,10 +138,8 @@ public class HeroAbility : MonoBehaviour
     {
         StartCoroutine(CooldownAbilityFire());
         coolDownManager.ResetCoolDown("Fire");
-        Debug.Log("Fire");
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 mouseDirection = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
-        Debug.Log(mouseDirection);
         if (mouseDirection == Vector2.zero)
             mouseDirection = Vector2.up;
         GameObject bulletLaunch = Instantiate(FireBall, transform.position, new Quaternion(mouseDirection.x, mouseDirection.y,0,90));
@@ -156,7 +154,6 @@ public class HeroAbility : MonoBehaviour
     {
         StartCoroutine(CooldownAbilityEarth());
         coolDownManager.ResetCoolDown("Earth");
-        Debug.Log("Earth");
         GameObject.FindGameObjectWithTag("Shield").GetComponent<SpriteRenderer>().color = new Color(88, 255, 0);
         StartCoroutine(ShieldDuration());
     }
@@ -170,7 +167,6 @@ public class HeroAbility : MonoBehaviour
         {
             StartCoroutine(CooldownAbilityWind());
             coolDownManager.ResetCoolDown("Wind");
-            Debug.Log("Wind");
             transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x,Camera.main.ScreenToWorldPoint(Input.mousePosition).y,0);
         }
     }
@@ -186,7 +182,6 @@ public class HeroAbility : MonoBehaviour
             coolDownManager.ResetCoolDown("Earth");
             StartCoroutine(CooldownAbilityWind());
             coolDownManager.ResetCoolDown("Wind");
-            Debug.Log("Explosionnnnnnnnnn");
             transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
             GameObject explosion = Instantiate(Explosion, transform.position, Quaternion.identity);
             Destroy(explosion, 1f);
@@ -208,7 +203,6 @@ public class HeroAbility : MonoBehaviour
             coolDownManager.ResetCoolDown("Fire");
             StartCoroutine(CooldownAbilityWind());
             coolDownManager.ResetCoolDown("Wind");
-            Debug.Log("Dash");
             StartCoroutine(TrailRenderer());
             cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             foreach (var item in Physics2D.RaycastAll((Vector2)transform.position, new Vector2(cursorPosition.x - transform.position.x, cursorPosition.y - transform.position.y), Vector3.Distance(transform.position, cursorPosition), enemyLayer))
@@ -228,7 +222,6 @@ public class HeroAbility : MonoBehaviour
         coolDownManager.ResetCoolDown("Fire");
         StartCoroutine(CooldownAbilityEarth());
         coolDownManager.ResetCoolDown("Earth");
-        Debug.Log("Shield");
         damagingShield = true;
         GameObject.FindGameObjectWithTag("Shield").GetComponent<SpriteRenderer>().color = new Color(255,0,0);
         StartCoroutine(ShieldDuration());
@@ -264,7 +257,7 @@ public class HeroAbility : MonoBehaviour
         {
             return false;
         }
-        tpZone = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), tailleRadius);
+        tpZone = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), radiusCharacter);
         foreach (Collider2D item in tpZone)
         {
             if (item.gameObject.layer == 6 || item.gameObject.layer == 8 || item.gameObject.layer == 9)

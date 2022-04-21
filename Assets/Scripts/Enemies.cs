@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Enemies : MonoBehaviour
 {
-    //Useful access to another Class
+    //Useful access to others classes and objects
     protected RoomManager roomManager;
+    protected GameObject player;
 
 
     [Header("Enemy Variables")]
@@ -13,6 +14,7 @@ public class Enemies : MonoBehaviour
     public float enemyDamage = 0f;
     public float enemySpeed = 0f;
     public SpriteRenderer sprite;
+    public Animator animator;
     public bool invulnerable = false;
     public bool isTouchDamage = true;
     protected bool dead = false;
@@ -20,6 +22,7 @@ public class Enemies : MonoBehaviour
     protected virtual void Start()
     {
         roomManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<RoomManager>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     protected virtual void FixedUpdate()
@@ -29,19 +32,22 @@ public class Enemies : MonoBehaviour
 
     protected virtual void DamagingHero()
     {
-        if (isTouchDamage && this.GetComponent<Collider2D>().IsTouching(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>()))
+        if (isTouchDamage && GetComponent<Collider2D>().IsTouching(player.GetComponent<Collider2D>()))
         {
-            GameObject.FindGameObjectWithTag("Player").SendMessage("TakeDamageHero", enemyDamage);
+            player.SendMessage("TakeDamageHero", enemyDamage);
         }
     }
+
     protected virtual void TakeDamage(float damage)
     {
+        if (dead)
+            return;
         if (!invulnerable)
         {
             enemyHP -= damage;
             StartCoroutine(Stagger());
         }
-        if (enemyHP <= 0 && !dead)
+        if (enemyHP <= 0)
         {
             IsDying();
         }
@@ -52,7 +58,7 @@ public class Enemies : MonoBehaviour
         invulnerable = !invulnerable;
     }
 
-    protected IEnumerator Stagger()
+    protected virtual IEnumerator Stagger()
     {
         sprite.color = new Color(255, 0, 0);
         yield return new WaitForSeconds(0.1f);
@@ -61,6 +67,7 @@ public class Enemies : MonoBehaviour
 
     protected virtual void IsDying()
     {
+        dead = true;
         GetComponent<Collider2D>().enabled = false;
         roomManager.CheckEnemiesStillIn();
     }

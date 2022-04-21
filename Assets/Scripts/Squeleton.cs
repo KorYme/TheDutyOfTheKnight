@@ -13,7 +13,7 @@ public class Squeleton : Enemies
 
     protected override void IsDying()
     {
-        GetComponentInChildren<Animator>().SetBool("Dying", true);
+        animator.SetBool("Dying", true);
         base.IsDying();
         SendMessage("StopMoving");
     }
