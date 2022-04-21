@@ -68,6 +68,7 @@ public class Enemies : MonoBehaviour
     protected virtual void IsDying()
     {
         dead = true;
+        enemySpeed = 0;
         GetComponent<Collider2D>().enabled = false;
         roomManager.CheckEnemiesStillIn();
     }

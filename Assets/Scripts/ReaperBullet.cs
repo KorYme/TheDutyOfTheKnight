@@ -31,17 +31,23 @@ public class ReaperBullet : Enemies
     {
         if (obstacles == (obstacles | (1 << collision.gameObject.layer)))
         {
-            Destroy(gameObject);
+            IsDying();
         }
         else if (targets == (targets | (1 << collision.gameObject.layer)))
         {
-            collision.gameObject.SendMessage("TakeDamage", enemyDamage);
-            Destroy(gameObject);
+            collision.gameObject.SendMessage("TakeDamageHero", enemyDamage);
+            IsDying();
         }
     }
 
     public void HasBeenLaunched()
     {
         launched = true;
+    }
+
+    protected override void IsDying()
+    {
+        animator.SetTrigger("Death");
+        base.IsDying();
     }
 }

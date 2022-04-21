@@ -32,7 +32,6 @@ public class BossFight : Enemies
         animator = GetComponent<Animator>();
         bossAbility1 = false;
         canMove = false;
-        StartCoroutine(PhaseManager());
     }
 
     protected override void FixedUpdate()
@@ -51,7 +50,7 @@ public class BossFight : Enemies
 
     IEnumerator PhaseManager()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(7f);
         bossAbility1 = true;
         StartCoroutine(PhaseManager());
     }
@@ -59,6 +58,7 @@ public class BossFight : Enemies
     void StartFight()
     {
         canMove = true;
+        StartCoroutine(PhaseManager());
     }
 
     void DirectionBoss()
