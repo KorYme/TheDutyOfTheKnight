@@ -154,13 +154,9 @@ public class RoomManager : MonoBehaviour
         enemiesIn = Physics2D.OverlapBox(camPos, camSize, 0f, enemyLayer);
         if (enemiesIn == null)
         {
-            //Ouvrir les portes
+            //Open the doors
             OpenOrCloseTheDoors(true);
-        }
-        else
-        {
-            //Else only useful to debug
-            Debug.Log("ENEMIES REMAINING");
+            //Add Opening door sound
         }
     }
 

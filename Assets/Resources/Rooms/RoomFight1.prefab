@@ -7352,6 +7352,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8212739113281601271, guid: 641ff35fe831c894685a6b93c85c90bd, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212739113281601271, guid: 641ff35fe831c894685a6b93c85c90bd, type: 3}
       propertyPath: m_Name
       value: Spawner (2)
       objectReference: {fileID: 0}

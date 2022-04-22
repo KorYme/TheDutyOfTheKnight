@@ -110,7 +110,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 2
-    functionName: IdleAnimation
+    functionName: ToggleInvulnerability
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

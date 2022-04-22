@@ -136,7 +136,11 @@ MonoBehaviour:
   reaperMinionBallDamage: 10
   multiplierSpeedPhase2: 1.5
   multiplierDamagePhase2: 1.3
-  canMove: 0
+  timeBetweenAbility1: 10
+  timeBetweenAbility2: 45
+  canMove: 1
+  bossAbility1: 0
+  bossAbility2: 0
 --- !u!70 &857200692401778530
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -40,6 +40,4 @@ public class HeroMovement : MonoBehaviour
         //Définit si le héros possède une vitesse
         animator.SetFloat("Speed", Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
     }
-
-
 }

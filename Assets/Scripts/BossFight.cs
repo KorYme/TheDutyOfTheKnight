@@ -17,10 +17,13 @@ public class BossFight : Enemies
     public float reaperMinionBallDamage;
     public float multiplierSpeedPhase2;
     public float multiplierDamagePhase2;
+    public float timeBetweenAbility1;
+    public float timeBetweenAbility2;
 
     [Header ("Other Variables")]
     public bool canMove;
-    private bool bossAbility1;
+    public bool bossAbility1;
+    public bool bossAbility2;
     private float healthBossInitial;
 
     protected override void Start()
@@ -37,7 +40,11 @@ public class BossFight : Enemies
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        if (bossAbility1 && canMove)
+        if (bossAbility2 && canMove)
+        {
+            BossAbility2();
+        }
+        else if (bossAbility1 && canMove)
         {
             BossAbility1();
         }
@@ -48,17 +55,25 @@ public class BossFight : Enemies
         }
     }
 
-    IEnumerator PhaseManager()
+    IEnumerator Ability1Manager()
     {
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(timeBetweenAbility1);
         bossAbility1 = true;
-        StartCoroutine(PhaseManager());
+        StartCoroutine(Ability1Manager());
+    }
+
+    IEnumerator Ability2Manager()
+    {
+        yield return new WaitForSeconds(timeBetweenAbility2);
+        bossAbility2 = false;
+        StartCoroutine(Ability2Manager());
     }
 
     void StartFight()
     {
         canMove = true;
-        StartCoroutine(PhaseManager());
+        StartCoroutine(Ability1Manager());
+        StartCoroutine(Ability2Manager());
     }
 
     void DirectionBoss()
@@ -78,7 +93,7 @@ public class BossFight : Enemies
     {
         if (Physics2D.OverlapCircle(hitPoint1.position, 1.5f, playerLayer) != null)
         {
-            canMove = false;
+            canMove = false;            
             animator.SetTrigger("Attack");
         }
     }
@@ -86,12 +101,13 @@ public class BossFight : Enemies
     void IdleAnimation()
     {
         canMove = true;
-        invulnerable = false;
     }
 
     void HasAttacked()
     {
         animator.ResetTrigger("Attack");
+        animator.ResetTrigger("Ability1");
+        animator.ResetTrigger("Ability2");
     }
 
     void AttackBoss1()
@@ -107,15 +123,26 @@ public class BossFight : Enemies
             HeroStats.instance.TakeDamageHero(enemyDamage);
     }
 
-    /// <summary>
-    /// The boss launches 9 bullets which deals damage to the player
-    /// The bullet spawn on the boss transform and go in a cardinal direction
-    /// </summary>
     void BossAbility1()
     {
+        animator.SetTrigger("Ability1");
         canMove = false;
         bossAbility1 = false;
-        //Launch Animation
+    }
+
+    void BossAbility2()
+    {
+        animator.SetTrigger("Ability2");
+        canMove = false;
+        bossAbility2 = false;
+    }
+
+    /// <summary>
+    /// The boss launches 8 bullets which deals damage to the player
+    /// The bullets spawn on the boss transform and go in a cardinal direction
+    /// </summary>
+    protected void LaunchBullets()
+    {
         for (int i = -1; i < 2; i++)
         {
             for (int y = -1; y < 2; y++)
@@ -123,8 +150,20 @@ public class BossFight : Enemies
                 if (y != 0 || i != 0)
                 {
                     GameObject bulletLaunch = Instantiate(reaperBullet, transform.position, Quaternion.identity);
-                    bulletLaunch.GetComponent<ReaperBullet>().direction = new Vector2(i,y);
+                    bulletLaunch.GetComponent<ReaperBullet>().direction = new Vector2(i, y);
                 }
+            }
+        }
+    }
+
+    protected void SpawnMinion()
+    {
+        for (int i = -1; i < 2; i+=2)
+        {
+            for (int y = -1; y < 2; y+=2)
+            {
+                GameObject bulletLaunch = Instantiate(reaperMinion, transform.position, Quaternion.identity);
+                bulletLaunch.GetComponent<ReaperBullet>().direction = new Vector2(i, y);
             }
         }
     }
@@ -143,6 +182,9 @@ public class BossFight : Enemies
         enemySpeed *= multiplierSpeedPhase2;
         animator.speed *= multiplierSpeedPhase2;
         enemyDamage *= multiplierDamagePhase2;
+        reaperBullet.GetComponent<ReaperBullet>().animator.speed *= multiplierSpeedPhase2;
+        reaperBullet.GetComponent<ReaperBullet>().enemySpeed *= multiplierSpeedPhase2;
+        reaperBullet.GetComponent<ReaperBullet>().enemyDamage *= multiplierDamagePhase2;
     }
 
     protected override void IsDying()
