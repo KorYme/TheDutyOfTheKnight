@@ -25,6 +25,10 @@ public class ReaperBullet : Enemies
             base.FixedUpdate();
             transform.Translate(direction* enemySpeed * Time.fixedDeltaTime);
         }
+        if (boss.dead && !dead)
+        {
+            IsDying();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

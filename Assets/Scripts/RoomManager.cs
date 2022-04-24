@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class RoomManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class RoomManager : MonoBehaviour
     private Collider2D[] theOpenedDoorsHere;
     private Collider2D[] insideEnemies;
     private Collider2D enemiesIn;
+    private Collider2D ladder1;
     public bool spawnRoomOut;
     private Vector2 camPos;
     private Vector2 camSize;
@@ -29,17 +31,16 @@ public class RoomManager : MonoBehaviour
     {
         heroAbility = GameObject.FindGameObjectWithTag("Player").GetComponent<HeroAbility>();
         InitiateValues();
-        //ActivateOrDesactivateEnemies(false);
-        heroAbility.fireUnlocked = false;
-        heroAbility.earthUnlocked = false;
-        heroAbility.windUnlocked = false;
+        heroAbility.earthUnlocked = true;
+        heroAbility.windUnlocked = true;
+        heroAbility.fireUnlocked = true;
     }
 
     private void FixedUpdate()
     {
         if (!spawnRoomOut)
         {
-            LadderScript();
+            Ladder1Script();
         }
     }
 
@@ -59,21 +60,19 @@ public class RoomManager : MonoBehaviour
         cameraFollow = mainCamera.GetComponent<CameraFollow>();
         levelGenerator = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelGenerator>();
         allMonsters = Resources.LoadAll<GameObject>("Monsters");
+        ladder1 = GameObject.FindGameObjectWithTag("Ladder1").GetComponent<Collider2D>();
     }
 
     /// <summary>
     /// Check if the player is touching the ladder and is pressing E
     /// </summary>
-    public void LadderScript()
+    public void Ladder1Script()
     {
-        if (GameObject.FindGameObjectWithTag("Ladder1").GetComponent<Collider2D>().IsTouching(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>()))
+        if (ladder1.IsTouching(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>()))
         {
             if (Input.GetKey(KeyCode.E))
             {
                 mainCamera.SetActive(true);
-                heroAbility.windUnlocked = true;
-                heroAbility.earthUnlocked = true;
-                heroAbility.fireUnlocked = true;
                 spawnCamera.SetActive(false);
                 player.transform.position = new Vector3(0, 0, 0);
                 spawnRoomOut = true;
@@ -107,7 +106,6 @@ public class RoomManager : MonoBehaviour
                 Destroy(item.gameObject);
             }
         }
-
     }
 
     /// <summary>

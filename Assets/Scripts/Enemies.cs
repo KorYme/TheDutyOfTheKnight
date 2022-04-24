@@ -17,7 +17,7 @@ public class Enemies : MonoBehaviour
     public Animator animator;
     public bool invulnerable = false;
     public bool isTouchDamage = true;
-    protected bool dead = false;
+    public bool dead = false;
 
     protected virtual void Start()
     {

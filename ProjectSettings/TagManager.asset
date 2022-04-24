@@ -30,6 +30,8 @@ TagManager:
   - Boss
   - SpawnBoss
   - CoolDownManager
+  - ReaperBullet
+  - Ladder2
   layers:
   - Default
   - TransparentFX
@@ -45,7 +47,7 @@ TagManager:
   - Shield
   - Spawner
   - BossLayer
-  - 
+  - Bouncing
   - 
   - 
   - 

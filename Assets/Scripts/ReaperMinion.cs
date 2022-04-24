@@ -8,6 +8,8 @@ public class ReaperMinion : Enemies
     BossFight boss;
     public LayerMask obstacles;
     public LayerMask targets;
+    private Rigidbody2D rb;
+    public bool launched;
 
     protected override void Start()
     {
@@ -15,5 +17,18 @@ public class ReaperMinion : Enemies
         boss = GameObject.FindGameObjectWithTag("Boss").GetComponent<BossFight>();
         enemySpeed = boss.reaperMinionBallSpeed;
         enemyDamage = boss.reaperMinionBallDamage;
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    public void HasBeenLaunched()
+    {
+        launched = true;
+    }
+
+    protected override void IsDying()
+    {
+        base.IsDying();
+        animator.SetTrigger("Death");
+        boss.AreMinionsStillAlive();
     }
 }

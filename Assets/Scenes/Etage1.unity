@@ -427,6 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e5bd170e6d5de4dbed47345d994526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelGenerator: {fileID: 0}
 --- !u!4 &132324576
 Transform:
   m_ObjectHideFlags: 0
@@ -457,7 +458,7 @@ MonoBehaviour:
   levelWidth: 5
   spawnCentered: 1
   nbShopAsked: 1
-  nbAbilityAsked: 1
+  nbAbilityAsked: 2
   nbRoomsAsked: 10
 --- !u!114 &132324578
 MonoBehaviour:

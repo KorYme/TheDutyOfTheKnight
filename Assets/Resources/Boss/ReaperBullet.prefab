@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2668322643682932835}
   m_Layer: 7
   m_Name: ReaperBullet
-  m_TagString: Untagged
+  m_TagString: ReaperBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,7 +137,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: caf93d5a677f7254f9f940f3626d36cb, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -161,6 +161,7 @@ MonoBehaviour:
   animator: {fileID: 2157134547959622595}
   invulnerable: 1
   isTouchDamage: 1
+  dead: 0
   direction: {x: 0, y: 0}
   obstacles:
     serializedVersion: 2

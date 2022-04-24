@@ -11,9 +11,16 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("More than one GameManager instance in the game !");
         }
-
         instance = this;
     }
+
+    public LevelGenerator levelGenerator;
+
+    private void Start()
+    {
+        levelGenerator = GetComponent<LevelGenerator>();
+    }
+
     /// <summary>
     /// Check if the game starts
     /// </summary>

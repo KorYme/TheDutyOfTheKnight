@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class BossFight : Enemies
 {
@@ -9,6 +10,8 @@ public class BossFight : Enemies
     public GameObject reaperMinion;
     Transform hitPoint1;
     Transform hitPoint2;
+    private float nbMinionsAlive;
+    private SpriteRenderer shield;
 
     [Header("Boss Variables")]
     public float reaperFireBallSpeed;
@@ -18,12 +21,10 @@ public class BossFight : Enemies
     public float multiplierSpeedPhase2;
     public float multiplierDamagePhase2;
     public float timeBetweenAbility1;
-    public float timeBetweenAbility2;
 
     [Header ("Other Variables")]
     public bool canMove;
     public bool bossAbility1;
-    public bool bossAbility2;
     private float healthBossInitial;
 
     protected override void Start()
@@ -35,16 +36,15 @@ public class BossFight : Enemies
         animator = GetComponent<Animator>();
         bossAbility1 = false;
         canMove = false;
+        nbMinionsAlive = 0;
+        shield = transform.Find("BossShield").GetComponent<SpriteRenderer>();
+        shield.enabled = false;
     }
 
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        if (bossAbility2 && canMove)
-        {
-            BossAbility2();
-        }
-        else if (bossAbility1 && canMove)
+        if (bossAbility1 && canMove)
         {
             BossAbility1();
         }
@@ -62,18 +62,10 @@ public class BossFight : Enemies
         StartCoroutine(Ability1Manager());
     }
 
-    IEnumerator Ability2Manager()
-    {
-        yield return new WaitForSeconds(timeBetweenAbility2);
-        bossAbility2 = false;
-        StartCoroutine(Ability2Manager());
-    }
-
     void StartFight()
     {
         canMove = true;
         StartCoroutine(Ability1Manager());
-        StartCoroutine(Ability2Manager());
     }
 
     void DirectionBoss()
@@ -107,7 +99,6 @@ public class BossFight : Enemies
     {
         animator.ResetTrigger("Attack");
         animator.ResetTrigger("Ability1");
-        animator.ResetTrigger("Ability2");
     }
 
     void AttackBoss1()
@@ -132,9 +123,9 @@ public class BossFight : Enemies
 
     void BossAbility2()
     {
-        animator.SetTrigger("Ability2");
         canMove = false;
-        bossAbility2 = false;
+        invulnerable = true;
+        shield.enabled = true;
     }
 
     /// <summary>
@@ -162,9 +153,21 @@ public class BossFight : Enemies
         {
             for (int y = -1; y < 2; y+=2)
             {
-                GameObject bulletLaunch = Instantiate(reaperMinion, transform.position, Quaternion.identity);
-                bulletLaunch.GetComponent<ReaperBullet>().direction = new Vector2(i, y);
+                Vector3 position = new Vector3(transform.position.x + i, transform.position.y + y, 0);
+                GameObject bulletLaunch = Instantiate(reaperMinion, position, Quaternion.identity);
+                bulletLaunch.GetComponent<ReaperMinion>().direction = new Vector2(i, y);
+                nbMinionsAlive++;
             }
+        }
+    }
+
+    public void AreMinionsStillAlive()
+    {
+        nbMinionsAlive--;
+        if (nbMinionsAlive == 0 && invulnerable)
+        {
+            invulnerable = false;
+            shield.enabled = false;
         }
     }
 
