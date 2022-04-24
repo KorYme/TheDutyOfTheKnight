@@ -76,7 +76,7 @@ public class HeroStats : MonoBehaviour
         }
         if (heroHP<=0)
         {
-            //GameManager.instance.Die();
+            GameManager.instance.Die();
         }
     }
 

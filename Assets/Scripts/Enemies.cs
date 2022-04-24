@@ -21,7 +21,7 @@ public class Enemies : MonoBehaviour
 
     protected virtual void Start()
     {
-        roomManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<RoomManager>();
+        roomManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<RoomManager>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -44,6 +44,7 @@ public class Enemies : MonoBehaviour
             return;
         if (!invulnerable)
         {
+            GameManager.instance.score += damage;
             enemyHP -= damage;
             StartCoroutine(Stagger());
         }

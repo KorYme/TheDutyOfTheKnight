@@ -5,26 +5,29 @@ using UnityEngine;
 
 public class KeepForNextScene : MonoBehaviour
 {
+    public static KeepForNextScene instance;
     public GameObject[] objects;
-    //private int levelNumber;
 
     private void Awake()
     {
+        instance = null;
+        if (instance != null)
+        {
+            Debug.LogError("More than one KeepForNextScene instance in the game !");
+        }
+        instance = this;
+
         foreach (var item in objects)
         {
             DontDestroyOnLoad(item);
         }
-        //levelNumber = 1;
     }
 
-    void FixedUpdate()
+    void RemoveFromDontDestroyOnLoad()
     {
-        //Need modifications
-        /*
-        if (Input.GetKeyDown(KeyCode.G))
+        foreach (var item in objects)
         {
-            levelNumber++;
-            SceneManager.LoadScene("Etage" + levelNumber.ToString());
-        }*/
+            SceneManager.MoveGameObjectToScene(item, SceneManager.GetActiveScene());
+        }
     }
 }

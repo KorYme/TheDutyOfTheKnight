@@ -33,10 +33,10 @@ public class LevelGenerator : MonoBehaviour
         FillRoomList();
     }
 
-    private void Start()
+    /*private void Start()
     {
         CreatingLevel();
-    }
+    }*/
 
     void InitializingValue()
     {
@@ -97,8 +97,8 @@ public class LevelGenerator : MonoBehaviour
             }
         }
         //Tests Boss
-        //level[spawnX,spawnY + 1] = "Boss";
-        PlacingBossRoom();
+        level[spawnX,spawnY + 1] = "Boss";
+        //PlacingBossRoom();
         PlacingOtherRooms();
         for (int i = 0; i < levelHeight; i++)
         {

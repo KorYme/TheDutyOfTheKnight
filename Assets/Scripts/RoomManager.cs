@@ -58,7 +58,7 @@ public class RoomManager : MonoBehaviour
         player.transform.position = new Vector3(-100, 101.5059f, 0);
         spawnRoomOut = false;
         cameraFollow = mainCamera.GetComponent<CameraFollow>();
-        levelGenerator = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelGenerator>();
+        levelGenerator = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelGenerator>();
         allMonsters = Resources.LoadAll<GameObject>("Monsters");
         ladder1 = GameObject.FindGameObjectWithTag("Ladder1").GetComponent<Collider2D>();
     }

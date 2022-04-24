@@ -10,6 +10,7 @@ public class SettingsMenu : MonoBehaviour
     public bool isFullScreen;
     public TMPro.TMP_Dropdown dropdown;
     Resolution[] resolutions;
+    public GameObject entryMenu;
 
     public void Start()
     {
@@ -49,5 +50,6 @@ public class SettingsMenu : MonoBehaviour
     public void CloseSettings()
     {
         gameObject.SetActive(false);
+        entryMenu.SetActive(true);
     }
 }

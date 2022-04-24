@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     public void Settings()
     {
         settingsWindow.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     public void QuitGame()

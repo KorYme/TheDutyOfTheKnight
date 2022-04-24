@@ -15,7 +15,7 @@ public class CameraFollow : MonoBehaviour
         mainCamera = this.gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
         heroStats = player.GetComponent<HeroStats>();
-        roomManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<RoomManager>();
+        roomManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<RoomManager>();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
