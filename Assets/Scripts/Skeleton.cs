@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Skeleton : Enemies
 {
+
     protected override void Start()
     {
         base.Start();
