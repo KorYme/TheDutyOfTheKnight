@@ -54,10 +54,10 @@ public class LevelGenerator : MonoBehaviour
     void FillRoomList()
     {
         allRooms = Resources.LoadAll<GameObject>("Rooms");
-        spawnRoom = Resources.Load<GameObject>("SpawnRoom");
-        shopRoom = Resources.Load<GameObject>("ShopRoom");
-        bossRoom = Resources.Load<GameObject>("BossRoom");
-        abilityRoom = Resources.Load<GameObject>("AbilityRoom");
+        spawnRoom = Resources.Load<GameObject>("SpecialRooms/SpawnRoom");
+        shopRoom = Resources.Load<GameObject>("SpecialRooms/ShopRoom");
+        bossRoom = Resources.Load<GameObject>("SpecialRooms/BossRoom");
+        abilityRoom = Resources.Load<GameObject>("SpecialRooms/AbilityRoom");
     }
 
     void CenteringSpawn(bool isCentered)

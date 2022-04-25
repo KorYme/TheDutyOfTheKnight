@@ -4,10 +4,22 @@ using UnityEngine;
 
 public class HeroStats : MonoBehaviour
 {
+    public static HeroStats instance;
+    private void Awake()
+    {
+        instance = null;
+        if (instance != null)
+        {
+            Debug.LogError("More than one heroStats instance in the game !");
+        }
+
+        instance = this;
+    }
+
     [Header("Main Stats")]
     public float heroHP = 100;
     public float heroMaxHealth = 100f;
-    public float heroAttaque = 20f;
+    public float heroAttack = 20f;
     public float speed = 250f;
     public float flashDelay;
     public float invicibilityDelay;
@@ -28,18 +40,6 @@ public class HeroStats : MonoBehaviour
     [Header("GameObjects and Components")]
     public SpriteRenderer graphics;
     private HealthBar healthBar;
-
-    public static HeroStats instance;
-    private void Awake()
-    {
-        instance = null;
-        if (instance != null)
-        {
-            Debug.LogError("More than one heroStats instance in the game !");
-        }
-
-        instance = this;
-    }
 
     void Start()
     {
@@ -67,12 +67,12 @@ public class HeroStats : MonoBehaviour
         if (heroHP <= capHeroLow && !(heroLow))
         {
             heroLow = true;
-            heroAttaque *= 2;
+            heroAttack *= 2;
         }
         else if (heroHP > capHeroLow && heroLow)
         {
             heroLow = false;
-            heroAttaque /= 2;
+            heroAttack /= 2;
         }
         if (heroHP<=0)
         {
@@ -89,6 +89,19 @@ public class HeroStats : MonoBehaviour
             Debug.Log("Le héro a désormais " + heroHP + " PV.");
             StartCoroutine(TheInvicibility());
         }
+    }
+
+    public void HealHero(float heal)
+    {
+        heroHP = heroHP + heal > heroMaxHealth ? heroMaxHealth : heroHP + heal;
+        healthBar.SetHealth(heroHP);
+        Debug.Log("Le héro a désormais " + heroHP + " PV.");
+    }
+
+    public void IncreaseMaxHealthHero(float increase)
+    {
+        heroMaxHealth += increase;
+        healthBar.InitializeHealthBar(heroMaxHealth, heroHP);
     }
 
     IEnumerator TheInvicibility()

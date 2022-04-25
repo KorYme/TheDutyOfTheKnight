@@ -31,9 +31,9 @@ public class RoomManager : MonoBehaviour
     {
         heroAbility = GameObject.FindGameObjectWithTag("Player").GetComponent<HeroAbility>();
         InitiateValues();
-        heroAbility.earthUnlocked = true;
-        heroAbility.windUnlocked = true;
-        heroAbility.fireUnlocked = true;
+        heroAbility.earthUnlocked = false;
+        heroAbility.windUnlocked = false;
+        heroAbility.fireUnlocked = false;
     }
 
     private void FixedUpdate()
@@ -77,6 +77,9 @@ public class RoomManager : MonoBehaviour
                 player.transform.position = new Vector3(0, 0, 0);
                 spawnRoomOut = true;
                 ChangingRoom();
+                heroAbility.earthUnlocked = true;
+                heroAbility.windUnlocked = true;
+                heroAbility.fireUnlocked = true;
             }
         }
     }

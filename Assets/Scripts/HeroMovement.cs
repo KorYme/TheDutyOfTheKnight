@@ -5,14 +5,12 @@ using UnityEngine;
 public class HeroMovement : MonoBehaviour
 {
     //Necessary variables definition
-    public HeroStats HeroStats;
     private Rigidbody2D rb;
     private Vector3 velocity = Vector3.zero;
     private Animator animator;
 
     public static HeroMovement instance;
-
-    //Instance
+    //Instance Generation
     private void Awake()
     {
         if (instance != null)
@@ -32,8 +30,8 @@ public class HeroMovement : MonoBehaviour
     void FixedUpdate()
     {
         //Déplacement horizontal et vertical à travers deux variables "input"
-        float horizontalInput = Input.GetAxis("Horizontal") * HeroStats.speed * Time.fixedDeltaTime;
-        float verticalInput = Input.GetAxis("Vertical") * HeroStats.speed * Time.fixedDeltaTime;
+        float horizontalInput = Input.GetAxis("Horizontal") * HeroStats.instance.speed * Time.fixedDeltaTime;
+        float verticalInput = Input.GetAxis("Vertical") * HeroStats.instance.speed * Time.fixedDeltaTime;
         Vector3 targetVelocity = new Vector2(horizontalInput, verticalInput);
         rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
 

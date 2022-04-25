@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Squeleton : Enemies
+public class Skeleton : Enemies
 {
     protected override void Start()
     {

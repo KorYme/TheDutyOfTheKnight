@@ -19,7 +19,6 @@ public class HeroHits : MonoBehaviour
 
     //Points System
     public string direction;
-    private HeroStats heroStats;
     private CoolDownManager coolDownManager;
     
 
@@ -27,7 +26,6 @@ public class HeroHits : MonoBehaviour
     {
         //Variable definition
         animator = GetComponent<Animator>();
-        heroStats = GameObject.FindGameObjectWithTag("Player").GetComponent<HeroStats>();
         cam = GameObject.FindGameObjectWithTag("SpawnCamera").GetComponent<Camera>();
         isInReloadTime = false;
         coolDownManager = GameObject.FindGameObjectWithTag("CoolDownManager").GetComponent<CoolDownManager>();
@@ -100,7 +98,7 @@ public class HeroHits : MonoBehaviour
         {
             if (enemy.GetComponent<Enemies>())
             {
-                enemy.GetComponent<Enemies>().SendMessage("TakeDamage", heroStats.heroAttaque);
+                enemy.GetComponent<Enemies>().SendMessage("TakeDamage", HeroStats.instance.heroAttack);
             }
         }
     }

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2624dd98551c2419fc88d299be1143, type: 3}
+  m_Name: SpeedPotion
+  m_EditorClassIdentifier: 
+  objectName: Speed Potion
+  description: A potion which gives you more movement speed
+  sprite: {fileID: 8881541749800195961, guid: 3def700810ea17b44af3f49a6ffc90df, type: 3}
+  coinCost: 20
+  coinGiven: 0
+  healthGiven: 0
+  maxHealthGiven: 0
+  speedGiven: 30
+  damageGiven: 0
