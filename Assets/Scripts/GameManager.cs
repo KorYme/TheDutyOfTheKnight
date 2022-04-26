@@ -7,8 +7,9 @@ public class GameManager : MonoBehaviour
 {
     [field:HideInInspector]
     public bool gameLaunched;
+    public bool victory;
     public float score;
-    public float timer;
+    public int timer;
 
     //Create the Singleton
     public static GameManager instance;
@@ -28,10 +29,10 @@ public class GameManager : MonoBehaviour
     public void InitGame ()
     {
         Debug.Log("The game starts !");
-        timer = 0f;
+        timer = 0;
         score = 0f;
         gameLaunched = true;
-        
+        victory = true;
         StartCoroutine(Timer());
     }
 
@@ -50,7 +51,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Go back to the menu after 
+    /// Display the ending screen after dying and stops the timer
     /// </summary>
     public void Die()
     {

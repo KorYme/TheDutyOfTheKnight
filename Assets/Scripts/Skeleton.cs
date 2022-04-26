@@ -12,6 +12,12 @@ public class Skeleton : Enemies
         SendMessage("Move", enemySpeed);
     }
 
+    protected override void StopPlaying()
+    {
+        base.StopPlaying();
+        SendMessage("StopMoving");
+    }
+
     protected override void IsDying()
     {
         animator.SetBool("Dying", true);

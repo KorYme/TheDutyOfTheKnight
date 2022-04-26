@@ -24,6 +24,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        GameManager.instance.InitGame();
         levelGenerator = GetComponent<LevelGenerator>();
         pauseMenu = false;
         hud.SetActive(true);

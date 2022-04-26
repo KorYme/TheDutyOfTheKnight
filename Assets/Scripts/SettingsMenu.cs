@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -51,5 +52,15 @@ public class SettingsMenu : MonoBehaviour
     {
         gameObject.SetActive(false);
         entryMenu.SetActive(true);
+    }
+
+    public void RetryButton()
+    {
+        SceneManager.LoadScene("Etage1");
+    }
+
+    public void MainMenuButton()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

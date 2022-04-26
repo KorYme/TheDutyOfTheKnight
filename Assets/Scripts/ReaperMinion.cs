@@ -25,6 +25,12 @@ public class ReaperMinion : Enemies
         launched = true;
     }
 
+    protected override void StopPlaying()
+    {
+        base.StopPlaying();
+        Destroy(transform.Find("ColliderBounce").gameObject);
+    }
+
     protected override void IsDying()
     {
         base.IsDying();

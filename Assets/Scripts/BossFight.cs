@@ -196,6 +196,7 @@ public class BossFight : Enemies
         dead = true;
         canMove = false;
         animator.SetTrigger("Death");
+        HeroStats.instance.StopHero();
     }
 
     protected override void Die()
@@ -203,5 +204,6 @@ public class BossFight : Enemies
         animator.ResetTrigger("Death");
         base.Die();
         roomManager.CheckEnemiesStillIn();
+        GameManager.instance.Die();
     }
 }

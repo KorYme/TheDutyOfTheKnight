@@ -36,6 +36,10 @@ public class Enemies : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         DamagingHero();
+        if (HeroStats.instance.isDead && animator.speed != 0)
+        {
+            StopPlaying();
+        }
     }
 
     protected virtual void DamagingHero()
@@ -88,6 +92,21 @@ public class Enemies : MonoBehaviour
         {
             Destroy(slider.gameObject);
         }
+    }
+
+    protected virtual void StopPlaying()
+    {
+        if (transform.Find("Canvas") != null)
+        {
+            Destroy(transform.Find("Canvas").gameObject);
+        }
+        if (GetComponent<Rigidbody2D>() != null)
+        {
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
+        animator.speed = 0;
+        enemySpeed = 0;
     }
 
     protected virtual void Die()

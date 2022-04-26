@@ -33,11 +33,6 @@ public class LevelGenerator : MonoBehaviour
         FillRoomList();
     }
 
-    /*private void Start()
-    {
-        CreatingLevel();
-    }*/
-
     void InitializingValue()
     {
         totalNumberRoomsAsked = 2 + nbRoomsAsked + nbShopAsked + nbAbilityAsked;

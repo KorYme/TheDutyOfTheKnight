@@ -60,7 +60,6 @@ public class HeroStats : MonoBehaviour
         {
             heroLow = false;
         }
-        GameManager.instance.InitGame();
     }
 
     void CheckStateHero()
@@ -77,20 +76,36 @@ public class HeroStats : MonoBehaviour
         }
         if (heroHP <= 0)
         {
+            GameManager.instance.victory = false;
             IsDying();
         }
     }
 
     public void IsDying()
     {
-        HeroMovement.instance.rb.bodyType = RigidbodyType2D.Kinematic;
-        invicibility = true;
         isDead = true;
-        
+        StopHero();
+        graphics.sortingOrder = 51;
+        animator.SetTrigger("Death");
+    }
+    
+    public void StopHero()
+    {
+        HeroMovement.instance.rb.bodyType = RigidbodyType2D.Kinematic;
+        HeroMovement.instance.rb.velocity = Vector2.zero;
+        HeroMovement.instance.enabled = false;
+        HeroHits.instance.enabled = false;
+        HeroAbility.instance.enabled = false;
+        invicibility = true;
+        if (!isDead)
+        {
+            animator.speed = 0;
+        }
     }
 
     public void Death()
     {
+        animator.speed = 0;
         GameManager.instance.Die();
     }
 
@@ -100,7 +115,6 @@ public class HeroStats : MonoBehaviour
         {
             heroHP -= damage;
             healthBar.SetHealth(heroHP);
-            Debug.Log("Le héro a désormais " + heroHP + " PV.");
             CheckStateHero();
             if (!isDead)
             {
@@ -134,7 +148,7 @@ public class HeroStats : MonoBehaviour
 
     IEnumerator FlashInvicibility()
     {
-        while (invicibility)
+        while (invicibility && !isDead)
         {
         graphics.color = new Color(1f, 1f, 1f, 0f);
         yield return new WaitForSeconds(flashDelay);

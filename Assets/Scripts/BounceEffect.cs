@@ -9,6 +9,8 @@ public class BounceEffect : MonoBehaviour
     private LayerMask obstacles;
     private Rigidbody2D rb;
     private Vector3 initialVelocity;
+    private Vector3 lastPosition;
+    public int frameNoMove;
 
     void Start()
     {
@@ -17,12 +19,28 @@ public class BounceEffect : MonoBehaviour
         obstacles = reaperMinion.obstacles;
         rb = parent.GetComponent<Rigidbody2D>();
         initialVelocity = reaperMinion.direction * reaperMinion.enemySpeed;
+        lastPosition = transform.position;
     }
     void FixedUpdate()
     {
         if (reaperMinion.launched)
         {
             rb.velocity = initialVelocity;
+        }
+
+        if (reaperMinion.launched && lastPosition != parent.transform.position)
+        {
+            lastPosition = parent.transform.position;
+            frameNoMove = 0;
+        }
+        else
+        {
+            frameNoMove++;
+            if (frameNoMove >= 10)
+            {
+                initialVelocity *= -1;
+                frameNoMove = 0;
+            }
         }
     }
 

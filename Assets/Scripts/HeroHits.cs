@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class HeroHits : MonoBehaviour
 {
+    public static HeroHits instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogError("There is more than one HeroHits in the scene");
+            return;
+        }
+        instance = this;
+    }
+
     //Public variables
     public float heroRange;
     public LayerMask enemyLayers;

@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public int nbCoins;
     public static PlayerInventory instance;
 
     private void Awake()
@@ -17,13 +17,30 @@ public class PlayerInventory : MonoBehaviour
         instance = this;
     }
 
-    void Start()
+    public int nbCoins;
+    public int nbHeart;
+    public int nbKey;
+
+    private bool isInventoryOpen;
+    public GameObject inventoryUI;
+
+    private void Start()
     {
-        nbCoins = 0;
+        inventoryUI.SetActive(false);
     }
 
-    void Update()
+    public void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            OpenOrCloseInventory();
+        }
     }
+
+    void OpenOrCloseInventory()
+    {
+        isInventoryOpen = !isInventoryOpen;
+        inventoryUI.SetActive(isInventoryOpen);
+    }
+
 }
