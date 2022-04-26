@@ -5,9 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public bool firstGame = true;
     [field:HideInInspector]
-    public bool isAlive;
+    public bool gameLaunched;
     public float score;
     public float timer;
 
@@ -31,8 +30,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("The game starts !");
         timer = 0f;
         score = 0f;
-        isAlive = true;
-        firstGame = false;
+        gameLaunched = true;
+        
         StartCoroutine(Timer());
     }
 
@@ -43,7 +42,7 @@ public class GameManager : MonoBehaviour
     IEnumerator Timer()
     {
         yield return new WaitForSeconds(1f);
-        if (isAlive)
+        if (gameLaunched)
         {
             timer++;
             StartCoroutine(Timer());
@@ -55,7 +54,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void Die()
     {
-        isAlive = false;
-        SceneManager.LoadScene("MainMenu");
+        gameLaunched = false;
+        LevelManager.instance.EndGameMenu();
     }
 }

@@ -7,6 +7,7 @@ public class HeroStats : MonoBehaviour
     public static HeroStats instance;
     private void Awake()
     {
+        Time.timeScale = 1f;
         instance = null;
         if (instance != null)
         {
@@ -24,6 +25,7 @@ public class HeroStats : MonoBehaviour
     public float flashDelay;
     public float invicibilityDelay;
     public bool invicibility;
+    public bool isDead;
 
     [Header("Abilities Stats")]
     public float fireDamage;
@@ -39,12 +41,12 @@ public class HeroStats : MonoBehaviour
 
     [Header("GameObjects and Components")]
     public SpriteRenderer graphics;
-    private HealthBar healthBar;
+    public Animator animator;
+    public HealthBar healthBar;
 
     void Start()
     {
         heroHP = heroMaxHealth;
-        healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>();
         healthBar.InitializeHealthBar(heroMaxHealth, heroHP);
 
         invicibility = false;
@@ -61,9 +63,8 @@ public class HeroStats : MonoBehaviour
         GameManager.instance.InitGame();
     }
 
-    void FixedUpdate()
+    void CheckStateHero()
     {
-        //Totalement à revoir
         if (heroHP <= capHeroLow && !(heroLow))
         {
             heroLow = true;
@@ -74,10 +75,23 @@ public class HeroStats : MonoBehaviour
             heroLow = false;
             heroAttack /= 2;
         }
-        if (heroHP<=0)
+        if (heroHP <= 0)
         {
-            GameManager.instance.Die();
+            IsDying();
         }
+    }
+
+    public void IsDying()
+    {
+        HeroMovement.instance.rb.bodyType = RigidbodyType2D.Kinematic;
+        invicibility = true;
+        isDead = true;
+        
+    }
+
+    public void Death()
+    {
+        GameManager.instance.Die();
     }
 
     public void TakeDamageHero(float damage)
@@ -87,7 +101,11 @@ public class HeroStats : MonoBehaviour
             heroHP -= damage;
             healthBar.SetHealth(heroHP);
             Debug.Log("Le héro a désormais " + heroHP + " PV.");
-            StartCoroutine(TheInvicibility());
+            CheckStateHero();
+            if (!isDead)
+            {
+                StartCoroutine(TheInvicibility());
+            }
         }
     }
 
@@ -95,6 +113,7 @@ public class HeroStats : MonoBehaviour
     {
         heroHP = heroHP + heal > heroMaxHealth ? heroMaxHealth : heroHP + heal;
         healthBar.SetHealth(heroHP);
+        CheckStateHero();
         Debug.Log("Le héro a désormais " + heroHP + " PV.");
     }
 
@@ -102,6 +121,7 @@ public class HeroStats : MonoBehaviour
     {
         heroMaxHealth += increase;
         healthBar.InitializeHealthBar(heroMaxHealth, heroHP);
+        CheckStateHero();
     }
 
     IEnumerator TheInvicibility()

@@ -5,7 +5,8 @@ using UnityEngine;
 public class HeroMovement : MonoBehaviour
 {
     //Necessary variables definition
-    private Rigidbody2D rb;
+    [field:HideInInspector]
+    public Rigidbody2D rb;
     private Vector3 velocity = Vector3.zero;
     private Animator animator;
 

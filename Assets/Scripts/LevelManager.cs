@@ -16,15 +16,19 @@ public class LevelManager : MonoBehaviour
         instance = this;
     }
 
-    public GameObject pauseMenuUI;
-    private bool pauseMenu;
     public LevelGenerator levelGenerator;
+    public GameObject hud;
+    public GameObject pauseMenuUI;
+    public GameObject endGameMenu;
+    private bool pauseMenu;
 
     private void Start()
     {
         levelGenerator = GetComponent<LevelGenerator>();
         pauseMenu = false;
+        hud.SetActive(true);
         pauseMenuUI.SetActive(false);
+        endGameMenu.SetActive(false);
         Recreatelevel();
     }
 
@@ -50,5 +54,11 @@ public class LevelManager : MonoBehaviour
         pauseMenu = !pauseMenu;
         pauseMenuUI.SetActive(pauseMenu);
         Time.timeScale = Mathf.Abs(Time.timeScale - 1f);
+    }
+
+    public void EndGameMenu()
+    {
+        hud.SetActive(false);
+        endGameMenu.SetActive(true);
     }
 }
