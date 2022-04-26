@@ -32,6 +32,8 @@ TagManager:
   - ReaperBullet
   - Ladder2
   - LevelManager
+  - HealthBar
+  - Coin
   layers:
   - Default
   - TransparentFX
@@ -48,7 +50,7 @@ TagManager:
   - Spawner
   - BossLayer
   - Bouncing
-  - 
+  - Objects
   - 
   - 
   - 

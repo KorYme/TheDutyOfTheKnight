@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2624dd98551c2419fc88d299be1143, type: 3}
+  m_Name: Key
+  m_EditorClassIdentifier: 
+  objectName: Key
+  description: Allow you to open a chest
+  sprite: {fileID: 6848829298122412017, guid: 020f862cbe42e534680dd6d908ed0b3e, type: 3}
+  coinCost: 15
+  coinGiven: 0
+  keyGiven: 1
+  healthGiven: 0
+  maxHealthGiven: 0
+  speedGiven: 0
+  attackGiven: 0
+  addToInventory: 1

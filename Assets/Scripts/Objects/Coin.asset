@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Coin
   description: MONEY
-  sprite: {fileID: 0}
+  sprite: {fileID: 5241099391819498733, guid: cf54867b63820d747978ab16317f5ecd, type: 3}
   coinCost: 0
   coinGiven: 1
+  keyGiven: 0
   healthGiven: 0
   maxHealthGiven: 0
   speedGiven: 0
-  damageGiven: 0
+  attackGiven: 0
+  addToInventory: 1

@@ -19,14 +19,15 @@ public class PlayerInventory : MonoBehaviour
 
     public int nbCoins;
     public int nbHeart;
-    public int nbKey;
+    public int nbSword;
+    public int nbKeys;
 
     private bool isInventoryOpen;
-    public GameObject inventoryUI;
+    //public GameObject inventoryUI;
 
     private void Start()
     {
-        inventoryUI.SetActive(false);
+        //inventoryUI.SetActive(false);
     }
 
     public void Update()
@@ -40,7 +41,7 @@ public class PlayerInventory : MonoBehaviour
     void OpenOrCloseInventory()
     {
         isInventoryOpen = !isInventoryOpen;
-        inventoryUI.SetActive(isInventoryOpen);
+        //inventoryUI.SetActive(isInventoryOpen);
     }
 
 }

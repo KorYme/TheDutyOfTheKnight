@@ -116,7 +116,7 @@ public class HeroStats : MonoBehaviour
             heroHP -= damage;
             healthBar.SetHealth(heroHP);
             CheckStateHero();
-            if (!isDead)
+            if (!isDead && damage != 0)
             {
                 StartCoroutine(TheInvicibility());
             }

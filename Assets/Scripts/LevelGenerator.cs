@@ -93,6 +93,8 @@ public class LevelGenerator : MonoBehaviour
         }
         //Tests Boss
         level[spawnX,spawnY + 1] = "Boss";
+        level[spawnX, spawnY - 1] = "Shop";
+        shopRoomCreated++;
         //PlacingBossRoom();
         PlacingOtherRooms();
         for (int i = 0; i < levelHeight; i++)
