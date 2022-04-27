@@ -25,6 +25,11 @@ public class LevelGenerator : MonoBehaviour
     private GameObject bossRoom;
     private GameObject abilityRoom;
 
+
+    [Header ("Test Mode")]
+    public bool testMode;
+
+
     private void Awake()
     {
         InitializingValue();
@@ -91,11 +96,9 @@ public class LevelGenerator : MonoBehaviour
                 totalNumberRoomsCreated++;
             }
         }
-        //Tests Boss
-        level[spawnX,spawnY + 1] = "Boss";
-        level[spawnX, spawnY - 1] = "Shop";
-        shopRoomCreated++;
-        //PlacingBossRoom();
+        //Tests Room
+        TestMode();
+        //To Modify
         PlacingOtherRooms();
         for (int i = 0; i < levelHeight; i++)
         {
@@ -110,6 +113,22 @@ public class LevelGenerator : MonoBehaviour
             }
         }
         AstarPath.active.Scan();
+    }
+
+    void TestMode()
+    {
+        if (testMode)
+        {
+            level[spawnX, spawnY + 1] = "Boss";
+            level[spawnX + 1, spawnY] = "Ability";
+            level[spawnX, spawnY - 1] = "Shop";
+            shopRoomCreated++;
+            abilityRoomCreated++;
+        }
+        else
+        {
+            PlacingBossRoom();
+        }
     }
 
     int HowManyRoundAround(int height, int width)

@@ -5,6 +5,19 @@ using UnityEngine.Tilemaps;
 
 public class RoomManager : MonoBehaviour
 {
+
+    public static RoomManager instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogError("There is more than one RoomManager in this game");
+            return;
+        }
+        instance = this;
+    }
+
     private HeroAbility heroAbility;
     private CameraFollow cameraFollow;
     private LevelGenerator levelGenerator;
@@ -25,7 +38,8 @@ public class RoomManager : MonoBehaviour
     public LayerMask enemyLayer;
     public LayerMask closedDoorsMask;
     public LayerMask openedDoorsMask;
-    public LayerMask spawner;
+    public LayerMask spawner;   
+    public LayerMask shopLayer; 
 
     void Start()
     {
@@ -182,5 +196,10 @@ public class RoomManager : MonoBehaviour
             }
             OpenOrCloseTheDoors(false);
         }
+    }
+
+    public bool IsItShop()
+    {
+        return Physics2D.OverlapBox(camPos, camSize, 0f, shopLayer);
     }
 }

@@ -128,7 +128,6 @@ public class HeroStats : MonoBehaviour
         heroHP = heroHP + heal > heroMaxHealth ? heroMaxHealth : heroHP + heal;
         healthBar.SetHealth(heroHP);
         CheckStateHero();
-        Debug.Log("Le héro a désormais " + heroHP + " PV.");
     }
 
     public void IncreaseMaxHealthHero(float increase)

@@ -73,10 +73,12 @@ public class BossFight : Enemies
         if (this.transform.position.x > player.transform.position.x)
         {
             this.transform.eulerAngles = new Vector3(0, 180, 0);
+            slider.transform.eulerAngles = new Vector3(0, 0, 0);
         }
         else
         {
             this.transform.eulerAngles = new Vector3(0, 0, 0);
+            slider.transform.eulerAngles = new Vector3(0, 0, 0);
         }
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, enemySpeed * Time.fixedDeltaTime);
     }

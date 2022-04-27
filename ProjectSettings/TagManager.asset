@@ -34,6 +34,7 @@ TagManager:
   - LevelManager
   - HealthBar
   - Coin
+  - Merchant
   layers:
   - Default
   - TransparentFX
@@ -51,7 +52,7 @@ TagManager:
   - BossLayer
   - Bouncing
   - Objects
-  - 
+  - Shop
   - 
   - 
   - 
