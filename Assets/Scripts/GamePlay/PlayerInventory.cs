@@ -18,30 +18,14 @@ public class PlayerInventory : MonoBehaviour
     }
 
     public int nbCoins;
-    public int nbHeart;
-    public int nbSword;
-    public int nbKeys;
+    public int nbKey;
+    public int nbKeyBoss;
 
-    private bool isInventoryOpen;
-    //public GameObject inventoryUI;
-
-    private void Start()
+    public void AddToInventory(ObjectsData objectData)
     {
-        //inventoryUI.SetActive(false);
+        nbCoins += objectData.coinGiven;
+        nbKey += objectData.keyGiven;
+        nbKeyBoss += objectData.keyBossGiven;
+        InventoryPanel.instance.UpdateInventory();
     }
-
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            OpenOrCloseInventory();
-        }
-    }
-
-    void OpenOrCloseInventory()
-    {
-        isInventoryOpen = !isInventoryOpen;
-        //inventoryUI.SetActive(isInventoryOpen);
-    }
-
 }

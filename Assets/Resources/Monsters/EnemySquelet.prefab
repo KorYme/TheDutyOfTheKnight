@@ -451,6 +451,8 @@ MonoBehaviour:
   isTouchDamage: 1
   dead: 0
   slider: {fileID: 4462430917434765614}
+  drops:
+  - {fileID: 6136551995765668482, guid: 8d6562f3a1860e246b73d6af419d0284, type: 3}
 --- !u!1 &6953286530886727266
 GameObject:
   m_ObjectHideFlags: 0

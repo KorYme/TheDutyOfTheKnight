@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce2624dd98551c2419fc88d299be1143, type: 3}
-  m_Name: Key
+  m_Name: KeyBoss
   m_EditorClassIdentifier: 
-  objectName: Key
-  description: A key which can open chests.
-  sprite: {fileID: 6242831123289951215, guid: 020f862cbe42e534680dd6d908ed0b3e, type: 3}
-  coinCost: 15
+  objectName: KeyBoss
+  description: A key needed to start the bossfight.
+  sprite: {fileID: 6848829298122412017, guid: 020f862cbe42e534680dd6d908ed0b3e, type: 3}
+  coinCost: 0
   coinGiven: 0
   keyGiven: 1
   keyBossGiven: 0

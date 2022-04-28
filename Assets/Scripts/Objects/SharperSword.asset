@@ -13,11 +13,14 @@ MonoBehaviour:
   m_Name: SharperSword
   m_EditorClassIdentifier: 
   objectName: SharperSword
-  description: A sharper sword for a sharper world (increase your damage)
+  description: A sharper sword for a sharper world (increase your damage).
   sprite: {fileID: 1432926143477238334, guid: 5ebf14d3f879d97499fe58a91dcf06b9, type: 3}
   coinCost: 30
   coinGiven: 0
+  keyGiven: 0
+  keyBossGiven: 0
   healthGiven: 0
   maxHealthGiven: 0
   speedGiven: 0
-  damageGiven: 20
+  attackGiven: 0
+  addToInventory: 0

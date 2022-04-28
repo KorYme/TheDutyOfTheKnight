@@ -13,11 +13,14 @@ MonoBehaviour:
   m_Name: SpeedPotion
   m_EditorClassIdentifier: 
   objectName: Speed Potion
-  description: A potion which gives you more movement speed
+  description: A potion which gives you more movement speed.
   sprite: {fileID: 8881541749800195961, guid: 3def700810ea17b44af3f49a6ffc90df, type: 3}
   coinCost: 20
   coinGiven: 0
+  keyGiven: 0
+  keyBossGiven: 0
   healthGiven: 0
   maxHealthGiven: 0
   speedGiven: 30
-  damageGiven: 0
+  attackGiven: 0
+  addToInventory: 0

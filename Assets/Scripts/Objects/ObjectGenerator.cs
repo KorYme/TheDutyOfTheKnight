@@ -8,14 +8,16 @@ public class ObjectGenerator : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool isInRange;
     private Merchant merchant;
+    private bool firstTimeTouched;
 
     protected virtual void Start()
     {
         //Make sure the sprite is the good one
+        merchant = GameObject.FindGameObjectWithTag("Merchant").GetComponent<Merchant>();
         spriteRenderer = gameObject.transform.Find("Graphic").gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = objectData.sprite;
         isInRange = false;
-        merchant = GameObject.FindGameObjectWithTag("Merchant").GetComponent<Merchant>();
+        firstTimeTouched = true;
     }
 
     public virtual void TakeObject()
@@ -24,10 +26,10 @@ public class ObjectGenerator : MonoBehaviour
         HeroStats.instance.HealHero(objectData.healthGiven);
         HeroStats.instance.speed += objectData.speedGiven;
         HeroStats.instance.heroAttack += objectData.attackGiven;
-        PlayerInventory.instance.nbCoins -= objectData.coinCost;
+        InventoryPanel.instance.UpdateInventory();
         if (objectData.addToInventory)
         {
-            //Ajouter à l'inventaire
+            PlayerInventory.instance.AddToInventory(objectData);
         }
         Destroy(gameObject);
     }
@@ -36,30 +38,37 @@ public class ObjectGenerator : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (!isInRange && DialogueManager.instance.currentPanelUser == "Object")
+            if (!isInRange && DialogueManager.instance.currentPanelUser == gameObject)
             {
                 DialogueManager.instance.PanelDisable();
             }
             else if (isInRange)
             {
-                DialogueManager.instance.currentPanelUser = "Object";
+                DialogueManager.instance.currentPanelUser = gameObject;
                 if (RoomManager.instance.IsItShop())
                 {
-                    if (PlayerInventory.instance.nbCoins < objectData.coinCost)
+                    if (firstTimeTouched)
                     {
-                        DialogueManager.instance.UpdateTheScreen(merchant.nameMerchant, "Tu n'as pas assez d'argent, il va te falloir " + (objectData.coinCost - PlayerInventory.instance.nbCoins).ToString() + " pieces de plus si tu comptes me l'acheter !");
                         if (!DialogueManager.instance.panelOpen)
                         {
                             DialogueManager.instance.PanelEnable();
                         }
-
+                        DialogueManager.instance.UpdateTheScreen(merchant.nameMerchant, objectData.description + " It costs " + objectData.coinCost + " coins.");
+                        firstTimeTouched = false;
                     }
                     else
                     {
-                        if (DialogueManager.instance.panelOpen)
-                            Debug.Log("C'est ca ouais");
-                        DialogueManager.instance.PanelDisable();
-                        TakeObject();
+                        if (PlayerInventory.instance.nbCoins < objectData.coinCost)
+                        {
+                            DialogueManager.instance.UpdateTheScreen(merchant.nameMerchant, "You don't have enough money, you'll need " + (objectData.coinCost - PlayerInventory.instance.nbCoins).ToString() + " more coins to buy it !");
+                            firstTimeTouched = true;
+                        }
+                        else
+                        {
+                            DialogueManager.instance.PanelDisable();
+                            PlayerInventory.instance.nbCoins -= objectData.coinCost;
+                            TakeObject();
+                        }
                     }
                 }
                 else
@@ -75,7 +84,6 @@ public class ObjectGenerator : MonoBehaviour
         if (collision.tag == "Player")
         {
             isInRange = true;
-            Debug.Log(isInRange);
         }
     }
 
@@ -84,11 +92,10 @@ public class ObjectGenerator : MonoBehaviour
         if (collision.tag == "Player")
         {
             isInRange = false;
-            if (DialogueManager.instance.currentPanelUser == "Object")
+            if (DialogueManager.instance.currentPanelUser == gameObject)
             {
                 DialogueManager.instance.PanelDisable();
             }
         }
     }
-        
 }

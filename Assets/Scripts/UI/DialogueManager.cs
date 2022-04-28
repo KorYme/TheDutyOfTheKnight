@@ -24,14 +24,14 @@ public class DialogueManager : MonoBehaviour
     [field:HideInInspector]
     public bool panelOpen;
     [field: HideInInspector]
-    public string currentPanelUser;
+    public GameObject currentPanelUser;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         panelName = transform.Find("NamePanel").Find("TextPanelName").GetComponent<TMP_Text>();
         panelContent = transform.Find("TextPanelContent").GetComponent<TMP_Text>();
-        currentPanelUser = "";
+        currentPanelUser = null;
     }
 
     public void PanelEnable()

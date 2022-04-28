@@ -16,8 +16,9 @@ MonoBehaviour:
   description: MONEY
   sprite: {fileID: 5241099391819498733, guid: cf54867b63820d747978ab16317f5ecd, type: 3}
   coinCost: 0
-  coinGiven: 20
+  coinGiven: 5
   keyGiven: 0
+  keyBossGiven: 0
   healthGiven: 0
   maxHealthGiven: 0
   speedGiven: 0

@@ -120,10 +120,9 @@ MonoBehaviour:
   nameMerchant: Lost Merchant
   sentencesMerchant:
   - Hello Adventurer ! I hope you're doing great
-  - Your journey must just be beginning as I see
+  - Your journey has just begun, what are you doing here ?
   - I've been stuck down here for 20 days now, but skeletons are good friends
-  - Let's talk business, what do you need ?
-  - I will let you look at my stuff
+  - Let's talk business, what do you need ? Look at my stuff !
 --- !u!70 &602371770167522491
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

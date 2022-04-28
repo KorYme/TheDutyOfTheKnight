@@ -20,6 +20,7 @@ public class Enemies : MonoBehaviour
     public bool isTouchDamage = true;
     public bool dead = false;
     public Slider slider;
+    public GameObject[] drops;
 
     protected virtual void Start()
     {
@@ -88,9 +89,21 @@ public class Enemies : MonoBehaviour
         enemySpeed = 0;
         GetComponent<Collider2D>().enabled = false;
         roomManager.CheckEnemiesStillIn();
+        DropItems(Random.Range(0,6));
         if (slider != null)
         {
             Destroy(slider.gameObject);
+        }
+    }
+
+    protected virtual void DropItems(int nbItems)
+    {
+        if (drops.Length != 0)
+        {
+            for (int i = 0; i < nbItems; i++)
+            {
+                Instantiate(drops[0], new Vector3(transform.position.x + Random.Range(0f, 1f), transform.position.y + Random.Range(0f, 1f), 0), Quaternion.identity);
+            }
         }
     }
 

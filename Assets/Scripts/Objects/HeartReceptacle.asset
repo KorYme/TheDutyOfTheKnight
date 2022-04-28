@@ -13,11 +13,14 @@ MonoBehaviour:
   m_Name: HeartReceptacle
   m_EditorClassIdentifier: 
   objectName: Heart Receptacle
-  description: A new heart to be more resistant to monster (increase your healthbar)
+  description: A new heart to be more resistant to monster (increase your healthbar).
   sprite: {fileID: 21300000, guid: 61f6282fb5f3abd4cb01d46df8d0d09d, type: 3}
   coinCost: 60
   coinGiven: 0
+  keyGiven: 0
+  keyBossGiven: 0
   healthGiven: 20
   maxHealthGiven: 20
   speedGiven: 0
-  damageGiven: 0
+  attackGiven: 0
+  addToInventory: 0

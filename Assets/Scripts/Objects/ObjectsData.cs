@@ -11,6 +11,7 @@ public class ObjectsData : ScriptableObject
     public int coinCost;
     public int coinGiven;
     public int keyGiven;
+    public int keyBossGiven;
     public float healthGiven;
     public float maxHealthGiven;
     public float speedGiven;

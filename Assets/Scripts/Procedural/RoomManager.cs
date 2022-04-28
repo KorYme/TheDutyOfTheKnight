@@ -107,6 +107,7 @@ public class RoomManager : MonoBehaviour
         AreEnemiesIn();
     }
 
+
     public void ActivateEnemies()
     {
         allSpawner = Physics2D.OverlapBoxAll(camPos, camSize, 0f, spawner);

@@ -25,13 +25,13 @@ public class Merchant : MonoBehaviour
 
     private void Update()
     {
-        if (!isInRange && DialogueManager.instance.panelOpen && DialogueManager.instance.currentPanelUser == "Merchant")
+        if (!isInRange && DialogueManager.instance.panelOpen && DialogueManager.instance.currentPanelUser == gameObject)
         {
             DialogueManager.instance.PanelDisable();
         }
         else if (isInRange && Input.GetKeyDown(KeyCode.E))
         {
-            DialogueManager.instance.currentPanelUser = "Merchant";
+            DialogueManager.instance.currentPanelUser = gameObject;
             if ( sentencesIndex < sentencesMerchant.Length)
             {
                 if (!DialogueManager.instance.panelOpen)
