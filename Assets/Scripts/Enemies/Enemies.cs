@@ -102,10 +102,32 @@ public class Enemies : MonoBehaviour
         {
             for (int i = 0; i < nbItems; i++)
             {
-                Instantiate(drops[0], new Vector3(transform.position.x + Random.Range(0f, 1f), transform.position.y + Random.Range(0f, 1f), 0), Quaternion.identity);
+                float x = transform.position.x + Random.Range(0f, 1.5f);
+                float y = transform.position.y + Random.Range(0f, 1.5f);
+                if (CanPopItem(new Vector3(x, y, 0), drops[0]))
+                {
+                    Instantiate(drops[0], new Vector3(x, y, 0), Quaternion.identity);
+                }
+                else
+                {
+                    i--;
+                }
             }
         }
     }
+
+    protected bool CanPopItem(Vector3 position, GameObject gameObject)
+    {
+        foreach (Collider2D item in Physics2D.OverlapCircleAll(position, gameObject.GetComponent<CircleCollider2D>().radius))
+        {
+            if (item.gameObject.layer == 6 || item.gameObject.layer == 8 || item.gameObject.layer == 9)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     protected virtual void StopPlaying()
     {

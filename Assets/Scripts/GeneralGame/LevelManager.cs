@@ -35,7 +35,7 @@ public class LevelManager : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !HeroStats.instance.isDead)
         {
             PauseAndUnpause();
         }
