@@ -24,22 +24,29 @@ public class RoomManager : MonoBehaviour
     private GameObject player;
     private GameObject spawnCamera;
     private GameObject mainCamera;
-    public GameObject[] allBosses;
     private GameObject[] allMonsters;
     private Collider2D[] allSpawner;
+
+
+    [Header ("Filling values")]
+    public InputData inputData;
+    public GameObject[] allBosses;
+
+    [Header ("Layers to fill")]
+    public LayerMask enemyLayer;
+    public LayerMask closedDoorsMask;
+    public LayerMask openedDoorsMask;
+    public LayerMask spawner;   
+    public LayerMask shopLayer;
+
     private Collider2D[] theClosedDoorsHere;
     private Collider2D[] theOpenedDoorsHere;
     private Collider2D[] insideEnemies;
     private Collider2D enemiesIn;
     private Collider2D ladder1;
-    public bool spawnRoomOut;
+    [HideInInspector]public bool spawnRoomOut;
     private Vector2 camPos;
     private Vector2 camSize;
-    public LayerMask enemyLayer;
-    public LayerMask closedDoorsMask;
-    public LayerMask openedDoorsMask;
-    public LayerMask spawner;   
-    public LayerMask shopLayer; 
 
     void Start()
     {

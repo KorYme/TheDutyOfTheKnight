@@ -6,6 +6,8 @@ using TMPro;
 public class InventoryPanel : MonoBehaviour
 {
     public static InventoryPanel instance;
+    public InputData inputData;
+
     private void Awake()
     {
         if (instance != null)

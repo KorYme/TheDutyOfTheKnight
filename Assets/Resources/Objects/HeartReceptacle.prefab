@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectData: {fileID: 11400000, guid: 211f498178819ef468cbf31f762be3c0, type: 2}
+  inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
 --- !u!58 &1472270781514468879
 CircleCollider2D:
   m_ObjectHideFlags: 0

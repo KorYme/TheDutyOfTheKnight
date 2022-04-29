@@ -9,6 +9,7 @@ public class ObjectGenerator : MonoBehaviour
     private bool isInRange;
     private Merchant merchant;
     private bool firstTimeTouched;
+    public InputData inputData;
 
     protected virtual void Start()
     {
@@ -36,7 +37,7 @@ public class ObjectGenerator : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(inputData.interact))
         {
             if (!isInRange && DialogueManager.instance.currentPanelUser == gameObject)
             {

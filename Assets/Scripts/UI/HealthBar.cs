@@ -7,6 +7,8 @@ public class HealthBar : MonoBehaviour
 {
     public Slider slider;
 
+    
+
     public void InitializeHealthBar(float maxHealth, float health)
     {
         slider.minValue = 0;

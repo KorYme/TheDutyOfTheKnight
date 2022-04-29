@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
     public bool victory;
     public float score;
     public int timer;
+    private SettingsMenu settingsMenu;
+
+    public int currentIndexResolutions = -1;
+    public float currentVolume;
 
     //Create the Singleton
     public static GameManager instance;
@@ -21,6 +25,14 @@ public class GameManager : MonoBehaviour
             Debug.LogError("More than one GameManager instance in the game !");
         }
         instance = this;
+        settingsMenu = GameObject.FindGameObjectWithTag("SettingsMenu").GetComponent<SettingsMenu>();
+        settingsMenu.gameObject.SetActive(false);
+    }
+
+    public void SaveParameters()
+    {
+        currentIndexResolutions = settingsMenu.currentIndexResolutions;
+        currentVolume = settingsMenu.currentVolume;
     }
 
     /// <summary>

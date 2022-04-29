@@ -129,6 +129,7 @@ MonoBehaviour:
   isTouchDamage: 0
   dead: 0
   slider: {fileID: 6872616398527320009}
+  drops: []
   playerLayer:
     serializedVersion: 2
     m_Bits: 1024
@@ -331,7 +332,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -282.507, y: -161.056}
+  m_AnchoredPosition: {x: -282.507, y: -157.12}
   m_SizeDelta: {x: 170, y: 29.5961}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6872616398527320009

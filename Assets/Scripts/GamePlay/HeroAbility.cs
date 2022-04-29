@@ -20,6 +20,7 @@ public class HeroAbility : MonoBehaviour
     public float cooldownEarth;
 
     [Header("KeyCodes")]
+    public InputData inputData;
     public KeyCode KeyFire = KeyCode.A;
     public KeyCode KeyWind = KeyCode.Mouse1;
     public KeyCode KeyEarth = KeyCode.Space;

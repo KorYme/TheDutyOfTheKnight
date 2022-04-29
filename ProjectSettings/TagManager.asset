@@ -35,6 +35,8 @@ TagManager:
   - HealthBar
   - Coin
   - Merchant
+  - AudioManager
+  - SettingsMenu
   layers:
   - Default
   - TransparentFX

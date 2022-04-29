@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject endGameMenu;
     private bool pauseMenu;
+    public InputData inputData;
 
     private void Start()
     {
@@ -35,7 +36,7 @@ public class LevelManager : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !HeroStats.instance.isDead)
+        if (Input.GetKeyDown(inputData.menu) && !HeroStats.instance.isDead)
         {
             PauseAndUnpause();
         }

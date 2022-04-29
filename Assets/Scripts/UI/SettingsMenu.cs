@@ -13,8 +13,12 @@ public class SettingsMenu : MonoBehaviour
     Resolution[] resolutions;
     public GameObject entryMenu;
 
+    public float currentVolume;
+    public int currentIndexResolutions;
+
     public void Start()
     {
+        GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioSource>();
         resolutions = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
         dropdown.ClearOptions();
         List<string> options = new List<string>();
@@ -30,11 +34,13 @@ public class SettingsMenu : MonoBehaviour
         dropdown.AddOptions(options);
         dropdown.value = currentResolutionIndex;
         dropdown.RefreshShownValue();
+        transform.Find("VolumeSlider").GetComponent<Slider>().value = GameManager.instance.currentVolume;
     }
 
     public void SetVolume(float volume)
     {
         audioMixer.SetFloat("volume", volume);
+        currentVolume = volume;
     }
 
     public void SetFullScreen(bool isFullScreen)
@@ -56,11 +62,13 @@ public class SettingsMenu : MonoBehaviour
 
     public void RetryButton()
     {
+        GameManager.instance.SaveParameters();
         SceneManager.LoadScene("Etage1");
     }
 
     public void MainMenuButton()
     {
+        GameManager.instance.SaveParameters();
         SceneManager.LoadScene("MainMenu");
     }
 }

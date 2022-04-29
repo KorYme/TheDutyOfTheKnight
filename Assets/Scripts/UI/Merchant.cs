@@ -10,6 +10,7 @@ public class Merchant : MonoBehaviour
     public string nameMerchant;
     public string[] sentencesMerchant;
     private int sentencesIndex;
+    public InputData inputData;
 
     private void Start()
     {
