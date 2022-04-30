@@ -5,7 +5,7 @@ public class InputData : ScriptableObject
 {
     public KeyCode menu;
     public KeyCode interact;
-    public KeyCode buy;
+    public KeyCode accept;
     public KeyCode swordHit;
     public KeyCode abilityEarth;
     public KeyCode abilityWind;

@@ -19,18 +19,22 @@ public class DialogueManager : MonoBehaviour
 
     private TMP_Text panelName;
     private TMP_Text panelContent;
+    private TMP_Text panelContinue;
     private Animator animator;
-    private bool isMoving;
-    [field:HideInInspector]
+    //[field:HideInInspector]
+    public bool isMoving;
+    //[field:HideInInspector]
     public bool panelOpen;
-    [field: HideInInspector]
+    //[field: HideInInspector]
     public GameObject currentPanelUser;
+    public InputData inputData;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         panelName = transform.Find("NamePanel").Find("TextPanelName").GetComponent<TMP_Text>();
         panelContent = transform.Find("TextPanelContent").GetComponent<TMP_Text>();
+        panelContinue = transform.Find("TextPanelContinue").GetComponent<TMP_Text>();
         currentPanelUser = null;
     }
 
@@ -59,9 +63,21 @@ public class DialogueManager : MonoBehaviour
         isMoving = false;
     }
 
-    public void UpdateTheScreen(string name, string content)
+    public void UpdateTheScreen(string name, string content, int bottomRightText = -1)
     {
         panelName.text = name;
         panelContent.text = content;
+        switch (bottomRightText)
+        {
+            case 0:
+                panelContinue.text = "Press " + inputData.interact.ToString() + " to close >";
+                return;
+            case 1:
+                panelContinue.text = "Press " + inputData.accept.ToString() + " to buy and " + inputData.interact.ToString() + " to close >";
+                return;
+            default:
+                panelContinue.text = "Press " + inputData.interact.ToString() + " to continue >";
+                return;
+        }
     }
 }

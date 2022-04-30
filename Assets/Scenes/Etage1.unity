@@ -1197,7 +1197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &238275123
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2223,8 +2223,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 321.932, y: -102.51}
-  m_SizeDelta: {x: 380.58, y: 57.702}
+  m_AnchoredPosition: {x: 12.943, y: -102.51}
+  m_SizeDelta: {x: 998.56, y: 57.702}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &431877917
 MonoBehaviour:
@@ -2280,7 +2280,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -4017,8 +4017,8 @@ RectTransform:
   m_Father: {fileID: 2014194902}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5279,8 +5279,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5723579f846b6c4a8b5e803a5012b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMoving: 0
   panelOpen: 0
   currentPanelUser: {fileID: 0}
+  inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
 --- !u!95 &1234496435
 Animator:
   serializedVersion: 3
@@ -6363,7 +6365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1484306245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6422,7 +6424,7 @@ GameObject:
   - component: {fileID: 1501682205}
   - component: {fileID: 1501682204}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Press [Tab]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8934,12 +8936,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d019963167f177741b5c953f40d50ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputData: {fileID: 0}
+  inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
+  playerInventory: {fileID: 401620119}
   inventoryCount:
   - {fileID: 951766762}
   - {fileID: 256361436}
   - {fileID: 1646214065}
   - {fileID: 1240759282}
+  initialTimeToClose: 2
 --- !u!1 &1761319131
 GameObject:
   m_ObjectHideFlags: 0
@@ -8958,7 +8962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1761319132
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9641,7 +9645,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1888231682
 MonoBehaviour:
   m_ObjectHideFlags: 0

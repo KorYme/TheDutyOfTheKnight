@@ -93,6 +93,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75a15564fe73164a9f2cc19e1fc1000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totemsData: {fileID: 11400000, guid: 8fb7bf98729352e4e9eb9dc9fa32525a, type: 2}
+  inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
 --- !u!1 &1957154236134430629
 GameObject:
   m_ObjectHideFlags: 0
@@ -6528,6 +6530,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75a15564fe73164a9f2cc19e1fc1000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totemsData: {fileID: 11400000, guid: ef4ee33a8d7b89648a402c59b93e25e1, type: 2}
+  inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
 --- !u!1 &7383513800129378979
 GameObject:
   m_ObjectHideFlags: 0
@@ -6890,6 +6894,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75a15564fe73164a9f2cc19e1fc1000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totemsData: {fileID: 11400000, guid: e170f15e0112e7842a55be464db333dc, type: 2}
+  inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
 --- !u!1 &7624706479690172847
 GameObject:
   m_ObjectHideFlags: 0

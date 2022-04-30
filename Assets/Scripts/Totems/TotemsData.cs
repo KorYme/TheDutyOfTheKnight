@@ -6,5 +6,6 @@ using UnityEngine;
 public class TotemsData : ScriptableObject
 {
     public string totemName, description;
-    public float fireDamageBonus, windCooldownBonus, earthCooldownBonus;
+    public float fireCooldownBonus, fireDamageBonus, windCooldownBonus, earthCooldownBonus, earthDurationBonus
+        ;
 }

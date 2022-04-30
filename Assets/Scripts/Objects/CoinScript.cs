@@ -12,10 +12,12 @@ public class CoinScript : MonoBehaviour
     private void Start()
     {
         GetComponent<CircleCollider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
         StartCoroutine(WaitToStartToggle());
         flashDelay = 0.2f;
         coinRadius = GetComponent<CircleCollider2D>().radius;
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
@@ -38,7 +40,12 @@ public class CoinScript : MonoBehaviour
         return true;
     }
 
-    void ActivateCoin()
+    void ActivateCoinSprite()
+    {
+        GetComponent<SpriteRenderer>().enabled = true; 
+    }
+
+    void ActivateCoinCollider()
     {
         GetComponent<CircleCollider2D>().enabled = true;
     }

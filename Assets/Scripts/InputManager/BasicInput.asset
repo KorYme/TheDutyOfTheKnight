@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: 27
   interact: 101
-  buy: 98
+  accept: 121
   swordHit: 323
   abilityEarth: 32
   abilityWind: 324

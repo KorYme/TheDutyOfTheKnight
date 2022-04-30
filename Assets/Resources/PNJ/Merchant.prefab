@@ -123,6 +123,7 @@ MonoBehaviour:
   - Your journey has just begun, what are you doing here ?
   - I've been stuck down here for 20 days now, but skeletons are good friends
   - Let's talk business, what do you need ? Look at my stuff !
+  inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
 --- !u!70 &602371770167522491
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -17,15 +17,23 @@ public class PlayerInventory : MonoBehaviour
         instance = this;
     }
 
+    [Header ("Current stuff")]
     public int nbCoins;
     public int nbKey;
     public int nbKeyBoss;
+    private InventoryPanel inventoryPanel;
+
+    private void Start()
+    {
+        inventoryPanel = InventoryPanel.instance;
+    }
 
     public void AddToInventory(ObjectsData objectData)
     {
         nbCoins += objectData.coinGiven;
         nbKey += objectData.keyGiven;
         nbKeyBoss += objectData.keyBossGiven;
-        InventoryPanel.instance.UpdateInventory();
+        inventoryPanel.ShowInventory();
+        inventoryPanel.UpdateInventory();
     }
 }

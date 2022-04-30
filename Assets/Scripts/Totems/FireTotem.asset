@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67ab97a29ad595c4280a3d8e2c78d31c, type: 3}
-  m_Name: EarthTotem
+  m_Name: FireTotem
   m_EditorClassIdentifier: 
-  totemName: Earth Totem
-  description: Here is the earth totem to decrease your shield's cooldown and make
-    it last longer
-  fireCooldownBonus: 0
-  fireDamageBonus: 0
+  totemName: Fire Totem
+  description: Here is the fire totem to decrease your fireball's cooldown and make
+    it a bit stronger
+  fireCooldownBonus: 2
+  fireDamageBonus: 10
   windCooldownBonus: 0
-  earthCooldownBonus: 2
-  earthDurationBonus: 1
+  earthCooldownBonus: 0
+  earthDurationBonus: 0

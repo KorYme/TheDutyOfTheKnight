@@ -11,12 +11,14 @@ public class Merchant : MonoBehaviour
     public string[] sentencesMerchant;
     private int sentencesIndex;
     public InputData inputData;
+    private DialogueManager dialogueManager;
 
     private void Start()
     {
         sprite = this.GetComponent<SpriteRenderer>();
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         sentencesIndex = 0;
+        dialogueManager = DialogueManager.instance;
     }
 
     private void FixedUpdate()
@@ -26,25 +28,32 @@ public class Merchant : MonoBehaviour
 
     private void Update()
     {
-        if (!isInRange && DialogueManager.instance.panelOpen && DialogueManager.instance.currentPanelUser == gameObject)
+        if (!isInRange && dialogueManager.panelOpen && dialogueManager.currentPanelUser == gameObject)
         {
-            DialogueManager.instance.PanelDisable();
+            dialogueManager.PanelDisable();
         }
         else if (isInRange && Input.GetKeyDown(KeyCode.E))
         {
-            DialogueManager.instance.currentPanelUser = gameObject;
+            dialogueManager.currentPanelUser = gameObject;
             if ( sentencesIndex < sentencesMerchant.Length)
             {
-                if (!DialogueManager.instance.panelOpen)
+                if (!dialogueManager.panelOpen)
                 {
-                    DialogueManager.instance.PanelEnable();
-                }   
-                DialogueManager.instance.UpdateTheScreen(nameMerchant, sentencesMerchant[sentencesIndex]);
+                    dialogueManager.PanelEnable();
+                }
+                if (sentencesIndex < sentencesMerchant.Length-1)
+                {
+                    dialogueManager.UpdateTheScreen(nameMerchant, sentencesMerchant[sentencesIndex]);
+                }
+                else
+                {
+                    dialogueManager.UpdateTheScreen(nameMerchant, sentencesMerchant[sentencesIndex],0);
+                }
                 sentencesIndex++;
             }
             else
             {
-                DialogueManager.instance.PanelDisable();
+                dialogueManager.PanelDisable();
                 sentencesIndex = 0;
             }
         }

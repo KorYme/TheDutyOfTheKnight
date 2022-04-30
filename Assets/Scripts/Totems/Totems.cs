@@ -5,6 +5,7 @@ using UnityEngine;
 public class Totems : MonoBehaviour
 {
     private bool inRange;
+    private DialogueManager dialogueManager;
 
     [Header ("To define values")]
     public TotemsData totemsData;
@@ -13,34 +14,34 @@ public class Totems : MonoBehaviour
     private void Start()
     {
         inRange = false;
+        dialogueManager = DialogueManager.instance;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(inputData.interact))
         {
             if (inRange)
             {
-                if (!DialogueManager.instance.panelOpen)
+                dialogueManager.currentPanelUser = gameObject;
+                //Need Modifications
+                dialogueManager.UpdateTheScreen(totemsData.name, totemsData.description);
+                if (!dialogueManager.panelOpen)
                 {
-                    DialogueManager.instance.PanelEnable();
+                    dialogueManager.PanelEnable();
                 }
-                else if (DialogueManager.instance.currentPanelUser == gameObject)
+                else if (dialogueManager.currentPanelUser == gameObject)
                 {
-                    DialogueManager.instance.PanelDisable();
+                    dialogueManager.PanelDisable();
                 }
-            }
-            else
-            {
-
             }
         }
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            if (DialogueManager.instance.currentPanelUser == gameObject && DialogueManager.instance.panelOpen)
+            if (dialogueManager.currentPanelUser == gameObject && dialogueManager.panelOpen)
             {
                 //Add stats
-                DialogueManager.instance.PanelDisable();
+                dialogueManager.PanelDisable();
             }
         }
     }
@@ -58,9 +59,9 @@ public class Totems : MonoBehaviour
         if (collision.transform.tag == "Player")
         {
             inRange = false;
-            if (DialogueManager.instance.currentPanelUser == gameObject)
+            if (dialogueManager.currentPanelUser == gameObject)
             {
-                DialogueManager.instance.PanelDisable();
+                dialogueManager.PanelDisable();
             }
         }
     }

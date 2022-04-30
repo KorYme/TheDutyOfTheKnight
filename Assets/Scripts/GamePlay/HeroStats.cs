@@ -44,8 +44,12 @@ public class HeroStats : MonoBehaviour
     public Animator animator;
     public HealthBar healthBar;
 
+    private HeroMovement heroMovement;
+
     void Start()
     {
+        heroMovement = HeroMovement.instance;
+
         heroHP = heroMaxHealth;
         healthBar.InitializeHealthBar(heroMaxHealth, heroHP);
 
@@ -91,9 +95,9 @@ public class HeroStats : MonoBehaviour
     
     public void StopHero()
     {
-        HeroMovement.instance.rb.bodyType = RigidbodyType2D.Kinematic;
-        HeroMovement.instance.rb.velocity = Vector2.zero;
-        HeroMovement.instance.enabled = false;
+        heroMovement.rb.bodyType = RigidbodyType2D.Kinematic;
+        heroMovement.rb.velocity = Vector2.zero;
+        heroMovement.enabled = false;
         HeroHits.instance.enabled = false;
         HeroAbility.instance.enabled = false;
         invicibility = true;

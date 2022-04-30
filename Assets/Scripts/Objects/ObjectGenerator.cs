@@ -10,6 +10,9 @@ public class ObjectGenerator : MonoBehaviour
     private Merchant merchant;
     private bool firstTimeTouched;
     public InputData inputData;
+    private DialogueManager dialogueManager;
+    private HeroStats heroStats;
+    private PlayerInventory playerInventory;
 
     protected virtual void Start()
     {
@@ -19,18 +22,21 @@ public class ObjectGenerator : MonoBehaviour
         spriteRenderer.sprite = objectData.sprite;
         isInRange = false;
         firstTimeTouched = true;
+        dialogueManager = DialogueManager.instance;
+        heroStats = HeroStats.instance;
+        playerInventory = PlayerInventory.instance;
     }
 
     public virtual void TakeObject()
     {
-        HeroStats.instance.IncreaseMaxHealthHero(objectData.maxHealthGiven);
-        HeroStats.instance.HealHero(objectData.healthGiven);
-        HeroStats.instance.speed += objectData.speedGiven;
-        HeroStats.instance.heroAttack += objectData.attackGiven;
+        heroStats.IncreaseMaxHealthHero(objectData.maxHealthGiven);
+        heroStats.HealHero(objectData.healthGiven);
+        heroStats.speed += objectData.speedGiven;
+        heroStats.heroAttack += objectData.attackGiven;
         InventoryPanel.instance.UpdateInventory();
         if (objectData.addToInventory)
         {
-            PlayerInventory.instance.AddToInventory(objectData);
+            playerInventory.AddToInventory(objectData);
         }
         Destroy(gameObject);
     }
@@ -39,37 +45,28 @@ public class ObjectGenerator : MonoBehaviour
     {
         if (Input.GetKeyDown(inputData.interact))
         {
-            if (!isInRange && DialogueManager.instance.currentPanelUser == gameObject)
+            if (!isInRange && dialogueManager.currentPanelUser == gameObject)
             {
-                DialogueManager.instance.PanelDisable();
+                dialogueManager.PanelDisable();
             }
-            else if (isInRange)
+            else if (isInRange && !dialogueManager.isMoving)
             {
-                DialogueManager.instance.currentPanelUser = gameObject;
+                dialogueManager.currentPanelUser = gameObject;
                 if (RoomManager.instance.IsItShop())
                 {
                     if (firstTimeTouched)
                     {
-                        if (!DialogueManager.instance.panelOpen)
+                        if (!dialogueManager.panelOpen)
                         {
-                            DialogueManager.instance.PanelEnable();
+                            dialogueManager.PanelEnable();
                         }
-                        DialogueManager.instance.UpdateTheScreen(merchant.nameMerchant, objectData.description + " It costs " + objectData.coinCost + " coins.");
+                        dialogueManager.UpdateTheScreen(merchant.nameMerchant, objectData.description + " It costs " + objectData.coinCost + " coins.", 1);
                         firstTimeTouched = false;
                     }
-                    else
+                    else if (dialogueManager.panelOpen)
                     {
-                        if (PlayerInventory.instance.nbCoins < objectData.coinCost)
-                        {
-                            DialogueManager.instance.UpdateTheScreen(merchant.nameMerchant, "You don't have enough money, you'll need " + (objectData.coinCost - PlayerInventory.instance.nbCoins).ToString() + " more coins to buy it !");
-                            firstTimeTouched = true;
-                        }
-                        else
-                        {
-                            DialogueManager.instance.PanelDisable();
-                            PlayerInventory.instance.nbCoins -= objectData.coinCost;
-                            TakeObject();
-                        }
+                        firstTimeTouched = true;
+                        dialogueManager.PanelDisable();
                     }
                 }
                 else
@@ -77,6 +74,29 @@ public class ObjectGenerator : MonoBehaviour
                     //Code Ramassage objet hors shop
                 }
             }
+        }
+
+        if (Input.GetKeyDown(inputData.accept))
+        {
+            if (dialogueManager.currentPanelUser == gameObject && !firstTimeTouched)
+            {
+                if (playerInventory.nbCoins < objectData.coinCost)
+                {
+                    dialogueManager.UpdateTheScreen(merchant.nameMerchant, "You don't have enough money, you'll need " + (objectData.coinCost - playerInventory.nbCoins).ToString() + " more coins to buy it !");
+                    firstTimeTouched = true;
+                }
+                else if (!dialogueManager.isMoving)
+                {
+                    dialogueManager.PanelDisable();
+                    playerInventory.nbCoins -= objectData.coinCost;
+                    TakeObject();
+                }
+            }
+        }
+
+        if (!isInRange && dialogueManager.currentPanelUser == gameObject && dialogueManager.panelOpen)
+        {
+            dialogueManager.PanelDisable();
         }
     }
 
@@ -93,9 +113,10 @@ public class ObjectGenerator : MonoBehaviour
         if (collision.tag == "Player")
         {
             isInRange = false;
-            if (DialogueManager.instance.currentPanelUser == gameObject)
+            firstTimeTouched = true;
+            if (dialogueManager.currentPanelUser == gameObject)
             {
-                DialogueManager.instance.PanelDisable();
+                dialogueManager.PanelDisable();
             }
         }
     }

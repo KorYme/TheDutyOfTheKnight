@@ -102,8 +102,8 @@ public class Enemies : MonoBehaviour
         {
             for (int i = 0; i < nbItems; i++)
             {
-                float x = transform.position.x + Random.Range(0f, 1.5f);
-                float y = transform.position.y + Random.Range(0f, 1.5f);
+                float x = transform.position.x + Random.Range(-0.75f, 0.75f);
+                float y = transform.position.y + Random.Range(-0.75f, 0.75f);
                 if (CanPopItem(new Vector3(x, y, 0), drops[0]))
                 {
                     Instantiate(drops[0], new Vector3(x, y, 0), Quaternion.identity);
