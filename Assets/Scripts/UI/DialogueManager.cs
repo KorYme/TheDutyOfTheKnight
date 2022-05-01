@@ -73,7 +73,13 @@ public class DialogueManager : MonoBehaviour
                 panelContinue.text = "Press " + inputData.interact.ToString() + " to close >";
                 return;
             case 1:
-                panelContinue.text = "Press " + inputData.accept.ToString() + " to buy and " + inputData.interact.ToString() + " to close >";
+                panelContinue.text = "Press " + inputData.accept.ToString() + " to buy or " + inputData.interact.ToString() + " to close >";
+                return;
+            case 2:
+                panelContinue.text = "Press " + inputData.accept.ToString() + " to pray or " + inputData.interact.ToString() + " to close >";
+                return;
+            case 3:
+                panelContinue.text = "Press " + inputData.accept.ToString() + " to pick up or " + inputData.interact.ToString() + " to close >";
                 return;
             default:
                 panelContinue.text = "Press " + inputData.interact.ToString() + " to continue >";

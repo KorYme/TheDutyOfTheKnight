@@ -9,22 +9,24 @@ public class LevelGenerator : MonoBehaviour
     public int levelHeight;
     public int levelWidth;
     public bool spawnCentered;
+
+    [Header ("Number of rooms asked")]
     public int nbShopAsked;
     public int nbAbilityAsked;
     public int nbRoomsAsked;
-    public static int spawnX;
-    public static int spawnY;
+    public int spawnX;
+    public int spawnY;
 
     private int totalNumberRoomsAsked;
     private int totalNumberRoomsCreated;
     private int abilityRoomCreated;
     private int shopRoomCreated;
+
     private GameObject[] allRooms;
     private GameObject spawnRoom;
     private GameObject shopRoom;
     private GameObject bossRoom;
     private GameObject abilityRoom;
-
 
     [Header ("Test Mode")]
     public bool testMode;
@@ -34,7 +36,7 @@ public class LevelGenerator : MonoBehaviour
     {
         InitializingValue();
         CenteringSpawn(spawnCentered);
-        CameraFollow.playerCoordinates = new Vector2(LevelGenerator.spawnX, LevelGenerator.spawnY);
+        CameraFollow.playerCoordinates = new Vector2(spawnX, spawnY);
         FillRoomList();
     }
 

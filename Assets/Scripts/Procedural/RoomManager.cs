@@ -50,19 +50,7 @@ public class RoomManager : MonoBehaviour
 
     void Start()
     {
-        heroAbility = GameObject.FindGameObjectWithTag("Player").GetComponent<HeroAbility>();
         InitiateValues();
-        heroAbility.earthUnlocked = false;
-        heroAbility.windUnlocked = false;
-        heroAbility.fireUnlocked = false;
-    }
-
-    private void FixedUpdate()
-    {
-        if (!spawnRoomOut)
-        {
-            Ladder1Script();
-        }
     }
 
     /// <summary>
@@ -70,39 +58,17 @@ public class RoomManager : MonoBehaviour
     /// </summary>
     public void InitiateValues()
     {
-        camSize = new Vector2(17.8162708f, 9.53441048f);
-        player = GameObject.FindGameObjectWithTag("Player");
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        spawnCamera = GameObject.FindGameObjectWithTag("SpawnCamera");
-        spawnCamera.SetActive(true);
-        Camera.main.gameObject.SetActive(false);
-        player.transform.position = new Vector3(-100, 101.5059f, 0);
-        spawnRoomOut = false;
-        cameraFollow = mainCamera.GetComponent<CameraFollow>();
-        levelGenerator = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelGenerator>();
         allMonsters = Resources.LoadAll<GameObject>("Monsters");
-        ladder1 = GameObject.FindGameObjectWithTag("Ladder1").GetComponent<Collider2D>();
-    }
-
-    /// <summary>
-    /// Check if the player is touching the ladder and is pressing E
-    /// </summary>
-    public void Ladder1Script()
-    {
-        if (ladder1.IsTouching(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>()))
-        {
-            if (Input.GetKey(KeyCode.E))
-            {
-                mainCamera.SetActive(true);
-                spawnCamera.SetActive(false);
-                player.transform.position = new Vector3(0, 0, 0);
-                spawnRoomOut = true;
-                ChangingRoom();
-                heroAbility.earthUnlocked = true;
-                heroAbility.windUnlocked = true;
-                heroAbility.fireUnlocked = true;
-            }
-        }
+        player = GameObject.FindGameObjectWithTag("Player");
+        heroAbility = player.GetComponent<HeroAbility>();
+        levelGenerator = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelGenerator>();
+        camSize = new Vector2(17.8162708f, 9.53441048f);
+        cameraFollow = Camera.main.GetComponent<CameraFollow>();
+        player.transform.position = new Vector3(0, 0, 0);
+        ChangingRoom();
+        heroAbility.earthUnlocked = true;
+        heroAbility.windUnlocked = true;
+        heroAbility.fireUnlocked = true;
     }
 
     public void ChangingRoom()
@@ -188,7 +154,7 @@ public class RoomManager : MonoBehaviour
     /// </summary>
     public void AreEnemiesIn()
     {
-        camPos = mainCamera.transform.position;
+        camPos = Camera.main.transform.position;
         //ActivateOrDesactivateEnemies(true);
         insideEnemies = Physics2D.OverlapBoxAll(camPos, camSize, 0f, enemyLayer);
         //ActivateOrDesactivateEnemies(false);

@@ -71,24 +71,48 @@ public class ObjectGenerator : MonoBehaviour
                 }
                 else
                 {
-                    //Code Ramassage objet hors shop
+                    if (firstTimeTouched)
+                    {
+                        if (!dialogueManager.panelOpen)
+                        {
+                            dialogueManager.PanelEnable();
+                        }
+                        dialogueManager.UpdateTheScreen(objectData.name, objectData.description, 3);
+                        firstTimeTouched = false;
+                    }
+                    else if (dialogueManager.panelOpen)
+                    {
+                        firstTimeTouched = true;
+                        dialogueManager.PanelDisable();
+                    }
                 }
             }
         }
 
         if (Input.GetKeyDown(inputData.accept))
         {
-            if (dialogueManager.currentPanelUser == gameObject && !firstTimeTouched)
+            if (RoomManager.instance.IsItShop())
             {
-                if (playerInventory.nbCoins < objectData.coinCost)
+                if (dialogueManager.currentPanelUser == gameObject && !firstTimeTouched)
                 {
-                    dialogueManager.UpdateTheScreen(merchant.nameMerchant, "You don't have enough money, you'll need " + (objectData.coinCost - playerInventory.nbCoins).ToString() + " more coins to buy it !");
-                    firstTimeTouched = true;
+                    if (playerInventory.nbCoins < objectData.coinCost)
+                    {
+                        dialogueManager.UpdateTheScreen(merchant.nameMerchant, "You don't have enough money, you'll need " + (objectData.coinCost - playerInventory.nbCoins).ToString() + " more coins to buy it !");
+                        firstTimeTouched = true;
+                    }
+                    else if (!dialogueManager.isMoving)
+                    {
+                        dialogueManager.PanelDisable();
+                        playerInventory.nbCoins -= objectData.coinCost;
+                        TakeObject();
+                    }
                 }
-                else if (!dialogueManager.isMoving)
+            }
+            else
+            {
+                if (dialogueManager.currentPanelUser == gameObject && !firstTimeTouched)
                 {
                     dialogueManager.PanelDisable();
-                    playerInventory.nbCoins -= objectData.coinCost;
                     TakeObject();
                 }
             }

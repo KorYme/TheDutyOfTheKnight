@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TotemsData", menuName = "MyGame/TotemsData")]
 public class TotemsData : ScriptableObject
 {
-    public string totemName, description;
-    public float fireCooldownBonus, fireDamageBonus, windCooldownBonus, earthCooldownBonus, earthDurationBonus
-        ;
+    public string totemName, description, textForPrayer;
+    public float fireCooldownBonus, fireDamageBonus, explosionDamageBonus, windCooldownBonus, earthCooldownBonus, earthDurationBonus;
 }

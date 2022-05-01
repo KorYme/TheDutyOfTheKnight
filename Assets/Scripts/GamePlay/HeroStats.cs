@@ -28,7 +28,7 @@ public class HeroStats : MonoBehaviour
     public bool isDead;
 
     [Header("Abilities Stats")]
-    public float fireDamage;
+    public float fireDamage = 25f;
     public float shieldDamage = 25f;
     public float shieldDuration = 3f;
     public float dashDamage = 50f;
@@ -45,10 +45,12 @@ public class HeroStats : MonoBehaviour
     public HealthBar healthBar;
 
     private HeroMovement heroMovement;
+    private HeroAbility heroAbility;
 
     void Start()
     {
         heroMovement = HeroMovement.instance;
+        heroAbility = HeroAbility.instance;
 
         heroHP = heroMaxHealth;
         healthBar.InitializeHealthBar(heroMaxHealth, heroHP);
@@ -126,6 +128,17 @@ public class HeroStats : MonoBehaviour
             }
         }
     }
+
+    public void AddStatsHero(TotemsData totemsData)
+    {
+        fireDamage += totemsData.fireDamageBonus;
+        shieldDamage += totemsData.fireDamageBonus;
+        shieldDuration += totemsData.earthDurationBonus;
+        dashDamage += totemsData.fireDamageBonus;
+        explosionDamage += totemsData.explosionDamageBonus;
+        heroAbility.UpgradeCD(totemsData);
+    }
+
 
     public void HealHero(float heal)
     {

@@ -23,9 +23,6 @@ TagManager:
   - East
   - West
   - GameManager
-  - FireTotem
-  - EarthTotem
-  - WindTotem
   - Boss
   - SpawnBoss
   - CoolDownManager
@@ -37,6 +34,9 @@ TagManager:
   - Merchant
   - AudioManager
   - SettingsMenu
+  - UIPlayer
+  - Totem
+  - Object
   layers:
   - Default
   - TransparentFX

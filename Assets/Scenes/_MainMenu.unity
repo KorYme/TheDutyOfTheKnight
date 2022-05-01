@@ -2434,7 +2434,6 @@ MonoBehaviour:
   isFullScreen: 0
   dropdown: {fileID: 1252119522}
   entryMenu: {fileID: 457694906}
-  currentVolume: 0
   currentIndexResolutions: 0
 --- !u!114 &1253306440
 MonoBehaviour:

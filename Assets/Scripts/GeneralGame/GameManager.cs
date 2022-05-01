@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     public bool victory;
     public float score;
     public int timer;
-    private SettingsMenu settingsMenu;
 
     public int currentIndexResolutions = -1;
     public float currentVolume;
@@ -19,20 +18,13 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private void Awake()
     {
-        instance = null;
         if (instance != null)
         {
-            Debug.LogError("More than one GameManager instance in the game !");
+            //Debug.LogError("More than one GameManager instance in the game !");
+            Destroy(gameObject);
+            return;
         }
         instance = this;
-        settingsMenu = GameObject.FindGameObjectWithTag("SettingsMenu").GetComponent<SettingsMenu>();
-        settingsMenu.gameObject.SetActive(false);
-    }
-
-    public void SaveParameters()
-    {
-        currentIndexResolutions = settingsMenu.currentIndexResolutions;
-        currentVolume = settingsMenu.currentVolume;
     }
 
     /// <summary>

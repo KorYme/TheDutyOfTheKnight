@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totemName: Earth Totem
   description: Here is the earth totem to decrease your shield's cooldown and make
-    it last longer
+    it last longer.
+  textForPrayer: You've just decided to be strong as the earth. Great decision !
   fireCooldownBonus: 0
   fireDamageBonus: 0
+  explosionDamageBonus: 0
   windCooldownBonus: 0
-  earthCooldownBonus: 2
+  earthCooldownBonus: 4
   earthDurationBonus: 1

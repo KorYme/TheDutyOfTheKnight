@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: WindTotem
   m_EditorClassIdentifier: 
   totemName: Wind Totem
-  description: Here is the wind totem to decrease your teleportation's cooldown a
-    lot !
+  description: Here is the wind totem to decrease your teleportation's cooldown and
+    increase the explosion damage.
+  textForPrayer: You've just decided to be as fast as the wind. Great decision !
   fireCooldownBonus: 0
   fireDamageBonus: 0
-  windCooldownBonus: 5
+  explosionDamageBonus: 20
+  windCooldownBonus: 4
   earthCooldownBonus: 0
   earthDurationBonus: 0

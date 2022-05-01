@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5847620207705836600}
+  - component: {fileID: 5468094688744496611}
   m_Layer: 0
   m_Name: Totems
   m_TagString: Untagged
@@ -33,6 +34,19 @@ Transform:
   m_Father: {fileID: 1957154237866620651}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5468094688744496611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434188177631798946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2e6d0c6c7f982e4a97e37825c79b0ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomAlreadyPrayed: 0
 --- !u!1 &1528344243825279223
 GameObject:
   m_ObjectHideFlags: 0
@@ -46,7 +60,7 @@ GameObject:
   - component: {fileID: 7804175067042818174}
   m_Layer: 0
   m_Name: FireTotem
-  m_TagString: FireTotem
+  m_TagString: Totem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6483,7 +6497,7 @@ GameObject:
   - component: {fileID: 6879061254925169074}
   m_Layer: 0
   m_Name: EarthTotem
-  m_TagString: FireTotem
+  m_TagString: Totem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6847,7 +6861,7 @@ GameObject:
   - component: {fileID: 5429838448840498697}
   m_Layer: 0
   m_Name: WindTotem
-  m_TagString: FireTotem
+  m_TagString: Totem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

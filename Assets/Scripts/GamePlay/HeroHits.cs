@@ -16,20 +16,26 @@ public class HeroHits : MonoBehaviour
         instance = this;
     }
 
-    //Public variables
+    [Header("Input Data")]
+    public InputData inputdata;
+
+    [Header ("Hits Variables")]
     public float heroRange;
     public LayerMask enemyLayers;
 
-    //Animator System
-    private Animator animator;
+    [HideInInspector]
     public Vector3 worldPosition;
+    private Animator animator;
     private float horizontalCursor;
     private float verticalCursor;
     private Camera cam;
+
+    [Header ("Animator System")]
     public float reloadTime;
     public bool isInReloadTime;
 
     //Points System
+    [HideInInspector]
     public string direction;
     private CoolDownManager coolDownManager;
     
@@ -38,19 +44,13 @@ public class HeroHits : MonoBehaviour
     {
         //Variable definition
         animator = GetComponent<Animator>();
-        cam = GameObject.FindGameObjectWithTag("SpawnCamera").GetComponent<Camera>();
+        cam = Camera.main;
         isInReloadTime = false;
         coolDownManager = GameObject.FindGameObjectWithTag("CoolDownManager").GetComponent<CoolDownManager>();
     }
 
     void FixedUpdate()
     {
-        //Check if we need to change the current camera
-        if (transform.position.y < 95)
-        {
-            cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        }
-
         //Check the mouse coordinates in the world space
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = cam.nearClipPlane;
@@ -87,17 +87,21 @@ public class HeroHits : MonoBehaviour
                 direction = "AttRgt";
             }
         }
+    }
 
-        //Lance le système d'attaque si le joueur n'est pas en isInReloadTime
-        if (Input.GetMouseButton(0) && !isInReloadTime)
+    private void Update()
+    {
+        if (Input.GetKey(inputdata.swordHit) && !isInReloadTime)
         {
             Attack();
         }
     }
 
+    /// <summary>
+    /// Play a hit animation
+    /// </summary>
     void Attack()
     {
-        //Play the hit animation
         animator.SetTrigger("Hitting");
         isInReloadTime = true;
         coolDownManager.ResetCoolDown("Hit");
@@ -120,10 +124,12 @@ public class HeroHits : MonoBehaviour
         StartCoroutine(WaitShoot());
     }
 
+    /// <summary>
+    /// We wait for the hit cooldown to hit again
+    /// </summary>
+    /// <returns></returns>
     IEnumerator WaitShoot()
     {
-        // Là on dit au script de patienter pendant l'animation de coup
-        // On a fini d'attendre donc on repasse isInReloadTime en false, donc on va pouvoir taper à nouveau
         yield return new WaitForSeconds(reloadTime);
         isInReloadTime = false;
     }

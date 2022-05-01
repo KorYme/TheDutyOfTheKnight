@@ -20,7 +20,6 @@ public class InGameMenu : MonoBehaviour
     public void ReturnToMenu()
     {
         Time.timeScale = 1f;
-        GameManager.instance.SaveParameters();
         SceneManager.LoadScene(levelToLoad);
     }
 }

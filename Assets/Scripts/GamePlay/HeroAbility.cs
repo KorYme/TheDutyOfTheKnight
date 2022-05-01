@@ -21,12 +21,6 @@ public class HeroAbility : MonoBehaviour
 
     [Header("KeyCodes")]
     public InputData inputData;
-    public KeyCode KeyFire = KeyCode.A;
-    public KeyCode KeyWind = KeyCode.Mouse1;
-    public KeyCode KeyEarth = KeyCode.Space;
-    public KeyCode KeyExplosion = KeyCode.Alpha1;
-    public KeyCode KeyDash = KeyCode.Alpha2;
-    public KeyCode KeyShieldDamage = KeyCode.Alpha3;
 
     [Header("To Define Values")]
     public HeroStats heroStats;
@@ -66,27 +60,27 @@ public class HeroAbility : MonoBehaviour
     private void Update()
     {
         //Check if the player clicked on an ability key
-        if (Input.GetKey(KeyFire) && fireUnlocked && !fireInCooldown)
+        if (Input.GetKey(inputData.abilityFire) && fireUnlocked && !fireInCooldown)
         {
             FireAbility();
         }
-        else if (Input.GetKey(KeyWind) && windUnlocked && !windInCooldown)
+        else if (Input.GetKey(inputData.abilityWind) && windUnlocked && !windInCooldown)
         {
             WindAbility();
         }
-        else if (Input.GetKey(KeyEarth) && earthUnlocked && !earthInCooldown)
+        else if (Input.GetKey(inputData.abilityEarth) && earthUnlocked && !earthInCooldown)
         {
             EarthAbility();
         }
-        else if (Input.GetKey(KeyExplosion) && earthUnlocked && windUnlocked && !earthInCooldown && !windInCooldown)
+        else if (Input.GetKey(inputData.abilityExplosion) && earthUnlocked && windUnlocked && !earthInCooldown && !windInCooldown)
         {
             ExplosionAbility();
         }
-        else if (Input.GetKey(KeyDash) && fireUnlocked && windUnlocked && !fireInCooldown && !windInCooldown)
+        else if (Input.GetKey(inputData.abilityDash) && fireUnlocked && windUnlocked && !fireInCooldown && !windInCooldown)
         {
             DashAbility();
         }
-        else if (Input.GetKey(KeyShieldDamage) && fireUnlocked && earthUnlocked && !fireInCooldown && !earthInCooldown)
+        else if (Input.GetKey(inputData.abilityDamagingShield) && fireUnlocked && earthUnlocked && !fireInCooldown && !earthInCooldown)
         {
             ShieldDamageAbility();
         }
@@ -277,5 +271,16 @@ public class HeroAbility : MonoBehaviour
         transform.Find("DashLane").GetComponent<TrailRenderer>().enabled = true;
         yield return new WaitForSeconds(.15f);
         transform.Find("DashLane").GetComponent<TrailRenderer>().enabled = false;
+    }
+
+
+    /// <summary>
+    /// Update the cooldowns aftter an upgrade
+    /// </summary>
+    public void UpgradeCD(TotemsData totemsData)
+    {
+        cooldownEarth -= totemsData.earthCooldownBonus;
+        cooldownWind -= totemsData.windCooldownBonus;
+        cooldownFire -= totemsData.fireCooldownBonus;
     }
 }
