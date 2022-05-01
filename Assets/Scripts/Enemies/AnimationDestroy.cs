@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class AnimationDestroy : MonoBehaviour
 {
+    public Skeleton skeleton;
+
+    public void HasHitted()
+    {
+        skeleton.HasHitted();
+    }
+
+    public void Hit()
+    {
+        skeleton.Hit();
+    }
+
     public void DestroyGameObject()
     {
         Destroy(transform.parent.gameObject);

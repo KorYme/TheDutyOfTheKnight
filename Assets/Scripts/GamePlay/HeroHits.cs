@@ -51,6 +51,11 @@ public class HeroHits : MonoBehaviour
 
     void FixedUpdate()
     {
+        LookingAtDirection();
+    }
+
+    void LookingAtDirection()
+    {
         //Check the mouse coordinates in the world space
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = cam.nearClipPlane;

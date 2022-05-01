@@ -36,7 +36,7 @@ public class HeroMovement : MonoBehaviour
         Vector3 targetVelocity = new Vector2(horizontalInput, verticalInput);
         rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
 
-        //Définit si le héros possède une vitesse
+        //Look at the the speed of the player to play idle or run animation
         animator.SetFloat("Speed", Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
     }
 }
