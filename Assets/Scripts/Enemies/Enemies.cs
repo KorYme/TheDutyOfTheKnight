@@ -21,6 +21,7 @@ public class Enemies : MonoBehaviour
     public bool dead = false;
     public Slider slider;
     public GameObject[] drops;
+    public LayerMask playerLayer;
 
     protected virtual void Start()
     {

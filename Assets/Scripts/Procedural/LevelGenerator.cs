@@ -64,7 +64,7 @@ public class LevelGenerator : MonoBehaviour
 
     void CenteringSpawn(bool isCentered)
     {
-        if (isCentered)
+        if (isCentered || testMode)
         {
             spawnX = Mathf.FloorToInt(levelWidth / 2);
             spawnY = Mathf.FloorToInt(levelHeight / 2);
@@ -98,9 +98,7 @@ public class LevelGenerator : MonoBehaviour
                 totalNumberRoomsCreated++;
             }
         }
-        //Tests Room
         TestMode();
-        //To Modify
         PlacingOtherRooms();
         for (int i = 0; i < levelHeight; i++)
         {
@@ -117,6 +115,10 @@ public class LevelGenerator : MonoBehaviour
         AstarPath.active.Scan();
     }
 
+    /// <summary>
+    /// Test Mode
+    /// Place rooms in very specificate places
+    /// </summary>
     void TestMode()
     {
         if (testMode)
@@ -133,6 +135,12 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Check how many rooms are around this very room
+    /// </summary>
+    /// <param name="height"></param>
+    /// <param name="width"></param>
+    /// <returns></returns>
     int HowManyRoundAround(int height, int width)
     {
         int count = 0;

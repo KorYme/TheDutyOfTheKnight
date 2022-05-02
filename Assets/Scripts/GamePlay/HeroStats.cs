@@ -164,7 +164,7 @@ public class HeroStats : MonoBehaviour
 
     IEnumerator FlashInvicibility()
     {
-        while (invicibility && !isDead)
+        while (invicibility && !isDead && GameManager.instance.gameLaunched)
         {
         graphics.color = new Color(1f, 1f, 1f, 0f);
         yield return new WaitForSeconds(flashDelay);

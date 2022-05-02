@@ -5,7 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class BossFight : Enemies
 {
-    public LayerMask playerLayer;
     public GameObject reaperBullet;
     public GameObject reaperMinion;
     Transform hitPoint1;
