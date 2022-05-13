@@ -56,16 +56,7 @@ public class HeroStats : MonoBehaviour
         healthBar.InitializeHealthBar(heroMaxHealth, heroHP);
 
         invicibility = false;
-        //Check if the nightmare mode
-        if (nightmareMode)
-        {
-            heroMaxHealth = 1;
-        }
-        //Vérifie si le héros est low dès le début du jeu
-        if (heroHP > capHeroLow)
-        {
-            heroLow = false;
-        }
+        isDead = false;
     }
 
     void CheckStateHero()
@@ -85,6 +76,12 @@ public class HeroStats : MonoBehaviour
             GameManager.instance.victory = false;
             IsDying();
         }
+    }
+
+    public void IsFalling()
+    {
+        animator.SetTrigger("IsFalling");
+        heroMovement.AllowMovement(false);
     }
 
     public void IsDying()

@@ -38,6 +38,7 @@ public class RoomManager : MonoBehaviour
     public LayerMask openedDoorsMask;
     public LayerMask spawner;   
     public LayerMask shopLayer;
+    public LayerMask respawnLayer;
 
     private Collider2D[] theClosedDoorsHere;
     private Collider2D[] theOpenedDoorsHere;
@@ -172,8 +173,31 @@ public class RoomManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Check if the current room is a shop or not
+    /// </summary>
+    /// <returns>True if it is a shop</returns>
     public bool IsItShop()
     {
         return Physics2D.OverlapBox(camPos, camSize, 0f, shopLayer);
+    }
+
+    public void RespawnInRoom()
+    {
+        float dist = 2000f;
+        Vector3 tpPlace = new Vector3();
+        foreach (var item in Physics2D.OverlapBoxAll(camPos, camSize, 0f, respawnLayer))
+        {
+            if (Vector2.Distance(item.transform.position, player.transform.position) < dist)
+            {
+                dist = Vector2.Distance(item.transform.position, player.transform.position);
+                tpPlace = item.transform.position;
+            }
+        }
+        player.transform.position = tpPlace;
+
+        HeroMovement.instance.AllowMovement(false);
+        //Make him invulnerable
+        //Play animator
     }
 }
