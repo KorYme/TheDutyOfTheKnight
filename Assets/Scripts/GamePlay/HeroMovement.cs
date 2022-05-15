@@ -45,8 +45,14 @@ public class HeroMovement : MonoBehaviour
         }
     }
 
+    public void RespawnInRoomAnimation()
+    {
+        RoomManager.instance.RespawnInRoom();
+    }
+
     public void AllowMovement(bool that)
     {
         canPlayerMove = that;
+        rb.velocity = Vector3.zero;
     }
 }

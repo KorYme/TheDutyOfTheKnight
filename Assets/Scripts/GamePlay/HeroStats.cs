@@ -82,6 +82,7 @@ public class HeroStats : MonoBehaviour
     {
         animator.SetTrigger("IsFalling");
         heroMovement.AllowMovement(false);
+        
     }
 
     public void IsDying()

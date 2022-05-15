@@ -144,7 +144,6 @@ public class RoomManager : MonoBehaviour
         enemiesIn = Physics2D.OverlapBox(camPos, camSize, 0f, enemyLayer);
         if (enemiesIn == null)
         {
-            //Open the doors
             OpenOrCloseTheDoors(true);
             //Add Opening door sound
         }
@@ -156,9 +155,7 @@ public class RoomManager : MonoBehaviour
     public void AreEnemiesIn()
     {
         camPos = Camera.main.transform.position;
-        //ActivateOrDesactivateEnemies(true);
         insideEnemies = Physics2D.OverlapBoxAll(camPos, camSize, 0f, enemyLayer);
-        //ActivateOrDesactivateEnemies(false);
         if (insideEnemies.Length == 0)
         {
             OpenOrCloseTheDoors(true);
@@ -174,6 +171,29 @@ public class RoomManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="that"></param>
+    public void EnemiesMoveEnable(bool that)
+    {
+        if (that)
+        {
+            foreach (var item in insideEnemies)
+            {
+                item.gameObject.SendMessage("StopMoving");
+            }
+        }
+        else
+        {
+            foreach (var item in insideEnemies)
+            {
+                item.gameObject.SendMessage("Move", enemySpeed);
+            }
+        }
+    }
+
+
+    /// <summary>
     /// Check if the current room is a shop or not
     /// </summary>
     /// <returns>True if it is a shop</returns>
@@ -186,7 +206,7 @@ public class RoomManager : MonoBehaviour
     {
         float dist = 2000f;
         Vector3 tpPlace = new Vector3();
-        foreach (var item in Physics2D.OverlapBoxAll(camPos, camSize, 0f, respawnLayer))
+        foreach (var item in Physics2D.OverlapBoxAll(camPos, camSize, 0f, respawnLayer))    
         {
             if (Vector2.Distance(item.transform.position, player.transform.position) < dist)
             {
@@ -196,8 +216,8 @@ public class RoomManager : MonoBehaviour
         }
         player.transform.position = tpPlace;
 
-        HeroMovement.instance.AllowMovement(false);
-        //Make him invulnerable
-        //Play animator
+        HeroMovement.instance.AllowMovement(true);
+        HeroStats.instance.invicibility = false;
+        player.SendMessage("TakeDamageHero", 15f);
     }
 }
