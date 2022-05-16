@@ -171,23 +171,24 @@ public class RoomManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Allow the enemies in the room to move or not
     /// </summary>
-    /// <param name="that"></param>
+    /// <param name="that">True if you want them to move and else false</param>
     public void EnemiesMoveEnable(bool that)
     {
+        insideEnemies = Physics2D.OverlapBoxAll(camPos, camSize, 0f, enemyLayer);
         if (that)
         {
             foreach (var item in insideEnemies)
             {
-                item.gameObject.SendMessage("StopMoving");
+                item.gameObject.SendMessage("StartMoving");
             }
         }
         else
         {
             foreach (var item in insideEnemies)
             {
-                item.gameObject.SendMessage("Move", enemySpeed);
+                item.gameObject.SendMessage("StopMoving");
             }
         }
     }
@@ -215,9 +216,9 @@ public class RoomManager : MonoBehaviour
             }
         }
         player.transform.position = tpPlace;
-
         HeroMovement.instance.AllowMovement(true);
         HeroStats.instance.invicibility = false;
         player.SendMessage("TakeDamageHero", 15f);
+        EnemiesMoveEnable(true);
     }
 }

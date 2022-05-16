@@ -19,6 +19,7 @@ public class Enemies : MonoBehaviour
     public bool invulnerable = false;
     public bool isTouchDamage = true;
     public bool dead = false;
+    public bool canMove;
     public Slider slider;
     public GameObject[] drops;
     public LayerMask playerLayer;
@@ -33,6 +34,7 @@ public class Enemies : MonoBehaviour
             slider.maxValue = enemyHP;
             slider.value = enemyHP;
         }
+        canMove = true;
     }
 
     protected virtual void FixedUpdate()
@@ -46,7 +48,7 @@ public class Enemies : MonoBehaviour
 
     protected virtual void DamagingHero()
     {
-        if (isTouchDamage && GetComponent<Collider2D>().IsTouching(player.GetComponent<Collider2D>()))
+        if (isTouchDamage && GetComponent<Collider2D>().IsTouching(player.GetComponent<Collider2D>()) && canMove)
         {
             player.SendMessage("TakeDamageHero", enemyDamage);
         }
@@ -70,6 +72,18 @@ public class Enemies : MonoBehaviour
         {
             IsDying();
         }
+    }
+    
+    public virtual void StartMoving()
+    {
+        canMove = true;
+        animator.speed = 1;
+    }
+
+    public virtual void StopMoving()
+    {
+        canMove = false;
+        animator.speed = 0;
     }
 
     protected virtual void ToggleInvulnerability()

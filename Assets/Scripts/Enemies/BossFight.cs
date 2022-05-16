@@ -22,7 +22,6 @@ public class BossFight : Enemies
     public float timeBetweenAbility1;
 
     [Header ("Other Variables")]
-    public bool canMove;
     public bool bossAbility1;
     private float healthBossInitial;
 

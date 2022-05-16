@@ -82,7 +82,7 @@ public class HeroStats : MonoBehaviour
     {
         animator.SetTrigger("IsFalling");
         heroMovement.AllowMovement(false);
-        
+        RoomManager.instance.EnemiesMoveEnable(false);
     }
 
     public void IsDying()

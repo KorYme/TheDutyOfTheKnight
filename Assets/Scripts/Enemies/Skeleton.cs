@@ -11,7 +11,7 @@ public class Skeleton : Enemies
     protected override void Start()
     {
         base.Start();
-        SendMessage("Move", enemySpeed);
+        SendMessage("MoveIA", enemySpeed);
         lastPos = transform.position;
         dir = "Bottom";
     }
@@ -63,7 +63,7 @@ public class Skeleton : Enemies
         {
             animator.SetTrigger("Hitting");
             isHitting = true;
-            SendMessage("StopMoving");
+            SendMessage("StopMovingIA");
         }
     }
 
@@ -102,19 +102,34 @@ public class Skeleton : Enemies
     public void HasHitted()
     {
         isHitting = false;
-        SendMessage("Move", enemySpeed);
+        SendMessage("MoveIA", enemySpeed);
+    }
+
+    public override void StartMoving()
+    {
+        base.StartMoving();
+        if (!isHitting)
+        {
+            SendMessage("MoveIA", enemySpeed);
+        }
+    }
+
+    public override void StopMoving()
+    {
+        base.StopMoving();
+        SendMessage("StopMovingIA");
     }
 
     protected override void StopPlaying()
     {
         base.StopPlaying();
-        SendMessage("StopMoving");
+        SendMessage("StopMovingIA");
     }
 
     protected override void IsDying()
     {
         animator.SetBool("Dying", true);
         base.IsDying();
-        SendMessage("StopMoving");
+        SendMessage("StopMovingIA");
     }
 }

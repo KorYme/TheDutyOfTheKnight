@@ -237,13 +237,13 @@ namespace Pathfinding {
 
 		#endregion
 
-		public void StopMoving()
+		public void StopMovingIA()
         {
 			maxSpeed = 0;
 			return;
         }
 
-		public void Move(float speed)
+		public void MoveIA(float speed)
         {
 			maxSpeed = speed;
 			return;
