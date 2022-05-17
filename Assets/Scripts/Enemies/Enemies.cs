@@ -18,7 +18,7 @@ public class Enemies : MonoBehaviour
     public Animator animator;
     public bool invulnerable = false;
     public bool isTouchDamage = true;
-    public bool dead = false;
+    [HideInInspector]public bool dead = false;
     public bool canMove;
     public Slider slider;
     public GameObject[] drops;
