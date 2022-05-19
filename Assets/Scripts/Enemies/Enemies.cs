@@ -6,9 +6,8 @@ using UnityEngine.UI;
 public class Enemies : MonoBehaviour
 {
     //Useful access to others classes and objects
-    protected RoomManager roomManager;
-    protected GameObject player;
 
+    protected GameObject player;
 
     [Header("Enemy Variables")]
     public float enemyHP = 10f;
@@ -26,8 +25,7 @@ public class Enemies : MonoBehaviour
 
     protected virtual void Start()
     {
-        roomManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<RoomManager>();
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = HeroStats.instance.gameObject;
         if (slider != null)
         {
             slider.minValue = 0;
@@ -103,7 +101,7 @@ public class Enemies : MonoBehaviour
         dead = true;
         enemySpeed = 0;
         GetComponent<Collider2D>().enabled = false;
-        roomManager.CheckEnemiesStillIn();
+        RoomManager.instance.CheckEnemiesStillIn();
         DropItems(Random.Range(0,6));
         if (slider != null)
         {

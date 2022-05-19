@@ -203,7 +203,7 @@ public class BossFight : Enemies
     {
         animator.ResetTrigger("Death");
         base.Die();
-        roomManager.CheckEnemiesStillIn();
+        RoomManager.instance.CheckEnemiesStillIn();
         GameManager.instance.Die();
     }
 }
