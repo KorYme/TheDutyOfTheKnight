@@ -137,7 +137,7 @@ public class HeroAbility : MonoBehaviour
         Vector2 mouseDirection = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
         if (mouseDirection == Vector2.zero)
             mouseDirection = Vector2.up;
-        GameObject bulletLaunch = Instantiate(FireBall, transform.position, new Quaternion(mouseDirection.x, mouseDirection.y,0,90));
+        GameObject bulletLaunch = Instantiate(FireBall, transform.position, Quaternion.identity);
         bulletLaunch.GetComponent<FireBall>().direction = mouseDirection.normalized;
         bulletLaunch.GetComponent<FireBall>().fireBallSpeed = fireBallSpeed;
     }

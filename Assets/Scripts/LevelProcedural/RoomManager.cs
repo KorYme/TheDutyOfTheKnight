@@ -5,7 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class RoomManager : MonoBehaviour
 {
-
     public static RoomManager instance;
 
     private void Awake()
@@ -19,32 +18,27 @@ public class RoomManager : MonoBehaviour
     }
 
     private HeroAbility heroAbility;
-    private CameraFollow cameraFollow;
-    private LevelGenerator levelGenerator;
     private GameObject player;
-    private GameObject spawnCamera;
-    private GameObject mainCamera;
-    private GameObject[] allMonsters;
     private Collider2D[] allSpawner;
 
 
     [Header ("Filling values")]
-    public InputData inputData;
-    public GameObject[] allBosses;
+    [SerializeField] public InputData inputData;
+    [SerializeField] public LevelGenerator levelGenerator;
+    [SerializeField] public GameObject[] allBosses;
 
     [Header ("Layers to fill")]
-    public LayerMask enemyLayer;
-    public LayerMask closedDoorsMask;
-    public LayerMask openedDoorsMask;
-    public LayerMask spawner;   
-    public LayerMask shopLayer;
-    public LayerMask respawnLayer;
+    [SerializeField] public LayerMask enemyLayer;
+    [SerializeField] public LayerMask closedDoorsMask;
+    [SerializeField] public LayerMask openedDoorsMask;
+    [SerializeField] public LayerMask spawner;
+    [SerializeField] public LayerMask shopLayer;
+    [SerializeField] public LayerMask respawnLayer;
 
     private Collider2D[] theClosedDoorsHere;
     private Collider2D[] theOpenedDoorsHere;
     private Collider2D[] insideEnemies;
     private Collider2D enemiesIn;
-    private Collider2D ladder1;
     [HideInInspector]public bool spawnRoomOut;
     private Vector2 camPos;
     private Vector2 camSize;
@@ -59,12 +53,9 @@ public class RoomManager : MonoBehaviour
     /// </summary>
     public void InitiateValues()
     {
-        allMonsters = Resources.LoadAll<GameObject>("Monsters");
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = HeroAbility.instance.gameObject;
         heroAbility = player.GetComponent<HeroAbility>();
-        levelGenerator = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelGenerator>();
         camSize = new Vector2(17.8162708f, 9.53441048f);
-        cameraFollow = Camera.main.GetComponent<CameraFollow>();
         player.transform.position = new Vector3(0, 0, 0);
         ChangingRoom();
         heroAbility.earthUnlocked = true;

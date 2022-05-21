@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
-    public string[,] level;
     [Header("Level Parameters")]
-    public int levelHeight;
-    public int levelWidth;
-    public bool spawnCentered;
+    [SerializeField] public string[,] level;
+    [SerializeField] public int levelHeight;
+    [SerializeField] public int levelWidth;
+    [SerializeField] public bool spawnCentered;
+    [SerializeField] public GameObject theBigGrid;
 
     [Header ("Number of rooms asked")]
-    public int nbShopAsked;
-    public int nbAbilityAsked;
-    public int nbRoomsAsked;
-    public int spawnX;
-    public int spawnY;
+    [SerializeField] public int nbShopAsked;
+    [SerializeField] public int nbAbilityAsked;
+    [SerializeField] public int nbRoomsAsked;
+    [SerializeField] public int spawnX;
+    [SerializeField] public int spawnY;
 
     private int totalNumberRoomsAsked;
     private int totalNumberRoomsCreated;
@@ -29,7 +30,7 @@ public class LevelGenerator : MonoBehaviour
     private GameObject abilityRoom;
 
     [Header ("Test Mode")]
-    public bool testMode;
+    [SerializeField] public bool testMode;
 
 
     private void Awake()
@@ -106,7 +107,7 @@ public class LevelGenerator : MonoBehaviour
             {
                 if (level[i,y] != "Null")
                 {
-                    GameObject ARoom = Instantiate(ChooseRandomRoom(level[i,y]), GameObject.FindGameObjectWithTag("TheBigGrid").transform, false);
+                    GameObject ARoom = Instantiate(ChooseRandomRoom(level[i,y]), theBigGrid.transform, false);
                     ARoom.name = level[i,y] + " [" + (i - spawnX).ToString() + "," + (y - spawnY).ToString() + "]";
                     ARoom.transform.position = new Vector3((i - spawnX) * 20 - 0.5f, (y - spawnY) * 12, 0);
                 }

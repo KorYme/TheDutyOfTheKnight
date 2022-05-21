@@ -4,25 +4,22 @@ using UnityEngine;
 
 public class FireBall : MonoBehaviour
 {
-    private HeroStats heroStats;
-
     [Header ("Variables FireBall")]
-    public float fireBallSpeed;
-    public LayerMask obstacles;
-    public LayerMask targets;
-    public Vector2 direction;
+    [SerializeField] public float fireBallSpeed;
+    [SerializeField] public LayerMask obstacles;
+    [SerializeField] public LayerMask targets;
+    [SerializeField] public Vector2 direction;
 
     private void Start()
     {
-        heroStats = GameObject.FindGameObjectWithTag("Player").GetComponent<HeroStats>();
         Invoke("DestroyProjectile", 5);
-        transform.Find("Graphics").eulerAngles = new Vector3(0,0,Vector3.Angle(Vector3.right,(Vector3)direction));
+        transform.eulerAngles = new Vector3(0, 0, (direction.y > 0 ? 1 : -1 ) * Vector3.Angle(Vector3.right, (Vector3)direction));
     }
 
 
     private void FixedUpdate()
     {
-        transform.Translate(direction * fireBallSpeed * Time.fixedDeltaTime);
+        transform.Translate(Vector3.right * fireBallSpeed * Time.fixedDeltaTime);
     }
 
     private void DestroyProjectile()
@@ -39,7 +36,7 @@ public class FireBall : MonoBehaviour
         }
         else if (targets == (targets | (1 << collision.gameObject.layer)))
         {
-            collision.gameObject.SendMessage("TakeDamage", heroStats.fireDamage);
+            collision.gameObject.SendMessage("TakeDamage", HeroStats.instance.fireDamage);
             Destroy(gameObject);
         }
     }
