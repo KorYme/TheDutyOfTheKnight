@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 5246515340966911305}
   - component: {fileID: 3700938285255288295}
   m_Layer: 7
-  m_Name: EnemySquelet
+  m_Name: EnemySkeleton
   m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -451,6 +451,7 @@ MonoBehaviour:
   invulnerable: 0
   isTouchDamage: 1
   dead: 0
+  canMove: 0
   slider: {fileID: 4462430917434765614}
   drops:
   - {fileID: 6136551995765668482, guid: 8d6562f3a1860e246b73d6af419d0284, type: 3}
@@ -590,7 +591,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 45
   m_TargetDisplay: 0
 --- !u!114 &4105717107906406708
 MonoBehaviour:

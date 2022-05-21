@@ -87,16 +87,7 @@ public class RoomManager : MonoBehaviour
         allSpawner = Physics2D.OverlapBoxAll(camPos, camSize, 0f, spawner);
         foreach (var item in allSpawner)
         {
-            if (item.tag == "SpawnBoss")
-            {
-                GameObject Boss = Instantiate(allBosses[Random.Range(0, allBosses.Length)], item.transform.position, Quaternion.identity);
-                Destroy(item.gameObject);
-            }
-            else
-            {
-                GameObject enemy = Instantiate(allMonsters[Random.Range(0, allMonsters.Length)], item.transform.position, Quaternion.identity);
-                Destroy(item.gameObject);
-            }
+            item.SendMessage("Spawn");
         }
     }
 
