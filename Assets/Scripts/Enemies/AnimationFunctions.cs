@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class AnimationFunctions : MonoBehaviour
 {
-    public Skeleton skeleton;
+    [SerializeField] public Skeleton skeleton;
+    [SerializeField] public Host host;
 
     public void HasHitted()
     {
@@ -14,6 +15,21 @@ public class AnimationFunctions : MonoBehaviour
     public void Hit()
     {
         skeleton.Hit();
+    }
+
+    public void HostFireBallCast()
+    {
+        host.FireBallCast();
+    }
+
+    public void HostInvicibilityTrue()
+    {
+        host.invulnerable = true;
+    }
+
+    public void HostInvicibilityFalse()
+    {
+        host.invulnerable = false;
     }
 
     public void DestroyGameObject()

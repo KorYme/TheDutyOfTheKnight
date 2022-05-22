@@ -1873,7 +1873,7 @@ MonoBehaviour:
   fireInCooldown: 0
   earthInCooldown: 0
   cooldownWind: 15
-  cooldownFire: 1
+  cooldownFire: 15
   cooldownEarth: 15
   inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
   heroStats: {fileID: 401620113}

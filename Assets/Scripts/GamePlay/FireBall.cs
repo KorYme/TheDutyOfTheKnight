@@ -9,6 +9,8 @@ public class FireBall : MonoBehaviour
     [SerializeField] public LayerMask obstacles;
     [SerializeField] public LayerMask targets;
     [SerializeField] public Vector2 direction;
+    [SerializeField] public bool playerFireball;
+    [SerializeField, HideInInspector] public float fireBallDamage;
 
     private void Start()
     {
@@ -36,7 +38,14 @@ public class FireBall : MonoBehaviour
         }
         else if (targets == (targets | (1 << collision.gameObject.layer)))
         {
-            collision.gameObject.SendMessage("TakeDamage", HeroStats.instance.fireDamage);
+            if (playerFireball)
+            {
+                collision.gameObject.SendMessage("TakeDamage", HeroStats.instance.fireDamage);
+            }
+            else
+            {
+                collision.gameObject.SendMessage("TakeDamageHero", fireBallDamage);
+            }
             Destroy(gameObject);
         }
     }

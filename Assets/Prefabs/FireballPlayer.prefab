@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 7338127636216114607}
   - component: {fileID: 4330029448768851471}
   m_Layer: 3
-  m_Name: Fireball
+  m_Name: FireballPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,6 +267,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 532608
   direction: {x: 0, y: 0}
+  playerFireball: 1
+  fireBallDamage: 0
 --- !u!198 &7338127636216114607
 ParticleSystem:
   m_ObjectHideFlags: 0

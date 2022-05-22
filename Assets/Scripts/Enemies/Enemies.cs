@@ -10,18 +10,19 @@ public class Enemies : MonoBehaviour
     protected GameObject player;
 
     [Header("Enemy Variables")]
-    public float enemyHP = 10f;
-    public float enemyDamage = 0f;
-    public float enemySpeed = 0f;
-    public SpriteRenderer sprite;
-    public Animator animator;
-    public bool invulnerable = false;
-    public bool isTouchDamage = true;
-    [HideInInspector]public bool dead = false;
-    public bool canMove;
-    public Slider slider;
-    public GameObject[] drops;
-    public LayerMask playerLayer;
+    [SerializeField] public float enemyHP = 10f;
+    [SerializeField] public float enemyDamage = 0f;
+    [SerializeField] public float enemySpeed = 0f;
+    [SerializeField] public SpriteRenderer sprite;
+    [SerializeField] public Animator animator;
+    [SerializeField] public bool invulnerable = false;
+    [SerializeField] public bool isTouchDamage = true;
+    [SerializeField][HideInInspector] public bool dead = false;
+    [SerializeField] public bool canMove;
+    [SerializeField] public Slider slider;
+    [SerializeField] public GameObject[] drops;
+    [SerializeField] public LayerMask playerLayer;
+    
 
     protected virtual void Start()
     {

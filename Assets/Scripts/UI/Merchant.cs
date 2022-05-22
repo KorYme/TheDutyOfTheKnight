@@ -16,7 +16,7 @@ public class Merchant : MonoBehaviour
     private void Start()
     {
         sprite = this.GetComponent<SpriteRenderer>();
-        playerPos = GameObject.FindGameObjectWithTag("Player").transform;
+        playerPos = HeroStats.instance.transform;
         sentencesIndex = 0;
         dialogueManager = DialogueManager.instance;
     }
