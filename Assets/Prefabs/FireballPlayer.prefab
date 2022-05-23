@@ -262,7 +262,7 @@ MonoBehaviour:
   fireBallSpeed: 0
   obstacles:
     serializedVersion: 2
-    m_Bits: 832
+    m_Bits: 1049408
   targets:
     serializedVersion: 2
     m_Bits: 532608

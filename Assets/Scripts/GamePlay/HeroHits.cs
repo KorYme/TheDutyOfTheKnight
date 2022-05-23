@@ -21,6 +21,7 @@ public class HeroHits : MonoBehaviour
 
     [Header ("Hits Variables")]
     public float heroRange;
+    public float knockBackPower;
     public LayerMask enemyLayers;
 
     [HideInInspector]
@@ -120,6 +121,7 @@ public class HeroHits : MonoBehaviour
             if (enemy.GetComponent<Enemies>())
             {
                 enemy.GetComponent<Enemies>().SendMessage("TakeDamage", HeroStats.instance.heroAttack);
+                enemy.GetComponent<Enemies>().KnockBack(enemy.transform.position - transform.position , knockBackPower);
             }
         }
     }

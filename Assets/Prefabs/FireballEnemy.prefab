@@ -262,11 +262,13 @@ MonoBehaviour:
   fireBallSpeed: 0
   obstacles:
     serializedVersion: 2
-    m_Bits: 2880
+    m_Bits: 1051456
   targets:
     serializedVersion: 2
     m_Bits: 1024
   direction: {x: 0, y: 0}
+  playerFireball: 0
+  fireBallDamage: 0
 --- !u!198 &7338127636216114607
 ParticleSystem:
   m_ObjectHideFlags: 0

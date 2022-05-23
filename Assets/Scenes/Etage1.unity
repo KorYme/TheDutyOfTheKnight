@@ -1675,6 +1675,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputdata: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
   heroRange: 1
+  knockBackPower: 1
   enemyLayers:
     serializedVersion: 2
     m_Bits: 532608
