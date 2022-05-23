@@ -110,11 +110,6 @@ public class Enemies : MonoBehaviour
         }
     }
 
-    public virtual void KnockBack(Vector2 directionKB, float multiplierKB)
-    {
-        transform.Translate(directionKB.normalized * multiplierKB * 0.3f);
-    }
-
     protected virtual void DropItems(int nbItems)
     {
         if (drops.Length != 0)

@@ -23,7 +23,6 @@ public class Skeleton : Enemies
         IsPlayerClose();
     }
 
-
     protected void ChooseDirectionRun()
     {
         if (Mathf.Abs(lastPos.y - transform.position.y) < Mathf.Abs(lastPos.x - transform.position.x))

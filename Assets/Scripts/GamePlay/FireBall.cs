@@ -8,7 +8,7 @@ public class FireBall : MonoBehaviour
     [SerializeField] public float fireBallSpeed;
     [SerializeField] public LayerMask obstacles;
     [SerializeField] public LayerMask targets;
-    [SerializeField] public Vector2 direction;
+    [SerializeField][HideInInspector] public Vector2 direction;
     [SerializeField] public bool playerFireball;
     [SerializeField, HideInInspector] public float fireBallDamage;
 

@@ -15,6 +15,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] public int nbShopAsked;
     [SerializeField] public int nbAbilityAsked;
     [SerializeField] public int nbRoomsAsked;
+    [SerializeField] public int nbChestRoomsAsked;
     [SerializeField] public int spawnX;
     [SerializeField] public int spawnY;
 
@@ -28,6 +29,7 @@ public class LevelGenerator : MonoBehaviour
     private GameObject shopRoom;
     private GameObject bossRoom;
     private GameObject abilityRoom;
+    [SerializeField][HideInInspector] public List<Vector2> rooms;
 
     [Header ("Test Mode")]
     [SerializeField] public bool testMode;
@@ -37,7 +39,7 @@ public class LevelGenerator : MonoBehaviour
     {
         InitializingValue();
         CenteringSpawn(spawnCentered);
-        CameraFollow.playerCoordinates = new Vector2(spawnX, spawnY);
+        CameraFollow.instance.playerCoordinates = new Vector2(spawnX, spawnY);
         FillRoomList();
     }
 
@@ -52,6 +54,7 @@ public class LevelGenerator : MonoBehaviour
         totalNumberRoomsCreated = 0;
         abilityRoomCreated = 0;
         shopRoomCreated = 0;
+        rooms = new List<Vector2>();
     }
 
     void FillRoomList()
@@ -79,6 +82,7 @@ public class LevelGenerator : MonoBehaviour
 
     public void CreatingLevel()
     {
+        rooms.Clear();
         level = new string[levelHeight, levelWidth];
         for (int i = 0; i < levelHeight; i++)
         {
@@ -95,12 +99,14 @@ public class LevelGenerator : MonoBehaviour
             int width = Random.Range(0, levelWidth);
             if (HowManyRoundAround(height, width) > 0 && level[height, width] == "Null")
             {
+                rooms.Add(new Vector2(height,width));
                 level[height, width] = "Room";
                 totalNumberRoomsCreated++;
             }
         }
         TestMode();
         PlacingOtherRooms();
+        PlaceChestRooms();
         for (int i = 0; i < levelHeight; i++)
         {
             for (int y = 0; y < levelWidth; y++)
@@ -110,6 +116,10 @@ public class LevelGenerator : MonoBehaviour
                     GameObject ARoom = Instantiate(ChooseRandomRoom(level[i,y]), theBigGrid.transform, false);
                     ARoom.name = level[i,y] + " [" + (i - spawnX).ToString() + "," + (y - spawnY).ToString() + "]";
                     ARoom.transform.position = new Vector3((i - spawnX) * 20 - 0.5f, (y - spawnY) * 12, 0);
+                    if (rooms.Contains(new Vector2(i,y)))
+                    {
+                        ARoom.name += " CHEST IN";
+                    }
                 }
             }
         }
@@ -124,6 +134,9 @@ public class LevelGenerator : MonoBehaviour
     {
         if (testMode)
         {
+            rooms.Remove(new Vector2(spawnX, spawnY + 1));
+            rooms.Remove(new Vector2(1+spawnX, spawnY));
+            rooms.Remove(new Vector2(spawnX, spawnY-1));
             level[spawnX, spawnY + 1] = "Boss";
             level[spawnX + 1, spawnY] = "Ability";
             level[spawnX, spawnY - 1] = "Shop";
@@ -235,6 +248,7 @@ public class LevelGenerator : MonoBehaviour
             }
         }
         Vector2 bossRoom = coordinates[Random.Range(0,coordinates.Count)];
+        rooms.Remove(bossRoom);
         level[(int)bossRoom.x,(int)bossRoom.y] = "Boss";
     }
 
@@ -246,6 +260,7 @@ public class LevelGenerator : MonoBehaviour
             int width = Random.Range(0, levelWidth);
             if (level[height, width] == "Room")
             {
+                rooms.Remove(new Vector2(height, width));
                 level[height, width] = "Ability";
                 abilityRoomCreated++;
             }
@@ -256,9 +271,18 @@ public class LevelGenerator : MonoBehaviour
             int width = Random.Range(0, levelWidth);
             if (level[height, width] == "Room")
             {
+                rooms.Remove(new Vector2(height, width));
                 level[height, width] = "Shop";
                 shopRoomCreated++;
             }
+        }
+    }
+
+    void PlaceChestRooms()
+    {
+        while (rooms.Count > nbChestRoomsAsked)
+        {
+            rooms.Remove(rooms[Random.Range(0, rooms.Count-1)]);
         }
     }
 }

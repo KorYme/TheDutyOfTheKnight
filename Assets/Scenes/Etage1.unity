@@ -1675,7 +1675,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputdata: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
   heroRange: 1
-  knockBackPower: 1
   enemyLayers:
     serializedVersion: 2
     m_Bits: 532608
@@ -2526,7 +2525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afdff621609ad28448a2f631d3d38e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomManager: {fileID: 0}
+  playerCoordinates: {x: 0, y: 0}
 --- !u!1 &547865910
 GameObject:
   m_ObjectHideFlags: 0
@@ -5826,8 +5825,10 @@ MonoBehaviour:
   nbShopAsked: 1
   nbAbilityAsked: 2
   nbRoomsAsked: 12
+  nbChestRoomsAsked: 5
   spawnX: 0
   spawnY: 0
+  rooms: []
   testMode: 1
 --- !u!114 &1358435964
 MonoBehaviour:

@@ -17,27 +17,24 @@ public class HeroHits : MonoBehaviour
     }
 
     [Header("Input Data")]
-    public InputData inputdata;
+    [SerializeField] public InputData inputdata;
 
     [Header ("Hits Variables")]
-    public float heroRange;
-    public float knockBackPower;
-    public LayerMask enemyLayers;
+    [SerializeField] public float heroRange;
+    [SerializeField] public LayerMask enemyLayers;
 
-    [HideInInspector]
-    public Vector3 worldPosition;
+    [SerializeField][HideInInspector] public Vector3 worldPosition;
     private Animator animator;
     private float horizontalCursor;
     private float verticalCursor;
     private Camera cam;
 
     [Header ("Animator System")]
-    public float reloadTime;
-    public bool isInReloadTime;
+    [SerializeField] public float reloadTime;
+    [SerializeField] public bool isInReloadTime;
 
     //Points System
-    [HideInInspector]
-    public string direction;
+    [SerializeField][HideInInspector] public string direction;
     private CoolDownManager coolDownManager;
     
 
@@ -121,7 +118,6 @@ public class HeroHits : MonoBehaviour
             if (enemy.GetComponent<Enemies>())
             {
                 enemy.GetComponent<Enemies>().SendMessage("TakeDamage", HeroStats.instance.heroAttack);
-                enemy.GetComponent<Enemies>().KnockBack(enemy.transform.position - transform.position , knockBackPower);
             }
         }
     }

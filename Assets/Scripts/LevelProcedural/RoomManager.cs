@@ -70,6 +70,7 @@ public class RoomManager : MonoBehaviour
         theClosedDoorsHere = Physics2D.OverlapBoxAll(camPos, camSize, 0f, closedDoorsMask);
         ActivateEnemies();
         AreEnemiesIn();
+        Debug.Log(CameraFollow.instance.playerCoordinates);
     }
 
 
@@ -89,7 +90,7 @@ public class RoomManager : MonoBehaviour
     private void OpenOrCloseTheDoors(bool that)
     {
         //And desactivate the chosen ones
-        List<string> cardinalsPoints = levelGenerator.WhichRoundAround((int)CameraFollow.playerCoordinates.x, (int)CameraFollow.playerCoordinates.y);
+        List<string> cardinalsPoints = levelGenerator.WhichRoundAround((int)CameraFollow.instance.playerCoordinates.x, (int)CameraFollow.instance.playerCoordinates.y);
         if (that)
         {
             //Door Sound
@@ -102,6 +103,10 @@ public class RoomManager : MonoBehaviour
             {
                 item.gameObject.SetActive(!cardinalsPoints.Contains(item.tag));
             }
+            //if (levelGenerator.rooms.Contains(new Vector2(pl)))
+            //{
+            //Faire apparaître le gameObject des portes
+            //}
         }
         else
         {

@@ -171,11 +171,6 @@ public class BossFight : Enemies
         }
     }
 
-    public override void KnockBack(Vector2 directionKB, float multiplier)
-    {
-        base.KnockBack(directionKB, multiplier * 0.4f);
-    }
-
     protected override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);

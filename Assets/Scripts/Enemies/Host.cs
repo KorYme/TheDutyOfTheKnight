@@ -25,6 +25,22 @@ public class Host : Enemies
         bulletLaunch.GetComponent<FireBall>().fireBallDamage = enemyDamage;
     }
 
+    protected override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        if (invulnerable)
+        {
+            StartCoroutine(NoStagger());
+        }
+    }
+
+    protected virtual IEnumerator NoStagger()
+    {
+        sprite.color = Color.gray;
+        yield return new WaitForSeconds(0.1f);
+        sprite.color = new Color(255, 255, 255);
+    }
+
     protected override void IsDying()
     {
         base.IsDying();

@@ -294,6 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeleton: {fileID: 3700938285255288295}
+  host: {fileID: 0}
 --- !u!1 &5246515340966911304
 GameObject:
   m_ObjectHideFlags: 0
