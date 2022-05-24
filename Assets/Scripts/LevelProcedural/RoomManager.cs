@@ -19,8 +19,6 @@ public class RoomManager : MonoBehaviour
 
     private HeroAbility heroAbility;
     private GameObject player;
-    private Collider2D[] allSpawner;
-
 
     [Header ("Filling values")]
     [SerializeField] public InputData inputData;
@@ -34,14 +32,12 @@ public class RoomManager : MonoBehaviour
     [SerializeField] public LayerMask spawner;
     [SerializeField] public LayerMask shopLayer;
     [SerializeField] public LayerMask respawnLayer;
+    [SerializeField] public LayerMask chestLayer;
 
-    private Collider2D[] theClosedDoorsHere;
-    private Collider2D[] theOpenedDoorsHere;
-    private Collider2D[] insideEnemies;
+    private Collider2D[] theClosedDoorsHere, theOpenedDoorsHere, insideEnemies, allSpawner;
     private Collider2D enemiesIn;
-    [HideInInspector]public bool spawnRoomOut;
-    private Vector2 camPos;
-    private Vector2 camSize;
+    private Vector2 camPos, camSize;
+    //[HideInInspector] [SerializeField] public bool spawnRoomOut;
 
     void Start()
     {
@@ -70,7 +66,6 @@ public class RoomManager : MonoBehaviour
         theClosedDoorsHere = Physics2D.OverlapBoxAll(camPos, camSize, 0f, closedDoorsMask);
         ActivateEnemies();
         AreEnemiesIn();
-        Debug.Log(CameraFollow.instance.playerCoordinates);
     }
 
     public void ActivateEnemies()
@@ -93,7 +88,7 @@ public class RoomManager : MonoBehaviour
         if (that)
         {
             //Door Sound
-            //Ouvre seulement les portes découlants vers d'autres salles
+            //Only open the doors with other doors behind
             foreach (var item in theOpenedDoorsHere)
             {
                 item.gameObject.SetActive(cardinalsPoints.Contains(item.tag));
@@ -119,7 +114,7 @@ public class RoomManager : MonoBehaviour
 
 
     /// <summary>
-    /// Check if at least one enemy is still in this room
+    /// Check if at least one enemy is still in this room 
     /// </summary>
     public void CheckEnemiesStillIn()
     {
@@ -127,7 +122,22 @@ public class RoomManager : MonoBehaviour
         if (enemiesIn == null)
         {
             OpenOrCloseTheDoors(true);
+            OpenTheChestInTheRoom();
             //Add Opening door sound
+        }
+    }
+
+    /// <summary>
+    /// Check if there is a chest in the room and then open it if it exists
+    /// </summary>
+    void OpenTheChestInTheRoom()
+    {
+        foreach (var item in Physics2D.OverlapBoxAll(camPos, camSize, 0f, chestLayer))
+        {
+            if (item.GetComponent<Chest>())
+            {
+                item.GetComponent<Chest>().CanBeOpen(true);
+            }
         }
     }
 

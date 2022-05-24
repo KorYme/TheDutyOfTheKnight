@@ -38,6 +38,7 @@ TagManager:
   - Totem
   - Object
   - Coordinates
+  - Chest
   layers:
   - Default
   - TransparentFX

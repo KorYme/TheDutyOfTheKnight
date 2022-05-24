@@ -32,6 +32,7 @@ public class HeroAbility : MonoBehaviour
     public float radiusCharacter;
     public Vector3 cursorPosition;
     public LayerMask enemyLayer;
+    public LayerMask cantTPLayer;
     public GameObject Explosion;
 
 
@@ -255,7 +256,7 @@ public class HeroAbility : MonoBehaviour
         tpZone = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), radiusCharacter);
         foreach (Collider2D item in tpZone)
         {
-            if (item.gameObject.layer == 6 || item.gameObject.layer == 8 || item.gameObject.layer == 9)
+            if (cantTPLayer == (cantTPLayer | (1 << item.gameObject.layer)))
             {
                 return false;
             }

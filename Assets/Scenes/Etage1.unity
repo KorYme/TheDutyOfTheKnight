@@ -1886,6 +1886,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 532608
+  cantTPLayer:
+    serializedVersion: 2
+    m_Bits: 3146560
   Explosion: {fileID: 7844617443299900646, guid: 9656f47995243e548bf00a06530908f7, type: 3}
 --- !u!114 &401620119
 MonoBehaviour:
@@ -5864,6 +5867,9 @@ MonoBehaviour:
   respawnLayer:
     serializedVersion: 2
     m_Bits: 131072
+  chestLayer:
+    serializedVersion: 2
+    m_Bits: 2097152
   spawnRoomOut: 0
 --- !u!1 &1397955654
 GameObject:

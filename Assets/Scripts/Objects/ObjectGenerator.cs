@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class ObjectGenerator : MonoBehaviour
 {
-    public ObjectsData objectData;
     private SpriteRenderer spriteRenderer;
     private bool isInRange;
     private Merchant merchant;
     private bool firstTimeTouched;
-    public InputData inputData;
     private DialogueManager dialogueManager;
     private HeroStats heroStats;
     private PlayerInventory playerInventory;
+    public ObjectsData objectData;
+    public InputData inputData;
 
-    protected virtual void Start()
+    private void Start()
     {
         //Make sure the sprite is the good one
         merchant = GameObject.FindGameObjectWithTag("Merchant").GetComponent<Merchant>();
@@ -27,7 +27,7 @@ public class ObjectGenerator : MonoBehaviour
         playerInventory = PlayerInventory.instance;
     }
 
-    public virtual void TakeObject()
+    public void TakeObject()
     {
         heroStats.IncreaseMaxHealthHero(objectData.maxHealthGiven);
         heroStats.HealHero(objectData.healthGiven);
