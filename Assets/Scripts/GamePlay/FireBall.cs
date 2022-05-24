@@ -5,12 +5,12 @@ using UnityEngine;
 public class FireBall : MonoBehaviour
 {
     [Header ("Variables FireBall")]
-    [SerializeField] public float fireBallSpeed;
-    [SerializeField] public LayerMask obstacles;
-    [SerializeField] public LayerMask targets;
-    [SerializeField][HideInInspector] public Vector2 direction;
-    [SerializeField] public bool playerFireball;
-    [SerializeField, HideInInspector] public float fireBallDamage;
+    public float fireBallSpeed;
+    public LayerMask obstacles;
+    public LayerMask targets;
+    [HideInInspector] public Vector2 direction;
+    public bool playerFireball;
+    [HideInInspector] public float fireBallDamage;
 
     private void Start()
     {

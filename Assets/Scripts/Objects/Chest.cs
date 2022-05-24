@@ -38,7 +38,7 @@ public class Chest : MonoBehaviour
 
     public void InstantiateItem()
     {
-        Debug.Log("SALUT");
+        Instantiate(LootManager.instance.GetALoot(), transform.position, Quaternion.identity);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

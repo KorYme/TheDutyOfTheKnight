@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce2624dd98551c2419fc88d299be1143, type: 3}
-  m_Name: Key
+  m_Name: RefreshPotion
   m_EditorClassIdentifier: 
-  objectName: Key
-  description: A key which can open chests.
-  sprite: {fileID: 6242831123289951215, guid: 020f862cbe42e534680dd6d908ed0b3e, type: 3}
-  coinCost: 15
+  objectName: Refresh Potion
+  description: A potion which refresh your cooldown when you use it
+  sprite: {fileID: 7271025096421245680, guid: 3bd420ef9086fff4b9aeef7941d50d2d, type: 3}
+  coinCost: 100
   coinGiven: 0
-  keyGiven: 1
+  refreshPotionGiven: 1
   keyBossGiven: 0
   healthGiven: 0
   maxHealthGiven: 0

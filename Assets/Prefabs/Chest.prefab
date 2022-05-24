@@ -67,9 +67,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3481565940726444849}
   - component: {fileID: 5814956077610145686}
-  - component: {fileID: 1120629154415287893}
   - component: {fileID: 6361458466000541377}
   - component: {fileID: 3105143454308073112}
+  - component: {fileID: 1120629154415287893}
   m_Layer: 21
   m_Name: Chest
   m_TagString: Untagged
@@ -143,19 +143,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1120629154415287893
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8656856068658962295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea312e446180da041ab7e8f1f4999656, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
 --- !u!95 &6361458466000541377
 Animator:
   serializedVersion: 3
@@ -191,3 +178,16 @@ CircleCollider2D:
   m_Offset: {x: -0.0615052, y: -0.03194791}
   serializedVersion: 2
   m_Radius: 1.1
+--- !u!114 &1120629154415287893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8656856068658962295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea312e446180da041ab7e8f1f4999656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}

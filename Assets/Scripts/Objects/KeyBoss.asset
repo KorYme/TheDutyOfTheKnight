@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce2624dd98551c2419fc88d299be1143, type: 3}
   m_Name: KeyBoss
   m_EditorClassIdentifier: 
-  objectName: KeyBoss
-  description: A key needed to start the bossfight.
-  sprite: {fileID: 6848829298122412017, guid: 020f862cbe42e534680dd6d908ed0b3e, type: 3}
+  objectName: 'Strange blaze '
+  description: A weird blaze is looking at you. It seems like he wants to stay with
+    you ?
+  sprite: {fileID: 945793653771260252, guid: 9b7543ebf5feb0643b9d135fb447df19, type: 3}
   coinCost: 0
   coinGiven: 0
-  keyGiven: 1
-  keyBossGiven: 0
+  keyGiven: 0
+  keyBossGiven: 1
   healthGiven: 0
   maxHealthGiven: 0
   speedGiven: 0

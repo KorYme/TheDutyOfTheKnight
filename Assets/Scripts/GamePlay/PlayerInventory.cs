@@ -19,9 +19,10 @@ public class PlayerInventory : MonoBehaviour
 
     [Header ("Current stuff")]
     public int nbCoins;
-    public int nbKey;
+    public int nbPotionRefresh;
     public int nbKeyBoss;
     private InventoryPanel inventoryPanel;
+    public InputData inputData;
 
     private void Start()
     {
@@ -31,9 +32,19 @@ public class PlayerInventory : MonoBehaviour
     public void AddToInventory(ObjectsData objectData)
     {
         nbCoins += objectData.coinGiven;
-        nbKey += objectData.keyGiven;
+        nbPotionRefresh += objectData.refreshPotionGiven;
         nbKeyBoss += objectData.keyBossGiven;
-        inventoryPanel.ShowInventory();
         inventoryPanel.UpdateInventory();
+        inventoryPanel.ShowInventory();
+    }
+
+    public void UseRefreshPotion()
+    {
+        if (nbPotionRefresh > 0)
+        {
+            nbPotionRefresh--;
+            inventoryPanel.UpdateInventory();
+            inventoryPanel.ShowInventory();
+        }
     }
 }

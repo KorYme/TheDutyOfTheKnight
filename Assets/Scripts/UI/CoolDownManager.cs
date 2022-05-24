@@ -91,21 +91,20 @@ public class CoolDownManager : MonoBehaviour
 
     public void ResetCoolDown(string name)
     {
-        if (name == "Hit")
+        switch (name)
         {
-            imageCDHit.fillAmount = 1;
-        }
-        else if (name == "Earth")
-        {
-            imageCDEarth.fillAmount = 1;
-        }
-        else if (name == "Wind")
-        {
-            imageCDWind.fillAmount = 1;
-        }
-        else if (name == "Fire")
-        {
-            imageCDFire.fillAmount = 1;
+            case "Hit":
+                imageCDHit.fillAmount = 1;
+                return;
+            case "Earth":
+                imageCDEarth.fillAmount = 1;
+                return;
+            case "Wind":
+                imageCDWind.fillAmount = 1;
+                return;
+            case "Fire":
+                imageCDFire.fillAmount = 1;
+                return;
         }
     }
 }

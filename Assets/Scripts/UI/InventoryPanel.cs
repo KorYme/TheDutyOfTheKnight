@@ -31,7 +31,6 @@ public class InventoryPanel : MonoBehaviour
         animator = GetComponent<Animator>();
         UpdateInventory();
         timeToClose = initialTimeToClose;
-        //playerInventory = PlayerInventory.instance;
     }
 
     private void FixedUpdate()
@@ -68,6 +67,9 @@ public class InventoryPanel : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Open the inventory panel for a short time
+    /// </summary>
     public void ShowInventory()
     {
         timeToClose = initialTimeToClose;
@@ -87,7 +89,7 @@ public class InventoryPanel : MonoBehaviour
     public void UpdateInventory()
     {
         inventoryCount[0].text = playerInventory.nbCoins.ToString();
-        inventoryCount[1].text = playerInventory.nbKey.ToString();
+        inventoryCount[1].text = playerInventory.nbPotionRefresh.ToString();
         inventoryCount[2].text = playerInventory.nbKeyBoss.ToString();
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
+    public static LevelGenerator instance;
+
     [Header("Level Parameters")]
     [SerializeField] public string[,] level;
     [SerializeField] public int levelHeight;
@@ -37,6 +39,12 @@ public class LevelGenerator : MonoBehaviour
 
     private void Awake()
     {
+        if (instance != null)
+        {
+            Debug.LogError("There is more than one LevelGenerator in the game");
+            return;
+        }
+        instance = this;
         InitializingValue();
         CenteringSpawn(spawnCentered);
         CameraFollow.instance.playerCoordinates = new Vector2(spawnX, spawnY);
@@ -162,24 +170,7 @@ public class LevelGenerator : MonoBehaviour
     /// <returns></returns>
     int HowManyRoundAround(int height, int width)
     {
-        int count = 0;
-        if (height > 0 ? level[height-1,width] != "Null" : false)
-        {
-            count++;
-        }
-        if (height < levelHeight - 1 ? level[height + 1, width] != "Null" : false)
-        {
-            count++;
-        }
-        if (width > 0 ? level[height, width-1] != "Null" : false)
-        {
-            count++;
-        }
-        if (width < levelWidth - 1 ? level[height, width + 1] != "Null" : false)
-        {
-            count++;
-        }
-        return count;
+        return WhichRoundAround(height, width).Count;
     }
 
     public List<string> WhichRoundAround(int height, int width)
@@ -204,27 +195,25 @@ public class LevelGenerator : MonoBehaviour
         return cardinalsPoints;
     }
 
-    GameObject ChooseRandomRoom(string name)
+    /// <summary>
+    /// Find which room is at this very place
+    /// </summary>
+    /// <param name="room">The string of the room</param>
+    /// <returns>The room at this place</returns>
+    GameObject ChooseRandomRoom(string room)
     {
-        if (name == "Spawn")
+        switch (room)
         {
-            return spawnRoom;
-        }
-        else if (name == "Shop")
-        {
-            return shopRoom;
-        }
-        else if (name == "Boss")
-        {
-            return bossRoom;
-        }
-        else if (name == "Ability")
-        {
-            return abilityRoom;
-        }
-        else
-        {
-            return allRooms[Random.Range(0, allRooms.Length)];
+            case "Spawn":
+                return spawnRoom;
+            case "Shop":
+                return shopRoom;
+            case "Boss":
+                return bossRoom;
+            case "Ability":
+                return abilityRoom;
+            default:
+                return allRooms[Random.Range(0, allRooms.Length)];
         }
     }
 

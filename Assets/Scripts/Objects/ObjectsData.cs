@@ -10,7 +10,7 @@ public class ObjectsData : ScriptableObject
     public Sprite sprite;
     public int coinCost;
     public int coinGiven;
-    public int keyGiven;
+    public int refreshPotionGiven;
     public int keyBossGiven;
     public float healthGiven;
     public float maxHealthGiven;
