@@ -73,7 +73,6 @@ public class RoomManager : MonoBehaviour
         Debug.Log(CameraFollow.instance.playerCoordinates);
     }
 
-
     public void ActivateEnemies()
     {
         allSpawner = Physics2D.OverlapBoxAll(camPos, camSize, 0f, spawner);
@@ -103,10 +102,6 @@ public class RoomManager : MonoBehaviour
             {
                 item.gameObject.SetActive(!cardinalsPoints.Contains(item.tag));
             }
-            //if (levelGenerator.rooms.Contains(new Vector2(pl)))
-            //{
-            //Faire apparaître le gameObject des portes
-            //}
         }
         else
         {

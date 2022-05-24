@@ -46,6 +46,7 @@ public class LevelGenerator : MonoBehaviour
     void InitializingValue()
     {
         totalNumberRoomsAsked = 2 + nbRoomsAsked + nbShopAsked + nbAbilityAsked;
+        nbChestRoomsAsked = nbChestRoomsAsked > nbRoomsAsked ? nbRoomsAsked : nbChestRoomsAsked;
         while (totalNumberRoomsAsked > levelHeight * levelWidth)
         {
             levelHeight++;
@@ -119,6 +120,10 @@ public class LevelGenerator : MonoBehaviour
                     if (rooms.Contains(new Vector2(i,y)))
                     {
                         ARoom.name += " CHEST IN";
+                    }
+                    else if (ARoom.name[0] == 'R')
+                    {
+                        Destroy(ARoom.transform.Find("Chest").gameObject);
                     }
                 }
             }
