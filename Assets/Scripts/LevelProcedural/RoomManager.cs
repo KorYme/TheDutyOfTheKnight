@@ -195,6 +195,11 @@ public class RoomManager : MonoBehaviour
         return Physics2D.OverlapBox(camPos, camSize, 0f, shopLayer);
     }
 
+    public GameObject GiveMeMerchant()
+    {
+        return Physics2D.OverlapBox(camPos, camSize, 0f, shopLayer).gameObject;
+    }
+
     public void RespawnInRoom()
     {
         float dist = 2000f;

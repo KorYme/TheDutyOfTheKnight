@@ -6,7 +6,7 @@ public class ObjectGenerator : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     private bool isInRange;
-    private Merchant merchant;
+    private PNJDialogue merchant;
     private bool firstTimeTouched;
     private DialogueManager dialogueManager;
     private HeroStats heroStats;
@@ -16,9 +16,7 @@ public class ObjectGenerator : MonoBehaviour
 
     private void Start()
     {
-        //Make sure the sprite is the good one
-        merchant = GameObject.FindGameObjectWithTag("Merchant").GetComponent<Merchant>();
-        spriteRenderer = gameObject.transform.Find("Graphic").gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer = transform.Find("Graphic").gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = objectData.sprite;
         isInRange = false;
         firstTimeTouched = true;
@@ -41,6 +39,14 @@ public class ObjectGenerator : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void InitializeMerchant()
+    {
+        if (merchant == null)
+        {
+            merchant = RoomManager.instance.GiveMeMerchant().GetComponent<PNJDialogue>();
+        }
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(inputData.interact))
@@ -60,7 +66,8 @@ public class ObjectGenerator : MonoBehaviour
                         {
                             dialogueManager.PanelEnable();
                         }
-                        dialogueManager.UpdateTheScreen(merchant.nameMerchant, objectData.description + " It costs " + objectData.coinCost + " coins.", 1);
+                        InitializeMerchant();
+                        dialogueManager.UpdateTheScreen(merchant.namePNJ, objectData.description + " It costs " + objectData.coinCost + " coins.", 1);
                         firstTimeTouched = false;
                     }
                     else if (dialogueManager.panelOpen)
@@ -97,7 +104,8 @@ public class ObjectGenerator : MonoBehaviour
                 {
                     if (playerInventory.nbCoins < objectData.coinCost)
                     {
-                        dialogueManager.UpdateTheScreen(merchant.nameMerchant, "You don't have enough money, you'll need " + (objectData.coinCost - playerInventory.nbCoins).ToString() + " more coins to buy it !");
+                        InitializeMerchant();
+                        dialogueManager.UpdateTheScreen(merchant.namePNJ, "You don't have enough money, you'll need " + (objectData.coinCost - playerInventory.nbCoins).ToString() + " more coins to buy it !");
                         firstTimeTouched = true;
                     }
                     else if (!dialogueManager.isMoving)

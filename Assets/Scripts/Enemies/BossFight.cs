@@ -42,11 +42,11 @@ public class BossFight : Enemies
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        if (bossAbility1 && canMove)
+        if (bossAbility1 && canMove && !dead)
         {
             BossAbility1();
         }
-        else if (canMove)
+        else if (canMove && !dead)
         {
             DirectionBoss();
             IsPlayerInRange();
@@ -68,14 +68,14 @@ public class BossFight : Enemies
 
     void DirectionBoss()
     {
-        if (this.transform.position.x > player.transform.position.x)
+        if (transform.position.x > player.transform.position.x)
         {
-            this.transform.eulerAngles = new Vector3(0, 180, 0);
+            transform.eulerAngles = new Vector3(0, 180, 0);
             slider.transform.eulerAngles = new Vector3(0, 0, 0);
         }
         else
         {
-            this.transform.eulerAngles = new Vector3(0, 0, 0);
+            transform.eulerAngles = new Vector3(0, 0, 0);
             slider.transform.eulerAngles = new Vector3(0, 0, 0);
         }
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, enemySpeed * Time.fixedDeltaTime);

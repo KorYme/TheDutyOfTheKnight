@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Merchant : MonoBehaviour
+public class PNJDialogue : MonoBehaviour
 {
     private SpriteRenderer sprite;
     private Transform playerPos;
@@ -35,19 +35,19 @@ public class Merchant : MonoBehaviour
         else if (isInRange && Input.GetKeyDown(KeyCode.E))
         {
             dialogueManager.currentPanelUser = gameObject;
-            if ( sentencesIndex < sentencesPNJ.Length)
+            if (sentencesIndex < sentencesPNJ.Length)
             {
                 if (!dialogueManager.panelOpen)
                 {
                     dialogueManager.PanelEnable();
                 }
-                if (sentencesIndex < sentencesPNJ.Length-1)
+                if (sentencesIndex < sentencesPNJ.Length - 1)
                 {
                     dialogueManager.UpdateTheScreen(namePNJ, sentencesPNJ[sentencesIndex]);
                 }
                 else
                 {
-                    dialogueManager.UpdateTheScreen(namePNJ, sentencesPNJ[sentencesIndex],0);
+                    dialogueManager.UpdateTheScreen(namePNJ, sentencesPNJ[sentencesIndex], 0);
                 }
                 sentencesIndex++;
             }

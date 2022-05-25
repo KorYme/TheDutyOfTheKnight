@@ -8,11 +8,14 @@ public class Chest : MonoBehaviour
     private bool canBeOpen;
     private bool isInRange;
     public InputData inputData;
+    private GameObject sprinkleGameobject;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         canBeOpen = false;
+        sprinkleGameobject = transform.Find("ParticleSystem").gameObject;
+        sprinkleGameobject.SetActive(false);
     }
 
     private void Update()
@@ -26,6 +29,7 @@ public class Chest : MonoBehaviour
     public void CanBeOpen(bool that)
     {
         canBeOpen = that;
+        sprinkleGameobject.SetActive(that);
         tag = that ? "Chest" : "Untagged";
     }
 
