@@ -3,6 +3,18 @@ using UnityEngine;
 
 public class HeroAbility : MonoBehaviour
 {
+    public static HeroAbility instance;
+    private void Awake()
+    {
+        instance = null;
+        if (instance != null)
+        {
+            Debug.LogError("More than one HeroAbility instance in the game !");
+        }
+
+        instance = this;
+    }
+    
     [Header("Ability unlocked")]
     public bool windUnlocked;
     public bool fireUnlocked;
@@ -34,27 +46,20 @@ public class HeroAbility : MonoBehaviour
     public LayerMask cantTPLayer;
     public GameObject Explosion;
 
-
-    public static HeroAbility instance;
-    private void Awake()
-    {
-        instance = null;
-        if (instance != null)
-        {
-            Debug.LogError("More than one HeroAbility instance in the game !");
-        }
-
-        instance = this;
-    }
-
+    private SpriteRenderer spriteShield;
+    private CircleCollider2D colliderShield;
+    private TrailRenderer dashTrail;
 
     private void Start()
     {
-        //Initialization
-        GameObject.FindGameObjectWithTag("Shield").GetComponent<SpriteRenderer>().enabled = false;
-        GameObject.FindGameObjectWithTag("Shield").GetComponent<CircleCollider2D>().enabled = false;
+        //Initializations
+        spriteShield = transform.Find("Shield").GetComponent<SpriteRenderer>();
+        colliderShield = transform.Find("Shield").GetComponent<CircleCollider2D>();
+        dashTrail = transform.Find("DashLane").GetComponent<TrailRenderer>();
+        spriteShield.enabled = false;
+        colliderShield.enabled = false;
         damagingShield = false;
-        transform.Find("DashLane").GetComponent<TrailRenderer>().enabled = false;
+        dashTrail.enabled = false;
     }
 
     private void Update()
@@ -101,29 +106,6 @@ public class HeroAbility : MonoBehaviour
         windInCooldown = false;
     }
 
-    /// <summary>
-    /// Create a cooldown for the fire ability
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator CooldownAbilityFire()
-    {
-        fireInCooldown = true;
-        yield return new WaitForSeconds(cooldownFire);
-        fireInCooldown = false;
-    }
-
-    /// <summary>
-    /// Create a cooldown for the earth ability
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator CooldownAbilityEarth()
-    {
-        earthInCooldown = true;
-        yield return new WaitForSeconds(cooldownEarth + heroStats.shieldDuration);
-        earthInCooldown = false;
-    }
-
-
     //USP Abilities
 
     /// <summary>
@@ -131,7 +113,7 @@ public class HeroAbility : MonoBehaviour
     /// </summary>
     void FireAbility()
     {
-        StartCoroutine(CooldownAbilityFire());
+        fireInCooldown = true;
         coolDownManager.ResetCoolDown("Fire");
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 mouseDirection = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
@@ -147,9 +129,9 @@ public class HeroAbility : MonoBehaviour
     /// </summary>
     void EarthAbility()
     {
-        StartCoroutine(CooldownAbilityEarth());
+        earthInCooldown = true;
         coolDownManager.ResetCoolDown("Earth");
-        GameObject.FindGameObjectWithTag("Shield").GetComponent<SpriteRenderer>().color = new Color(88, 255, 0);
+        spriteShield.color = new Color(88, 255, 0);
         StartCoroutine(ShieldDuration());
     }
 
@@ -160,7 +142,7 @@ public class HeroAbility : MonoBehaviour
     {
         if (CanUTP())
         {
-            StartCoroutine(CooldownAbilityWind());
+            windInCooldown = true;
             coolDownManager.ResetCoolDown("Wind");
             transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x,Camera.main.ScreenToWorldPoint(Input.mousePosition).y,0);
         }
@@ -173,9 +155,9 @@ public class HeroAbility : MonoBehaviour
     {
         if (CanUTP())
         {
-            StartCoroutine(CooldownAbilityEarth());
+            earthInCooldown = true;
             coolDownManager.ResetCoolDown("Earth");
-            StartCoroutine(CooldownAbilityWind());
+            windInCooldown = true;
             coolDownManager.ResetCoolDown("Wind");
             transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
             GameObject explosion = Instantiate(Explosion, transform.position, Quaternion.identity);
@@ -194,9 +176,9 @@ public class HeroAbility : MonoBehaviour
     {
         if (CanUTP())
         {
-            StartCoroutine(CooldownAbilityFire());
+            fireInCooldown = true;
             coolDownManager.ResetCoolDown("Fire");
-            StartCoroutine(CooldownAbilityWind());
+            windInCooldown = true;
             coolDownManager.ResetCoolDown("Wind");
             StartCoroutine(TrailRenderer());
             cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -213,12 +195,12 @@ public class HeroAbility : MonoBehaviour
     /// </summary>
     void ShieldDamageAbility()
     {
-        StartCoroutine(CooldownAbilityFire());
+        fireInCooldown = true;
         coolDownManager.ResetCoolDown("Fire");
-        StartCoroutine(CooldownAbilityEarth());
+        earthInCooldown = true;
         coolDownManager.ResetCoolDown("Earth");
         damagingShield = true;
-        GameObject.FindGameObjectWithTag("Shield").GetComponent<SpriteRenderer>().color = new Color(255,0,0);
+        spriteShield.color = new Color(255,0,0);
         StartCoroutine(ShieldDuration());
     }
 
@@ -231,15 +213,15 @@ public class HeroAbility : MonoBehaviour
     /// <returns></returns>
     IEnumerator ShieldDuration()
     {
-        GameObject.FindGameObjectWithTag("Shield").GetComponent<SpriteRenderer>().enabled = true;
-        GameObject.FindGameObjectWithTag("Shield").GetComponent<CircleCollider2D>().enabled = true;
+        spriteShield.enabled = true;
+        colliderShield.enabled = true;
         heroStats.invicibility = true;
         yield return new WaitForSeconds(heroStats.shieldDuration);
-        GameObject.FindGameObjectWithTag("Shield").GetComponent<SpriteRenderer>().enabled = false;
-        GameObject.FindGameObjectWithTag("Shield").GetComponent<CircleCollider2D>().enabled = false;
+        spriteShield.enabled = false;
+        colliderShield.enabled = false;
         heroStats.invicibility = false;
         damagingShield = false;
-        GameObject.FindGameObjectWithTag("Shield").GetComponent<SpriteRenderer>().color = new Color(255,255,255);
+        spriteShield.color = new Color(255,255,255);
     }
 
     /// <summary>
@@ -268,9 +250,9 @@ public class HeroAbility : MonoBehaviour
     /// </summary>
     IEnumerator TrailRenderer()
     {
-        transform.Find("DashLane").GetComponent<TrailRenderer>().enabled = true;
+        dashTrail.enabled = true;
         yield return new WaitForSeconds(.15f);
-        transform.Find("DashLane").GetComponent<TrailRenderer>().enabled = false;
+        dashTrail.enabled = false;
     }
 
 

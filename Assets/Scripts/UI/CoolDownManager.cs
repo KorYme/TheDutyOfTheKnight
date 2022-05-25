@@ -27,11 +27,11 @@ public class CoolDownManager : MonoBehaviour
     {
         InitializeAllObjects();
         InitializeCD();
-        heroHits = GameObject.FindGameObjectWithTag("Player").GetComponent<HeroHits>();
     }
 
     void InitializeAllObjects()
     {
+        heroHits = HeroHits.instance;
         imageCDHit = CDHitUI.transform.Find("CoolDown").GetComponent<Image>();
         imageCDEarth = CDEarthUI.transform.Find("CoolDown").GetComponent<Image>();
         imageCDWind = CDWindUI.transform.Find("CoolDown").GetComponent<Image>();
@@ -64,6 +64,10 @@ public class CoolDownManager : MonoBehaviour
         {
             imageCDEarth.fillAmount -= 1 / (HeroAbility.instance.cooldownEarth + HeroStats.instance.shieldDuration) * Time.fixedDeltaTime;
             textCDEarth.text = Mathf.Floor((HeroAbility.instance.cooldownEarth + HeroStats.instance.shieldDuration) * imageCDEarth.fillAmount).ToString();
+            if (imageCDEarth.fillAmount <= 0)
+            {
+                HeroAbility.instance.earthInCooldown = false;
+            }
         }
         else
         {
@@ -73,6 +77,10 @@ public class CoolDownManager : MonoBehaviour
         {
             imageCDWind.fillAmount -= 1 / HeroAbility.instance.cooldownWind * Time.fixedDeltaTime;
             textCDWind.text = Mathf.Floor(HeroAbility.instance.cooldownWind * imageCDWind.fillAmount).ToString();
+            if (imageCDWind.fillAmount <= 0)
+            {
+                HeroAbility.instance.windInCooldown = false;
+            }
         }
         else
         {
@@ -82,6 +90,10 @@ public class CoolDownManager : MonoBehaviour
         {
             imageCDFire.fillAmount -= 1 / HeroAbility.instance.cooldownFire * Time.fixedDeltaTime;
             textCDFire.text = Mathf.Floor(HeroAbility.instance.cooldownFire * imageCDFire.fillAmount).ToString();
+            if (imageCDFire.fillAmount <= 0)
+            {
+                HeroAbility.instance.fireInCooldown = false;
+            }
         }
         else
         {

@@ -1905,6 +1905,7 @@ MonoBehaviour:
   nbCoins: 0
   nbPotionRefresh: 0
   nbKeyBoss: 0
+  inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
 --- !u!1 &415753859
 GameObject:
   m_ObjectHideFlags: 0
