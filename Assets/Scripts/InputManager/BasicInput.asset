@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: 27
   interact: 101
-  accept: 121
+  close: 121
+  inventory: 9
+  miniMap: 109
+  useItem: 114
   swordHit: 323
   abilityEarth: 32
   abilityWind: 324
   abilityFire: 97
-  abilityDash: 50
   abilityExplosion: 49
+  abilityDash: 50
   abilityDamagingShield: 51
-  inventory: 9

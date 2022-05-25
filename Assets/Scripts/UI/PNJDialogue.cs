@@ -28,36 +28,45 @@ public class PNJDialogue : MonoBehaviour
 
     private void Update()
     {
-        if (!isInRange && dialogueManager.panelOpen && dialogueManager.currentPanelUser == gameObject)
+        if (isInRange && !dialogueManager.isMoving)
         {
-            dialogueManager.PanelDisable();
-        }
-        else if (isInRange && Input.GetKeyDown(KeyCode.E))
-        {
-            dialogueManager.currentPanelUser = gameObject;
-            if (sentencesIndex < sentencesPNJ.Length)
+            if (Input.GetKeyDown(inputData.interact))
             {
-                if (!dialogueManager.panelOpen)
+                dialogueManager.currentPanelUser = gameObject;
+                if (sentencesIndex < sentencesPNJ.Length)
                 {
-                    dialogueManager.PanelEnable();
-                }
-                if (sentencesIndex < sentencesPNJ.Length - 1)
-                {
-                    dialogueManager.UpdateTheScreen(namePNJ, sentencesPNJ[sentencesIndex]);
+                    if (!dialogueManager.panelOpen)
+                    {
+                        dialogueManager.PanelEnable();
+                    }
+                    if (sentencesIndex < sentencesPNJ.Length - 1)
+                    {
+                        dialogueManager.UpdateTheScreen(namePNJ, sentencesPNJ[sentencesIndex]);
+                    }
+                    else
+                    {
+                        dialogueManager.UpdateTheScreen(namePNJ, sentencesPNJ[sentencesIndex], 0);
+                    }
+                    sentencesIndex++;
                 }
                 else
                 {
-                    dialogueManager.UpdateTheScreen(namePNJ, sentencesPNJ[sentencesIndex], 0);
+                    dialogueManager.PanelDisable();
+                    sentencesIndex = 0;
                 }
-                sentencesIndex++;
             }
-            else
+            else if (Input.GetKeyDown(inputData.close))
             {
-                dialogueManager.PanelDisable();
-                sentencesIndex = 0;
+                if (isInRange && dialogueManager.panelOpen && !dialogueManager.isMoving)
+                {
+                    dialogueManager.PanelDisable();
+                    sentencesIndex = 0;
+                }
             }
         }
     }
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -72,6 +81,11 @@ public class PNJDialogue : MonoBehaviour
         if (collision.tag == "Player")
         {
             isInRange = false;
+            if (dialogueManager.currentPanelUser == gameObject)
+            {
+                dialogueManager.PanelDisable();
+                sentencesIndex = 0;
+            }
         }
     }
 }

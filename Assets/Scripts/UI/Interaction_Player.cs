@@ -19,6 +19,9 @@ public class Interaction_Player : MonoBehaviour
     private GameObject UI_Player;
     private float interactions;
 
+    [Header("List with tag for interaction")]
+    public List<string> allTags;
+
     private void Start()
     {
         UI_Player = transform.parent.Find("UI_Player").gameObject;
@@ -40,7 +43,7 @@ public class Interaction_Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Totem" || collision.tag == "Object" || collision.tag == "Merchant" || collision.tag == "Chest")
+        if (allTags.Contains(collision.tag))
         {
             interactions++;
             if (interactions > 0)
@@ -52,7 +55,7 @@ public class Interaction_Player : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Totem" || collision.tag == "Object" || collision.tag == "Merchant" || collision.tag == "Chest")
+        if (allTags.Contains(collision.tag))
         {
             interactions--;
             if (interactions <= 0)

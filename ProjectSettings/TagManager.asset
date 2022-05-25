@@ -39,6 +39,7 @@ TagManager:
   - Object
   - Coordinates
   - Chest
+  - Tuto
   layers:
   - Default
   - TransparentFX

@@ -105,7 +105,7 @@ public class ObjectGenerator : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(inputData.accept))
+        if (Input.GetKeyDown(inputData.close))
         {
             if (RoomManager.instance.IsItShop())
             {

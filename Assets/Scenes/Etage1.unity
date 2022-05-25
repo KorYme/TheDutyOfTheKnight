@@ -5036,6 +5036,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e0abad5a7b9b574fbae776dc898f88f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allTags:
+  - Chest
+  - Tuto
+  - Merchant
+  - Totem
+  - Object
 --- !u!1 &1234496430
 GameObject:
   m_ObjectHideFlags: 0

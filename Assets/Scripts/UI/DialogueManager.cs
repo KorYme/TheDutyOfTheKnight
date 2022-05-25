@@ -21,6 +21,7 @@ public class DialogueManager : MonoBehaviour
     private TMP_Text panelContent;
     private TMP_Text panelContinue;
     private Animator animator;
+    private KeyCode[] inputs;
     [field: HideInInspector] public bool isMoving;
     [field: HideInInspector] public bool panelOpen;
     [field: HideInInspector] public GameObject currentPanelUser;
@@ -67,19 +68,19 @@ public class DialogueManager : MonoBehaviour
         switch (bottomRightText)
         {
             case 0:
-                panelContinue.text = "Press " + inputData.interact.ToString() + " to close >";
+                panelContinue.text = "Press " + inputData.interact.ToString() + " or " + inputData.close.ToString() + " to close >";
                 return;
             case 1:
-                panelContinue.text = "Press " + inputData.interact.ToString() + " to buy or " + inputData.accept.ToString() + " to close >";
+                panelContinue.text = "Press " + inputData.interact.ToString() + " to buy or " + inputData.close.ToString() + " to close >";
                 return;
             case 2:
-                panelContinue.text = "Press " + inputData.interact.ToString() + " to pray or " + inputData.accept.ToString() + " to close >";
+                panelContinue.text = "Press " + inputData.interact.ToString() + " to pray or " + inputData.close.ToString() + " to close >";
                 return;
             case 3:
-                panelContinue.text = "Press " + inputData.interact.ToString() + " to pick up or " + inputData.accept.ToString() + " to close >";
+                panelContinue.text = "Press " + inputData.interact.ToString() + " to pick up or " + inputData.close.ToString() + " to close >";
                 return;
             default:
-                panelContinue.text = "Press " + inputData.interact.ToString() + " to continue >";
+                panelContinue.text = "Press " + inputData.interact.ToString() + " to continue or " + inputData.close.ToString() + " to close >";
                 return;
         }
     }

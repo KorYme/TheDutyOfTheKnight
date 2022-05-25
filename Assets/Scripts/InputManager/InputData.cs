@@ -6,8 +6,10 @@ public class InputData : ScriptableObject
     [Header ("General Inputs")]
     public KeyCode menu;
     public KeyCode interact;
-    public KeyCode accept;
+    public KeyCode close;
     public KeyCode inventory;
+    public KeyCode miniMap;
+    public KeyCode useItem;
 
     [Header ("Abilities Inputs")]
     public KeyCode swordHit;
