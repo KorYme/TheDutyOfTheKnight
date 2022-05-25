@@ -72,8 +72,17 @@ public class ObjectGenerator : MonoBehaviour
                     }
                     else if (dialogueManager.panelOpen)
                     {
-                        firstTimeTouched = true;
-                        dialogueManager.PanelDisable();
+                        if (playerInventory.nbCoins < objectData.coinCost)
+                        {
+                            dialogueManager.UpdateTheScreen(merchant.namePNJ, "You don't have enough money, you'll need " + (objectData.coinCost - playerInventory.nbCoins).ToString() + " more coins to buy it !");
+                            firstTimeTouched = true;
+                        }
+                        else if (!dialogueManager.isMoving)
+                        {
+                            dialogueManager.PanelDisable();
+                            playerInventory.nbCoins -= objectData.coinCost;
+                            TakeObject();
+                        }
                     }
                 }
                 else
@@ -89,8 +98,8 @@ public class ObjectGenerator : MonoBehaviour
                     }
                     else if (dialogueManager.panelOpen)
                     {
-                        firstTimeTouched = true;
                         dialogueManager.PanelDisable();
+                        TakeObject();
                     }
                 }
             }
@@ -102,26 +111,16 @@ public class ObjectGenerator : MonoBehaviour
             {
                 if (dialogueManager.currentPanelUser == gameObject && !firstTimeTouched)
                 {
-                    if (playerInventory.nbCoins < objectData.coinCost)
-                    {
-                        InitializeMerchant();
-                        dialogueManager.UpdateTheScreen(merchant.namePNJ, "You don't have enough money, you'll need " + (objectData.coinCost - playerInventory.nbCoins).ToString() + " more coins to buy it !");
-                        firstTimeTouched = true;
-                    }
-                    else if (!dialogueManager.isMoving)
-                    {
-                        dialogueManager.PanelDisable();
-                        playerInventory.nbCoins -= objectData.coinCost;
-                        TakeObject();
-                    }
+                    firstTimeTouched = true;
+                    dialogueManager.PanelDisable();
                 }
             }
             else
             {
                 if (dialogueManager.currentPanelUser == gameObject && !firstTimeTouched)
                 {
+                    firstTimeTouched = true;
                     dialogueManager.PanelDisable();
-                    TakeObject();
                 }
             }
         }

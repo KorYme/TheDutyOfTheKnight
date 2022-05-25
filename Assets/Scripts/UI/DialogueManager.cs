@@ -21,12 +21,9 @@ public class DialogueManager : MonoBehaviour
     private TMP_Text panelContent;
     private TMP_Text panelContinue;
     private Animator animator;
-    //[field:HideInInspector]
-    public bool isMoving;
-    //[field:HideInInspector]
-    public bool panelOpen;
-    //[field: HideInInspector]
-    public GameObject currentPanelUser;
+    [field: HideInInspector] public bool isMoving;
+    [field: HideInInspector] public bool panelOpen;
+    [field: HideInInspector] public GameObject currentPanelUser;
     public InputData inputData;
 
     private void Start()
@@ -73,13 +70,13 @@ public class DialogueManager : MonoBehaviour
                 panelContinue.text = "Press " + inputData.interact.ToString() + " to close >";
                 return;
             case 1:
-                panelContinue.text = "Press " + inputData.accept.ToString() + " to buy or " + inputData.interact.ToString() + " to close >";
+                panelContinue.text = "Press " + inputData.interact.ToString() + " to buy or " + inputData.accept.ToString() + " to close >";
                 return;
             case 2:
-                panelContinue.text = "Press " + inputData.accept.ToString() + " to pray or " + inputData.interact.ToString() + " to close >";
+                panelContinue.text = "Press " + inputData.interact.ToString() + " to pray or " + inputData.accept.ToString() + " to close >";
                 return;
             case 3:
-                panelContinue.text = "Press " + inputData.accept.ToString() + " to pick up or " + inputData.interact.ToString() + " to close >";
+                panelContinue.text = "Press " + inputData.interact.ToString() + " to pick up or " + inputData.accept.ToString() + " to close >";
                 return;
             default:
                 panelContinue.text = "Press " + inputData.interact.ToString() + " to continue >";
