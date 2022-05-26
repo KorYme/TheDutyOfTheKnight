@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CoolDownManager : MonoBehaviour
 {
+    public static CoolDownManager instance;
 
     Image imageCDHit;
     Image imageCDEarth;
@@ -13,8 +14,7 @@ public class CoolDownManager : MonoBehaviour
     Text textCDEarth;
     Text textCDWind;
     Text textCDFire;
-    private HeroHits heroHits;
-
+    HeroHits heroHits;
 
     [Header("All CoolDown Images")]
     public GameObject CDHitUI;
@@ -22,11 +22,20 @@ public class CoolDownManager : MonoBehaviour
     public GameObject CDWindUI;
     public GameObject CDFireUI;
 
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.Log("There is more than one CoolDownManager in the game");
+            return;
+        }
+        instance = this;
+    }
 
     private void Start()
     {
         InitializeAllObjects();
-        InitializeCD();
+        InitializeCDTo0(false);
     }
 
     void InitializeAllObjects()
@@ -41,12 +50,18 @@ public class CoolDownManager : MonoBehaviour
         textCDFire = CDFireUI.transform.Find("Text").GetComponent<Text>();
     }
 
-    void InitializeCD()
+    public void InitializeCDTo0(bool notStart = true)
     {
-        imageCDHit.fillAmount = 0;
+        if (!notStart)
+        {
+            imageCDHit.fillAmount = 0;
+        }
         imageCDEarth.fillAmount = 0;
         imageCDWind.fillAmount = 0;
         imageCDFire.fillAmount = 0;
+        HeroAbility.instance.earthInCooldown = false;
+        HeroAbility.instance.windInCooldown = false;
+        HeroAbility.instance.fireInCooldown = false;
     }
 
     void FixedUpdate()

@@ -7,8 +7,8 @@ public class BossFight : Enemies
 {
     public GameObject reaperBullet;
     public GameObject reaperMinion;
-    Transform hitPoint1;
-    Transform hitPoint2;
+    private Transform hitPoint1;
+    private Transform hitPoint2;
     private float nbMinionsAlive;
     private SpriteRenderer shield;
 

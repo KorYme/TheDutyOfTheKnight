@@ -35,7 +35,6 @@ public class HeroAbility : MonoBehaviour
 
     [Header("To Define Values")]
     public HeroStats heroStats;
-    public CoolDownManager coolDownManager;
     public GameObject FireBall;
     public float fireBallSpeed;
     public bool damagingShield;
@@ -46,6 +45,7 @@ public class HeroAbility : MonoBehaviour
     public LayerMask cantTPLayer;
     public GameObject Explosion;
 
+    private CoolDownManager coolDownManager;
     private SpriteRenderer spriteShield;
     private CircleCollider2D colliderShield;
     private TrailRenderer dashTrail;
@@ -53,6 +53,7 @@ public class HeroAbility : MonoBehaviour
     private void Start()
     {
         //Initializations
+        coolDownManager = CoolDownManager.instance;
         spriteShield = transform.Find("Shield").GetComponent<SpriteRenderer>();
         colliderShield = transform.Find("Shield").GetComponent<CircleCollider2D>();
         dashTrail = transform.Find("DashLane").GetComponent<TrailRenderer>();
@@ -89,21 +90,6 @@ public class HeroAbility : MonoBehaviour
         {
             ShieldDamageAbility();
         }
-    }
-
-    
-
-    //Cooldowns' coroutines
-
-    /// <summary>
-    /// Create a cooldown for the wind ability
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator CooldownAbilityWind()
-    {
-        windInCooldown = true;
-        yield return new WaitForSeconds(cooldownWind);
-        windInCooldown = false;
     }
 
     //USP Abilities

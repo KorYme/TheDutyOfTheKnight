@@ -21,7 +21,6 @@ public class DialogueManager : MonoBehaviour
     private TMP_Text panelContent;
     private TMP_Text panelContinue;
     private Animator animator;
-    private KeyCode[] inputs;
     [field: HideInInspector] public bool isMoving;
     [field: HideInInspector] public bool panelOpen;
     [field: HideInInspector] public GameObject currentPanelUser;

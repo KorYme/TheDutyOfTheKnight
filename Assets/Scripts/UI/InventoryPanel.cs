@@ -51,6 +51,7 @@ public class InventoryPanel : MonoBehaviour
     {
         if (Input.GetKeyDown(inputData.inventory) && !isMoving)
         {
+            UpdateInventory();
             if (inventoryOpen)
             {
                 animator.SetTrigger("Close");

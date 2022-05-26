@@ -7,19 +7,19 @@ public class LevelGenerator : MonoBehaviour
     public static LevelGenerator instance;
 
     [Header("Level Parameters")]
-    [SerializeField] public string[,] level;
-    [SerializeField] public int levelHeight;
-    [SerializeField] public int levelWidth;
-    [SerializeField] public bool spawnCentered;
-    [SerializeField] public GameObject theBigGrid;
+    public string[,] level;
+    public int levelHeight;
+    public int levelWidth;
+    public bool spawnCentered;
+    public GameObject theBigGrid;
 
     [Header ("Number of rooms asked")]
-    [SerializeField] public int nbShopAsked;
-    [SerializeField] public int nbAbilityAsked;
-    [SerializeField] public int nbRoomsAsked;
-    [SerializeField] public int nbChestRoomsAsked;
-    [SerializeField] public int spawnX;
-    [SerializeField] public int spawnY;
+    public int nbShopAsked;
+    public int nbAbilityAsked;
+    public int nbRoomsAsked;
+    public int nbChestRoomsAsked;
+    public int spawnX;
+    public int spawnY;
 
     private int totalNumberRoomsAsked;
     private int totalNumberRoomsCreated;
@@ -31,10 +31,10 @@ public class LevelGenerator : MonoBehaviour
     private GameObject shopRoom;
     private GameObject bossRoom;
     private GameObject abilityRoom;
-    [SerializeField][HideInInspector] public List<Vector2> rooms;
+    [HideInInspector] public List<Vector2> rooms;
 
     [Header ("Test Mode")]
-    [SerializeField] public bool testMode;
+    public bool testMode;
 
 
     private void Awake()

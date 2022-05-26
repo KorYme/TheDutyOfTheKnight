@@ -153,5 +153,15 @@ MonoBehaviour:
   sentencesPNJ:
   - Welcome in the Duty of the Knight !
   - To get out of those caves, you'll have to defeat the boss who lives down here.
-  - 'To '
+  - You don't remember how to move or even aim ???
+  - To move, use "ZQSD" and aim using the "mouse" position.
+  - Have you also forgotten how to use your abilities ?
+  - Ok! So "A" is for the fireball, "Left Click" is for the teleportation and "Space"
+    is for the shield.
+  - You can even try the "1", "2" and "3" keys to combine your ability to unlock
+    new ones
+  - I guess you also don't know anymore how to use your inventory
+  - Ok so "Tab" is to open your inventory and "R" is to use the refresh potion
+  - I think you've learned eveything I could teach you.
+  - So I wish you a nice trip adventurer !
   inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}

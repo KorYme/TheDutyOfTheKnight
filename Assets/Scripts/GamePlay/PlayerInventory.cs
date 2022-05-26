@@ -29,6 +29,19 @@ public class PlayerInventory : MonoBehaviour
         inventoryPanel = InventoryPanel.instance;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(inputData.useItem))
+        {
+            UseRefreshPotion();
+        }
+        if (Input.GetKeyDown(KeyCode.K) && LevelGenerator.instance.testMode)
+        {
+            InventoryPanel.instance.UpdateInventory();
+            nbPotionRefresh++;
+        }
+    }
+
     public void AddToInventory(ObjectsData objectData)
     {
         nbCoins += objectData.coinGiven;
@@ -38,10 +51,11 @@ public class PlayerInventory : MonoBehaviour
         inventoryPanel.ShowInventory();
     }
 
-    public void UseRefreshPotion()
+    void UseRefreshPotion()
     {
         if (nbPotionRefresh > 0)
         {
+            CoolDownManager.instance.InitializeCDTo0();
             nbPotionRefresh--;
             inventoryPanel.UpdateInventory();
             inventoryPanel.ShowInventory();

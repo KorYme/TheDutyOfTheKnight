@@ -17,7 +17,7 @@ public class SettingsMenu : MonoBehaviour
 
     private void Awake()
     {
-        GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioSource>();
+        GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioSource>();//A CHANGER
         transform.Find("VolumeSlider").GetComponent<Slider>().value = GameManager.instance.currentVolume;
     }
 

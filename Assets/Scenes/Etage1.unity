@@ -1878,7 +1878,6 @@ MonoBehaviour:
   cooldownEarth: 15
   inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
   heroStats: {fileID: 401620113}
-  coolDownManager: {fileID: 1410516782}
   FireBall: {fileID: 6067577561094456797, guid: 65a52fbba66c01944926e1304f11631f, type: 3}
   fireBallSpeed: 7
   damagingShield: 0
@@ -7935,7 +7934,7 @@ MonoBehaviour:
   - {fileID: 256361436}
   - {fileID: 1646214065}
   - {fileID: 1240759282}
-  initialTimeToClose: 2
+  initialTimeToClose: 2.5
 --- !u!1 &1761319131
 GameObject:
   m_ObjectHideFlags: 0
