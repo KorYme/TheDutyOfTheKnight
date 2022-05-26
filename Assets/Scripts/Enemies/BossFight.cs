@@ -7,10 +7,16 @@ public class BossFight : Enemies
 {
     public GameObject reaperBullet;
     public GameObject reaperMinion;
+    public InputData inputData;
     private Transform hitPoint1;
     private Transform hitPoint2;
     private float nbMinionsAlive;
     private SpriteRenderer shield;
+    private GameObject healthBar;
+    private CapsuleCollider2D bossCollider;
+    private CircleCollider2D rangeCollider;
+    private bool hasFightStarted;
+    private bool isInRange;
 
     [Header("Boss Variables")]
     public float reaperFireBallSpeed;
@@ -27,6 +33,12 @@ public class BossFight : Enemies
 
     protected override void Start()
     {
+        InitializeValues();
+        DisableBossStart();
+    }
+
+    void InitializeValues()
+    {
         base.Start();
         healthBossInitial = enemyHP;
         hitPoint1 = transform.Find("HitPoint1");
@@ -37,19 +49,63 @@ public class BossFight : Enemies
         nbMinionsAlive = 0;
         shield = transform.Find("BossShield").GetComponent<SpriteRenderer>();
         shield.enabled = false;
+        healthBar = transform.Find("Canvas").gameObject;
+        bossCollider = GetComponent<CapsuleCollider2D>();
+        rangeCollider = GetComponent<CircleCollider2D>();
+        hasFightStarted = false;
+        isInRange = false;
+    }
+
+    void DisableBossStart()
+    {
+        bossCollider.enabled = false;
+        rangeCollider.enabled = true;
+        tag = "SleepingBoss";
+    }
+
+    public void Summoning()
+    {
+        Destroy(transform.Find("SleepingBossHitBox").gameObject);
+        rangeCollider.enabled = false;
+        bossCollider.enabled = true;
+        Interaction_Player.instance.ForceExit();
+        animator.SetTrigger("FightStarted");
+        hasFightStarted=true;
+        tag = "Boss";
+        healthBar.GetComponent<Animator>().SetTrigger("Appear");
+    }
+
+    void StartFight()
+    {
+        canMove = true;
+        StartCoroutine(Ability1Manager());
     }
 
     protected override void FixedUpdate()
     {
-        base.FixedUpdate();
-        if (bossAbility1 && canMove && !dead)
+        if (hasFightStarted)
         {
-            BossAbility1();
+            base.FixedUpdate();
+            if (bossAbility1 && canMove && !dead)
+            {
+                BossAbility1();
+            }
+            else if (canMove && !dead)
+            {
+                DirectionBoss();
+                IsPlayerInRange();
+            }
         }
-        else if (canMove && !dead)
+    }
+
+    private void Update()
+    {
+        if (!hasFightStarted && isInRange)
         {
-            DirectionBoss();
-            IsPlayerInRange();
+            if (Input.GetKeyDown(inputData.interact))
+            {
+                Summoning();
+            }
         }
     }
 
@@ -60,11 +116,6 @@ public class BossFight : Enemies
         StartCoroutine(Ability1Manager());
     }
 
-    void StartFight()
-    {
-        canMove = true;
-        StartCoroutine(Ability1Manager());
-    }
 
     void DirectionBoss()
     {
@@ -205,5 +256,21 @@ public class BossFight : Enemies
         base.Die();
         RoomManager.instance.CheckEnemiesStillIn();
         GameManager.instance.Die();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            isInRange = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            isInRange = false;
+        }
     }
 }

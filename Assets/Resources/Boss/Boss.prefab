@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 667516612553251089}
   - component: {fileID: 4173808660998626093}
   - component: {fileID: 857200692401778530}
+  - component: {fileID: 1478628207052187180}
   m_Layer: 13
   m_Name: Boss
-  m_TagString: Boss
+  m_TagString: SleepingBoss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,6 +32,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5.25, y: 5.25, z: 1}
   m_Children:
+  - {fileID: 3274130404086516187}
   - {fileID: 442676216032157764}
   - {fileID: 2518223345332730094}
   - {fileID: 7560634557552085964}
@@ -78,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 50
-  m_Sprite: {fileID: 8793639957104055765, guid: 0c384eb060190ad43bdf3fcf365a7286, type: 3}
+  m_Sprite: {fileID: 2891620135027730149, guid: d3fbe78ec71c49644841ed6d8dc21d46, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -120,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e08f8827bf90f5448e45d29cf6875ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dead: 0
   enemyHP: 500
   enemyDamage: 30
   enemySpeed: 2
@@ -127,7 +130,7 @@ MonoBehaviour:
   animator: {fileID: 667516612553251089}
   invulnerable: 0
   isTouchDamage: 0
-  dead: 0
+  canMove: 1
   slider: {fileID: 6872616398527320009}
   drops: []
   playerLayer:
@@ -135,6 +138,7 @@ MonoBehaviour:
     m_Bits: 1024
   reaperBullet: {fileID: 8896610446740735514, guid: ac3f49c778f3a5a40b66c24992279a2e, type: 3}
   reaperMinion: {fileID: 8203106886454101171, guid: 989c3eb7594e6ef4dbf87053ce81d2d9, type: 3}
+  inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
   reaperFireBallSpeed: 7
   reaperMinionBallSpeed: 2
   reaperFireBallDamage: 15
@@ -142,7 +146,6 @@ MonoBehaviour:
   multiplierSpeedPhase2: 1.5
   multiplierDamagePhase2: 1.3
   timeBetweenAbility1: 10
-  canMove: 1
   bossAbility1: 0
 --- !u!70 &857200692401778530
 CapsuleCollider2D:
@@ -160,6 +163,22 @@ CapsuleCollider2D:
   m_Offset: {x: -0.028280668, y: -0.058328927}
   m_Size: {x: 0.30712402, y: 0.5722553}
   m_Direction: 0
+--- !u!58 &1478628207052187180
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306401054567032145}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.02, y: 0.035}
+  serializedVersion: 2
+  m_Radius: 0.37
 --- !u!1 &1749179488648688230
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +191,7 @@ GameObject:
   m_Layer: 0
   m_Name: HitPoint2
   m_TagString: Untagged
-  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -188,7 +207,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3698332652984046209}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2150374130057674004
 GameObject:
@@ -277,7 +296,7 @@ GameObject:
   m_Layer: 0
   m_Name: HitPoint1
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -293,7 +312,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3698332652984046209}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3702414000474464788
 GameObject:
@@ -428,7 +447,7 @@ Transform:
   m_LocalScale: {x: 0.13790576, y: 0.13790576, z: 0.13790576}
   m_Children: []
   m_Father: {fileID: 3698332652984046209}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6413428484895066242
 SpriteRenderer:
@@ -643,6 +662,7 @@ GameObject:
   - component: {fileID: 159692434414705623}
   - component: {fileID: 441669665868808322}
   - component: {fileID: 3357900935917361851}
+  - component: {fileID: 5274199701906506630}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -663,7 +683,7 @@ RectTransform:
   m_Children:
   - {fileID: 3315814773187227406}
   m_Father: {fileID: 3698332652984046209}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -731,3 +751,69 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!95 &5274199701906506630
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7693759948154605765}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: df923c55765f4144e8c0b279f3ed3566, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &7886991887357848055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3274130404086516187}
+  - component: {fileID: 5193942222537846689}
+  m_Layer: 0
+  m_Name: SleepingBossHitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3274130404086516187
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7886991887357848055}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3698332652984046209}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &5193942222537846689
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7886991887357848055}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.02, y: 0.035}
+  serializedVersion: 2
+  m_Radius: 0.12

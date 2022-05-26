@@ -10,6 +10,7 @@ public class Enemies : MonoBehaviour
     protected GameObject player;
 
     [Header("Enemy Variables")]
+    [HideInInspector] public bool dead = false;
     public float enemyHP = 10f;
     public float enemyDamage = 0f;
     public float enemySpeed = 0f;
@@ -17,7 +18,6 @@ public class Enemies : MonoBehaviour
     public Animator animator;
     public bool invulnerable = false;
     public bool isTouchDamage = true;
-    [HideInInspector] public bool dead = false;
     public bool canMove;
     public Slider slider;
     public GameObject[] drops;

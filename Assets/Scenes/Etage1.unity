@@ -5041,6 +5041,7 @@ MonoBehaviour:
   - Merchant
   - Totem
   - Object
+  - SleepingBoss
 --- !u!1 &1234496430
 GameObject:
   m_ObjectHideFlags: 0
