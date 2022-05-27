@@ -15,7 +15,7 @@ MonoBehaviour:
   objectName: Sharper Sword
   description: A sharper sword for a sharper world (increase your damage).
   sprite: {fileID: 1432926143477238334, guid: 5ebf14d3f879d97499fe58a91dcf06b9, type: 3}
-  coinCost: 30
+  coinCost: 35
   coinGiven: 0
   refreshPotionGiven: 0
   keyBossGiven: 0

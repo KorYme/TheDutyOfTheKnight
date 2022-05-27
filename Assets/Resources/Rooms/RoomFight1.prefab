@@ -8089,6 +8089,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4638482672737264525}
     m_Modifications:
+    - target: {fileID: 3470331822531782135, guid: 641ff35fe831c894685a6b93c85c90bd, type: 3}
+      propertyPath: monsters.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8212739113281601264, guid: 641ff35fe831c894685a6b93c85c90bd, type: 3}
       propertyPath: m_RootOrder
       value: 2
