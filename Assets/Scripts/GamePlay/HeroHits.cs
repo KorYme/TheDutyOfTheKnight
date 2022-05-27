@@ -49,6 +49,8 @@ public class HeroHits : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (LevelManager.instance.pauseMenu || PlayerInventory.instance.miniMapOpen)
+            return;
         LookingAtDirection();
     }
 
@@ -94,6 +96,8 @@ public class HeroHits : MonoBehaviour
 
     private void Update()
     {
+        if (LevelManager.instance.pauseMenu || PlayerInventory.instance.miniMapOpen)
+            return;
         if (Input.GetKey(inputdata.swordHit) && !isInReloadTime)
         {
             Attack();
@@ -120,20 +124,5 @@ public class HeroHits : MonoBehaviour
                 enemy.GetComponent<Enemies>().SendMessage("TakeDamage", HeroStats.instance.heroAttack);
             }
         }
-    }
-
-    void HasEndedHit()
-    {
-        StartCoroutine(WaitShoot());
-    }
-
-    /// <summary>
-    /// We wait for the hit cooldown to hit again
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator WaitShoot()
-    {
-        yield return new WaitForSeconds(reloadTime);
-        isInReloadTime = false;
     }
 }

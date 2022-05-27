@@ -32,6 +32,8 @@ public class HeroMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (LevelManager.instance.pauseMenu || PlayerInventory.instance.miniMapOpen)
+            return;
         if (canPlayerMove)
         {
             //Déplacement horizontal et vertical à travers deux variables "input"

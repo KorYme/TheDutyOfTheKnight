@@ -66,6 +66,8 @@ public class CoolDownManager : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (LevelManager.instance.pauseMenu || PlayerInventory.instance.miniMapOpen)
+            return;
         CheckCD();
     }
 
@@ -74,6 +76,10 @@ public class CoolDownManager : MonoBehaviour
         if (heroHits.isInReloadTime)
         {
             imageCDHit.fillAmount -= 1 / (heroHits.reloadTime + 0.6f) * Time.fixedDeltaTime;
+            if (imageCDHit.fillAmount <= 0)
+            {
+                heroHits.isInReloadTime = false;
+            }
         }
         if (HeroAbility.instance.earthInCooldown)
         {

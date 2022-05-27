@@ -26,7 +26,7 @@ public class LevelGenerator : MonoBehaviour
     private int abilityRoomCreated;
     private int shopRoomCreated;
 
-    private GameObject[] allRooms;
+    private List<GameObject> allRooms;
     private GameObject spawnRoom;
     private GameObject shopRoom;
     private GameObject bossRoom;
@@ -71,7 +71,12 @@ public class LevelGenerator : MonoBehaviour
 
     void FillRoomList()
     {
-        allRooms = Resources.LoadAll<GameObject>("Rooms");
+        allRooms = new List<GameObject>();
+        allRooms.Clear();
+        foreach (var item in Resources.LoadAll<GameObject>("Rooms"))
+        {
+            allRooms.Add(item);
+        }
         spawnRoom = Resources.Load<GameObject>("SpecialRooms/SpawnRoom");
         shopRoom = Resources.Load<GameObject>("SpecialRooms/ShopRoom");
         bossRoom = Resources.Load<GameObject>("SpecialRooms/BossRoom");
@@ -128,7 +133,7 @@ public class LevelGenerator : MonoBehaviour
                 MiniMapBlock.transform.position = new Vector3((i - spawnX) * 20 - 0.5f, (y - spawnY) * 12, 0);
                 if (level[i,y] != "Null")
                 {
-                    GameObject ARoom = Instantiate(ChooseRandomRoom(level[i,y]), theBigGrid.transform, false);
+                    GameObject ARoom = Instantiate(ChooseTheRightRoom(level[i,y]), theBigGrid.transform, false);
                     ARoom.name = level[i,y] + " [" + (i - spawnX).ToString() + "," + (y - spawnY).ToString() + "]";
                     ARoom.transform.position = new Vector3((i - spawnX) * 20 - 0.5f, (y - spawnY) * 12, 0);
                     if (rooms.Contains(new Vector2(i,y)))
@@ -165,6 +170,17 @@ public class LevelGenerator : MonoBehaviour
         else
         {
             PlacingBossRoom();
+        }
+    }
+
+    /// <summary>
+    /// Destroy all the minimap blocks to discover the minimap
+    /// </summary>
+    public void SeeAllMiniMap()
+    {
+        foreach (Transform item in miniMapBlocks)
+        {
+            item.gameObject.SetActive(!item.gameObject.activeSelf);
         }
     }
 
@@ -206,7 +222,7 @@ public class LevelGenerator : MonoBehaviour
     /// </summary>
     /// <param name="room">The string of the room</param>
     /// <returns>The room at this place</returns>
-    GameObject ChooseRandomRoom(string room)
+    GameObject ChooseTheRightRoom(string room)
     {
         switch (room)
         {
@@ -219,8 +235,27 @@ public class LevelGenerator : MonoBehaviour
             case "Ability":
                 return abilityRoom;
             default:
-                return allRooms[Random.Range(0, allRooms.Length)];
+                return ChooseAmongAllRoomsInit();
         }
+    }
+
+    /// <summary>
+    /// Choose a room among all the one who haven't already been chosen
+    /// </summary>
+    /// <returns>The new room</returns>
+    GameObject ChooseAmongAllRoomsInit()
+    {
+        if (allRooms.Count == 0)
+        {
+            allRooms.Clear();
+            foreach (var item in Resources.LoadAll<GameObject>("Rooms"))
+            {
+                allRooms.Add(item);
+            }
+        }
+        GameObject thisRoom = allRooms[Random.Range(0, allRooms.Count)];
+        allRooms.Remove(thisRoom);
+        return thisRoom;
     }
 
     void PlacingBossRoom()

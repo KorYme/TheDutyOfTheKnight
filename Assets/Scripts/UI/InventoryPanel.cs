@@ -17,12 +17,13 @@ public class InventoryPanel : MonoBehaviour
         instance = this;
     }
 
-    public InputData inputData;
-    public PlayerInventory playerInventory;
+    [SerializeField] private InputData inputData;
+    [SerializeField] private PlayerInventory playerInventory;
+    [SerializeField] private TMP_Text[] inventoryCount;
+    [SerializeField] private TMP_Text textInventory;
     private Animator animator;
     private bool isMoving;
     private bool inventoryOpen;
-    public TMP_Text[] inventoryCount;
     public float initialTimeToClose;
     private float timeToClose;
 
@@ -31,6 +32,7 @@ public class InventoryPanel : MonoBehaviour
         animator = GetComponent<Animator>();
         UpdateInventory();
         timeToClose = initialTimeToClose;
+        textInventory.text = "Press [" + inputData.inventory.ToString() + "]";
     }
 
     private void FixedUpdate()

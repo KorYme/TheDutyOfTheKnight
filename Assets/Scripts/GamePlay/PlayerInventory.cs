@@ -22,18 +22,15 @@ public class PlayerInventory : MonoBehaviour
     public int nbPotionRefresh;
     public int nbKeyBoss;
     private InventoryPanel inventoryPanel;
-    private bool miniMapOpen;
-    private Vector2 initialVelocity;
-    private Rigidbody2D rb;
+    [HideInInspector] public bool miniMapOpen;
     [SerializeField] private InputData inputData;
     [SerializeField] private GameObject miniMap;
 
     private void Start()
     {
-        initialVelocity = Vector2.zero;
-        rb = GetComponent<Rigidbody2D>();
+        miniMapOpen = false;
+        miniMap.SetActive(false);
         inventoryPanel = InventoryPanel.instance;
-        MiniMapDisable();
     }
 
     private void Update()
@@ -48,8 +45,13 @@ public class PlayerInventory : MonoBehaviour
             nbPotionRefresh++;
             nbKeyBoss++;
             InventoryPanel.instance.UpdateInventory();
+            HeroStats.instance.HealHero(100f);
+            if (miniMapOpen)
+            {
+                LevelGenerator.instance.SeeAllMiniMap();
+            }
         }
-        if (Input.GetKeyDown(inputData.miniMap) && RoomManager.instance.IsNotInFight())
+        if (Input.GetKeyDown(inputData.miniMap) && RoomManager.instance.IsNotInFight() && !LevelManager.instance.pauseMenu)
         {
             if (miniMapOpen)
             {
@@ -85,26 +87,15 @@ public class PlayerInventory : MonoBehaviour
 
     public void MiniMapEnable()
     {
-        Debug.Log("Enable");
-        if (!LevelManager.instance.pauseMenu)
-        {
-            miniMapOpen = true;
-            miniMap.SetActive(true);
-            HeroMovement.instance.canPlayerMove = false;
-            initialVelocity = rb.velocity;
-            rb.velocity = Vector2.zero;
-        }
+        miniMapOpen = true;
+        miniMap.SetActive(true);
+        LevelManager.instance.InvertTime();
     }
 
     public void MiniMapDisable()
     {
-        Debug.Log("Disable");
-        if (!LevelManager.instance.pauseMenu)
-        {
-            miniMapOpen = false;
-            miniMap.SetActive(false);
-            HeroMovement.instance.canPlayerMove = true;
-            rb.velocity = initialVelocity;
-        }
+        miniMapOpen = false;
+        miniMap.SetActive(false);
+        LevelManager.instance.InvertTime();
     }
 }

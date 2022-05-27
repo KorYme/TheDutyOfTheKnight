@@ -65,7 +65,11 @@ public class RoomManager : MonoBehaviour
         camPos = Camera.main.transform.position;
         theOpenedDoorsHere = Physics2D.OverlapBoxAll(camPos, camSize, 0f, openedDoorsMask);
         theClosedDoorsHere = Physics2D.OverlapBoxAll(camPos, camSize, 0f, closedDoorsMask);
-        Physics2D.OverlapBox(camPos, camSize, 0f, miniMapBlocks)?.gameObject.SetActive(false);
+        Collider2D thisRoomBlock = Physics2D.OverlapBox(camPos, camSize, 0f, miniMapBlocks);
+        if (thisRoomBlock != null)
+        {
+            Destroy(thisRoomBlock.gameObject);
+        }
         ActivateEnemies();
         AreEnemiesIn();
     }

@@ -16,7 +16,7 @@ MonoBehaviour:
   interact: 101
   close: 121
   inventory: 9
-  miniMap: 109
+  miniMap: 304
   useItem: 114
   swordHit: 323
   abilityEarth: 32

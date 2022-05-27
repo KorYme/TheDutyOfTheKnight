@@ -16,9 +16,9 @@ public class LevelManager : MonoBehaviour
         instance = this;
     }
 
+    [HideInInspector] public GameObject pauseMenuUI;
     public LevelGenerator levelGenerator;
     public GameObject hud;
-    public GameObject pauseMenuUI;
     public GameObject endGameMenu;
     public InputData inputData;
     [SerializeField] public bool pauseMenu;
@@ -37,7 +37,7 @@ public class LevelManager : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(inputData.menu) && !HeroStats.instance.isDead)
+        if (Input.GetKeyDown(inputData.menu) && !HeroStats.instance.isDead && !PlayerInventory.instance.miniMapOpen)
         {
             PauseAndUnpause();
         }
@@ -66,6 +66,11 @@ public class LevelManager : MonoBehaviour
     {
         pauseMenu = !pauseMenu;
         pauseMenuUI.SetActive(pauseMenu);
+        InvertTime();
+    }
+
+    public void InvertTime()
+    {
         Time.timeScale = Mathf.Abs(Time.timeScale - 1f);
     }
 
