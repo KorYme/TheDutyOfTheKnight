@@ -78,6 +78,12 @@ public class DialogueManager : MonoBehaviour
             case 3:
                 panelContinue.text = "Press " + inputData.interact.ToString() + " to pick up or " + inputData.close.ToString() + " to close >";
                 return;
+            case 4:
+                panelContinue.text = "Press " + inputData.interact.ToString() + " to interact with the sphere or " + inputData.close.ToString() + " to leave >";
+                return;
+            case 5:
+                panelContinue.text = "Press " + inputData.interact.ToString() + " to retry or " + inputData.close.ToString() + " to close >";
+                return;
             default:
                 panelContinue.text = "Press " + inputData.interact.ToString() + " to continue or " + inputData.close.ToString() + " to close >";
                 return;

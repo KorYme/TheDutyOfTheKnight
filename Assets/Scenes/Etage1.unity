@@ -5860,7 +5860,10 @@ MonoBehaviour:
   - {fileID: 306401054567032145, guid: 86f376f104e412e4f9e5795e4777b1e2, type: 3}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 532608
+    m_Bits: 524416
+  bossLayer:
+    serializedVersion: 2
+    m_Bits: 8192
   closedDoorsMask:
     serializedVersion: 2
     m_Bits: 256

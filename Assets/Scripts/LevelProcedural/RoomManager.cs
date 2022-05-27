@@ -21,23 +21,23 @@ public class RoomManager : MonoBehaviour
     private GameObject player;
 
     [Header ("Filling values")]
-    [SerializeField] public InputData inputData;
-    [SerializeField] public LevelGenerator levelGenerator;
-    [SerializeField] public GameObject[] allBosses;
+    public InputData inputData;
+    public LevelGenerator levelGenerator;
+    public GameObject[] allBosses;
 
     [Header ("Layers to fill")]
-    [SerializeField] public LayerMask enemyLayer;
-    [SerializeField] public LayerMask closedDoorsMask;
-    [SerializeField] public LayerMask openedDoorsMask;
-    [SerializeField] public LayerMask spawner;
-    [SerializeField] public LayerMask shopLayer;
-    [SerializeField] public LayerMask respawnLayer;
-    [SerializeField] public LayerMask chestLayer;
+    public LayerMask enemyLayer;
+    public LayerMask bossLayer;
+    public LayerMask closedDoorsMask;
+    public LayerMask openedDoorsMask;
+    public LayerMask spawner;
+    public LayerMask shopLayer;
+    public LayerMask respawnLayer;
+    public LayerMask chestLayer;
 
-    private Collider2D[] theClosedDoorsHere, theOpenedDoorsHere, insideEnemies, allSpawner;
+    private Collider2D[] theClosedDoorsHere, theOpenedDoorsHere, insideEnemies, allSpawner, theClosedDoorsBoss;
     private Collider2D enemiesIn;
     private Vector2 camPos, camSize;
-    //[HideInInspector] [SerializeField] public bool spawnRoomOut;
 
     void Start()
     {
@@ -52,7 +52,7 @@ public class RoomManager : MonoBehaviour
         player = HeroAbility.instance.gameObject;
         heroAbility = player.GetComponent<HeroAbility>();
         camSize = new Vector2(17.8162708f, 9.53441048f);
-        player.transform.position = new Vector3(0, 0, 0);
+        player.transform.position = new Vector3(-0.5f, 0, 0);
         ChangingRoom();
         heroAbility.earthUnlocked = true;
         heroAbility.windUnlocked = true;
@@ -85,6 +85,10 @@ public class RoomManager : MonoBehaviour
     {
         //And desactivate the chosen ones
         List<string> cardinalsPoints = levelGenerator.WhichRoundAround((int)CameraFollow.instance.playerCoordinates.x, (int)CameraFollow.instance.playerCoordinates.y);
+        if (levelGenerator.level[(int)CameraFollow.instance.playerCoordinates.x, (int)CameraFollow.instance.playerCoordinates.y] == "Boss")
+        {
+            theClosedDoorsHere = theClosedDoorsBoss;
+        }
         if (that)
         {
             //Door Sound
@@ -144,10 +148,22 @@ public class RoomManager : MonoBehaviour
     /// <summary>
     /// Check if at least one enemy is in this new room
     /// </summary>
-    public void AreEnemiesIn()
+    public void AreEnemiesIn(bool noBoss=true)
     {
         camPos = Camera.main.transform.position;
-        insideEnemies = Physics2D.OverlapBoxAll(camPos, camSize, 0f, enemyLayer);
+        if (theClosedDoorsBoss == null && levelGenerator.level[(int)CameraFollow.instance.playerCoordinates.x, (int)CameraFollow.instance.playerCoordinates.y] == "Boss")
+        {
+            theClosedDoorsBoss = theClosedDoorsHere;
+        }
+        if (noBoss)
+        {
+            insideEnemies = Physics2D.OverlapBoxAll(camPos, camSize, 0f, enemyLayer);
+        }
+        else
+        {
+            insideEnemies = Physics2D.OverlapBoxAll(camPos, camSize, 0f, bossLayer);
+            enemyLayer |= (1 << LayerMask.NameToLayer("BossLayer"));
+        }
         if (insideEnemies.Length == 0)
         {
             OpenOrCloseTheDoors(true);

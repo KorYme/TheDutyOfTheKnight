@@ -33,7 +33,15 @@ public class ReaperMinion : Enemies
 
     protected override void IsDying()
     {
-        base.IsDying();
+        dead = true;
+        enemySpeed = 0;
+        GetComponent<Collider2D>().enabled = false;
+        RoomManager.instance.CheckEnemiesStillIn();
+        DropItems(Random.Range(0, 6));
+        if (slider != null)
+        {
+            Destroy(slider.gameObject);
+        }
         animator.SetTrigger("Death");
         boss.AreMinionsStillAlive();
     }

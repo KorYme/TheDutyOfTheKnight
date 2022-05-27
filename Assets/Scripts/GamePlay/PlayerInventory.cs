@@ -37,8 +37,10 @@ public class PlayerInventory : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.K) && LevelGenerator.instance.testMode)
         {
-            InventoryPanel.instance.UpdateInventory();
+            inventoryPanel.ShowInventory();
             nbPotionRefresh++;
+            nbKeyBoss++;
+            InventoryPanel.instance.UpdateInventory();
         }
     }
 
@@ -47,6 +49,7 @@ public class PlayerInventory : MonoBehaviour
         nbCoins += objectData.coinGiven;
         nbPotionRefresh += objectData.refreshPotionGiven;
         nbKeyBoss += objectData.keyBossGiven;
+        nbKeyBoss = nbKeyBoss > 3 ? 3 : nbKeyBoss;
         inventoryPanel.UpdateInventory();
         inventoryPanel.ShowInventory();
     }

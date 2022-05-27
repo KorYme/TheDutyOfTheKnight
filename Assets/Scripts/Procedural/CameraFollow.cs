@@ -19,7 +19,7 @@ public class CameraFollow : MonoBehaviour
     private GameObject mainCamera;
     private GameObject player;
     private RoomManager roomManager;
-    [SerializeField] public Vector2 playerCoordinates;
+    public Vector2 playerCoordinates;    
 
     private void Start()
     {

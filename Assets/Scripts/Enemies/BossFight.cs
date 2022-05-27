@@ -29,7 +29,10 @@ public class BossFight : Enemies
 
     [Header ("Other Variables")]
     public bool bossAbility1;
+
+
     private float healthBossInitial;
+    private bool firstInteraction;
 
     protected override void Start()
     {
@@ -54,6 +57,7 @@ public class BossFight : Enemies
         rangeCollider = GetComponent<CircleCollider2D>();
         hasFightStarted = false;
         isInRange = false;
+        firstInteraction = true;
     }
 
     void DisableBossStart()
@@ -65,6 +69,7 @@ public class BossFight : Enemies
 
     public void Summoning()
     {
+        RoomManager.instance.AreEnemiesIn(false);
         Destroy(transform.Find("SleepingBossHitBox").gameObject);
         rangeCollider.enabled = false;
         bossCollider.enabled = true;
@@ -100,11 +105,38 @@ public class BossFight : Enemies
 
     private void Update()
     {
-        if (!hasFightStarted && isInRange)
+        if (!hasFightStarted && isInRange && !DialogueManager.instance.isMoving)
         {
             if (Input.GetKeyDown(inputData.interact))
             {
-                Summoning();
+                DialogueManager.instance.currentPanelUser = gameObject;
+                if (firstInteraction)
+                {
+                    if (!DialogueManager.instance.panelOpen)
+                    {
+                        DialogueManager.instance.PanelEnable();
+                    }
+                    DialogueManager.instance.UpdateTheScreen("???","A strange sphere is levitating in front of you, do you want to interact with it ?", 4);
+                    firstInteraction = false;
+                }
+                else
+                {
+                    if (PlayerInventory.instance.nbKeyBoss >= 3)
+                    {
+                        Summoning();
+                        PlayerInventory.instance.nbKeyBoss = 0;
+                    }
+                    else
+                    {
+                        DialogueManager.instance.UpdateTheScreen("???", "Nothing happened, maybe it's only the dungeon decoration after all.", 5);
+                        firstInteraction = true;
+                    }
+                }
+            }
+            if (Input.GetKeyDown(inputData.close) && DialogueManager.instance.panelOpen)
+            {
+                DialogueManager.instance.PanelDisable();
+                firstInteraction = true;
             }
         }
     }
@@ -271,6 +303,11 @@ public class BossFight : Enemies
         if (collision.tag == "Player")
         {
             isInRange = false;
+            firstInteraction = true;
+            if (DialogueManager.instance.currentPanelUser == gameObject)
+            {
+                DialogueManager.instance.PanelDisable();
+            }
         }
     }
 }
