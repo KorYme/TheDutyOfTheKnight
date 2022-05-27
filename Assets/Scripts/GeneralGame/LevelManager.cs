@@ -20,8 +20,9 @@ public class LevelManager : MonoBehaviour
     public GameObject hud;
     public GameObject pauseMenuUI;
     public GameObject endGameMenu;
-    private bool pauseMenu;
     public InputData inputData;
+    [SerializeField] public bool pauseMenu;
+    [SerializeField] private GameObject theBigGrid;
 
     private void Start()
     {
@@ -44,9 +45,19 @@ public class LevelManager : MonoBehaviour
 
     public void Recreatelevel()
     {
-        foreach (var item in GameObject.FindGameObjectsWithTag("Room"))
+        foreach (Transform item in theBigGrid.transform)
         {
-            Destroy(item);
+            if (item.name == "MiniMapBlocks")
+            {
+                foreach (Transform block in item)
+                {
+                    Destroy(block.gameObject);
+                }
+            }
+            else
+            {
+                Destroy(item.gameObject);
+            }
         }
         levelGenerator.CreatingLevel();
     }

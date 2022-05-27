@@ -31,6 +31,8 @@ public class LevelGenerator : MonoBehaviour
     private GameObject shopRoom;
     private GameObject bossRoom;
     private GameObject abilityRoom;
+    private GameObject miniMapBlock;
+    private Transform miniMapBlocks;
     [HideInInspector] public List<Vector2> rooms;
 
     [Header ("Test Mode")]
@@ -64,6 +66,7 @@ public class LevelGenerator : MonoBehaviour
         abilityRoomCreated = 0;
         shopRoomCreated = 0;
         rooms = new List<Vector2>();
+        miniMapBlocks = theBigGrid.transform.Find("MiniMapBlocks");
     }
 
     void FillRoomList()
@@ -73,6 +76,7 @@ public class LevelGenerator : MonoBehaviour
         shopRoom = Resources.Load<GameObject>("SpecialRooms/ShopRoom");
         bossRoom = Resources.Load<GameObject>("SpecialRooms/BossRoom");
         abilityRoom = Resources.Load<GameObject>("SpecialRooms/AbilityRoom");
+        miniMapBlock = Resources.Load<GameObject>("SpecialRooms/MiniMapBlock");
     }
 
     void CenteringSpawn(bool isCentered)
@@ -120,6 +124,8 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int y = 0; y < levelWidth; y++)
             {
+                GameObject MiniMapBlock = Instantiate(miniMapBlock, miniMapBlocks, false);
+                MiniMapBlock.transform.position = new Vector3((i - spawnX) * 20 - 0.5f, (y - spawnY) * 12, 0);
                 if (level[i,y] != "Null")
                 {
                     GameObject ARoom = Instantiate(ChooseRandomRoom(level[i,y]), theBigGrid.transform, false);

@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 5246515340352671689}
   - component: {fileID: 5246515340352671690}
   - component: {fileID: 2049015943969668350}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,6 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb3d07b298e34946b251bc5c30e21fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dead: 0
   enemyHP: 125
   enemyDamage: 10
   enemySpeed: 1
@@ -451,7 +452,6 @@ MonoBehaviour:
   animator: {fileID: 5246515340352671690}
   invulnerable: 0
   isTouchDamage: 1
-  dead: 0
   canMove: 0
   slider: {fileID: 4462430917434765614}
   drops:

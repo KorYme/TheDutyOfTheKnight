@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class ReaperMinion : Enemies
 {
-    public Vector2 direction;
-    BossFight boss;
-    public LayerMask obstacles;
-    public LayerMask targets;
-    private Rigidbody2D rb;
-    public bool launched;
+    private BossFight boss;
+    [HideInInspector] public Vector2 direction;
+    [HideInInspector] public LayerMask obstacles;
+    [HideInInspector] public LayerMask targets;
+    [HideInInspector] public bool launched;
 
     protected override void Start()
     {
@@ -17,7 +16,6 @@ public class ReaperMinion : Enemies
         boss = GameObject.FindGameObjectWithTag("Boss").GetComponent<BossFight>();
         enemySpeed = boss.reaperMinionBallSpeed;
         enemyDamage = boss.reaperMinionBallDamage;
-        rb = GetComponent<Rigidbody2D>();
     }
 
     public void HasBeenLaunched()
@@ -35,9 +33,10 @@ public class ReaperMinion : Enemies
     {
         dead = true;
         enemySpeed = 0;
+        launched = false;
         GetComponent<Collider2D>().enabled = false;
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         RoomManager.instance.CheckEnemiesStillIn();
-        DropItems(Random.Range(0, 6));
         if (slider != null)
         {
             Destroy(slider.gameObject);

@@ -8,10 +8,10 @@ using UnityEngine.SceneManagement;
 public class SettingsMenu : MonoBehaviour
 {
     public AudioMixer audioMixer;
-    public bool isFullScreen;
     public TMPro.TMP_Dropdown dropdown;
-    Resolution[] resolutions;
     public GameObject entryMenu;
+    private Resolution[] resolutions;
+    public bool isFullScreen;
 
     public int currentIndexResolutions;
 

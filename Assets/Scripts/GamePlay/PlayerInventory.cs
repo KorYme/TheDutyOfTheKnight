@@ -22,11 +22,18 @@ public class PlayerInventory : MonoBehaviour
     public int nbPotionRefresh;
     public int nbKeyBoss;
     private InventoryPanel inventoryPanel;
-    public InputData inputData;
+    private bool miniMapOpen;
+    private Vector2 initialVelocity;
+    private Rigidbody2D rb;
+    [SerializeField] private InputData inputData;
+    [SerializeField] private GameObject miniMap;
 
     private void Start()
     {
+        initialVelocity = Vector2.zero;
+        rb = GetComponent<Rigidbody2D>();
         inventoryPanel = InventoryPanel.instance;
+        MiniMapDisable();
     }
 
     private void Update()
@@ -41,6 +48,17 @@ public class PlayerInventory : MonoBehaviour
             nbPotionRefresh++;
             nbKeyBoss++;
             InventoryPanel.instance.UpdateInventory();
+        }
+        if (Input.GetKeyDown(inputData.miniMap) && RoomManager.instance.IsNotInFight())
+        {
+            if (miniMapOpen)
+            {
+                MiniMapDisable();
+            }
+            else
+            {
+                MiniMapEnable();
+            }
         }
     }
 
@@ -62,6 +80,31 @@ public class PlayerInventory : MonoBehaviour
             nbPotionRefresh--;
             inventoryPanel.UpdateInventory();
             inventoryPanel.ShowInventory();
+        }
+    }
+
+    public void MiniMapEnable()
+    {
+        Debug.Log("Enable");
+        if (!LevelManager.instance.pauseMenu)
+        {
+            miniMapOpen = true;
+            miniMap.SetActive(true);
+            HeroMovement.instance.canPlayerMove = false;
+            initialVelocity = rb.velocity;
+            rb.velocity = Vector2.zero;
+        }
+    }
+
+    public void MiniMapDisable()
+    {
+        Debug.Log("Disable");
+        if (!LevelManager.instance.pauseMenu)
+        {
+            miniMapOpen = false;
+            miniMap.SetActive(false);
+            HeroMovement.instance.canPlayerMove = true;
+            rb.velocity = initialVelocity;
         }
     }
 }

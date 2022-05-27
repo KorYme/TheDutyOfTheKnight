@@ -10,7 +10,7 @@ public class BounceEffect : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 initialVelocity;
     private Vector3 lastPosition;
-    public int frameNoMove;
+    private int frameNoMove;
 
     void Start()
     {
@@ -26,20 +26,19 @@ public class BounceEffect : MonoBehaviour
         if (reaperMinion.launched)
         {
             rb.velocity = initialVelocity;
-        }
-
-        if (reaperMinion.launched && lastPosition != parent.transform.position)
-        {
-            lastPosition = parent.transform.position;
-            frameNoMove = 0;
-        }
-        else
-        {
-            frameNoMove++;
-            if (frameNoMove >= 10)
+            if (lastPosition != parent.transform.position)
             {
-                initialVelocity *= -1;
+                lastPosition = parent.transform.position;
                 frameNoMove = 0;
+            }
+            else
+            {
+                frameNoMove++;
+                if (frameNoMove >= 10)
+                {
+                    initialVelocity *= -1;
+                    frameNoMove = 0;
+                }
             }
         }
     }

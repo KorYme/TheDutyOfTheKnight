@@ -26,14 +26,15 @@ public class RoomManager : MonoBehaviour
     public GameObject[] allBosses;
 
     [Header ("Layers to fill")]
-    public LayerMask enemyLayer;
-    public LayerMask bossLayer;
-    public LayerMask closedDoorsMask;
-    public LayerMask openedDoorsMask;
-    public LayerMask spawner;
-    public LayerMask shopLayer;
-    public LayerMask respawnLayer;
-    public LayerMask chestLayer;
+    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private LayerMask bossLayer;
+    [SerializeField] private LayerMask closedDoorsMask;
+    [SerializeField] private LayerMask openedDoorsMask;
+    [SerializeField] private LayerMask spawner;
+    [SerializeField] private LayerMask shopLayer;
+    [SerializeField] private LayerMask respawnLayer;
+    [SerializeField] private LayerMask chestLayer;
+    [SerializeField] private LayerMask miniMapBlocks;
 
     private Collider2D[] theClosedDoorsHere, theOpenedDoorsHere, insideEnemies, allSpawner, theClosedDoorsBoss;
     private Collider2D enemiesIn;
@@ -64,6 +65,7 @@ public class RoomManager : MonoBehaviour
         camPos = Camera.main.transform.position;
         theOpenedDoorsHere = Physics2D.OverlapBoxAll(camPos, camSize, 0f, openedDoorsMask);
         theClosedDoorsHere = Physics2D.OverlapBoxAll(camPos, camSize, 0f, closedDoorsMask);
+        Physics2D.OverlapBox(camPos, camSize, 0f, miniMapBlocks)?.gameObject.SetActive(false);
         ActivateEnemies();
         AreEnemiesIn();
     }
@@ -129,6 +131,11 @@ public class RoomManager : MonoBehaviour
             OpenTheChestInTheRoom();
             //Add Opening door sound
         }
+    }
+
+    public bool IsNotInFight()
+    {
+        return Physics2D.OverlapBox(camPos, camSize, 0f, enemyLayer) == null;
     }
 
     /// <summary>

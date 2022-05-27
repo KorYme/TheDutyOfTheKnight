@@ -5,34 +5,34 @@ using UnityEngine.Tilemaps;
 
 public class BossFight : Enemies
 {
-    public GameObject reaperBullet;
-    public GameObject reaperMinion;
-    public InputData inputData;
     private Transform hitPoint1;
     private Transform hitPoint2;
-    private float nbMinionsAlive;
-    private SpriteRenderer shield;
+    private SpriteRenderer shieldSprite;
     private GameObject healthBar;
     private CapsuleCollider2D bossCollider;
     private CircleCollider2D rangeCollider;
     private bool hasFightStarted;
     private bool isInRange;
+    private bool bossAbility1;
+    private bool firstInteraction;
+    private float healthBossInitial;
+    private float nbMinionsAlive;
+
+    [Header("Useful GameObject")]
+    [SerializeField] private GameObject reaperBullet;
+    [SerializeField] private GameObject reaperMinion;
+
+    [Header("Inputs")]
+    [SerializeField] public InputData inputData;
 
     [Header("Boss Variables")]
     public float reaperFireBallSpeed;
     public float reaperMinionBallSpeed;
     public float reaperFireBallDamage;
     public float reaperMinionBallDamage;
-    public float multiplierSpeedPhase2;
-    public float multiplierDamagePhase2;
-    public float timeBetweenAbility1;
-
-    [Header ("Other Variables")]
-    public bool bossAbility1;
-
-
-    private float healthBossInitial;
-    private bool firstInteraction;
+    [SerializeField] private float multiplierSpeedPhase2;
+    [SerializeField] private float multiplierDamagePhase2;
+    [SerializeField] private float timeBetweenAbility1;
 
     protected override void Start()
     {
@@ -43,21 +43,21 @@ public class BossFight : Enemies
     void InitializeValues()
     {
         base.Start();
-        healthBossInitial = enemyHP;
+        rangeCollider = GetComponent<CircleCollider2D>();
+        bossCollider = GetComponent<CapsuleCollider2D>();
+        shieldSprite = transform.Find("BossShield").GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        healthBar = transform.Find("Canvas").gameObject;
         hitPoint1 = transform.Find("HitPoint1");
         hitPoint2 = transform.Find("HitPoint2");
-        animator = GetComponent<Animator>();
         bossAbility1 = false;
         canMove = false;
-        nbMinionsAlive = 0;
-        shield = transform.Find("BossShield").GetComponent<SpriteRenderer>();
-        shield.enabled = false;
-        healthBar = transform.Find("Canvas").gameObject;
-        bossCollider = GetComponent<CapsuleCollider2D>();
-        rangeCollider = GetComponent<CircleCollider2D>();
+        shieldSprite.enabled = false;
         hasFightStarted = false;
         isInRange = false;
         firstInteraction = true;
+        healthBossInitial = enemyHP;
+        nbMinionsAlive = 0;
     }
 
     void DisableBossStart()
@@ -69,15 +69,15 @@ public class BossFight : Enemies
 
     public void Summoning()
     {
-        RoomManager.instance.AreEnemiesIn(false);
         Destroy(transform.Find("SleepingBossHitBox").gameObject);
+        RoomManager.instance.AreEnemiesIn(false);
+        Interaction_Player.instance.ForceExit();
+        healthBar.GetComponent<Animator>().SetTrigger("Appear");
+        animator.SetTrigger("FightStarted");
         rangeCollider.enabled = false;
         bossCollider.enabled = true;
-        Interaction_Player.instance.ForceExit();
-        animator.SetTrigger("FightStarted");
         hasFightStarted=true;
         tag = "Boss";
-        healthBar.GetComponent<Animator>().SetTrigger("Appear");
     }
 
     void StartFight()
@@ -208,7 +208,7 @@ public class BossFight : Enemies
     {
         canMove = false;
         invulnerable = true;
-        shield.enabled = true;
+        shieldSprite.enabled = true;
     }
 
     /// <summary>
@@ -250,7 +250,7 @@ public class BossFight : Enemies
         if (nbMinionsAlive == 0 && invulnerable)
         {
             invulnerable = false;
-            shield.enabled = false;
+            shieldSprite.enabled = false;
         }
     }
 

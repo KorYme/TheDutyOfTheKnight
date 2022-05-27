@@ -20,7 +20,7 @@ public class HeroMovement : MonoBehaviour
     public Rigidbody2D rb;
     private Vector3 velocity = Vector3.zero;
     private Animator animator;
-    private bool canPlayerMove;
+    [HideInInspector] public bool canPlayerMove;
 
     //Initialization
     private void Start()
