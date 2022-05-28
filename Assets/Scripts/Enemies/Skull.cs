@@ -10,6 +10,7 @@ public class Skull : Enemies
     public Rigidbody2D rb;
     private Vector2 direction;
     public LayerMask obstacles;
+    private Vector2 initialVelocity;
 
     protected override void Start()
     {
@@ -20,7 +21,7 @@ public class Skull : Enemies
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        if (canDash)
+        if (canDash && canMove)
         {
             Dash();
         }
@@ -65,6 +66,19 @@ public class Skull : Enemies
         rb.velocity = Vector2.zero;
         rb.isKinematic = true;
         animator.SetTrigger("Dying");
+    }
+
+    public override void StartMoving()
+    {
+        base.StartMoving();
+        rb.velocity = initialVelocity;
+    }
+
+    public override void StopMoving()
+    {
+        base.StopMoving();
+        initialVelocity = rb.velocity;
+        rb.velocity = Vector2.zero;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

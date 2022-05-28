@@ -108,7 +108,7 @@ public class HeroAbility : MonoBehaviour
         if (mouseDirection == Vector2.zero)
             mouseDirection = Vector2.up;
         GameObject bulletLaunch = Instantiate(FireBall, transform.position, Quaternion.identity);
-        bulletLaunch.GetComponent<FireBall>().direction = mouseDirection.normalized;
+        bulletLaunch.GetComponent<FireBall>().SetDirection(mouseDirection.normalized);
         bulletLaunch.GetComponent<FireBall>().fireBallSpeed = fireBallSpeed;
     }
 
@@ -249,8 +249,8 @@ public class HeroAbility : MonoBehaviour
     /// </summary>
     public void UpgradeCD(TotemsData totemsData)
     {
-        cooldownEarth -= totemsData.earthCooldownBonus;
-        cooldownWind -= totemsData.windCooldownBonus;
-        cooldownFire -= totemsData.fireCooldownBonus;
+        cooldownEarth -= (cooldownEarth - totemsData.earthCooldownBonus > 0 ? totemsData.earthCooldownBonus : cooldownEarth);
+        cooldownWind -= (cooldownWind - totemsData.windCooldownBonus > 0 ? totemsData.windCooldownBonus : cooldownWind);
+        cooldownFire -= (cooldownFire - totemsData.fireCooldownBonus > 0 ? totemsData.fireCooldownBonus : cooldownFire);
     }
 }

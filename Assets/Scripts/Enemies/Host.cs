@@ -20,7 +20,7 @@ public class Host : Enemies
     public void FireBallCast()
     {
         GameObject bulletLaunch = Instantiate(fireBall, shotPoint.position, Quaternion.identity);
-        bulletLaunch.GetComponent<FireBall>().direction = (player.transform.position - transform.position).normalized;
+        bulletLaunch.GetComponent<FireBall>().SetDirection((player.transform.position - transform.position).normalized);
         bulletLaunch.GetComponent<FireBall>().fireBallSpeed = fireBallSpeed;
         bulletLaunch.GetComponent<FireBall>().fireBallDamage = enemyDamage;
     }

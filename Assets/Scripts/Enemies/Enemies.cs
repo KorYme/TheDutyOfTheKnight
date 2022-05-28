@@ -142,8 +142,6 @@ public class Enemies : MonoBehaviour
         return true;
     }
 
-
-
     protected virtual void StopPlaying()
     {
         if (transform.Find("Canvas") != null)

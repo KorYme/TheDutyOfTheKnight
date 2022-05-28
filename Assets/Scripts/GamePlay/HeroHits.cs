@@ -17,11 +17,12 @@ public class HeroHits : MonoBehaviour
     }
 
     [Header("Input Data")]
-    [SerializeField] public InputData inputdata;
+    public InputData inputdata;
 
     [Header ("Hits Variables")]
-    [SerializeField] public float heroRange;
-    [SerializeField] public LayerMask enemyLayers;
+    public float heroRange;
+    public LayerMask enemyLayers;
+    public LayerMask fireballLayer;
 
     [SerializeField][HideInInspector] public Vector3 worldPosition;
     private Animator animator;
@@ -30,11 +31,11 @@ public class HeroHits : MonoBehaviour
     private Camera cam;
 
     [Header ("Animator System")]
-    [SerializeField] public float reloadTime;
-    [SerializeField] public bool isInReloadTime;
+    public float reloadTime;
+    public bool isInReloadTime;
 
     //Points System
-    [SerializeField][HideInInspector] public string direction;
+    [HideInInspector] public string direction;
     private CoolDownManager coolDownManager;
     
 
@@ -44,7 +45,7 @@ public class HeroHits : MonoBehaviour
         animator = GetComponent<Animator>();
         cam = Camera.main;
         isInReloadTime = false;
-        coolDownManager = GameObject.FindGameObjectWithTag("CoolDownManager").GetComponent<CoolDownManager>();
+        coolDownManager = CoolDownManager.instance;
     }
 
     void FixedUpdate()
@@ -60,8 +61,8 @@ public class HeroHits : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = cam.nearClipPlane;
         worldPosition = cam.ScreenToWorldPoint(mousePos);
-        horizontalCursor = worldPosition.x - this.transform.position.x;
-        verticalCursor = worldPosition.y - this.transform.position.y;
+        horizontalCursor = worldPosition.x - transform.position.x;
+        verticalCursor = worldPosition.y - transform.position.y;
 
         //Check in which direction the character will have to look
         if (Mathf.Abs(verticalCursor) >= Mathf.Abs(horizontalCursor))
@@ -70,12 +71,12 @@ public class HeroHits : MonoBehaviour
             if (verticalCursor <= 0)
             {
                 animator.SetFloat("lookY", -1f);
-                direction = "AttBot";
+                direction = "AttackPointBot";
             }
             else
             {
                 animator.SetFloat("lookY", 1f);
-                direction = "AttTop";
+                direction = "AttackPointTop";
             }
         }
         else
@@ -84,12 +85,12 @@ public class HeroHits : MonoBehaviour
             if (horizontalCursor < 0)
             {
                 animator.SetFloat("lookX", -1f);
-                direction = "AttLft";
+                direction = "AttackPointLeft";
             }
             else
             {
                 animator.SetFloat("lookX", 1f);
-                direction = "AttRgt";
+                direction = "AttackPointRight";
             }
         }
     }
@@ -116,13 +117,18 @@ public class HeroHits : MonoBehaviour
 
     void HasHitted()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(GameObject.FindGameObjectWithTag(direction).transform.position, heroRange, enemyLayers);
-        foreach (Collider2D enemy in hitEnemies)
+        foreach (Collider2D enemy in Physics2D.OverlapCircleAll(transform.Find(direction).transform.position, heroRange, enemyLayers))
         {
             if (enemy.GetComponent<Enemies>())
             {
                 enemy.GetComponent<Enemies>().SendMessage("TakeDamage", HeroStats.instance.heroAttack);
             }
+        }
+        foreach (Collider2D fireball in Physics2D.OverlapCircleAll(transform.Find(direction).transform.position, heroRange, fireballLayer))
+        {
+            Debug.Log("Ca detecte");
+            fireball.GetComponent<FireBall>().SetDirection(new Vector2(horizontalCursor,verticalCursor));
+            fireball.GetComponent<FireBall>().playerFireball = true;
         }
     }
 }

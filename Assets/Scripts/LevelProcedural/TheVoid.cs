@@ -8,7 +8,7 @@ public class TheVoid : MonoBehaviour
     {
         if (collision.tag == "Coordinates")
         {
-            HeroStats.instance.IsFalling();
+            HeroMovement.instance.IsFalling();
         }
     }
 }

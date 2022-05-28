@@ -25,8 +25,8 @@ public class HeroMovement : MonoBehaviour
     //Initialization
     private void Start()
     {
-        rb = this.GetComponent<Rigidbody2D>();
-        animator = this.GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         canPlayerMove = true;
     }
 
@@ -50,6 +50,13 @@ public class HeroMovement : MonoBehaviour
     public void RespawnInRoomAnimation()
     {
         RoomManager.instance.RespawnInRoom();
+    }
+
+    public void IsFalling()
+    {
+        animator.SetTrigger("IsFalling");
+        AllowMovement(false);
+        RoomManager.instance.EnemiesMoveEnable(false);
     }
 
     public void AllowMovement(bool that)

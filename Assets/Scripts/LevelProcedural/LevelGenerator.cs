@@ -18,8 +18,8 @@ public class LevelGenerator : MonoBehaviour
     public int nbAbilityAsked;
     public int nbRoomsAsked;
     public int nbChestRoomsAsked;
-    public int spawnX;
-    public int spawnY;
+    [HideInInspector] public int spawnX;
+    [HideInInspector] public int spawnY;
 
     private int totalNumberRoomsAsked;
     private int totalNumberRoomsCreated;
@@ -174,7 +174,7 @@ public class LevelGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// Destroy all the minimap blocks to discover the minimap
+    /// Discover the whole minimap and undiscover it on will
     /// </summary>
     public void SeeAllMiniMap()
     {

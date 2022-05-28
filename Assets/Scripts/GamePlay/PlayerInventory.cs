@@ -43,7 +43,7 @@ public class PlayerInventory : MonoBehaviour
         {
             inventoryPanel.ShowInventory();
             nbPotionRefresh++;
-            nbKeyBoss++;
+            nbKeyBoss = 3;
             InventoryPanel.instance.UpdateInventory();
             HeroStats.instance.HealHero(100f);
             if (miniMapOpen)

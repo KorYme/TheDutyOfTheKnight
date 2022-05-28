@@ -21,7 +21,7 @@ public class LevelManager : MonoBehaviour
     public GameObject hud;
     public GameObject endGameMenu;
     public InputData inputData;
-    [SerializeField] public bool pauseMenu;
+    [HideInInspector] public bool pauseMenu;
     [SerializeField] private GameObject theBigGrid;
 
     private void Start()

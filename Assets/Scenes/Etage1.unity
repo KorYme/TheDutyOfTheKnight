@@ -1679,6 +1679,9 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 532608
+  fireballLayer:
+    serializedVersion: 2
+    m_Bits: 8
   worldPosition: {x: 0, y: 0, z: 0}
   reloadTime: 0.3
   isInReloadTime: 0
@@ -6107,12 +6110,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelHeight: 5
   levelWidth: 5
-  spawnCentered: 1
+  spawnCentered: 0
   theBigGrid: {fileID: 732598715}
-  nbShopAsked: 1
+  nbShopAsked: 2
   nbAbilityAsked: 2
   nbRoomsAsked: 12
-  nbChestRoomsAsked: 12
+  nbChestRoomsAsked: 6
   spawnX: 0
   spawnY: 0
   rooms: []
@@ -6172,7 +6175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a902a0c181e904fa81194f6f1fd019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onlyRPInside: 0
+  onlyRPInside: 1
 --- !u!1 &1397955654
 GameObject:
   m_ObjectHideFlags: 0
