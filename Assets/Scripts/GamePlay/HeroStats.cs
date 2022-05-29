@@ -36,7 +36,7 @@ public class HeroStats : MonoBehaviour
     
     [Header("Gamemode Parameters")]
     public bool nightmareMode;
-    public float capHeroLow = 5;
+    [SerializeField] private float capHeroLow;
     private bool heroLow;
 
     [Header("GameObjects and Components")]

@@ -1572,8 +1572,8 @@ GameObject:
   - component: {fileID: 401620114}
   - component: {fileID: 401620111}
   - component: {fileID: 401620112}
-  - component: {fileID: 401620110}
   - component: {fileID: 401620113}
+  - component: {fileID: 401620110}
   - component: {fileID: 401620118}
   - component: {fileID: 401620119}
   m_Layer: 10
@@ -1665,7 +1665,7 @@ MonoBehaviour:
   shieldDuration: 3
   dashDamage: 50
   explosionDamage: 100
-  nightmareMode: 0
+  nightmareMode: 1
   capHeroLow: 10
   graphics: {fileID: 401620116}
   animator: {fileID: 401620111}
@@ -6553,6 +6553,7 @@ MonoBehaviour:
   levelGenerator: {fileID: 1358435963}
   allBosses:
   - {fileID: 306401054567032145, guid: 86f376f104e412e4f9e5795e4777b1e2, type: 3}
+  voidDamage: 10
   enemyLayer:
     serializedVersion: 2
     m_Bits: 524416

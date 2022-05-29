@@ -22,5 +22,5 @@ MonoBehaviour:
   healthGiven: 0
   maxHealthGiven: 0
   speedGiven: 0
-  attackGiven: 0
+  attackGiven: 10
   addToInventory: 0

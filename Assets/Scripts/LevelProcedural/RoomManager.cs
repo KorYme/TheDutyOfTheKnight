@@ -21,9 +21,10 @@ public class RoomManager : MonoBehaviour
     private GameObject player;
 
     [Header ("Filling values")]
-    public InputData inputData;
-    public LevelGenerator levelGenerator;
-    public GameObject[] allBosses;
+    [SerializeField] private InputData inputData;
+    [SerializeField] private LevelGenerator levelGenerator;
+    [SerializeField] private GameObject[] allBosses;
+    [SerializeField] private float voidDamage;
 
     [Header ("Layers to fill")]
     [SerializeField] private LayerMask enemyLayer;
@@ -242,7 +243,7 @@ public class RoomManager : MonoBehaviour
         player.transform.position = tpPlace;
         HeroMovement.instance.AllowMovement(true);
         HeroStats.instance.invicibility = false;
-        player.SendMessage("TakeDamageHero", 15f);
+        HeroStats.instance.TakeDamageHero(voidDamage);
         EnemiesMoveEnable(true);
     }
 }

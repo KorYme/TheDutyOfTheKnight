@@ -113,7 +113,7 @@ public class ObjectGenerator : MonoBehaviour
         {
             if (RoomManager.instance.IsItShop())
             {
-                if (dialogueManager.currentPanelUser == gameObject && !firstTimeTouched)
+                if (dialogueManager.currentPanelUser == gameObject)
                 {
                     firstTimeTouched = true;
                     dialogueManager.PanelDisable();
@@ -121,7 +121,7 @@ public class ObjectGenerator : MonoBehaviour
             }
             else
             {
-                if (dialogueManager.currentPanelUser == gameObject && !firstTimeTouched)
+                if (dialogueManager.currentPanelUser == gameObject)
                 {
                     firstTimeTouched = true;
                     dialogueManager.PanelDisable();
