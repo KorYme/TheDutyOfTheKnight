@@ -7,20 +7,18 @@ public class CoolDownManager : MonoBehaviour
 {
     public static CoolDownManager instance;
 
-    Image imageCDHit;
-    Image imageCDEarth;
-    Image imageCDWind;
-    Image imageCDFire;
-    Text textCDEarth;
-    Text textCDWind;
-    Text textCDFire;
     HeroHits heroHits;
+    HeroAbility heroAbility;
 
     [Header("All CoolDown Images")]
-    public GameObject CDHitUI;
-    public GameObject CDEarthUI;
-    public GameObject CDWindUI;
-    public GameObject CDFireUI;
+    [SerializeField] Image imageCDHit;
+    [SerializeField] Image imageCDEarth;
+    [SerializeField] Image imageCDWind;
+    [SerializeField] Image imageCDFire;
+    [SerializeField] GameObject keyButtonHit;
+    [SerializeField] GameObject keyButtonEarth;
+    [SerializeField] GameObject keyButtonWind;
+    [SerializeField] GameObject keyButtonFire;
 
     private void Awake()
     {
@@ -36,18 +34,13 @@ public class CoolDownManager : MonoBehaviour
     {
         InitializeAllObjects();
         InitializeCDTo0(false);
+        DisplayRefreshKeyButton();
     }
 
     void InitializeAllObjects()
     {
         heroHits = HeroHits.instance;
-        imageCDHit = CDHitUI.transform.Find("CoolDown").GetComponent<Image>();
-        imageCDEarth = CDEarthUI.transform.Find("CoolDown").GetComponent<Image>();
-        imageCDWind = CDWindUI.transform.Find("CoolDown").GetComponent<Image>();
-        imageCDFire = CDFireUI.transform.Find("CoolDown").GetComponent<Image>();
-        textCDEarth = CDEarthUI.transform.Find("Text").GetComponent<Text>();
-        textCDWind = CDWindUI.transform.Find("Text").GetComponent<Text>();
-        textCDFire = CDFireUI.transform.Find("Text").GetComponent<Text>();
+        heroAbility = HeroAbility.instance;
     }
 
     public void InitializeCDTo0(bool notStart = true)
@@ -59,9 +52,17 @@ public class CoolDownManager : MonoBehaviour
         imageCDEarth.fillAmount = 0;
         imageCDWind.fillAmount = 0;
         imageCDFire.fillAmount = 0;
-        HeroAbility.instance.earthInCooldown = false;
-        HeroAbility.instance.windInCooldown = false;
-        HeroAbility.instance.fireInCooldown = false;
+        heroAbility.earthInCooldown = false;
+        heroAbility.windInCooldown = false;
+        heroAbility.fireInCooldown = false;
+    }
+
+    void DisplayRefreshKeyButton()
+    {
+        keyButtonHit.SetActive(!heroHits.isInReloadTime);
+        keyButtonEarth.SetActive(!heroAbility.earthInCooldown);
+        keyButtonWind.SetActive(!heroAbility.windInCooldown);
+        keyButtonFire.SetActive(!heroAbility.fireInCooldown);
     }
 
     void FixedUpdate()
@@ -81,44 +82,29 @@ public class CoolDownManager : MonoBehaviour
                 heroHits.isInReloadTime = false;
             }
         }
-        if (HeroAbility.instance.earthInCooldown)
+        if (heroAbility.earthInCooldown)
         {
-            imageCDEarth.fillAmount -= 1 / (HeroAbility.instance.cooldownEarth + HeroStats.instance.shieldDuration) * Time.fixedDeltaTime;
-            textCDEarth.text = Mathf.Floor((HeroAbility.instance.cooldownEarth + HeroStats.instance.shieldDuration) * imageCDEarth.fillAmount).ToString();
+            imageCDEarth.fillAmount -= 1 / (heroAbility.cooldownEarth + HeroStats.instance.shieldDuration) * Time.fixedDeltaTime;
             if (imageCDEarth.fillAmount <= 0)
             {
-                HeroAbility.instance.earthInCooldown = false;
+                heroAbility.earthInCooldown = false;
             }
         }
-        else
+        if (heroAbility.windInCooldown)
         {
-            textCDEarth.text = "";
-        }
-        if (HeroAbility.instance.windInCooldown)
-        {
-            imageCDWind.fillAmount -= 1 / HeroAbility.instance.cooldownWind * Time.fixedDeltaTime;
-            textCDWind.text = Mathf.Floor(HeroAbility.instance.cooldownWind * imageCDWind.fillAmount).ToString();
+            imageCDWind.fillAmount -= 1 / heroAbility.cooldownWind * Time.fixedDeltaTime;
             if (imageCDWind.fillAmount <= 0)
             {
-                HeroAbility.instance.windInCooldown = false;
+                heroAbility.windInCooldown = false;
             }
         }
-        else
+        if (heroAbility.fireInCooldown)
         {
-            textCDWind.text = "";
-        }
-        if (HeroAbility.instance.fireInCooldown)
-        {
-            imageCDFire.fillAmount -= 1 / HeroAbility.instance.cooldownFire * Time.fixedDeltaTime;
-            textCDFire.text = Mathf.Floor(HeroAbility.instance.cooldownFire * imageCDFire.fillAmount).ToString();
+            imageCDFire.fillAmount -= 1 / heroAbility.cooldownFire * Time.fixedDeltaTime;
             if (imageCDFire.fillAmount <= 0)
             {
-                HeroAbility.instance.fireInCooldown = false;
+                heroAbility.fireInCooldown = false;
             }
-        }
-        else
-        {
-            textCDFire.text = "";
         }
     }
 

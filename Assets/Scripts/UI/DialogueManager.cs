@@ -21,9 +21,9 @@ public class DialogueManager : MonoBehaviour
     private TMP_Text panelContent;
     private TMP_Text panelContinue;
     private Animator animator;
-    [field: HideInInspector] public bool isMoving;
-    [field: HideInInspector] public bool panelOpen;
-    [field: HideInInspector] public GameObject currentPanelUser;
+    [HideInInspector] public bool isMoving;
+    [HideInInspector] public bool panelOpen;
+    [HideInInspector] public GameObject currentPanelUser;
     public InputData inputData;
 
     private void Start()
@@ -80,9 +80,6 @@ public class DialogueManager : MonoBehaviour
                 return;
             case 4:
                 panelContinue.text = "Press " + inputData.interact.ToString() + " to interact with the sphere or " + inputData.close.ToString() + " to leave >";
-                return;
-            case 5:
-                panelContinue.text = "Press " + inputData.interact.ToString() + " to retry or " + inputData.close.ToString() + " to close >";
                 return;
             default:
                 panelContinue.text = "Press " + inputData.interact.ToString() + " to continue or " + inputData.close.ToString() + " to close >";

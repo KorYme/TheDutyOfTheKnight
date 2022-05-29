@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public bool victory;
     public float score;
     public int timer;
+    public float nbTry;
 
     public int currentIndexResolutions = -1;
     public float currentVolume;
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         instance = this;
+        nbTry = 0;
     }
 
     /// <summary>
@@ -35,22 +37,24 @@ public class GameManager : MonoBehaviour
         Debug.Log("The game starts !");
         timer = 0;
         score = 0f;
+        nbTry++;
         gameLaunched = true;
         victory = true;
-        StartCoroutine(Timer());
+        StartCoroutine(Timer(nbTry));
     }
 
     /// <summary>
-    /// Add 1 second to the timer each second
+    /// Add one second to timer
     /// </summary>
-    /// <returns></returns>
-    IEnumerator Timer()
+    /// <param name="thisTry">Which try is it</param>
+    /// <returns>Wait for 1 second</returns>
+    IEnumerator Timer(float thisTry)
     {
         yield return new WaitForSeconds(1f);
-        if (gameLaunched)
+        if (gameLaunched && nbTry == thisTry)
         {
             timer++;
-            StartCoroutine(Timer());
+            StartCoroutine(Timer(thisTry));
         }
     }
 

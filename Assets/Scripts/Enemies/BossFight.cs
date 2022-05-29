@@ -15,8 +15,10 @@ public class BossFight : Enemies
     private bool isInRange;
     private bool bossAbility1;
     private bool firstInteraction;
+    private bool secondInteraction;
     private float healthBossInitial;
     private float nbMinionsAlive;
+    private DialogueManager dialogueManager;
 
     [Header("Useful GameObject")]
     [SerializeField] private GameObject reaperBullet;
@@ -47,6 +49,7 @@ public class BossFight : Enemies
         bossCollider = GetComponent<CapsuleCollider2D>();
         shieldSprite = transform.Find("BossShield").GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        dialogueManager = DialogueManager.instance;
         healthBar = transform.Find("Canvas").gameObject;
         hitPoint1 = transform.Find("HitPoint1");
         hitPoint2 = transform.Find("HitPoint2");
@@ -56,6 +59,7 @@ public class BossFight : Enemies
         hasFightStarted = false;
         isInRange = false;
         firstInteraction = true;
+        secondInteraction = true;
         healthBossInitial = enemyHP;
         nbMinionsAlive = 0;
     }
@@ -105,18 +109,18 @@ public class BossFight : Enemies
 
     private void Update()
     {
-        if (!hasFightStarted && isInRange && !DialogueManager.instance.isMoving)
+        if (!hasFightStarted && isInRange && !dialogueManager.isMoving)
         {
             if (Input.GetKeyDown(inputData.interact))
             {
-                DialogueManager.instance.currentPanelUser = gameObject;
+                dialogueManager.currentPanelUser = gameObject;
                 if (firstInteraction)
                 {
-                    if (!DialogueManager.instance.panelOpen)
+                    if (!dialogueManager.panelOpen)
                     {
-                        DialogueManager.instance.PanelEnable();
+                        dialogueManager.PanelEnable();
                     }
-                    DialogueManager.instance.UpdateTheScreen("???","A strange sphere is levitating in front of you, do you want to interact with it ?", 4);
+                    dialogueManager.UpdateTheScreen("???","A strange sphere is levitating in front of you, do you want to interact with it ?", 4);
                     firstInteraction = false;
                 }
                 else
@@ -126,18 +130,29 @@ public class BossFight : Enemies
                         Summoning();
                         PlayerInventory.instance.nbKeyBoss = 0;
                     }
+                    else if (secondInteraction)
+                    {
+                        dialogueManager.UpdateTheScreen("???", "Nothing happened, maybe it's only the dungeon decoration after all.", 0);
+                        secondInteraction = false;
+                    }
                     else
                     {
-                        DialogueManager.instance.UpdateTheScreen("???", "Nothing happened, maybe it's only the dungeon decoration after all.", 5);
+                        dialogueManager.PanelDisable();
                         firstInteraction = true;
+                        secondInteraction = true;
                     }
                 }
             }
-            if (Input.GetKeyDown(inputData.close) && DialogueManager.instance.panelOpen)
+            if (Input.GetKeyDown(inputData.close) && dialogueManager.panelOpen)
             {
-                DialogueManager.instance.PanelDisable();
+                dialogueManager.PanelDisable();
                 firstInteraction = true;
+                secondInteraction = true;
             }
+        }
+        else if (dialogueManager.panelOpen && !isInRange && dialogueManager.currentPanelUser == gameObject)
+        {
+            dialogueManager.PanelDisable();
         }
     }
 
@@ -304,9 +319,9 @@ public class BossFight : Enemies
         {
             isInRange = false;
             firstInteraction = true;
-            if (DialogueManager.instance.currentPanelUser == gameObject)
+            if (dialogueManager.currentPanelUser == gameObject)
             {
-                DialogueManager.instance.PanelDisable();
+                dialogueManager.PanelDisable();
             }
         }
     }

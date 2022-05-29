@@ -126,7 +126,6 @@ public class HeroHits : MonoBehaviour
         }
         foreach (Collider2D fireball in Physics2D.OverlapCircleAll(transform.Find(direction).transform.position, heroRange, fireballLayer))
         {
-            Debug.Log("Ca detecte");
             fireball.GetComponent<FireBall>().SetDirection(new Vector2(horizontalCursor,verticalCursor));
             fireball.GetComponent<FireBall>().playerFireball = true;
         }

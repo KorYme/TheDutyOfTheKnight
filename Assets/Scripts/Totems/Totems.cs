@@ -70,6 +70,10 @@ public class Totems : MonoBehaviour
                 dialogueManager.PanelDisable();
             }
         }
+        else if (dialogueManager.panelOpen && !inRange && dialogueManager.currentPanelUser == gameObject)
+        {
+            dialogueManager.PanelDisable();
+        }
     }
 
     bool HasPlayerAlreadyPrayed()

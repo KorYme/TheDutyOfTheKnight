@@ -64,6 +64,10 @@ public class PNJDialogue : MonoBehaviour
                 }
             }
         }
+        else if (dialogueManager.panelOpen && !isInRange && dialogueManager.currentPanelUser == gameObject)
+        {
+            dialogueManager.PanelDisable();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
