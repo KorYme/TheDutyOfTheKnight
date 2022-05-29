@@ -113,6 +113,7 @@ public class HeroHits : MonoBehaviour
         animator.SetTrigger("Hitting");
         isInReloadTime = true;
         coolDownManager.ResetCoolDown("Hit");
+        coolDownManager.DisplayRefreshKeyButton();
     }
 
     void HasHitted()

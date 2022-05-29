@@ -103,6 +103,7 @@ public class HeroAbility : MonoBehaviour
     {
         fireInCooldown = true;
         coolDownManager.ResetCoolDown("Fire");
+        coolDownManager.DisplayRefreshKeyButton();
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 mouseDirection = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
         if (mouseDirection == Vector2.zero)
@@ -119,6 +120,7 @@ public class HeroAbility : MonoBehaviour
     {
         earthInCooldown = true;
         coolDownManager.ResetCoolDown("Earth");
+        coolDownManager.DisplayRefreshKeyButton();
         spriteShield.color = new Color(88, 255, 0);
         StartCoroutine(ShieldDuration());
     }
@@ -132,6 +134,7 @@ public class HeroAbility : MonoBehaviour
         {
             windInCooldown = true;
             coolDownManager.ResetCoolDown("Wind");
+            coolDownManager.DisplayRefreshKeyButton();
             transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x,Camera.main.ScreenToWorldPoint(Input.mousePosition).y,0);
         }
     }
@@ -147,6 +150,7 @@ public class HeroAbility : MonoBehaviour
             coolDownManager.ResetCoolDown("Earth");
             windInCooldown = true;
             coolDownManager.ResetCoolDown("Wind");
+            coolDownManager.DisplayRefreshKeyButton();
             transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
             GameObject explosion = Instantiate(Explosion, transform.position, Quaternion.identity);
             Destroy(explosion, 1f);
@@ -168,6 +172,7 @@ public class HeroAbility : MonoBehaviour
             coolDownManager.ResetCoolDown("Fire");
             windInCooldown = true;
             coolDownManager.ResetCoolDown("Wind");
+            coolDownManager.DisplayRefreshKeyButton();
             StartCoroutine(TrailRenderer());
             cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             foreach (var item in Physics2D.RaycastAll((Vector2)transform.position, new Vector2(cursorPosition.x - transform.position.x, cursorPosition.y - transform.position.y), Vector3.Distance(transform.position, cursorPosition), enemyLayer))
@@ -187,11 +192,11 @@ public class HeroAbility : MonoBehaviour
         coolDownManager.ResetCoolDown("Fire");
         earthInCooldown = true;
         coolDownManager.ResetCoolDown("Earth");
+        coolDownManager.DisplayRefreshKeyButton();
         damagingShield = true;
         spriteShield.color = new Color(255,0,0);
         StartCoroutine(ShieldDuration());
     }
-
     
     /// <summary>
     /// Activate the shield's sprite, its collider and make the player inivicible.

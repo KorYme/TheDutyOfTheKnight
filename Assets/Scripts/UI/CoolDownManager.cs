@@ -57,7 +57,7 @@ public class CoolDownManager : MonoBehaviour
         heroAbility.fireInCooldown = false;
     }
 
-    void DisplayRefreshKeyButton()
+    public void DisplayRefreshKeyButton()
     {
         keyButtonHit.SetActive(!heroHits.isInReloadTime);
         keyButtonEarth.SetActive(!heroAbility.earthInCooldown);
@@ -80,6 +80,7 @@ public class CoolDownManager : MonoBehaviour
             if (imageCDHit.fillAmount <= 0)
             {
                 heroHits.isInReloadTime = false;
+                DisplayRefreshKeyButton();
             }
         }
         if (heroAbility.earthInCooldown)
@@ -88,6 +89,7 @@ public class CoolDownManager : MonoBehaviour
             if (imageCDEarth.fillAmount <= 0)
             {
                 heroAbility.earthInCooldown = false;
+                DisplayRefreshKeyButton();
             }
         }
         if (heroAbility.windInCooldown)
@@ -96,6 +98,7 @@ public class CoolDownManager : MonoBehaviour
             if (imageCDWind.fillAmount <= 0)
             {
                 heroAbility.windInCooldown = false;
+                DisplayRefreshKeyButton();
             }
         }
         if (heroAbility.fireInCooldown)
@@ -104,6 +107,7 @@ public class CoolDownManager : MonoBehaviour
             if (imageCDFire.fillAmount <= 0)
             {
                 heroAbility.fireInCooldown = false;
+                DisplayRefreshKeyButton();
             }
         }
     }
