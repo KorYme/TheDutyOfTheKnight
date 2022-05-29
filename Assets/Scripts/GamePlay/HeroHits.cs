@@ -99,7 +99,7 @@ public class HeroHits : MonoBehaviour
     {
         if (LevelManager.instance.pauseMenu || PlayerInventory.instance.miniMapOpen)
             return;
-        if (Input.GetKey(inputdata.swordHit) && !isInReloadTime)
+        if (Input.GetKey(inputdata.swordHit) && !isInReloadTime && HeroMovement.instance.canPlayerMove)
         {
             Attack();
         }

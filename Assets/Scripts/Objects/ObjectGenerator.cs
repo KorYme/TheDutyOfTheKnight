@@ -36,7 +36,10 @@ public class ObjectGenerator : MonoBehaviour
         {
             playerInventory.AddToInventory(objectData);
         }
-        Destroy(gameObject);
+        if (!RoomManager.instance.IsItShop())
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void InitializeMerchant()
@@ -79,7 +82,8 @@ public class ObjectGenerator : MonoBehaviour
                         }
                         else if (!dialogueManager.isMoving)
                         {
-                            dialogueManager.PanelDisable();
+                            dialogueManager.UpdateTheScreen(merchant.namePNJ, "Thanks for this purchase, if you want to buy more do not hesitate, I have plenty more !");
+                            firstTimeTouched = true;
                             playerInventory.nbCoins -= objectData.coinCost;
                             TakeObject();
                         }

@@ -10,5 +10,9 @@ public class TheVoid : MonoBehaviour
         {
             HeroMovement.instance.IsFalling();
         }
+        else if (collision.tag == "Coin")
+        {
+            Destroy(collision.gameObject);
+        }
     }
 }
