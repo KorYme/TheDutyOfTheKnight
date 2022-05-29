@@ -16,7 +16,7 @@ MonoBehaviour:
   description: Here is the fire totem to decrease your fireball's cooldown and make
     it a bit stronger.
   textForPrayer: You've just decided to fight fire with fire. Great decision !
-  fireCooldownBonus: 4
+  fireCooldownBonus: 5
   fireDamageBonus: 10
   explosionDamageBonus: 0
   windCooldownBonus: 0

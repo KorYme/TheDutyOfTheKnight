@@ -62,6 +62,7 @@ public class BossFight : Enemies
         secondInteraction = true;
         healthBossInitial = enemyHP;
         nbMinionsAlive = 0;
+        invulnerable = true;
     }
 
     void DisableBossStart()
@@ -88,6 +89,7 @@ public class BossFight : Enemies
     {
         canMove = true;
         StartCoroutine(Ability1Manager());
+        invulnerable = false;
     }
 
     protected override void FixedUpdate()

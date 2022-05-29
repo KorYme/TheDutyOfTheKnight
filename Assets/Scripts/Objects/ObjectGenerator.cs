@@ -97,7 +97,7 @@ public class ObjectGenerator : MonoBehaviour
                         {
                             dialogueManager.PanelEnable();
                         }
-                        dialogueManager.UpdateTheScreen(objectData.name, objectData.description, 3);
+                        dialogueManager.UpdateTheScreen(objectData.objectName, objectData.description, 3);
                         firstTimeTouched = false;
                     }
                     else if (dialogueManager.panelOpen)

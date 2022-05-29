@@ -19,6 +19,6 @@ MonoBehaviour:
   fireCooldownBonus: 0
   fireDamageBonus: 0
   explosionDamageBonus: 20
-  windCooldownBonus: 4
+  windCooldownBonus: 5
   earthCooldownBonus: 0
   earthDurationBonus: 0
