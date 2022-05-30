@@ -10786,30 +10786,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5332987533604518572, guid: bb4e862b8200e78478ef8426c59b641a, type: 3}
-      propertyPath: sounds.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5332987533604518572, guid: bb4e862b8200e78478ef8426c59b641a, type: 3}
-      propertyPath: sounds.Array.data[1].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 5ef3fe49dfc0662429c93e6ba8588139, type: 3}
-    - target: {fileID: 5332987533604518572, guid: bb4e862b8200e78478ef8426c59b641a, type: 3}
-      propertyPath: sounds.Array.data[1].loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5332987533604518572, guid: bb4e862b8200e78478ef8426c59b641a, type: 3}
-      propertyPath: sounds.Array.data[1].name
-      value: BossBattle
-      objectReference: {fileID: 0}
-    - target: {fileID: 5332987533604518572, guid: bb4e862b8200e78478ef8426c59b641a, type: 3}
-      propertyPath: sounds.Array.data[1].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5332987533604518572, guid: bb4e862b8200e78478ef8426c59b641a, type: 3}
-      propertyPath: sounds.Array.data[1].volume
-      value: 0.04
-      objectReference: {fileID: 0}
     - target: {fileID: 5332987533604518575, guid: bb4e862b8200e78478ef8426c59b641a, type: 3}
       propertyPath: m_Name
       value: AudioManager

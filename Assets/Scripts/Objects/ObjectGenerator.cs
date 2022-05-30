@@ -32,6 +32,7 @@ public class ObjectGenerator : MonoBehaviour
         heroStats.speed += objectData.speedGiven;
         heroStats.heroAttack += objectData.attackGiven;
         InventoryPanel.instance.UpdateInventory();
+        AudioManager.instance.PlayClip(objectData.clipToPlay);
         if (objectData.addToInventory)
         {
             playerInventory.AddToInventory(objectData);

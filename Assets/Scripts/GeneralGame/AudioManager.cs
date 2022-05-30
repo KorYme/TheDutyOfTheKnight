@@ -11,6 +11,17 @@ public class AudioManager : MonoBehaviour
 
     public Sounds[] sounds;
 
+    enum musicPhase
+    {
+        Title,
+        Dungeon,
+        Boss,
+        Death,
+        Victory,
+    }
+
+    musicPhase currentMusicPhase;
+
     private void Awake()
     {
         if (instance != null)
@@ -37,30 +48,40 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        PlayClip("BossTheme");
-    }
-
     public void PlayClip(string name)
     {
+        if (name == "")
+        {
+            return;
+        }
         Sounds s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
         {
             Debug.LogWarning("The clip " + name + " doesn't exist !");
             return;
+        }
+        if (s.soundtrack)
+        {
+            switch (name)
+            {
+                case "Title":
+                    currentMusicPhase = musicPhase.Title;
+                    return;
+                default:
+                    return;
+            }
         }
         s.source.Play();
     }
     
-    public void StopClip(string name)
+    public void StopAllSoundTrack()
     {
-        Sounds s = Array.Find(sounds, sound => sound.name == name);
-        if (s == null)
+        foreach (Sounds s in sounds)
         {
-            Debug.LogWarning("The clip " + name + " doesn't exist !");
-            return;
+            if (s.soundtrack && s.source.isPlaying)
+            {
+                s.source.Stop();
+            }
         }
-        s.source.Stop();
     }
 }

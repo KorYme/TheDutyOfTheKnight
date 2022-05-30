@@ -15,6 +15,7 @@ MonoBehaviour:
   objectName: Health Potion
   description: A potion which heals you from 30 damages.
   sprite: {fileID: -5332326739548658726, guid: 3def700810ea17b44af3f49a6ffc90df, type: 3}
+  clipToPlay: Heal
   coinCost: 10
   coinGiven: 0
   refreshPotionGiven: 0

@@ -15,6 +15,7 @@ MonoBehaviour:
   objectName: Coin
   description: MONEY
   sprite: {fileID: 5241099391819498733, guid: cf54867b63820d747978ab16317f5ecd, type: 3}
+  clipToPlay: Coin
   coinCost: 0
   coinGiven: 1
   refreshPotionGiven: 0

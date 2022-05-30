@@ -15,6 +15,7 @@ MonoBehaviour:
   objectName: Heart Receptacle
   description: A new heart to be more resistant to monster (increase your healthbar).
   sprite: {fileID: 21300000, guid: 61f6282fb5f3abd4cb01d46df8d0d09d, type: 3}
+  clipToPlay: Heal
   coinCost: 30
   coinGiven: 0
   refreshPotionGiven: 0

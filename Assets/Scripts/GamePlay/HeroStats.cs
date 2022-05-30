@@ -110,6 +110,7 @@ public class HeroStats : MonoBehaviour
     {
         if (!invicibility)
         {
+            AudioManager.instance.PlayClip("Damage");
             heroHP -= damage;
             healthBar.SetHealth(heroHP);
             CheckStateHero();

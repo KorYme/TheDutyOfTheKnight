@@ -8,6 +8,7 @@ public class ObjectsData : ScriptableObject
     public string objectName;
     public string description;
     public Sprite sprite;
+    public string clipToPlay;
     public int coinCost;
     public int coinGiven;
     public int refreshPotionGiven;

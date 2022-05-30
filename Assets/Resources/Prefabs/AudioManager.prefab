@@ -45,15 +45,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixerGroup: {fileID: 24300002, guid: 548f7f5b5f0fc064196e46c179b82dd4, type: 2}
   sounds:
+  - name: TitleTheme
+    clip: {fileID: 8300000, guid: 0c703e1af2e1bd0428147ff53619366d, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    soundtrack: 1
+    source: {fileID: 0}
+  - name: DungeonTheme1
+    clip: {fileID: 8300000, guid: dddd824a9eff94940bcc71f5cc517f4a, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    soundtrack: 1
+    source: {fileID: 0}
+  - name: DungeonTheme2
+    clip: {fileID: 8300000, guid: ca2beab81d3d5984b8219a29e497a972, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    soundtrack: 1
+    source: {fileID: 0}
+  - name: DungeonTheme3
+    clip: {fileID: 8300000, guid: 0c703e1af2e1bd0428147ff53619366d, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    soundtrack: 1
+    source: {fileID: 0}
   - name: BossTheme
     clip: {fileID: 8300000, guid: c40d720c2fb304f48853d2b189d51336, type: 3}
     volume: 0.1
     pitch: 1
     loop: 1
+    soundtrack: 1
     source: {fileID: 0}
   - name: DeathTheme
     clip: {fileID: 8300000, guid: 5ef3fe49dfc0662429c93e6ba8588139, type: 3}
     volume: 0.1
     pitch: 1
     loop: 1
+    soundtrack: 1
+    source: {fileID: 0}
+  - name: Coin
+    clip: {fileID: 8300000, guid: 80b9e8305b78147409924ec801113a21, type: 3}
+    volume: 0.03
+    pitch: 1
+    loop: 0
+    soundtrack: 0
+    source: {fileID: 0}
+  - name: Damage
+    clip: {fileID: 8300000, guid: b9bfc60c876ef824b99ef108d3a8688a, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    soundtrack: 0
+    source: {fileID: 0}
+  - name: Heal
+    clip: {fileID: 8300000, guid: f493b41fefa381546acbb2ca9057785a, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    soundtrack: 0
     source: {fileID: 0}

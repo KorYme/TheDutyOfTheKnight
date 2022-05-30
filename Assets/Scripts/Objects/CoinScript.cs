@@ -22,6 +22,7 @@ public class CoinScript : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            AudioManager.instance.PlayClip(objectsData.clipToPlay);
             PlayerInventory.instance.AddToInventory(objectsData);
             Destroy(gameObject);
         }
