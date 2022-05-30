@@ -78,9 +78,9 @@ public class RoomManager : MonoBehaviour
     public void ActivateEnemies()
     {
         allSpawner = Physics2D.OverlapBoxAll(camPos, camSize, 0f, spawner);
-        foreach (var item in allSpawner)
+        foreach (Collider2D item in allSpawner)
         {
-            item.SendMessage("Spawn");
+            item.GetComponent<Spawner>().Spawn();
         }
     }
 
@@ -92,7 +92,7 @@ public class RoomManager : MonoBehaviour
     {
         //And desactivate the chosen ones
         List<string> cardinalsPoints = levelGenerator.WhichRoundAround((int)CameraFollow.instance.playerCoordinates.x, (int)CameraFollow.instance.playerCoordinates.y);
-        if (levelGenerator.level[(int)CameraFollow.instance.playerCoordinates.x, (int)CameraFollow.instance.playerCoordinates.y] == "Boss")
+        if (levelGenerator.level[(int)CameraFollow.instance.playerCoordinates.x, (int)CameraFollow.instance.playerCoordinates.y] == LevelGenerator.RoomType.Boss)
         {
             theClosedDoorsHere = theClosedDoorsBoss;
         }
@@ -163,7 +163,7 @@ public class RoomManager : MonoBehaviour
     public void AreEnemiesIn(bool noBoss=true)
     {
         camPos = Camera.main.transform.position;
-        if (theClosedDoorsBoss == null && levelGenerator.level[(int)CameraFollow.instance.playerCoordinates.x, (int)CameraFollow.instance.playerCoordinates.y] == "Boss")
+        if (theClosedDoorsBoss == null && levelGenerator.level[(int)CameraFollow.instance.playerCoordinates.x, (int)CameraFollow.instance.playerCoordinates.y] == LevelGenerator.RoomType.Boss)
         {
             theClosedDoorsBoss = theClosedDoorsHere;
         }
