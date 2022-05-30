@@ -67,7 +67,7 @@ public class CoolDownManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (LevelManager.instance.pauseMenu || PlayerInventory.instance.miniMapOpen)
+        if (LevelManager.instance.pauseMenu)
             return;
         CheckCD();
     }

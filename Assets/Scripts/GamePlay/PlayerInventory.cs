@@ -51,7 +51,7 @@ public class PlayerInventory : MonoBehaviour
                 LevelGenerator.instance.SeeAllMiniMap();
             }
         }
-        if (Input.GetKeyDown(inputData.miniMap) && RoomManager.instance.IsNotInFight() && !LevelManager.instance.pauseMenu)
+        if (Input.GetKeyDown(inputData.miniMap) && !LevelManager.instance.pauseMenu)
         {
             if (miniMapOpen)
             {
@@ -89,13 +89,11 @@ public class PlayerInventory : MonoBehaviour
     {
         miniMapOpen = true;
         miniMap.SetActive(true);
-        LevelManager.instance.InvertTime();
     }
 
     public void MiniMapDisable()
     {
         miniMapOpen = false;
         miniMap.SetActive(false);
-        LevelManager.instance.InvertTime();
     }
 }

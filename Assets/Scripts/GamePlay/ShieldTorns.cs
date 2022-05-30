@@ -6,31 +6,18 @@ public class ShieldTorns : MonoBehaviour
 {
     private HeroAbility heroAbility;
     private HeroStats heroStats;
-    private List<GameObject> enemyAlreadyHit;
-
 
     private void Start()
     {
-        heroAbility = GameObject.FindGameObjectWithTag("Player").GetComponent<HeroAbility>();
-        heroStats = GameObject.FindGameObjectWithTag("Player").GetComponent<HeroStats>();
-        enemyAlreadyHit = new List<GameObject>();
+        heroAbility = HeroAbility.instance;
+        heroStats = HeroStats.instance;
     }
 
-    private void FixedUpdate()
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        if (!heroAbility.damagingShield)
+        if (heroAbility.damagingShield && collision.gameObject.GetComponent<Enemies>() != null)
         {
-            enemyAlreadyHit.Clear();
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (!enemyAlreadyHit.Contains(collision.gameObject) && heroAbility.damagingShield && collision.gameObject.tag == "Enemies")
-        {
-            enemyAlreadyHit.Add(collision.gameObject);
-            collision.gameObject.SendMessage("TakeDamage", heroStats.shieldDamage);
-            Debug.Log(collision.gameObject.name);
+            collision.gameObject.GetComponent<Enemies>().TakeDamage(heroStats.shieldDamage * Time.fixedDeltaTime);
         }
     }
 }

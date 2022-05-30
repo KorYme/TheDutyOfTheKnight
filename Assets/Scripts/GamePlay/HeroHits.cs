@@ -50,7 +50,7 @@ public class HeroHits : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (LevelManager.instance.pauseMenu || PlayerInventory.instance.miniMapOpen)
+        if (LevelManager.instance.pauseMenu)
             return;
         LookingAtDirection();
     }
@@ -97,7 +97,7 @@ public class HeroHits : MonoBehaviour
 
     private void Update()
     {
-        if (LevelManager.instance.pauseMenu || PlayerInventory.instance.miniMapOpen)
+        if (LevelManager.instance.pauseMenu)
             return;
         if (Input.GetKey(inputdata.swordHit) && !isInReloadTime && HeroMovement.instance.canPlayerMove)
         {
@@ -127,7 +127,7 @@ public class HeroHits : MonoBehaviour
         }
         foreach (Collider2D fireball in Physics2D.OverlapCircleAll(transform.Find(direction).transform.position, heroRange, fireballLayer))
         {
-            fireball.GetComponent<FireBall>().SetDirection(new Vector2(horizontalCursor,verticalCursor));
+            fireball.GetComponent<FireBall>().SetDirection(new Vector2(horizontalCursor,verticalCursor).normalized);
             fireball.GetComponent<FireBall>().playerFireball = true;
         }
     }

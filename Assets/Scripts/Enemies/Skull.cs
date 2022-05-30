@@ -45,7 +45,7 @@ public class Skull : Enemies
         rb.velocity = direction * enemySpeed;
     }
 
-    protected override void TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
     }

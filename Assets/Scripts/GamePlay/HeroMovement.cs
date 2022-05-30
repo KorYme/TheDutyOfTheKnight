@@ -32,7 +32,7 @@ public class HeroMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (LevelManager.instance.pauseMenu || PlayerInventory.instance.miniMapOpen)
+        if (LevelManager.instance.pauseMenu)
             return;
         if (canPlayerMove)
         {

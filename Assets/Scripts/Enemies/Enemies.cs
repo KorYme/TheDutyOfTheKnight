@@ -53,7 +53,7 @@ public class Enemies : MonoBehaviour
         }
     }
 
-    protected virtual void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         if (dead)
             return;

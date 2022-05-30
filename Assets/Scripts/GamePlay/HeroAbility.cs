@@ -65,7 +65,7 @@ public class HeroAbility : MonoBehaviour
 
     private void Update()
     {
-        if (LevelManager.instance.pauseMenu || PlayerInventory.instance.miniMapOpen)
+        if (LevelManager.instance.pauseMenu)
             return;
         //Check if the player clicked on an ability key
         if (Input.GetKey(inputData.abilityFire) && fireUnlocked && !fireInCooldown)

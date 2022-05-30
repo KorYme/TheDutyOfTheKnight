@@ -6,7 +6,9 @@ public class Totems : MonoBehaviour
 {
     private bool inRange;
     private bool isPraying;
-    private bool justPrayed;
+    private bool eToClose;
+    private bool firstInteraction;
+    private float prayTime;
     private DialogueManager dialogueManager;
     private HeroStats heroStats;
     public List<GameObject> totemsList;
@@ -22,7 +24,7 @@ public class Totems : MonoBehaviour
         heroStats = HeroStats.instance;
         inRange = false;
         isPraying = false;
-        justPrayed = false;
+        eToClose = false;
         hasAlreadyPrayed = false;
         for (int i = 0; i < transform.parent.childCount; i++)
         {
@@ -37,37 +39,53 @@ public class Totems : MonoBehaviour
             if (Input.GetKeyDown(inputData.interact))
             {
                 dialogueManager.currentPanelUser = gameObject;
-                if (justPrayed)
+                if (eToClose)
                 {
                     dialogueManager.PanelDisable();
-                    justPrayed = false;
+                    eToClose = false;
                 }
-                else if (HasPlayerAlreadyPrayed())
+                else if (firstInteraction)
                 {
-                    dialogueManager.UpdateTheScreen(totemsData.name, "You've already prayed a totem in this room, go away !", 0);
-                    justPrayed = true;
-                }
-                else if (isPraying)
-                {
-                    hasAlreadyPrayed = true;
-                    isPraying = false;
-                    if (dialogueManager.currentPanelUser == gameObject && dialogueManager.panelOpen)
-                    {
-                        heroStats.AddStatsHero(totemsData);
-                        dialogueManager.UpdateTheScreen(totemsData.name, totemsData.textForPrayer, 0);
-                        justPrayed = true;
-                    }
+                    dialogueManager.PanelEnable();
+                    dialogueManager.UpdateTheScreen(totemsData.totemName, totemsData.description, 2);
+                    firstInteraction = false;
                 }
                 else
                 {
-                    dialogueManager.UpdateTheScreen(totemsData.name, totemsData.description, 2);
-                    isPraying = true;
+                    if (HasPlayerAlreadyPrayed())
+                    {
+                        firstInteraction = true;
+                        dialogueManager.UpdateTheScreen(totemsData.totemName, "You've already prayed a totem in this room, go away !", 0);
+                        eToClose = true;
+                    }
+                    else
+                    {
+                        isPraying = true;
+                    }
                 }
-                dialogueManager.PanelEnable();
             }
-            if (Input.GetKeyDown(inputData.close) && dialogueManager.panelOpen)
+            if (Input.GetKeyDown(inputData.close))
             {
                 dialogueManager.PanelDisable();
+            }
+            if (Input.GetKey(inputData.interact) && isPraying)
+            {
+                prayTime += Time.deltaTime;
+                if (prayTime >= 2)
+                {
+                    hasAlreadyPrayed = true;
+                    isPraying = false;
+                    eToClose = true;
+                    if (dialogueManager.currentPanelUser == gameObject && dialogueManager.panelOpen)
+                    {
+                        heroStats.AddStatsHero(totemsData);
+                        dialogueManager.UpdateTheScreen(totemsData.totemName, totemsData.textForPrayer, 0);
+                    }
+                }
+            }
+            else
+            {
+                prayTime = 0;
             }
         }
         else if (dialogueManager.panelOpen && !inRange && dialogueManager.currentPanelUser == gameObject)
@@ -93,6 +111,7 @@ public class Totems : MonoBehaviour
         if (collision.transform.tag == "Player")
         {
             inRange = true;
+            firstInteraction = true;
         }
     }
 
@@ -102,7 +121,8 @@ public class Totems : MonoBehaviour
         {
             inRange = false;
             isPraying = false;
-            justPrayed = false;
+            eToClose = false;
+            prayTime = 0;
             if (dialogueManager.currentPanelUser == gameObject)
             {
                 dialogueManager.PanelDisable();

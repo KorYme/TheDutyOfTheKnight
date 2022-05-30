@@ -25,7 +25,7 @@ public class Host : Enemies
         bulletLaunch.GetComponent<FireBall>().fireBallDamage = enemyDamage;
     }
 
-    protected override void TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
         if (invulnerable)

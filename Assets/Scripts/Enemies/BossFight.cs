@@ -271,7 +271,7 @@ public class BossFight : Enemies
         }
     }
 
-    protected override void TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
         if (healthBossInitial/2 >= enemyHP && !dead)
