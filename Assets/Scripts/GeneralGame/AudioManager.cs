@@ -1,38 +1,66 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.Audio;
+using System;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager instance;
 
-    public AudioClip[] playlist;
-    private AudioSource audioSource;
-    private int musicIndex;
+    [SerializeField]
+    private AudioMixerGroup audioMixerGroup;
 
-    void Start()
+    public Sounds[] sounds;
+
+    private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
-        musicIndex = 0;
-        audioSource.clip = playlist[musicIndex];
-        audioSource.Play();
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        InitializeAllClips();
     }
 
-    void Update()
+    void InitializeAllClips()
     {
-        if (!audioSource.isPlaying)
+        foreach (Sounds s in sounds)
         {
-            PlayNextSong();
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+            s.source.pitch = s.pitch;
+            s.source.volume = s.volume;
+            s.source.loop = s.loop;
+            s.source.outputAudioMixerGroup = audioMixerGroup;
         }
     }
 
-    void PlayNextSong()
+    private void Start()
     {
-        musicIndex++;
-        if (musicIndex == playlist.Length)
+        PlayClip("BossTheme");
+    }
+
+    public void PlayClip(string name)
+    {
+        Sounds s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
         {
-            musicIndex = 0;
+            Debug.LogWarning("The clip " + name + " doesn't exist !");
+            return;
         }
-        audioSource.clip = playlist[musicIndex];
-        audioSource.Play();
+        s.source.Play();
+    }
+    
+    public void StopClip(string name)
+    {
+        Sounds s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("The clip " + name + " doesn't exist !");
+            return;
+        }
+        s.source.Stop();
     }
 }
