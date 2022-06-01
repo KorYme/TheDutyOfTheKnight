@@ -214,14 +214,14 @@ public class RoomManager : MonoBehaviour
         {
             foreach (var item in insideEnemies)
             {
-                item.gameObject.SendMessage("StartMoving");
+                item.gameObject.GetComponent<Enemies>().StartMoving();
             }
         }
         else
         {
             foreach (var item in insideEnemies)
             {
-                item.gameObject.SendMessage("StopMoving");
+                item.gameObject.GetComponent<Enemies>().StopMoving();
             }
         }
     }
@@ -255,7 +255,7 @@ public class RoomManager : MonoBehaviour
         }
         player.transform.position = tpPlace;
         HeroMovement.instance.AllowMovement(true);
-        HeroStats.instance.invicibility = false;
+        HeroStats.instance.invincibility = false;
         HeroStats.instance.TakeDamageHero(voidDamage);
         EnemiesMoveEnable(true);
     }

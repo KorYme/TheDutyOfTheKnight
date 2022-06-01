@@ -53,7 +53,10 @@ public class HeroHits : MonoBehaviour
     {
         if (LevelManager.instance.pauseMenu)
             return;
-        LookingAtDirection();
+        if (HeroMovement.instance.canPlayerMove)
+        {
+            LookingAtDirection();
+        }
     }
 
     void LookingAtDirection()

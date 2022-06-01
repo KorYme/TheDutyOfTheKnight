@@ -23,8 +23,8 @@ public class HeroStats : MonoBehaviour
     public float heroAttack = 20f;
     public float speed = 250f;
     public float flashDelay;
-    public float invicibilityDelay;
-    public bool invicibility;
+    public float invincibilityDelay;
+    public bool invincibility;
     public bool isDead;
 
     [Header("Abilities Stats")]
@@ -55,7 +55,7 @@ public class HeroStats : MonoBehaviour
         heroHP = heroMaxHealth;
         healthBar.InitializeHealthBar(heroMaxHealth, heroHP);
 
-        invicibility = false;
+        invincibility = false;
         isDead = false;
     }
 
@@ -93,7 +93,7 @@ public class HeroStats : MonoBehaviour
         heroMovement.enabled = false;
         HeroHits.instance.enabled = false;
         HeroAbility.instance.enabled = false;
-        invicibility = true;
+        invincibility = true;
         if (!isDead)
         {
             animator.speed = 0;
@@ -109,7 +109,7 @@ public class HeroStats : MonoBehaviour
 
     public void TakeDamageHero(float damage)
     {
-        if (!invicibility)
+        if (!invincibility)
         {
             AudioManager.instance.PlayClip("Damage");
             heroHP -= damage;
@@ -150,15 +150,15 @@ public class HeroStats : MonoBehaviour
 
     IEnumerator TheInvicibility()
     {
-        invicibility = true;
+        invincibility = true;
         StartCoroutine(FlashInvicibility());
-        yield return new WaitForSeconds(invicibilityDelay);
-        invicibility = false;
+        yield return new WaitForSeconds(invincibilityDelay);
+        invincibility = false;
     }
 
     IEnumerator FlashInvicibility()
     {
-        while (invicibility && !isDead && GameManager.instance.gameLaunched)
+        while (invincibility && !isDead && GameManager.instance.gameLaunched)
         {
         graphics.color = new Color(1f, 1f, 1f, 0f);
         yield return new WaitForSeconds(flashDelay);

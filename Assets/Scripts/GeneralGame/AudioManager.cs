@@ -35,7 +35,14 @@ public class AudioManager : MonoBehaviour
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
             s.source.pitch = s.pitch;
-            s.source.volume = 0;
+            if (s.soundtrack)
+            {
+                s.source.volume = 0;
+            }
+            else
+            {
+                s.source.volume = s.volume;
+            }
             s.source.outputAudioMixerGroup = audioMixerGroup;
         }
         currentSoundtrack = null;
@@ -103,7 +110,7 @@ public class AudioManager : MonoBehaviour
         }
     }
     
-    public void StopAllSoundTrack()
+    public void StopSoundTrack()
     {
         currentSoundtrack = null;
         nextSoundtrack = "";

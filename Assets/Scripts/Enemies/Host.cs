@@ -43,7 +43,7 @@ public class Host : Enemies
 
     protected override void IsDying()
     {
-        base.IsDying();
+        base.IsDying(); 
         animator.SetTrigger("Death");
     }
 }

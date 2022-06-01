@@ -60,7 +60,7 @@ public class CoolDownManager : MonoBehaviour
     public void DisplayRefreshKeyButton()
     {
         keyButtonHit.SetActive(!heroHits.isInReloadTime);
-        keyButtonEarth.SetActive(!heroAbility.earthInCooldown);
+        keyButtonEarth.SetActive(!heroAbility.earthInCooldown && !heroAbility.shieldOpen);
         keyButtonWind.SetActive(!heroAbility.windInCooldown);
         keyButtonFire.SetActive(!heroAbility.fireInCooldown);
     }

@@ -18,7 +18,10 @@ public class FireBall : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.Translate(Vector3.right * fireBallSpeed * Time.fixedDeltaTime);
+        if (HeroMovement.instance.canPlayerMove)
+        {
+            transform.Translate(Vector3.right * fireBallSpeed * Time.fixedDeltaTime);
+        }
     }
 
     public void SetDirection(Vector2 direction)

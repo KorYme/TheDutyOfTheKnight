@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HeroAbility : MonoBehaviour
@@ -11,7 +12,6 @@ public class HeroAbility : MonoBehaviour
         {
             Debug.LogError("More than one HeroAbility instance in the game !");
         }
-
         instance = this;
     }
     
@@ -35,40 +35,64 @@ public class HeroAbility : MonoBehaviour
 
     [Header("To Define Values")]
     public HeroStats heroStats;
-    private Collider2D[] tpZone;
-    public GameObject FireBall;
-    public GameObject Explosion;
-    public bool damagingShield;
+    public GameObject fireBall;
+    public GameObject explosion;
     public float fireBallSpeed;
     public float radiusCharacter;
     public float knockBackFireBall;
+    public float dashTime;
+    public bool isDashing;
     public LayerMask enemyLayer;
     public LayerMask cantTPLayer;
 
+    [HideInInspector] public bool shieldOpen;
+    [HideInInspector] public bool damagingShield;
     [HideInInspector] public Vector3 cursorPosition;
+    [HideInInspector] public Vector3 tpPosition;
+    private bool explosionWithTP;
+    private float dashDistance;
+    private Vector2 destinationDash;
+    private Collider2D[] tpZone;
+    private CapsuleCollider2D playerCollider;
+    private CircleCollider2D shieldCollider;
     private CoolDownManager coolDownManager;
     private SpriteRenderer spriteShield;
-    private CircleCollider2D colliderShield;
     private TrailRenderer dashTrail;
     private Rigidbody2D rb;
+    private Animator animator;
+    private Animator animatorShield;
+    private List<Enemies> enemiesTouched;
 
     private void Start()
     {
         //Initializations
         coolDownManager = CoolDownManager.instance;
         spriteShield = transform.Find("Shield").GetComponent<SpriteRenderer>();
-        colliderShield = transform.Find("Shield").GetComponent<CircleCollider2D>();
+        animatorShield = transform.Find("Shield").GetComponent<Animator>();
         dashTrail = transform.Find("DashLane").GetComponent<TrailRenderer>();
+        shieldCollider = transform.Find("Shield").GetComponent<CircleCollider2D>();
+        playerCollider = GetComponent<CapsuleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
-        spriteShield.enabled = false;
-        colliderShield.enabled = false;
+        animator = GetComponent<Animator>();
         damagingShield = false;
-        dashTrail.enabled = false;
+        dashTrail.emitting = false;
+        shieldOpen = false;
+        explosionWithTP = false;
+        isDashing = false;
+        enemiesTouched = new List<Enemies>();
     }
 
     private void Update()
     {
-        if (LevelManager.instance.pauseMenu)
+        if (isDashing)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, destinationDash, Time.deltaTime / dashTime * dashDistance);
+            if (Vector2.Distance(transform.position, destinationDash) < 0.001f)
+            {
+                EndDash();
+            }
+        }
+        if (LevelManager.instance.pauseMenu || !HeroMovement.instance.canPlayerMove)
             return;
         //Check if the player clicked on an ability key
         if (Input.GetKey(inputData.abilityFire) && fireUnlocked && !fireInCooldown)
@@ -79,7 +103,7 @@ public class HeroAbility : MonoBehaviour
         {
             WindAbility();
         }
-        else if (Input.GetKey(inputData.abilityEarth) && earthUnlocked && !earthInCooldown)
+        else if (Input.GetKey(inputData.abilityEarth) && earthUnlocked && !earthInCooldown && !shieldOpen)
         {
             EarthAbility();
         }
@@ -91,7 +115,7 @@ public class HeroAbility : MonoBehaviour
         {
             DashAbility();
         }
-        else if (Input.GetKey(inputData.abilityDamagingShield) && fireUnlocked && earthUnlocked && !fireInCooldown && !earthInCooldown)
+        else if (Input.GetKey(inputData.abilityDamagingShield) && fireUnlocked && earthUnlocked && !fireInCooldown && !earthInCooldown && !shieldOpen)
         {
             ShieldDamageAbility();
         }
@@ -111,7 +135,7 @@ public class HeroAbility : MonoBehaviour
         Vector2 mouseDirection = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
         if (mouseDirection == Vector2.zero)
             mouseDirection = Vector2.up;
-        GameObject bulletLaunch = Instantiate(FireBall, transform.position, Quaternion.identity);
+        GameObject bulletLaunch = Instantiate(fireBall, transform.position, Quaternion.identity);
         bulletLaunch.GetComponent<FireBall>().SetDirection(mouseDirection.normalized);
         bulletLaunch.GetComponent<FireBall>().fireBallSpeed = fireBallSpeed;
         rb.velocity += mouseDirection.normalized * -1 * knockBackFireBall;
@@ -123,24 +147,32 @@ public class HeroAbility : MonoBehaviour
     /// </summary>
     void EarthAbility()
     {
+        shieldOpen = true;
         earthInCooldown = true;
         coolDownManager.ResetCoolDown("Earth");
         coolDownManager.DisplayRefreshKeyButton();
         spriteShield.color = new Color(88, 255, 0);
+        animatorShield.SetTrigger("ShieldEnter");
         StartCoroutine(ShieldDuration());
     }
 
     /// <summary>
-    /// Teleport the player on the mouse location if CanUTP is true
+    /// Teleport the player on the mouse position
     /// </summary>
-    void WindAbility()
+    /// <param name="alreadyCheck">Do it without checking if the TP is right</param>
+    void WindAbility(bool alreadyCheck = false)
     {
-        if (CanUTP())
+        if (CanUTP() || alreadyCheck)
         {
             windInCooldown = true;
             coolDownManager.ResetCoolDown("Wind");
             coolDownManager.DisplayRefreshKeyButton();
-            transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x,Camera.main.ScreenToWorldPoint(Input.mousePosition).y,0);
+            tpPosition = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
+            animator.SetTrigger("TP");
+            RoomManager.instance.EnemiesMoveEnable(false);
+            HeroMovement.instance.canPlayerMove = false;
+            rb.velocity = Vector2.zero;
+            Interaction_Player.instance.ForceExit();
         }
     }
 
@@ -152,18 +184,9 @@ public class HeroAbility : MonoBehaviour
         if (CanUTP())
         {
             earthInCooldown = true;
-            windInCooldown = true;
             coolDownManager.ResetCoolDown("Earth");
-            coolDownManager.ResetCoolDown("Wind");
-            coolDownManager.DisplayRefreshKeyButton();
-            AudioManager.instance.PlayClip("Explosion");
-            transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
-            GameObject explosion = Instantiate(Explosion, transform.position, Quaternion.identity);
-            Destroy(explosion, 1f);
-            foreach (var item in Physics2D.OverlapCircleAll(transform.position, 1.2f, enemyLayer))
-            {
-                item.gameObject.SendMessage("TakeDamage",heroStats.explosionDamage);
-            }
+            explosionWithTP = true;
+            WindAbility(true);
         }
     }
 
@@ -172,21 +195,41 @@ public class HeroAbility : MonoBehaviour
     /// </summary>
     void DashAbility()
     {
-        if (CanUTP())
+        if (CanUTP() && !isDashing)
         {
             fireInCooldown = true;
             coolDownManager.ResetCoolDown("Fire");
             windInCooldown = true;
             coolDownManager.ResetCoolDown("Wind");
             coolDownManager.DisplayRefreshKeyButton();
-            StartCoroutine(TrailRenderer());
-            cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            foreach (var item in Physics2D.RaycastAll((Vector2)transform.position, new Vector2(cursorPosition.x - transform.position.x, cursorPosition.y - transform.position.y), Vector3.Distance(transform.position, cursorPosition), enemyLayer))
-            {
-                item.collider.gameObject.SendMessage("TakeDamage", heroStats.dashDamage);
-            }
-            transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
+            isDashing = true;
+            destinationDash = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+            dashTrail.emitting = true;
+            HeroMovement.instance.canPlayerMove = false;
+            RoomManager.instance.EnemiesMoveEnable(false);
+            dashDistance = Vector2.Distance(transform.position, destinationDash);
+            heroStats.invincibility = true;
+            enemiesTouched.Clear();
+            shieldCollider.isTrigger = true;
+            playerCollider.isTrigger = true;
+            animator.SetTrigger("EntryDash");
         }
+    }
+
+    public void EndDash()
+    {
+        isDashing = false;
+        dashTrail.emitting = false;
+        HeroMovement.instance.canPlayerMove = true;
+        RoomManager.instance.EnemiesMoveEnable(true);
+        heroStats.invincibility = false;
+        foreach (Enemies item in enemiesTouched)
+        {
+            item.TakeDamage(heroStats.dashDamage);
+        }
+        shieldCollider.isTrigger = false;
+        playerCollider.isTrigger = false;
+        animator.SetTrigger("ExitDash");
     }
 
     /// <summary>
@@ -212,15 +255,9 @@ public class HeroAbility : MonoBehaviour
     /// <returns></returns>
     IEnumerator ShieldDuration()
     {
-        spriteShield.enabled = true;
-        colliderShield.enabled = true;
-        heroStats.invicibility = true;
         yield return new WaitForSeconds(heroStats.shieldDuration);
-        spriteShield.enabled = false;
-        colliderShield.enabled = false;
-        heroStats.invicibility = false;
+        animatorShield.SetTrigger("ShieldExit");
         damagingShield = false;
-        spriteShield.color = new Color(255,255,255);
     }
 
     /// <summary>
@@ -244,16 +281,38 @@ public class HeroAbility : MonoBehaviour
         return true;
     }
 
-    /// <summary>
-    /// Create a line on the way of the dash
-    /// </summary>
-    IEnumerator TrailRenderer()
+    public void TP()
     {
-        dashTrail.enabled = true;
-        yield return new WaitForSeconds(.15f);
-        dashTrail.enabled = false;
+        transform.position = tpPosition;
+        if (explosionWithTP)
+        {
+            AudioManager.instance.PlayClip("Explosion");
+            GameObject anExplosion = Instantiate(explosion, transform.position, Quaternion.identity);
+            Destroy(anExplosion, 1f);
+            foreach (var item in Physics2D.OverlapCircleAll(transform.position, 1.2f, enemyLayer))
+            {
+                item.gameObject.SendMessage("TakeDamage", heroStats.explosionDamage);
+            }
+            explosionWithTP = false;
+        }
     }
 
+    public void TPEnded()
+    {
+        HeroMovement.instance.canPlayerMove = true;
+        RoomManager.instance.EnemiesMoveEnable(true);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (isDashing)
+        {
+            if (collision.GetComponent<Enemies>() != null && !enemiesTouched.Contains(collision.GetComponent<Enemies>()))
+            {
+                enemiesTouched.Add(collision.GetComponent<Enemies>());
+            }
+        }
+    }
 
     /// <summary>
     /// Update the cooldowns aftter an upgrade
@@ -261,6 +320,7 @@ public class HeroAbility : MonoBehaviour
     public void UpgradeCD(TotemsData totemsData)
     {
         cooldownEarth -= (cooldownEarth - totemsData.earthCooldownBonus > 0 ? totemsData.earthCooldownBonus : cooldownEarth);
+        cooldownEarth = cooldownEarth > heroStats.shieldDuration ? cooldownEarth : heroStats.shieldDuration;
         cooldownWind -= (cooldownWind - totemsData.windCooldownBonus > 0 ? totemsData.windCooldownBonus : cooldownWind);
         cooldownFire -= (cooldownFire - totemsData.fireCooldownBonus > 0 ? totemsData.fireCooldownBonus : cooldownFire);
     }

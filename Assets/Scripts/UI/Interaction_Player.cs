@@ -36,6 +36,7 @@ public class Interaction_Player : MonoBehaviour
             interactions--;
             if (interactions <= 0)
             {
+                interactions = 0;
                 UI_Player?.SetActive(false);
             }
         }
@@ -60,6 +61,7 @@ public class Interaction_Player : MonoBehaviour
             interactions--;
             if (interactions <= 0)
             {
+                interactions = 0;
                 UI_Player?.SetActive(false);
             }
         }

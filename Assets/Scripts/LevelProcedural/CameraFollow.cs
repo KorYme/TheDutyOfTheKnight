@@ -32,6 +32,7 @@ public class CameraFollow : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            HeroAbility.instance.EndDash();
             if (Mathf.Abs(player.transform.position.x-mainCamera.transform.position.x)> Mathf.Abs(player.transform.position.y - mainCamera.transform.position.y))
             {
                 if (player.transform.position.x - mainCamera.transform.position.x<0)

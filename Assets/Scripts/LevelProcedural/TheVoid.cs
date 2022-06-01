@@ -6,7 +6,7 @@ public class TheVoid : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Coordinates")
+        if (collision.tag == "Coordinates" && HeroMovement.instance.canPlayerMove)
         {
             HeroMovement.instance.IsFalling();
         }

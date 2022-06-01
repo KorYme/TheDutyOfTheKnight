@@ -35,7 +35,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(inputData.useItem))
+        if (Input.GetKeyDown(inputData.useItem) && HeroMovement.instance.canPlayerMove)
         {
             UseRefreshPotion();
         }
@@ -52,7 +52,7 @@ public class PlayerInventory : MonoBehaviour
                 LevelGenerator.instance.SeeAllMiniMap();
             }
         }
-        if (Input.GetKeyDown(inputData.miniMap) && !LevelManager.instance.pauseMenu)
+        if (Input.GetKeyDown(inputData.miniMap) && !LevelManager.instance.pauseMenu && HeroMovement.instance.canPlayerMove)
         {
             if (miniMapOpen)
             {
@@ -80,6 +80,7 @@ public class PlayerInventory : MonoBehaviour
         if (nbPotionRefresh > 0)
         {
             CoolDownManager.instance.InitializeCDTo0();
+            CoolDownManager.instance.DisplayRefreshKeyButton();
             nbPotionRefresh--;
             inventoryPanel.UpdateInventory();
             inventoryPanel.ShowInventory();

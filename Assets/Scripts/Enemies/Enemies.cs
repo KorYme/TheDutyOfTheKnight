@@ -101,6 +101,7 @@ public class Enemies : MonoBehaviour
     {
         dead = true;
         enemySpeed = 0;
+        animator.speed = 1;
         GetComponent<Collider2D>().enabled = false;
         RoomManager.instance.CheckEnemiesStillIn();
         DropItems(Random.Range(0, 6));
