@@ -23,7 +23,6 @@ public class AudioManager : MonoBehaviour
             return;
         }
         instance = this;
-        DontDestroyOnLoad(gameObject);
         InitializeAllClips();
         liSTCurrentlyPlayed = new List<Sounds>();
     }

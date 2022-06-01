@@ -4,20 +4,20 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using TMPro;
 
 public class SettingsMenu : MonoBehaviour
 {
     public AudioMixer audioMixer;
-    public TMPro.TMP_Dropdown dropdown;
+    public TMP_Dropdown dropdown;
     public GameObject entryMenu;
     private Resolution[] resolutions;
     public bool isFullScreen;
-
     public int currentIndexResolutions;
 
     private void Awake()
     {
-        GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioSource>();//A CHANGER
         transform.Find("VolumeSlider").GetComponent<Slider>().value = GameManager.instance.currentVolume;
     }
 
@@ -63,15 +63,5 @@ public class SettingsMenu : MonoBehaviour
     {
         gameObject.SetActive(false);
         entryMenu.SetActive(true);
-    }
-
-    public void RetryButton()
-    {
-        SceneManager.LoadScene("Etage1");
-    }
-
-    public void MainMenuButton()
-    {
-        SceneManager.LoadScene("_MainMenu");
     }
 }
