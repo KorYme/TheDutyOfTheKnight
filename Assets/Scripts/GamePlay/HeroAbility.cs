@@ -35,20 +35,22 @@ public class HeroAbility : MonoBehaviour
 
     [Header("To Define Values")]
     public HeroStats heroStats;
-    public GameObject FireBall;
-    public float fireBallSpeed;
-    public bool damagingShield;
     private Collider2D[] tpZone;
+    public GameObject FireBall;
+    public GameObject Explosion;
+    public bool damagingShield;
+    public float fireBallSpeed;
     public float radiusCharacter;
-    public Vector3 cursorPosition;
+    public float knockBackFireBall;
     public LayerMask enemyLayer;
     public LayerMask cantTPLayer;
-    public GameObject Explosion;
 
+    [HideInInspector] public Vector3 cursorPosition;
     private CoolDownManager coolDownManager;
     private SpriteRenderer spriteShield;
     private CircleCollider2D colliderShield;
     private TrailRenderer dashTrail;
+    private Rigidbody2D rb;
 
     private void Start()
     {
@@ -57,6 +59,7 @@ public class HeroAbility : MonoBehaviour
         spriteShield = transform.Find("Shield").GetComponent<SpriteRenderer>();
         colliderShield = transform.Find("Shield").GetComponent<CircleCollider2D>();
         dashTrail = transform.Find("DashLane").GetComponent<TrailRenderer>();
+        rb = GetComponent<Rigidbody2D>();
         spriteShield.enabled = false;
         colliderShield.enabled = false;
         damagingShield = false;
@@ -111,6 +114,8 @@ public class HeroAbility : MonoBehaviour
         GameObject bulletLaunch = Instantiate(FireBall, transform.position, Quaternion.identity);
         bulletLaunch.GetComponent<FireBall>().SetDirection(mouseDirection.normalized);
         bulletLaunch.GetComponent<FireBall>().fireBallSpeed = fireBallSpeed;
+        rb.velocity += mouseDirection.normalized * -1 * knockBackFireBall;
+        AudioManager.instance.PlayClip("Fireball");
     }
 
     /// <summary>
@@ -147,10 +152,11 @@ public class HeroAbility : MonoBehaviour
         if (CanUTP())
         {
             earthInCooldown = true;
-            coolDownManager.ResetCoolDown("Earth");
             windInCooldown = true;
+            coolDownManager.ResetCoolDown("Earth");
             coolDownManager.ResetCoolDown("Wind");
             coolDownManager.DisplayRefreshKeyButton();
+            AudioManager.instance.PlayClip("Explosion");
             transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
             GameObject explosion = Instantiate(Explosion, transform.position, Quaternion.identity);
             Destroy(explosion, 1f);

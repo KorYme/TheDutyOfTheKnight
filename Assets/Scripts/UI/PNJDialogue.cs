@@ -10,6 +10,7 @@ public class PNJDialogue : MonoBehaviour
     private int sentencesIndex;
     private DialogueManager dialogueManager;
     public string namePNJ;
+    [TextArea(3,10)]
     public string[] sentencesPNJ;
     public InputData inputData;
 
@@ -33,6 +34,7 @@ public class PNJDialogue : MonoBehaviour
             if (Input.GetKeyDown(inputData.interact))
             {
                 dialogueManager.currentPanelUser = gameObject;
+                AudioManager.instance.PlayClip("Confirm");
                 if (sentencesIndex < sentencesPNJ.Length)
                 {
                     if (!dialogueManager.panelOpen)
@@ -57,6 +59,7 @@ public class PNJDialogue : MonoBehaviour
             }
             else if (Input.GetKeyDown(inputData.close))
             {
+                AudioManager.instance.PlayClip("Close");
                 if (isInRange && dialogueManager.panelOpen && !dialogueManager.isMoving)
                 {
                     dialogueManager.PanelDisable();

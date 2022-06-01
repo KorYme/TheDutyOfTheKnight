@@ -15,7 +15,7 @@ MonoBehaviour:
   objectName: Refresh Potion
   description: A potion which refresh your cooldown when you use it
   sprite: {fileID: 7271025096421245680, guid: 3bd420ef9086fff4b9aeef7941d50d2d, type: 3}
-  clipToPlay: 
+  clipToPlay: PickUp1
   coinCost: 20
   coinGiven: 0
   refreshPotionGiven: 1

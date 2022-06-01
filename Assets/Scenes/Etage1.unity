@@ -1804,17 +1804,18 @@ MonoBehaviour:
   inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
   heroStats: {fileID: 401620113}
   FireBall: {fileID: 6067577561094456797, guid: 65a52fbba66c01944926e1304f11631f, type: 3}
-  fireBallSpeed: 7
+  Explosion: {fileID: 7844617443299900646, guid: 9656f47995243e548bf00a06530908f7, type: 3}
   damagingShield: 0
-  radiusCharacter: 0
-  cursorPosition: {x: 0, y: 0, z: 0}
+  fireBallSpeed: 7
+  radiusCharacter: 0.2
+  knockBackFireBall: 10
   enemyLayer:
     serializedVersion: 2
     m_Bits: 532608
   cantTPLayer:
     serializedVersion: 2
     m_Bits: 3146560
-  Explosion: {fileID: 7844617443299900646, guid: 9656f47995243e548bf00a06530908f7, type: 3}
+  cursorPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &401620119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3081,7 +3082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.47058824}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6581,6 +6582,9 @@ MonoBehaviour:
   miniMapBlocks:
     serializedVersion: 2
     m_Bits: 4194304
+  objectsLayer:
+    serializedVersion: 2
+    m_Bits: 32768
 --- !u!114 &1358435965
 MonoBehaviour:
   m_ObjectHideFlags: 0

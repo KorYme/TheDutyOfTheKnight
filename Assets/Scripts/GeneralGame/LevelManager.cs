@@ -33,6 +33,7 @@ public class LevelManager : MonoBehaviour
         pauseMenuUI.SetActive(false);
         endGameMenu.SetActive(false);
         Recreatelevel();
+        AudioManager.instance.PlayClip("DungeonTheme1");
     }
 
     public void Update()

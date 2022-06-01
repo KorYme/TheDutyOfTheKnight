@@ -1,6 +1,7 @@
 using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
@@ -10,17 +11,9 @@ public class AudioManager : MonoBehaviour
     private AudioMixerGroup audioMixerGroup;
 
     public Sounds[] sounds;
-
-    enum musicPhase
-    {
-        Title,
-        Dungeon,
-        Boss,
-        Death,
-        Victory,
-    }
-
-    musicPhase currentMusicPhase;
+    private Sounds currentSoundtrack;
+    private string nextSoundtrack;
+    private List<Sounds> liSTCurrentlyPlayed;
 
     private void Awake()
     {
@@ -31,8 +24,8 @@ public class AudioManager : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
-
         InitializeAllClips();
+        liSTCurrentlyPlayed = new List<Sounds>();
     }
 
     void InitializeAllClips()
@@ -42,10 +35,20 @@ public class AudioManager : MonoBehaviour
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
             s.source.pitch = s.pitch;
-            s.source.volume = s.volume;
-            s.source.loop = s.loop;
+            s.source.volume = 0;
             s.source.outputAudioMixerGroup = audioMixerGroup;
         }
+        currentSoundtrack = null;
+        nextSoundtrack = "";
+    }
+
+    private void FixedUpdate()
+    {
+        if (currentSoundtrack !=null ? !currentSoundtrack.source.isPlaying : false)
+        {
+            PlayClip(nextSoundtrack);
+        }
+        IncreaseOrDecreaseVolumeOtherST();
     }
 
     public void PlayClip(string name)
@@ -60,25 +63,53 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("The clip " + name + " doesn't exist !");
             return;
         }
-        if (s.soundtrack)
+        else if (s.soundtrack)
         {
-            switch (name)
+            //StopAllSoundTrack();
+            currentSoundtrack = s;
+            nextSoundtrack = s.nextSoundName != "" ? s.nextSoundName : s.name;
+            if (!liSTCurrentlyPlayed.Contains(s))
             {
-                case "Title":
-                    currentMusicPhase = musicPhase.Title;
-                    return;
-                default:
-                    return;
+                liSTCurrentlyPlayed.Add(s);
             }
         }
         s.source.Play();
     }
+
+    void IncreaseOrDecreaseVolumeOtherST()
+    {
+        for (int i = 0; i < liSTCurrentlyPlayed.Count; i++)
+        {
+            //Decrease here
+            if (liSTCurrentlyPlayed[i] != currentSoundtrack)
+            {
+                if (liSTCurrentlyPlayed[i].source.volume > 0)
+                {
+                    liSTCurrentlyPlayed[i].source.volume -= Time.fixedDeltaTime * liSTCurrentlyPlayed[i].volume * 0.5f;
+                }
+                else
+                {
+                    liSTCurrentlyPlayed[i].source.Stop();
+                    liSTCurrentlyPlayed.Remove(liSTCurrentlyPlayed[i]);
+                }
+            }
+            else //Increase here
+            {
+                if (currentSoundtrack.source.volume < currentSoundtrack.volume)
+                {
+                    currentSoundtrack.source.volume += Time.deltaTime * currentSoundtrack.volume * 0.3f;
+                }
+            }
+        }
+    }
     
     public void StopAllSoundTrack()
     {
+        currentSoundtrack = null;
+        nextSoundtrack = "";
         foreach (Sounds s in sounds)
         {
-            if (s.soundtrack && s.source.isPlaying)
+            if (s.soundtrack)
             {
                 s.source.Stop();
             }

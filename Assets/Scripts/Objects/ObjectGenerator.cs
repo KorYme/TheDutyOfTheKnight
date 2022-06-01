@@ -11,6 +11,7 @@ public class ObjectGenerator : MonoBehaviour
     private DialogueManager dialogueManager;
     private HeroStats heroStats;
     private PlayerInventory playerInventory;
+    private Animator animator;
     public ObjectsData objectData;
     public InputData inputData;
 
@@ -23,6 +24,7 @@ public class ObjectGenerator : MonoBehaviour
         dialogueManager = DialogueManager.instance;
         heroStats = HeroStats.instance;
         playerInventory = PlayerInventory.instance;
+        animator = transform.GetChild(0).GetComponent<Animator>();
     }
 
     public void TakeObject()
@@ -43,6 +45,11 @@ public class ObjectGenerator : MonoBehaviour
         }
     }
 
+    public void ResetAnimator()
+    {
+        animator.SetTrigger("EnterRoom");
+    }
+
     private void InitializeMerchant()
     {
         if (merchant == null)
@@ -61,6 +68,7 @@ public class ObjectGenerator : MonoBehaviour
             }
             else if (isInRange && !dialogueManager.isMoving)
             {
+                AudioManager.instance.PlayClip("Confirm");
                 dialogueManager.currentPanelUser = gameObject;
                 if (RoomManager.instance.IsItShop())
                 {
@@ -110,8 +118,9 @@ public class ObjectGenerator : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(inputData.close))
+        if (Input.GetKeyDown(inputData.close) && dialogueManager.panelOpen && !dialogueManager.isMoving)
         {
+            AudioManager.instance.PlayClip("Close");
             if (RoomManager.instance.IsItShop())
             {
                 if (dialogueManager.currentPanelUser == gameObject)

@@ -36,6 +36,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private LayerMask respawnLayer;
     [SerializeField] private LayerMask chestLayer;
     [SerializeField] private LayerMask miniMapBlocks;
+    [SerializeField] private LayerMask objectsLayer;
 
     private Collider2D[] theClosedDoorsHere, theOpenedDoorsHere, insideEnemies, allSpawner, theClosedDoorsBoss;
     private Collider2D enemiesIn;
@@ -71,6 +72,7 @@ public class RoomManager : MonoBehaviour
         {
             Destroy(thisRoomBlock.gameObject);
         }
+        ActivateObjects();
         ActivateEnemies();
         AreEnemiesIn();
     }
@@ -81,6 +83,17 @@ public class RoomManager : MonoBehaviour
         foreach (Collider2D item in allSpawner)
         {
             item.GetComponent<Spawner>().Spawn();
+        }
+    }
+
+    void ActivateObjects()
+    {
+        if (IsItShop())
+        {
+            foreach (var item in Physics2D.OverlapBoxAll(camPos, camSize, 0f, objectsLayer))
+            {
+                item.GetComponent<ObjectGenerator>().ResetAnimator();
+            }
         }
     }
 
@@ -98,7 +111,6 @@ public class RoomManager : MonoBehaviour
         }
         if (that)
         {
-            //Door Sound
             //Only open the doors with other doors behind
             foreach (var item in theOpenedDoorsHere)
             {
@@ -132,9 +144,9 @@ public class RoomManager : MonoBehaviour
         enemiesIn = Physics2D.OverlapBox(camPos, camSize, 0f, enemyLayer);
         if (enemiesIn == null)
         {
+            AudioManager.instance.PlayClip("DoorOpening");
             OpenOrCloseTheDoors(true);
             OpenTheChestInTheRoom();
-            //Add Opening door sound
         }
     }
 
@@ -186,6 +198,7 @@ public class RoomManager : MonoBehaviour
             {
                 item.gameObject.SetActive(true);
             }
+            AudioManager.instance.PlayClip("DoorClosing");
             OpenOrCloseTheDoors(false);
         }
     }

@@ -15,6 +15,7 @@ MonoBehaviour:
   objectName: Speed Potion
   description: A potion which gives you more movement speed.
   sprite: {fileID: 8881541749800195961, guid: 3def700810ea17b44af3f49a6ffc90df, type: 3}
+  clipToPlay: PickUp1
   coinCost: 25
   coinGiven: 0
   refreshPotionGiven: 0

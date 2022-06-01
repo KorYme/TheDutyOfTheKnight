@@ -42,7 +42,7 @@ public class PlayerInventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K) && LevelGenerator.instance.testMode)
         {
             inventoryPanel.ShowInventory();
-            nbPotionRefresh++;
+            nbPotionRefresh = 100;
             nbKeyBoss = 3;
             nbCoins = 1000;
             InventoryPanel.instance.UpdateInventory();

@@ -39,6 +39,7 @@ public class Totems : MonoBehaviour
             if (Input.GetKeyDown(inputData.interact))
             {
                 dialogueManager.currentPanelUser = gameObject;
+                AudioManager.instance.PlayClip("Confirm");
                 if (eToClose)
                 {
                     dialogueManager.PanelDisable();
@@ -64,14 +65,15 @@ public class Totems : MonoBehaviour
                     }
                 }
             }
-            if (Input.GetKeyDown(inputData.close))
+            if (Input.GetKeyDown(inputData.close) && dialogueManager.panelOpen)
             {
+                AudioManager.instance.PlayClip("Close");
                 dialogueManager.PanelDisable();
             }
             if (Input.GetKey(inputData.interact) && isPraying)
             {
                 prayTime += Time.deltaTime;
-                if (prayTime >= 2)
+                if (prayTime >= 1)
                 {
                     hasAlreadyPrayed = true;
                     isPraying = false;

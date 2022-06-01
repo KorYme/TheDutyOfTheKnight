@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1472270781514468878}
   - component: {fileID: 1472270781514468876}
   - component: {fileID: 1472270781514468879}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: SpeedPotion
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -73,6 +73,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1148724648246301035}
   - component: {fileID: 1073782343424827521}
+  - component: {fileID: 17856316801563727}
   m_Layer: 0
   m_Name: Graphic
   m_TagString: Untagged
@@ -134,14 +135,33 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 25
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 8881541749800195961, guid: 3def700810ea17b44af3f49a6ffc90df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &17856316801563727
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8847812537297227717}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8b2b7231b39772342bfb5697c7e2c79f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

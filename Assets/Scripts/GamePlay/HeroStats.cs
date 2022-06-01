@@ -104,6 +104,7 @@ public class HeroStats : MonoBehaviour
     {
         animator.speed = 0;
         GameManager.instance.Die();
+        AudioManager.instance.PlayClip("DeathTheme");
     }
 
     public void TakeDamageHero(float damage)
@@ -123,6 +124,7 @@ public class HeroStats : MonoBehaviour
 
     public void AddStatsHero(TotemsData totemsData)
     {
+        AudioManager.instance.PlayClip("TotemBuff");
         fireDamage += totemsData.fireDamageBonus;
         shieldDamage += totemsData.fireDamageBonus;
         shieldDuration += totemsData.earthDurationBonus;

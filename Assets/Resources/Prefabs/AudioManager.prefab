@@ -49,62 +49,139 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 0c703e1af2e1bd0428147ff53619366d, type: 3}
     volume: 0.1
     pitch: 1
-    loop: 1
     soundtrack: 1
+    nextSoundName: 
     source: {fileID: 0}
   - name: DungeonTheme1
     clip: {fileID: 8300000, guid: dddd824a9eff94940bcc71f5cc517f4a, type: 3}
     volume: 0.1
     pitch: 1
-    loop: 1
     soundtrack: 1
+    nextSoundName: DungeonTheme2
     source: {fileID: 0}
   - name: DungeonTheme2
     clip: {fileID: 8300000, guid: ca2beab81d3d5984b8219a29e497a972, type: 3}
     volume: 0.1
     pitch: 1
-    loop: 1
     soundtrack: 1
+    nextSoundName: DungeonTheme3
     source: {fileID: 0}
   - name: DungeonTheme3
     clip: {fileID: 8300000, guid: 0c703e1af2e1bd0428147ff53619366d, type: 3}
     volume: 0.1
     pitch: 1
-    loop: 1
     soundtrack: 1
+    nextSoundName: DungeonTheme1
     source: {fileID: 0}
   - name: BossTheme
     clip: {fileID: 8300000, guid: c40d720c2fb304f48853d2b189d51336, type: 3}
     volume: 0.1
     pitch: 1
-    loop: 1
     soundtrack: 1
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: VictoryTheme
+    clip: {fileID: 8300000, guid: 6924d6e7507b5124aae614bbf2059d16, type: 3}
+    volume: 0.1
+    pitch: 1
+    soundtrack: 1
+    nextSoundName: 
     source: {fileID: 0}
   - name: DeathTheme
     clip: {fileID: 8300000, guid: 5ef3fe49dfc0662429c93e6ba8588139, type: 3}
     volume: 0.1
     pitch: 1
-    loop: 1
     soundtrack: 1
+    nextSoundName: 
     source: {fileID: 0}
   - name: Coin
     clip: {fileID: 8300000, guid: 80b9e8305b78147409924ec801113a21, type: 3}
-    volume: 0.03
+    volume: 0.1
     pitch: 1
-    loop: 0
     soundtrack: 0
+    nextSoundName: 
     source: {fileID: 0}
   - name: Damage
     clip: {fileID: 8300000, guid: b9bfc60c876ef824b99ef108d3a8688a, type: 3}
     volume: 0.1
     pitch: 1
-    loop: 0
     soundtrack: 0
+    nextSoundName: 
     source: {fileID: 0}
   - name: Heal
     clip: {fileID: 8300000, guid: f493b41fefa381546acbb2ca9057785a, type: 3}
     volume: 0.1
     pitch: 1
-    loop: 0
     soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: Explosion
+    clip: {fileID: 8300000, guid: bfe643c46bb305d4693c35d7bf49faf0, type: 3}
+    volume: 0.35
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: TotemBuff
+    clip: {fileID: 8300000, guid: 67d4a40c40ad9224099ca109bd350b58, type: 3}
+    volume: 0.3
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: Fireball
+    clip: {fileID: 8300000, guid: e29364ad50bb4f74aa2c15e105f817dc, type: 3}
+    volume: 0.3
+    pitch: 1.35
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: PickUp1
+    clip: {fileID: 8300000, guid: 99eddfa678322e048a183bb6ccdc3665, type: 3}
+    volume: 0.25
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: DoorOpening
+    clip: {fileID: 8300000, guid: 58262d513f247684cb874c162682382c, type: 3}
+    volume: 0.3
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: DoorClosing
+    clip: {fileID: 8300000, guid: 438fa0287aa54de4f8de383e178dc432, type: 3}
+    volume: 0.5
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: FirstSwing
+    clip: {fileID: 8300000, guid: 1e4ff2f8a480e154e8060bff0ccace3b, type: 3}
+    volume: 0.25
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: SecondSwing
+    clip: {fileID: 8300000, guid: 4646ced81835cb142b07bbdabfc743ab, type: 3}
+    volume: 0.2
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: Confirm
+    clip: {fileID: 8300000, guid: d7673775a233cf64fa6e5d828304b099, type: 3}
+    volume: 0.25
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: Close
+    clip: {fileID: 8300000, guid: dff3702f29a17874baf967a1a7b0e188, type: 3}
+    volume: 0.25
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
     source: {fileID: 0}

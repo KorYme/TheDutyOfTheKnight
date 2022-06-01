@@ -83,6 +83,7 @@ public class BossFight : Enemies
         bossCollider.enabled = true;
         hasFightStarted=true;
         tag = "Boss";
+        AudioManager.instance.PlayClip("BossTheme");
     }
 
     void StartFight()
@@ -115,6 +116,7 @@ public class BossFight : Enemies
         {
             if (Input.GetKeyDown(inputData.interact))
             {
+                AudioManager.instance.PlayClip("Confirm");
                 dialogueManager.currentPanelUser = gameObject;
                 if (firstInteraction)
                 {
@@ -147,6 +149,7 @@ public class BossFight : Enemies
             }
             if (Input.GetKeyDown(inputData.close) && dialogueManager.panelOpen)
             {
+                AudioManager.instance.PlayClip("Close");
                 dialogueManager.PanelDisable();
                 firstInteraction = true;
                 secondInteraction = true;
@@ -305,6 +308,7 @@ public class BossFight : Enemies
         base.Die();
         RoomManager.instance.CheckEnemiesStillIn();
         GameManager.instance.Die();
+        AudioManager.instance.PlayClip("VictoryTheme");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

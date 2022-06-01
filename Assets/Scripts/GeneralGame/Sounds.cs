@@ -13,8 +13,8 @@ public class Sounds
     [Range(.1f, 3f)]
     public float pitch;
 
-    public bool loop;
     public bool soundtrack;
+    public string nextSoundName;
 
     [HideInInspector]
     public AudioSource source;

@@ -37,6 +37,7 @@ public class HeroHits : MonoBehaviour
     //Points System
     [HideInInspector] public string direction;
     private CoolDownManager coolDownManager;
+    private bool firstSwing;
     
 
     void Start()
@@ -118,6 +119,7 @@ public class HeroHits : MonoBehaviour
 
     void HasHitted()
     {
+        AudioManager.instance.PlayClip(firstSwing ? "FirstSwing" : "SecondSwing");
         foreach (Collider2D enemy in Physics2D.OverlapCircleAll(transform.Find(direction).transform.position, heroRange, enemyLayers))
         {
             if (enemy.GetComponent<Enemies>())
