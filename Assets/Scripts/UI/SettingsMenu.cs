@@ -49,11 +49,13 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetFullScreen(bool isFullScreen)
     {
+        AudioManager.instance.PlayClip("ButtonSound");
         Screen.fullScreen = isFullScreen;
     }
 
     public void SetResolution(int resolutionIndex)
     {
+        AudioManager.instance.PlayClip("ButtonSound");
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         GameManager.instance.currentIndexResolutions = resolutionIndex;
@@ -61,6 +63,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void CloseSettings()
     {
+        AudioManager.instance.PlayClip("ButtonSound");
         gameObject.SetActive(false);
         entryMenu.SetActive(true);
     }

@@ -99,12 +99,9 @@ public class AudioManager : MonoBehaviour
                     liSTCurrentlyPlayed.Remove(liSTCurrentlyPlayed[i]);
                 }
             }
-            else //Increase here
+            else if (currentSoundtrack.source.volume < currentSoundtrack.volume)
             {
-                if (currentSoundtrack.source.volume < currentSoundtrack.volume)
-                {
-                    currentSoundtrack.source.volume += Time.deltaTime * currentSoundtrack.volume * 0.3f;
-                }
+                currentSoundtrack.source.volume += Time.deltaTime * currentSoundtrack.volume * 0.3f;
             }
         }
     }

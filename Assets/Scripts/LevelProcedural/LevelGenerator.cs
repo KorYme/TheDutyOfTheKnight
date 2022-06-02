@@ -284,7 +284,6 @@ public class LevelGenerator : MonoBehaviour
                         coordinates.Clear();
                         coordinates.Add(new Vector2(i, y));
                         lessconnexion = HowManyRoundAround(i, y);
-
                     }
                     else if (HowManyRoundAround(i, y) == lessconnexion)
                     {

@@ -121,7 +121,7 @@ public class HeroAbility : MonoBehaviour
         }
     }
 
-    //USP Abilities
+    //USP ABILITIES
 
     /// <summary>
     /// Create a fireball and launch it in the direction of the cursor
@@ -216,6 +216,21 @@ public class HeroAbility : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Give the shield a color, damages and launch the shield function
+    /// </summary>
+    void ShieldDamageAbility()
+    {
+        fireInCooldown = true;
+        coolDownManager.ResetCoolDown("Fire");
+        EarthAbility();
+        damagingShield = true;
+        spriteShield.color = new Color(255,0,0);
+
+    }
+
+    //OTHER FUNCTIONS FOR ABILITY
+
     public void EndDash()
     {
         isDashing = false;
@@ -232,21 +247,6 @@ public class HeroAbility : MonoBehaviour
         animator.SetTrigger("ExitDash");
     }
 
-    /// <summary>
-    /// Give the shield a color, damages and launch the shield function
-    /// </summary>
-    void ShieldDamageAbility()
-    {
-        fireInCooldown = true;
-        coolDownManager.ResetCoolDown("Fire");
-        earthInCooldown = true;
-        coolDownManager.ResetCoolDown("Earth");
-        coolDownManager.DisplayRefreshKeyButton();
-        damagingShield = true;
-        spriteShield.color = new Color(255,0,0);
-        StartCoroutine(ShieldDuration());
-    }
-    
     /// <summary>
     /// Activate the shield's sprite, its collider and make the player inivicible.
     /// Go back to normal after {shieldDuration} time.

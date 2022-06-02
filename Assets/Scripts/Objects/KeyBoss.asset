@@ -16,9 +16,10 @@ MonoBehaviour:
   description: A weird blaze is looking at you. It seems like he wants to stay with
     you ?
   sprite: {fileID: 945793653771260252, guid: 9b7543ebf5feb0643b9d135fb447df19, type: 3}
+  clipToPlay: PickUp1
   coinCost: 0
   coinGiven: 0
-  keyGiven: 0
+  refreshPotionGiven: 0
   keyBossGiven: 1
   healthGiven: 0
   maxHealthGiven: 0

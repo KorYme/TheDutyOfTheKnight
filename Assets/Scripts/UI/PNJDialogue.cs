@@ -34,9 +34,9 @@ public class PNJDialogue : MonoBehaviour
             if (Input.GetKeyDown(inputData.interact))
             {
                 dialogueManager.currentPanelUser = gameObject;
-                AudioManager.instance.PlayClip("Confirm");
                 if (sentencesIndex < sentencesPNJ.Length)
                 {
+                    AudioManager.instance.PlayClip("Confirm");
                     if (!dialogueManager.panelOpen)
                     {
                         dialogueManager.PanelEnable();
@@ -53,6 +53,7 @@ public class PNJDialogue : MonoBehaviour
                 }
                 else
                 {
+                    AudioManager.instance.PlayClip("Close");
                     dialogueManager.PanelDisable();
                     sentencesIndex = 0;
                 }

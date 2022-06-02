@@ -47,49 +47,49 @@ MonoBehaviour:
   sounds:
   - name: TitleTheme
     clip: {fileID: 8300000, guid: 0c703e1af2e1bd0428147ff53619366d, type: 3}
-    volume: 0.1
+    volume: 0.05
     pitch: 1
     soundtrack: 1
     nextSoundName: 
     source: {fileID: 0}
   - name: DungeonTheme1
     clip: {fileID: 8300000, guid: dddd824a9eff94940bcc71f5cc517f4a, type: 3}
-    volume: 0.1
+    volume: 0.05
     pitch: 1
     soundtrack: 1
     nextSoundName: DungeonTheme2
     source: {fileID: 0}
   - name: DungeonTheme2
     clip: {fileID: 8300000, guid: ca2beab81d3d5984b8219a29e497a972, type: 3}
-    volume: 0.1
+    volume: 0.05
     pitch: 1
     soundtrack: 1
     nextSoundName: DungeonTheme3
     source: {fileID: 0}
   - name: DungeonTheme3
     clip: {fileID: 8300000, guid: 0c703e1af2e1bd0428147ff53619366d, type: 3}
-    volume: 0.1
+    volume: 0.05
     pitch: 1
     soundtrack: 1
     nextSoundName: DungeonTheme1
     source: {fileID: 0}
   - name: BossTheme
     clip: {fileID: 8300000, guid: c40d720c2fb304f48853d2b189d51336, type: 3}
-    volume: 0.1
+    volume: 0.075
     pitch: 1
     soundtrack: 1
     nextSoundName: 
     source: {fileID: 0}
   - name: VictoryTheme
     clip: {fileID: 8300000, guid: 6924d6e7507b5124aae614bbf2059d16, type: 3}
-    volume: 0.1
+    volume: 0.075
     pitch: 1
     soundtrack: 1
     nextSoundName: 
     source: {fileID: 0}
   - name: DeathTheme
     clip: {fileID: 8300000, guid: 5ef3fe49dfc0662429c93e6ba8588139, type: 3}
-    volume: 0.1
+    volume: 0.075
     pitch: 1
     soundtrack: 1
     nextSoundName: 
@@ -122,7 +122,7 @@ MonoBehaviour:
     soundtrack: 0
     nextSoundName: 
     source: {fileID: 0}
-  - name: TotemBuff
+  - name: BellDeath
     clip: {fileID: 8300000, guid: 67d4a40c40ad9224099ca109bd350b58, type: 3}
     volume: 0.3
     pitch: 1
@@ -181,6 +181,48 @@ MonoBehaviour:
   - name: Close
     clip: {fileID: 8300000, guid: dff3702f29a17874baf967a1a7b0e188, type: 3}
     volume: 0.25
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: SwordUpgrade
+    clip: {fileID: 8300000, guid: deffdc2438232d64fb196ef3c0d5424b, type: 3}
+    volume: 0.25
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: Potion
+    clip: {fileID: 8300000, guid: 37354c07067edcc42ab57c9cc2654c12, type: 3}
+    volume: 0.3
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: Benediction
+    clip: {fileID: 8300000, guid: 0e28ea02ed7428242921bf82b4f098e3, type: 3}
+    volume: 0.4
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: MiniMapOpen
+    clip: {fileID: 8300000, guid: 8fb95f164016ac642996f97fc2210dee, type: 3}
+    volume: 0.1
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: MiniMapClose
+    clip: {fileID: 8300000, guid: c63a8096076fd0d42a91da518d906026, type: 3}
+    volume: 0.1
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: ButtonSound
+    clip: {fileID: 8300000, guid: a66b063f917619842aef0e715757df81, type: 3}
+    volume: 0.15
     pitch: 1
     soundtrack: 0
     nextSoundName: 

@@ -56,10 +56,12 @@ public class PlayerInventory : MonoBehaviour
         {
             if (miniMapOpen)
             {
+                AudioManager.instance.PlayClip("MiniMapOpen");
                 MiniMapDisable();
             }
             else
             {
+                AudioManager.instance.PlayClip("MiniMapClose");
                 MiniMapEnable();
             }
         }

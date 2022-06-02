@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class CoinScript : MonoBehaviour
 {
-    public ObjectsData objectsData;
-    public float timeToDestroying;
+    [SerializeField] private ObjectsData objectsData;
+    [SerializeField] private float timeToDestroying;
     private float flashDelay;
-    private float coinRadius;
+    Vector3 currentPosition;
+
 
     private void Start()
     {
@@ -15,7 +16,15 @@ public class CoinScript : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = false;
         StartCoroutine(WaitToStartToggle());
         flashDelay = 0.2f;
-        coinRadius = GetComponent<CircleCollider2D>().radius;
+        currentPosition = transform.position;
+    }
+
+    private void Update()
+    {
+        if (transform.position != currentPosition)
+        {
+            Debug.Log("LA");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,19 +35,6 @@ public class CoinScript : MonoBehaviour
             PlayerInventory.instance.AddToInventory(objectsData);
             Destroy(gameObject);
         }
-    }
-
-    bool CanPopCoins()
-    {
-        Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), coinRadius);
-        foreach (Collider2D item in Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), coinRadius))
-        {
-            if (item.gameObject.layer == 6 || item.gameObject.layer == 8 || item.gameObject.layer == 9)
-            {
-                return false;
-            }
-        }
-        return true;
     }
 
     void ActivateCoinSprite()

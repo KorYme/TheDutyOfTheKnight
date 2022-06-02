@@ -75,6 +75,7 @@ public class InventoryPanel : MonoBehaviour
     /// </summary>
     public void ShowInventory()
     {
+        UpdateInventory();
         timeToClose = initialTimeToClose;
         if (!inventoryOpen)
         {

@@ -17,22 +17,26 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
+        AudioManager.instance.PlayClip("ButtonSound");
         Time.timeScale = 1f;
         StartCoroutine(LoadingNewScene(levelToLoad));
     }
     public void Settings()
     {
+        AudioManager.instance.PlayClip("ButtonSound");
         settingsWindow.SetActive(true);
         gameObject.SetActive(false);
     }
 
     public void QuitGame()
     {
+        AudioManager.instance.PlayClip("ButtonSound");
         Application.Quit();
     }
 
     public void MainMenuButton()
     {
+        AudioManager.instance.PlayClip("ButtonSound");
         Time.timeScale = 1f;
         StartCoroutine(LoadingNewScene("_MainMenu"));
     }

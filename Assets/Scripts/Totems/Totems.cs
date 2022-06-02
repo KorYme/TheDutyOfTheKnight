@@ -69,10 +69,12 @@ public class Totems : MonoBehaviour
             {
                 AudioManager.instance.PlayClip("Close");
                 dialogueManager.PanelDisable();
+                firstInteraction = true;
             }
             if (Input.GetKey(inputData.interact) && isPraying)
             {
                 prayTime += Time.deltaTime;
+                Interaction_Player.instance.SetImagE(1 - prayTime);
                 if (prayTime >= 1)
                 {
                     hasAlreadyPrayed = true;
@@ -85,9 +87,11 @@ public class Totems : MonoBehaviour
                     }
                 }
             }
-            else
+            else if (prayTime > 0)
             {
+                AudioManager.instance.PlayClip("Close");
                 prayTime = 0;
+                Interaction_Player.instance.SetImagE(1f);
             }
         }
         else if (dialogueManager.panelOpen && !inRange && dialogueManager.currentPanelUser == gameObject)

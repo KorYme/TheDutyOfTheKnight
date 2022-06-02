@@ -68,7 +68,6 @@ public class ObjectGenerator : MonoBehaviour
             }
             else if (isInRange && !dialogueManager.isMoving)
             {
-                AudioManager.instance.PlayClip("Confirm");
                 dialogueManager.currentPanelUser = gameObject;
                 if (RoomManager.instance.IsItShop())
                 {
@@ -79,22 +78,26 @@ public class ObjectGenerator : MonoBehaviour
                             dialogueManager.PanelEnable();
                         }
                         InitializeMerchant();
-                        dialogueManager.UpdateTheScreen(merchant.namePNJ, objectData.description + " It costs " + objectData.coinCost + " coins.", 1);
+                        AudioManager.instance.PlayClip("Confirm");
+                        dialogueManager.UpdateTheScreen(merchant.namePNJ, objectData.description + " It costs <color=blue>" + objectData.coinCost + "</color> coins.", 1);
                         firstTimeTouched = false;
                     }
                     else if (dialogueManager.panelOpen)
                     {
                         if (playerInventory.nbCoins < objectData.coinCost)
                         {
-                            dialogueManager.UpdateTheScreen(merchant.namePNJ, "You don't have enough money, you'll need " + (objectData.coinCost - playerInventory.nbCoins).ToString() + " more coins to buy it !");
+                            AudioManager.instance.PlayClip("Close");
+                            dialogueManager.UpdateTheScreen(merchant.namePNJ, "You don't have enough money, you'll need <color=blue>" + (objectData.coinCost - playerInventory.nbCoins).ToString() + "</color> more coins to buy it !");
                             firstTimeTouched = true;
                         }
                         else if (!dialogueManager.isMoving)
                         {
+                            AudioManager.instance.PlayClip("Confirm");
                             dialogueManager.UpdateTheScreen(merchant.namePNJ, "Thanks for this purchase, if you want to buy more do not hesitate, I have plenty more !");
                             firstTimeTouched = true;
                             playerInventory.nbCoins -= objectData.coinCost;
                             TakeObject();
+                            InventoryPanel.instance.ShowInventory();
                         }
                     }
                 }
@@ -106,11 +109,13 @@ public class ObjectGenerator : MonoBehaviour
                         {
                             dialogueManager.PanelEnable();
                         }
+                        AudioManager.instance.PlayClip("Confirm");
                         dialogueManager.UpdateTheScreen(objectData.objectName, objectData.description, 3);
                         firstTimeTouched = false;
                     }
                     else if (dialogueManager.panelOpen)
                     {
+                        AudioManager.instance.PlayClip("Close");
                         dialogueManager.PanelDisable();
                         TakeObject();
                     }

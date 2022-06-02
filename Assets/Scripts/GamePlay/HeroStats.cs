@@ -24,8 +24,8 @@ public class HeroStats : MonoBehaviour
     public float speed = 250f;
     public float flashDelay;
     public float invincibilityDelay;
-    public bool invincibility;
-    public bool isDead;
+    [HideInInspector] public bool invincibility;
+    [HideInInspector] public bool isDead;
 
     [Header("Abilities Stats")]
     public float fireDamage = 25f;
@@ -35,14 +35,13 @@ public class HeroStats : MonoBehaviour
     public float explosionDamage = 100f;
     
     [Header("Gamemode Parameters")]
-    public bool nightmareMode;
     [SerializeField] private float capHeroLow;
     private bool heroLow;
 
     [Header("GameObjects and Components")]
-    public SpriteRenderer graphics;
-    public Animator animator;
-    public HealthBar healthBar;
+    [SerializeField] private SpriteRenderer graphics;
+    [SerializeField] private Animator animator;
+    [SerializeField] private HealthBar healthBar;
 
     private HeroMovement heroMovement;
     private HeroAbility heroAbility;
@@ -61,7 +60,12 @@ public class HeroStats : MonoBehaviour
 
     void CheckStateHero()
     {
-        if (heroHP <= capHeroLow && !(heroLow))
+        if (heroHP <= 0)
+        {
+            GameManager.instance.victory = false;
+            IsDying();
+        }
+        else if (heroHP <= capHeroLow && !(heroLow))
         {
             heroLow = true;
             heroAttack *= 2;
@@ -71,11 +75,6 @@ public class HeroStats : MonoBehaviour
             heroLow = false;
             heroAttack /= 2;
         }
-        if (heroHP <= 0)
-        {
-            GameManager.instance.victory = false;
-            IsDying();
-        }
     }
 
     public void IsDying()
@@ -84,6 +83,7 @@ public class HeroStats : MonoBehaviour
         StopHero();
         graphics.sortingOrder = 51;
         animator.SetTrigger("Death");
+        AudioManager.instance.PlayClip("BellDeath");
     }
     
     public void StopHero()
@@ -124,7 +124,7 @@ public class HeroStats : MonoBehaviour
 
     public void AddStatsHero(TotemsData totemsData)
     {
-        AudioManager.instance.PlayClip("TotemBuff");
+        AudioManager.instance.PlayClip("Benediction");
         fireDamage += totemsData.fireDamageBonus;
         shieldDamage += totemsData.fireDamageBonus;
         shieldDuration += totemsData.earthDurationBonus;

@@ -17,29 +17,34 @@ public class InGameMenu : MonoBehaviour
 
     public void ResumeGame()
     {
+        AudioManager.instance.PlayClip("ButtonSound");
         LevelManager.instance.PauseAndUnpause();
     }
 
     public void Settings()
     {
+        AudioManager.instance.PlayClip("ButtonSound");
         settingsWindow.SetActive(true);
         gameObject.SetActive(false);
     }
 
     public void ReturnToMenu()
     {
+        AudioManager.instance.PlayClip("ButtonSound");
         Time.timeScale = 1f;
         SceneManager.LoadScene(levelToLoad);
     }
 
     public void RetryButton()
     {
+        AudioManager.instance.PlayClip("ButtonSound");
         Time.timeScale = 1f;
         StartCoroutine(LoadingNewScene("Etage1"));
     }
 
     public void MainMenuButton()
     {
+        AudioManager.instance.PlayClip("ButtonSound");
         Time.timeScale = 1f;
         StartCoroutine(LoadingNewScene("_MainMenu"));
     }
