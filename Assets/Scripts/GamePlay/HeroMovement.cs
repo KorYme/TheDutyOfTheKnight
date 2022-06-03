@@ -55,6 +55,7 @@ public class HeroMovement : MonoBehaviour
     public void IsFalling()
     {
         animator.SetTrigger("IsFalling");
+        AudioManager.instance.PlayClip("Falling");
         AllowMovement(false);
         RoomManager.instance.EnemiesMoveEnable(false);
     }
