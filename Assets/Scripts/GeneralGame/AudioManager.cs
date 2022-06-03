@@ -106,13 +106,24 @@ public class AudioManager : MonoBehaviour
         }
     }
     
-    public void StopSoundTrack()
+    public void StopAllSoundTrack()
     {
         currentSoundtrack = null;
         nextSoundtrack = "";
         foreach (Sounds s in sounds)
         {
             if (s.soundtrack)
+            {
+                s.source.Stop();
+            }
+        }
+    }
+
+    public void StopAllClips()
+    {
+        foreach (Sounds s in sounds)
+        {
+            if (!s.soundtrack)
             {
                 s.source.Stop();
             }

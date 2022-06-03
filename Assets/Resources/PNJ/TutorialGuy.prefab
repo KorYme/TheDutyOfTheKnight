@@ -149,21 +149,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fd1c20fc9f4e094e9b9707c39d6c941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  namePNJ: Torial
-  sentencesPNJ:
-  - Welcome in the Duty of the Knight !
-  - To get out of those caves, you'll have to defeat the boss who lives down here.
-  - You don't remember how to move or even aim ???
-  - To move, use <color=blue>ZQSD</color> and aim using the <color=blue>Mouse</color>
-    position.
-  - Have you also forgotten how to use your abilities ?
-  - Ok! So <color=blue>A</color> is for the fireball, <color=blue>Right Click</color>
-    is for the teleportation and <color=blue>Space</color> is for the shield.
-  - You can even try the <color=blue>1</color>, <color=blue>2</color> and <color=blue>3</color>
-    keys to combine your ability to unlock new ones
-  - I guess you also don't know anymore how to use your inventory
-  - Press <color=blue>Tab</color> to open the inventory, use your refresh potions
-    with <color=blue>R</color> and <color=blue>Left Shift</color> is for the map
-  - I think you've learned eveything I could teach you.
-  - So I wish you a nice trip adventurer !
   inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
+  namePNJ: Torial
+  dialogue:
+  - sentences: Welcome in the Duty of the Knight !
+    clipSentences: Tuto1
+  - sentences: To get out of those caves, you'll have to defeat the boss who lives
+      down here.
+    clipSentences: Tuto2
+  - sentences: You don't remember how to move or even aim ???
+    clipSentences: Tuto3
+  - sentences: 'To move, use <color=blue>ZQSD</color> and aim using the
+
+      <color=blue>Mouse</color>
+      position.'
+    clipSentences: Tuto4
+  - sentences: Have you also forgotten how to use your abilities ?
+    clipSentences: Tuto3
+  - sentences: Ok! So <color=blue>A</color> is for the fireball, <color=blue>Right
+      Click</color> is for the teleportation and <color=blue>Space</color> is for
+      the shield.
+    clipSentences: Tuto2
+  - sentences: You can even try the <color=blue>1</color>, <color=blue>2</color>
+      and <color=blue>3</color> keys to combine your ability to unlock new ones
+    clipSentences: Tuto4
+  - sentences: I guess you also don't know anymore how to use your inventory
+    clipSentences: Tuto1
+  - sentences: Press <color=blue>Tab</color> to open the inventory, use your refresh
+      potions with <color=blue>R</color> and <color=blue>Left Shift</color> is for
+      the map
+    clipSentences: Tuto3
+  - sentences: I think you've learned eveything I could teach you.
+    clipSentences: Tuto1
+  - sentences: So I wish you a nice trip adventurer !
+    clipSentences: Tuto4

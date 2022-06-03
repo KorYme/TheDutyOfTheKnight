@@ -164,6 +164,7 @@ public class HeroAbility : MonoBehaviour
     {
         if (CanUTP() || alreadyCheck)
         {
+            AudioManager.instance.PlayClip("Teleportation");
             windInCooldown = true;
             coolDownManager.ResetCoolDown("Wind");
             coolDownManager.DisplayRefreshKeyButton();
@@ -197,6 +198,7 @@ public class HeroAbility : MonoBehaviour
     {
         if (CanUTP() && !isDashing)
         {
+            AudioManager.instance.PlayClip("Dash");
             fireInCooldown = true;
             coolDownManager.ResetCoolDown("Fire");
             windInCooldown = true;

@@ -87,13 +87,15 @@ public class ObjectGenerator : MonoBehaviour
                         if (playerInventory.nbCoins < objectData.coinCost)
                         {
                             AudioManager.instance.PlayClip("Close");
+                            AudioManager.instance.PlayClip("ShopAngry");
                             dialogueManager.UpdateTheScreen(merchant.namePNJ, "You don't have enough money, you'll need <color=blue>" + (objectData.coinCost - playerInventory.nbCoins).ToString() + "</color> more coins to buy it !");
                             firstTimeTouched = true;
                         }
-                        else if (!dialogueManager.isMoving)
+                        else
                         {
                             AudioManager.instance.PlayClip("Confirm");
                             dialogueManager.UpdateTheScreen(merchant.namePNJ, "Thanks for this purchase, if you want to buy more do not hesitate, I have plenty more !");
+                            AudioManager.instance.PlayClip("ShopHappy");
                             firstTimeTouched = true;
                             playerInventory.nbCoins -= objectData.coinCost;
                             TakeObject();

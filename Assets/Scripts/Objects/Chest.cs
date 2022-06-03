@@ -36,6 +36,7 @@ public class Chest : MonoBehaviour
     public void OpenTheChest()
     {
         animator.SetTrigger("Opening");
+        AudioManager.instance.PlayClip("Chest");
         Interaction_Player.instance.ForceExit();
         CanBeOpen(false);
     }

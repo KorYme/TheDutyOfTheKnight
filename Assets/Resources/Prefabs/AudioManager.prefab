@@ -145,7 +145,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: DoorOpening
     clip: {fileID: 8300000, guid: 58262d513f247684cb874c162682382c, type: 3}
-    volume: 0.3
+    volume: 0.175
     pitch: 1
     soundtrack: 0
     nextSoundName: 
@@ -222,6 +222,90 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: ButtonSound
     clip: {fileID: 8300000, guid: a66b063f917619842aef0e715757df81, type: 3}
+    volume: 0.15
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: Teleportation
+    clip: {fileID: 8300000, guid: b00ab8e7c3ca5d24a843f5f66e605d6e, type: 3}
+    volume: 0.15
+    pitch: 1.15
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: Dash
+    clip: {fileID: 8300000, guid: b61775f036c86c542bc5090deea187ae, type: 3}
+    volume: 0.15
+    pitch: 1.5
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: Tuto1
+    clip: {fileID: 8300000, guid: 7a77f73757da5374f9775cdd3fd00a8c, type: 3}
+    volume: 0.15
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: Tuto2
+    clip: {fileID: 8300000, guid: 3385e509e8102fb4ba84d276bbf798ca, type: 3}
+    volume: 0.15
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: Tuto3
+    clip: {fileID: 8300000, guid: bdfc5a166408f204ebe39f6af5d2ab75, type: 3}
+    volume: 0.15
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: Tuto4
+    clip: {fileID: 8300000, guid: ceecee726b701e44f8d0dfaa09a1b1c2, type: 3}
+    volume: 0.15
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: ShopGreetings
+    clip: {fileID: 8300000, guid: e1e534257348fff4eb4db895151f8383, type: 3}
+    volume: 0.15
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: Shop1
+    clip: {fileID: 8300000, guid: d0a4ce61e81cfcc4bb6aa3c1bc9beb67, type: 3}
+    volume: 0.15
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: Shop2
+    clip: {fileID: 8300000, guid: e1fd8dd5110f74d4992da23c565445b6, type: 3}
+    volume: 0.15
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: ShopAngry
+    clip: {fileID: 8300000, guid: 25df309523dfd5843a6efbe403f3e015, type: 3}
+    volume: 0.15
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: ShopHappy
+    clip: {fileID: 8300000, guid: 51a555b589a42dd4eb17a1f1c3d0c5de, type: 3}
+    volume: 0.15
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: Chest
+    clip: {fileID: 8300000, guid: 1023c91587319334f8e33e0d7739f8ca, type: 3}
     volume: 0.15
     pitch: 1
     soundtrack: 0

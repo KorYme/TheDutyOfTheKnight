@@ -149,10 +149,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fd1c20fc9f4e094e9b9707c39d6c941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  namePNJ: Lost Merchant
-  sentencesPNJ:
-  - Hello Adventurer ! I hope you're doing great
-  - Your journey has just begun, what are you doing here ?
-  - I've been stuck down here for 20 days now, but skeletons are good friends
-  - Let's talk business, what do you need ? Look at my stuff !
   inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
+  namePNJ: Lost Merchant
+  dialogue:
+  - sentences: Hello Adventurer ! I hope you're doing great
+    clipSentences: ShopGreetings
+  - sentences: Your journey has just begun, what are you doing here ?
+    clipSentences: Shop1
+  - sentences: I've been stuck down here for 20 days now, but skeletons are good
+      friends
+    clipSentences: Shop2
+  - sentences: Let's talk business, what do you need ? Look at my stuff !
+    clipSentences: Shop1

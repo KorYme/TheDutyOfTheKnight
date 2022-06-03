@@ -83,7 +83,6 @@ public class HeroStats : MonoBehaviour
         StopHero();
         graphics.sortingOrder = 51;
         animator.SetTrigger("Death");
-        AudioManager.instance.PlayClip("BellDeath");
     }
     
     public void StopHero()
@@ -104,6 +103,7 @@ public class HeroStats : MonoBehaviour
     {
         animator.speed = 0;
         GameManager.instance.Die();
+        AudioManager.instance.PlayClip("BellDeath");
         AudioManager.instance.PlayClip("DeathTheme");
     }
 

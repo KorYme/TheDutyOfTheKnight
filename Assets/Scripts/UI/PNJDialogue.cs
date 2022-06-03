@@ -8,11 +8,10 @@ public class PNJDialogue : MonoBehaviour
     private Transform playerPos;
     private bool isInRange;
     private int sentencesIndex;
+    [SerializeField] private InputData inputData;
     private DialogueManager dialogueManager;
     public string namePNJ;
-    [TextArea(3,10)]
-    public string[] sentencesPNJ;
-    public InputData inputData;
+    public SentencesPNJ[] dialogue;
 
     private void Start()
     {
@@ -34,21 +33,23 @@ public class PNJDialogue : MonoBehaviour
             if (Input.GetKeyDown(inputData.interact))
             {
                 dialogueManager.currentPanelUser = gameObject;
-                if (sentencesIndex < sentencesPNJ.Length)
+                if (sentencesIndex < dialogue.Length)
                 {
                     AudioManager.instance.PlayClip("Confirm");
                     if (!dialogueManager.panelOpen)
                     {
                         dialogueManager.PanelEnable();
                     }
-                    if (sentencesIndex < sentencesPNJ.Length - 1)
+                    if (sentencesIndex < dialogue.Length - 1)
                     {
-                        dialogueManager.UpdateTheScreen(namePNJ, sentencesPNJ[sentencesIndex]);
+                        dialogueManager.UpdateTheScreen(namePNJ, dialogue[sentencesIndex].sentences);
                     }
                     else
                     {
-                        dialogueManager.UpdateTheScreen(namePNJ, sentencesPNJ[sentencesIndex], 0);
+                        dialogueManager.UpdateTheScreen(namePNJ, dialogue[sentencesIndex].sentences, 0);
                     }
+                    AudioManager.instance.StopAllClips();
+                    AudioManager.instance.PlayClip(dialogue[sentencesIndex].clipSentences);
                     sentencesIndex++;
                 }
                 else
