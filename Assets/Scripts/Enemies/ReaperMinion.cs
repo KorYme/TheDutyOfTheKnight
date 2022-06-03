@@ -36,7 +36,6 @@ public class ReaperMinion : Enemies
         launched = false;
         GetComponent<Collider2D>().enabled = false;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        RoomManager.instance.CheckEnemiesStillIn();
         if (slider != null)
         {
             Destroy(slider.gameObject);

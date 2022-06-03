@@ -5510,8 +5510,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1761319133}
-        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+      - m_Target: {fileID: 1469111992}
+        m_TargetAssemblyTypeName: ScoreMenu, Assembly-CSharp
         m_MethodName: RetryButton
         m_Mode: 1
         m_Arguments:
@@ -6902,8 +6902,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1761319133}
-        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+      - m_Target: {fileID: 1469111992}
+        m_TargetAssemblyTypeName: ScoreMenu, Assembly-CSharp
         m_MethodName: MainMenuButton
         m_Mode: 1
         m_Arguments:
@@ -7473,6 +7473,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   victoryOrNot: {fileID: 1314246295}
   recapText: {fileID: 1635160462}
+  loadingBar: {fileID: 306418945}
+  loadingText: {fileID: 133259594}
+  percentage: {fileID: 1050700049}
+  animator: {fileID: 408643897}
 --- !u!1 &1501682202
 GameObject:
   m_ObjectHideFlags: 0
@@ -11460,10 +11464,6 @@ PrefabInstance:
     - target: {fileID: 5332987533604518570, guid: bb4e862b8200e78478ef8426c59b641a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5332987533604518572, guid: bb4e862b8200e78478ef8426c59b641a, type: 3}
-      propertyPath: sounds.Array.data[14].volume
-      value: 0.075
       objectReference: {fileID: 0}
     - target: {fileID: 5332987533604518575, guid: bb4e862b8200e78478ef8426c59b641a, type: 3}
       propertyPath: m_Name

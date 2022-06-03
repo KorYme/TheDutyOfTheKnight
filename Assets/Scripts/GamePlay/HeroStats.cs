@@ -89,9 +89,7 @@ public class HeroStats : MonoBehaviour
     {
         heroMovement.rb.bodyType = RigidbodyType2D.Kinematic;
         heroMovement.rb.velocity = Vector2.zero;
-        heroMovement.enabled = false;
-        HeroHits.instance.enabled = false;
-        HeroAbility.instance.enabled = false;
+        heroMovement.canPlayerMove = false;
         invincibility = true;
         if (!isDead)
         {

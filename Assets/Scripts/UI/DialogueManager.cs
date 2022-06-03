@@ -62,8 +62,9 @@ public class DialogueManager : MonoBehaviour
 
     public void UpdateTheScreen(string name, string content, int bottomRightText = -1)
     {
+        StopCoroutine("PrintText");
         panelName.text = name;
-        panelContent.text = content;
+        StartCoroutine("PrintText", content);
         switch (bottomRightText)
         {
             case 0:
@@ -84,6 +85,33 @@ public class DialogueManager : MonoBehaviour
             default:
                 panelContinue.text = "Press " + inputData.interact.ToString() + " to continue or " + inputData.close.ToString() + " to close >";
                 return;
+        }
+    }
+
+    IEnumerator PrintText(string text)
+    {
+        panelContent.text = "";
+        bool fill = false;
+        string stocking = "";
+        foreach (char item in text.ToCharArray())
+        {
+            if (item == '<' || fill)
+            {
+                fill = true;
+                stocking += item;
+                if (item == '>')
+                {
+                    panelContent.text += stocking;
+                    stocking = "";
+                    yield return null;
+                    fill = false;
+                }
+            }
+            else
+            {
+                panelContent.text += item;
+                yield return null;
+            }
         }
     }
 }
