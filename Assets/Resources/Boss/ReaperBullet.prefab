@@ -54,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -154,15 +154,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d6caaa66e3c684f98c5f6f0fd6b1c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dead: 0
   enemyHP: 10
-  enemyDamage: 20
-  enemySpeed: 7
+  enemyDamage: 26
+  enemySpeed: 10.5
   sprite: {fileID: -8055734020834997466}
   animator: {fileID: 2157134547959622595}
   invulnerable: 1
   isTouchDamage: 1
-  dead: 0
+  canMove: 0
   slider: {fileID: 0}
+  drops: []
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   direction: {x: 0, y: 0}
   obstacles:
     serializedVersion: 2

@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75a15564fe73164a9f2cc19e1fc1000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totemsList: []
   hasAlreadyPrayed: 0
   totemsData: {fileID: 11400000, guid: 8fb7bf98729352e4e9eb9dc9fa32525a, type: 2}
   inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
@@ -2614,7 +2615,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2866,7 +2867,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3088,7 +3089,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3250,7 +3251,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4340,7 +4341,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4570,13 +4571,13 @@ Tilemap:
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: cc244b2b407b47c4b9b73a51e42b8c24, type: 2}
+    m_Data: {fileID: 11400000, guid: bc577cffcd8e96d44ad40806e07ee587, type: 2}
   - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: da1f29ea266261f44b70db5c467fb901, type: 2}
+    m_Data: {fileID: 11400000, guid: 076cf68876799214cbd998062f7ed9d9, type: 2}
   - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: b0c3e4fb6d0339540bd81263f9dbba00, type: 2}
+    m_Data: {fileID: 11400000, guid: 32498df6a465d9b42b019bec00c84319, type: 2}
   - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: 525fd6ee3acb91a4692140f377853570, type: 2}
+    m_Data: {fileID: 11400000, guid: 3d42dbe43c0c31d4696ae612ad2d0c5c, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: a80bbec293fb9b040ab76ba5d6480090, type: 2}
   - m_RefCount: 1
@@ -4615,13 +4616,13 @@ Tilemap:
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 1
-    m_Data: {fileID: 4675416719600701815, guid: c778fb45e8123f24b8cd154cb0115efb, type: 3}
+    m_Data: {fileID: -5841278725105099121, guid: c778fb45e8123f24b8cd154cb0115efb, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 4326632541582842387, guid: c778fb45e8123f24b8cd154cb0115efb, type: 3}
+    m_Data: {fileID: 5648051701598818102, guid: c778fb45e8123f24b8cd154cb0115efb, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: -7589558509660979219, guid: c778fb45e8123f24b8cd154cb0115efb, type: 3}
+    m_Data: {fileID: -5378400097954922373, guid: c778fb45e8123f24b8cd154cb0115efb, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 5866251911489649533, guid: c778fb45e8123f24b8cd154cb0115efb, type: 3}
+    m_Data: {fileID: 6597271093096821939, guid: c778fb45e8123f24b8cd154cb0115efb, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -4380685740843201857, guid: c778fb45e8123f24b8cd154cb0115efb, type: 3}
   - m_RefCount: 1
@@ -4703,7 +4704,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4974,7 +4975,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5237,7 +5238,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5510,7 +5511,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5773,7 +5774,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5960,7 +5961,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6164,7 +6165,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6433,7 +6434,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6706,7 +6707,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6811,6 +6812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75a15564fe73164a9f2cc19e1fc1000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totemsList: []
   hasAlreadyPrayed: 0
   totemsData: {fileID: 11400000, guid: ef4ee33a8d7b89648a402c59b93e25e1, type: 2}
   inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
@@ -7087,7 +7089,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7176,6 +7178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75a15564fe73164a9f2cc19e1fc1000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totemsList: []
   hasAlreadyPrayed: 0
   totemsData: {fileID: 11400000, guid: e170f15e0112e7842a55be464db333dc, type: 2}
   inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
@@ -7373,7 +7376,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7642,7 +7645,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -260,7 +260,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -372,6 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c2cee14984d6345bed539e066c171c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dead: 0
   enemyHP: 50
   enemyDamage: 20
   enemySpeed: 0
@@ -379,7 +380,6 @@ MonoBehaviour:
   animator: {fileID: 1508601127582176053}
   invulnerable: 0
   isTouchDamage: 0
-  dead: 0
   canMove: 0
   slider: {fileID: 8305365036114741321}
   drops:

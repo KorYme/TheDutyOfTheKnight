@@ -34,6 +34,7 @@ public class ReaperMinion : Enemies
         dead = true;
         enemySpeed = 0;
         launched = false;
+        animator.speed = 1;
         GetComponent<Collider2D>().enabled = false;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         if (slider != null)

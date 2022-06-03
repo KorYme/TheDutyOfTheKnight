@@ -57,7 +57,7 @@ public class Enemies : MonoBehaviour
     {
         if (dead)
             return;
-        if (!invulnerable)
+        else if (!invulnerable)
         {
             GameManager.instance.score += damage;
             enemyHP -= damage;
