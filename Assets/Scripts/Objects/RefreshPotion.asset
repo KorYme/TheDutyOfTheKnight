@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: RefreshPotion
   m_EditorClassIdentifier: 
   objectName: Refresh Potion
-  description: A potion which refresh your cooldown when you use it
+  description: A potion which refresh your cooldown when you use it. Press <color=blue>R</color>
+    to use it.
   sprite: {fileID: 7271025096421245680, guid: 3bd420ef9086fff4b9aeef7941d50d2d, type: 3}
   clipToPlay: PickUp1
   coinCost: 20

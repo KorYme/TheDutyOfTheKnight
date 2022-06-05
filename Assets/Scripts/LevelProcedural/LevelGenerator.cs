@@ -49,7 +49,6 @@ public class LevelGenerator : MonoBehaviour
     [Header ("Test Mode")]
     public bool testMode;
 
-
     private void Awake()
     {
         if (instance != null)

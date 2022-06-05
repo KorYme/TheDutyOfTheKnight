@@ -136,6 +136,13 @@ MonoBehaviour:
     soundtrack: 0
     nextSoundName: 
     source: {fileID: 0}
+  - name: EnemyFireBall
+    clip: {fileID: 8300000, guid: e29364ad50bb4f74aa2c15e105f817dc, type: 3}
+    volume: 0.2
+    pitch: 1.35
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
   - name: PickUp1
     clip: {fileID: 8300000, guid: 99eddfa678322e048a183bb6ccdc3665, type: 3}
     volume: 0.25
@@ -157,16 +164,72 @@ MonoBehaviour:
     soundtrack: 0
     nextSoundName: 
     source: {fileID: 0}
-  - name: FirstSwing
+  - name: SwordSwing1
     clip: {fileID: 8300000, guid: 1e4ff2f8a480e154e8060bff0ccace3b, type: 3}
-    volume: 0.25
+    volume: 0.2
     pitch: 1
     soundtrack: 0
     nextSoundName: 
     source: {fileID: 0}
-  - name: SecondSwing
+  - name: EnemySwing1
+    clip: {fileID: 8300000, guid: 1e4ff2f8a480e154e8060bff0ccace3b, type: 3}
+    volume: 0.15
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: SwordSwing2
     clip: {fileID: 8300000, guid: 4646ced81835cb142b07bbdabfc743ab, type: 3}
     volume: 0.2
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: EnemySwing2
+    clip: {fileID: 8300000, guid: 4646ced81835cb142b07bbdabfc743ab, type: 3}
+    volume: 0.15
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: SwordSwing3
+    clip: {fileID: 8300000, guid: 37da8e57f71c38a49ae30cbf461819b3, type: 3}
+    volume: 0.2
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: EnemySwing3
+    clip: {fileID: 8300000, guid: 37da8e57f71c38a49ae30cbf461819b3, type: 3}
+    volume: 0.15
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: SwordSwing4
+    clip: {fileID: 8300000, guid: f464912a8b21b0c468aa2c52ea8f0903, type: 3}
+    volume: 0.2
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: EnemySwing4
+    clip: {fileID: 8300000, guid: f464912a8b21b0c468aa2c52ea8f0903, type: 3}
+    volume: 0.15
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: SwordSwing5
+    clip: {fileID: 8300000, guid: eaee826f799cb9c4aa7f4a94968574ec, type: 3}
+    volume: 0.2
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: EnemySwing5
+    clip: {fileID: 8300000, guid: eaee826f799cb9c4aa7f4a94968574ec, type: 3}
+    volume: 0.15
     pitch: 1
     soundtrack: 0
     nextSoundName: 
@@ -313,6 +376,34 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Falling
     clip: {fileID: 8300000, guid: 4423416d857b302439ffb20b74a6f7b0, type: 3}
+    volume: 0.15
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: SkeletonDeath
+    clip: {fileID: 8300000, guid: 4e6cb2171270eb048babb2447404f654, type: 3}
+    volume: 0.1
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: SkeletonDamage1
+    clip: {fileID: 8300000, guid: 598c1788a842d0c42a0917088e4e4390, type: 3}
+    volume: 0.2
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: SkeletonDamage2
+    clip: {fileID: 8300000, guid: 4eb3b660faf988a4da96fb9f877f3532, type: 3}
+    volume: 0.2
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: DamageEnemies
+    clip: {fileID: 8300000, guid: 74e0ba1dec0acf64388d5725236761b1, type: 3}
     volume: 0.15
     pitch: 1
     soundtrack: 0

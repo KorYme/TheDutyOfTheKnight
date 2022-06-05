@@ -6,6 +6,7 @@ using UnityEngine;
 public class ObjectsData : ScriptableObject
 {
     public string objectName;
+    [TextArea (4,10)]
     public string description;
     public Sprite sprite;
     public string clipToPlay;

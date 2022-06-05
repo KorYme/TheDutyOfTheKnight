@@ -59,6 +59,7 @@ public class Enemies : MonoBehaviour
             return;
         else if (!invulnerable)
         {
+            AudioManager.instance.PlayClip("DamageEnemy");
             GameManager.instance.score += damage;
             enemyHP -= damage;
             StartCoroutine(Stagger());

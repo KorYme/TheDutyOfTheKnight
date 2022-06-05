@@ -15,11 +15,13 @@ public class AnimationFunctions : MonoBehaviour
     public void Hit()
     {
         skeleton.Hit();
+        AudioManager.instance.PlayClip("EnemySwing" + Random.Range(1,6));
     }
 
     public void HostFireBallCast()
     {
         host.FireBallCast();
+        AudioManager.instance.PlayClip("EnemyFireBall");
     }
 
     public void HostInvicibilityTrue()

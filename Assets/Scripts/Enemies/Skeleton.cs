@@ -130,5 +130,6 @@ public class Skeleton : Enemies
         animator.SetBool("Dying", true);
         base.IsDying();
         SendMessage("StopMovingIA");
+        AudioManager.instance.PlayClip("SkeletonDeath");
     }
 }
