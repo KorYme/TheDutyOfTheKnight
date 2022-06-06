@@ -45,7 +45,7 @@ public class LevelManager : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(inputData.menu) && !HeroStats.instance.isDead && !PlayerInventory.instance.miniMapOpen)
+        if (Input.GetKeyDown(inputData.menu) && !HeroStats.instance.isDead && !PlayerInventory.instance.miniMapOpen && GameManager.instance.gameLaunched)
         {
             PauseAndUnpause();
         }

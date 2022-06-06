@@ -3,6 +3,9 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// Script managing every audio in the game
+/// </summary>
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;

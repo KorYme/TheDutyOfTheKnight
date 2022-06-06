@@ -241,6 +241,7 @@ public class BossFight : Enemies
     /// </summary>
     void AttackBoss1()
     {
+        AudioManager.instance.PlayClip("Scythe1");
         if (Physics2D.OverlapCircle(hitPoint1.position, 1.6f, playerLayer) != null)
             HeroStats.instance.TakeDamageHero(enemyDamage);
     }
@@ -250,7 +251,7 @@ public class BossFight : Enemies
     /// </summary>
     void AttackBoss2()
     {
-
+        AudioManager.instance.PlayClip("Scythe2");
         if (Physics2D.OverlapCircle(hitPoint2.position, 1.15f, playerLayer) != null)
             HeroStats.instance.TakeDamageHero(enemyDamage);
     }
@@ -352,6 +353,20 @@ public class BossFight : Enemies
     /// <inheritdoc />
     protected override void IsDying()
     {
+        StartCoroutine(WaitForHeroToStop());
+    }
+
+    /// <summary>
+    /// Wait for the hero to get his control back
+    /// </summary>
+    /// <returns>Until the player can move</returns>
+    IEnumerator WaitForHeroToStop()
+    {
+        while (!HeroMovement.instance.canPlayerMove)
+        {
+            yield return null;
+        }
+        AudioManager.instance.PlayClip("BossDeathSound");
         animator.speed /= multiplierSpeedPhase2;
         dead = true;
         canMove = false;

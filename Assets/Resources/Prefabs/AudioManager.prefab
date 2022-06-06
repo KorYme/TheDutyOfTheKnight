@@ -402,9 +402,44 @@ MonoBehaviour:
     soundtrack: 0
     nextSoundName: 
     source: {fileID: 0}
-  - name: DamageEnemy
+  - name: Scythe1
+    clip: {fileID: 8300000, guid: aabc451480ba53a42b848adc4d6fc2b1, type: 3}
+    volume: 0.3
+    pitch: 1.2
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: Scythe2
+    clip: {fileID: 8300000, guid: fef7760a033c7154eb4dcebc476bec2a, type: 3}
+    volume: 0.3
+    pitch: 1.2
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: NoDamageHost
     clip: {fileID: 8300000, guid: 74e0ba1dec0acf64388d5725236761b1, type: 3}
     volume: 0.15
+    pitch: 1
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: DamageEnemy
+    clip: {fileID: 8300000, guid: 376e2dbc8deb0814d881d3a2734726f3, type: 3}
+    volume: 0.15
+    pitch: 2
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: DeathSkullAndHost
+    clip: {fileID: 8300000, guid: 69665b77ca7150244ab12c71baa5ed95, type: 3}
+    volume: 0.4
+    pitch: 1.5
+    soundtrack: 0
+    nextSoundName: 
+    source: {fileID: 0}
+  - name: BossDeathSound
+    clip: {fileID: 8300000, guid: 7639a60edff2c5c49bd20b396c50022a, type: 3}
+    volume: 0.3
     pitch: 1
     soundtrack: 0
     nextSoundName: 

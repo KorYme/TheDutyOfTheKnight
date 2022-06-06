@@ -25,6 +25,7 @@ public class DialogueManager : MonoBehaviour
     private TMP_Text panelContent;
     private TMP_Text panelContinue;
     private Animator animator;
+    [SerializeField] private int timeDisplayLetter;
     [HideInInspector] public bool isMoving;
     [HideInInspector] public bool panelOpen;
     [HideInInspector] public GameObject currentPanelUser;
@@ -127,14 +128,20 @@ public class DialogueManager : MonoBehaviour
                 {
                     panelContent.text += stocking;
                     stocking = "";
-                    yield return null;
+                    for (int i = 0; i < timeDisplayLetter; i++)
+                    {
+                        yield return null;
+                    }
                     fill = false;
                 }
             }
             else
             {
                 panelContent.text += item;
-                yield return null;
+                for (int i = 0; i < timeDisplayLetter; i++)
+                {
+                    yield return null;
+                }
             }
         }
     }

@@ -76,6 +76,7 @@ public class Skull : Enemies
     protected override void IsDying()
     {
         base.IsDying();
+        AudioManager.instance.PlayClip("DeathSkullAndHost");
         rb.velocity = Vector2.zero;
         rb.isKinematic = true;
         animator.SetTrigger("Dying");

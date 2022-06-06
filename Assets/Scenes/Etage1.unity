@@ -6168,6 +6168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
+  timeDisplayLetter: 2
   isMoving: 0
   panelOpen: 0
   currentPanelUser: {fileID: 0}

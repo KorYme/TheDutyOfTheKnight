@@ -38,6 +38,7 @@ public class Host : Enemies
         if (invulnerable)
         {
             StartCoroutine(NoStagger());
+            AudioManager.instance.PlayClip("NoDamageHost");
         }
     }
 
@@ -55,7 +56,8 @@ public class Host : Enemies
     /// <inheritdoc/>
     protected override void IsDying()
     {
-        base.IsDying(); 
+        base.IsDying();
+        AudioManager.instance.PlayClip("DeathSkullAndHost");
         animator.SetTrigger("Death");
     }
 }

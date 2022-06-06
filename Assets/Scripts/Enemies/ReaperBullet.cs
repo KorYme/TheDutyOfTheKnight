@@ -58,6 +58,7 @@ public class ReaperBullet : Enemies
     public void HasBeenLaunched()
     {
         launched = true;
+        AudioManager.instance.PlayClip("EnemyFireBall");
     }
 
     /// <inheritdoc />
