@@ -1969,16 +1969,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputdata: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
-  heroRange: 1
   enemyLayers:
     serializedVersion: 2
     m_Bits: 532608
   fireballLayer:
     serializedVersion: 2
     m_Bits: 8
-  worldPosition: {x: 0, y: 0, z: 0}
+  heroRange: 1
   reloadTime: 0.3
   isInReloadTime: 0
+  worldPosition: {x: 0, y: 0, z: 0}
   direction: 
 --- !u!95 &401620111
 Animator:
@@ -2178,17 +2178,16 @@ MonoBehaviour:
   heroStats: {fileID: 401620113}
   fireBall: {fileID: 6067577561094456797, guid: 65a52fbba66c01944926e1304f11631f, type: 3}
   explosion: {fileID: 7844617443299900646, guid: 9656f47995243e548bf00a06530908f7, type: 3}
-  fireBallSpeed: 7
-  radiusCharacter: 0.2
-  knockBackFireBall: 10
-  dashTime: 0.2
-  isDashing: 0
   enemyLayer:
     serializedVersion: 2
     m_Bits: 532608
   cantTPLayer:
     serializedVersion: 2
-    m_Bits: 3146560
+    m_Bits: 11535168
+  fireBallSpeed: 7
+  radiusCharacter: 0.2
+  knockBackFireBall: 10
+  dashTime: 0.2
   shieldOpen: 0
   damagingShield: 0
   cursorPosition: {x: 0, y: 0, z: 0}
@@ -2992,7 +2991,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4194303
+    m_Bits: 12582911
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -4382,7 +4381,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 7710529
+    m_Bits: 16099137
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 796b022359eaf1b41aa00d5919720c24, type: 2}
   m_TargetDisplay: 0
