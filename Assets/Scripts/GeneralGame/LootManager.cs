@@ -1,11 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script managing all the loot in the chest to have the right number of items
+/// </summary>
 public class LootManager : MonoBehaviour
 {
     public static LootManager instance;
-
+    //Singleton initialization
     private void Awake()
     {
         if (instance != null)
@@ -19,8 +21,9 @@ public class LootManager : MonoBehaviour
     private List<GameObject> lootsChest;
     private GameObject bossKey, refreshPotion;
     private GameObject[] otherLoots;
-    [Header("Activate if you don't want other loots inside the box")]
-    public bool onlyRPInside;
+
+    [Header("Only refresh potion in chest")]
+    [SerializeField] private bool onlyRPInside;
 
     private void Start()
     {
@@ -30,6 +33,9 @@ public class LootManager : MonoBehaviour
         InitializeTheLootList();
     }
 
+    /// <summary>
+    /// Create the loot's list
+    /// </summary>
     void InitializeTheLootList()
     {
         lootsChest = new List<GameObject>();
@@ -54,6 +60,10 @@ public class LootManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Take a random loot in the loot's list
+    /// </summary>
+    /// <returns>An available loot</returns>
     public GameObject GetALoot()
     {
         GameObject loot = lootsChest[Random.Range(0,lootsChest.Count)];

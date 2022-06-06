@@ -1,19 +1,21 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script managing all the statistics of the player
+/// </summary>
 public class HeroStats : MonoBehaviour
 {
     public static HeroStats instance;
+    //Singleton Initialization
     private void Awake()
     {
         Time.timeScale = 1f;
-        instance = null;
         if (instance != null)
         {
             Debug.LogError("More than one heroStats instance in the game !");
+            return;
         }
-
         instance = this;
     }
 
@@ -22,10 +24,8 @@ public class HeroStats : MonoBehaviour
     public float heroMaxHealth = 100f;
     public float heroAttack = 20f;
     public float speed = 250f;
-    public float flashDelay;
-    public float invincibilityDelay;
-    [HideInInspector] public bool invincibility;
-    [HideInInspector] public bool isDead;
+    [SerializeField] private float flashDelay;
+    [SerializeField] private float invincibilityDelay;
 
     [Header("Abilities Stats")]
     public float fireDamage = 25f;
@@ -33,10 +33,6 @@ public class HeroStats : MonoBehaviour
     public float shieldDuration = 3f;
     public float dashDamage = 50f;
     public float explosionDamage = 100f;
-    
-    [Header("Gamemode Parameters")]
-    [SerializeField] private float capHeroLow;
-    private bool heroLow;
 
     [Header("GameObjects and Components")]
     [SerializeField] private SpriteRenderer graphics;
@@ -45,6 +41,8 @@ public class HeroStats : MonoBehaviour
 
     private HeroMovement heroMovement;
     private HeroAbility heroAbility;
+    [HideInInspector] public bool invincibility;
+    [HideInInspector] public bool isDead;
 
     void Start()
     {
@@ -58,6 +56,9 @@ public class HeroStats : MonoBehaviour
         isDead = false;
     }
 
+    /// <summary>
+    /// Check if the player is dead after being damaged
+    /// </summary>
     void CheckStateHero()
     {
         if (heroHP <= 0)
@@ -65,18 +66,12 @@ public class HeroStats : MonoBehaviour
             GameManager.instance.victory = false;
             IsDying();
         }
-        else if (heroHP <= capHeroLow && !(heroLow))
-        {
-            heroLow = true;
-            heroAttack *= 2;
-        }
-        else if (heroHP > capHeroLow && heroLow)
-        {
-            heroLow = false;
-            heroAttack /= 2;
-        }
     }
 
+    /// <summary>
+    /// Play the dying animation of the player -
+    /// Called when the player has just died
+    /// </summary>
     public void IsDying()
     {
         isDead = true;
@@ -85,6 +80,9 @@ public class HeroStats : MonoBehaviour
         animator.SetTrigger("Death");
     }
     
+    /// <summary>
+    /// Stop the hero's movement
+    /// </summary>
     public void StopHero()
     {
         heroMovement.rb.bodyType = RigidbodyType2D.Kinematic;
@@ -97,6 +95,9 @@ public class HeroStats : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Display the lose panel and play the death's clips
+    /// </summary>
     public void Death()
     {
         animator.speed = 0;
@@ -105,6 +106,10 @@ public class HeroStats : MonoBehaviour
         AudioManager.instance.PlayClip("DeathTheme");
     }
 
+    /// <summary>
+    /// Deal damage to the player if he is not invincible
+    /// </summary>
+    /// <param name="damage">Number of damage to deal</param>
     public void TakeDamageHero(float damage)
     {
         if (!invincibility)
@@ -120,6 +125,10 @@ public class HeroStats : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Upgrade the hero's stats with the totem stats he prayed for
+    /// </summary>
+    /// <param name="totemsData">Data of all totems</param>
     public void AddStatsHero(TotemsData totemsData)
     {
         AudioManager.instance.PlayClip("Benediction");
@@ -131,7 +140,10 @@ public class HeroStats : MonoBehaviour
         heroAbility.UpgradeCD(totemsData);
     }
 
-
+    /// <summary>
+    /// Heal the hero
+    /// </summary>
+    /// <param name="heal">Number of damage to heal</param>
     public void HealHero(float heal)
     {
         heroHP = heroHP + heal > heroMaxHealth ? heroMaxHealth : heroHP + heal;
@@ -139,6 +151,10 @@ public class HeroStats : MonoBehaviour
         CheckStateHero();
     }
 
+    /// <summary>
+    /// Increase the maximum health of the hero
+    /// </summary>
+    /// <param name="increase">Number of health point to add to the max health</param>
     public void IncreaseMaxHealthHero(float increase)
     {
         heroMaxHealth += increase;
@@ -146,6 +162,10 @@ public class HeroStats : MonoBehaviour
         CheckStateHero();
     }
 
+    /// <summary>
+    /// Timing of the hero's invicibility 
+    /// </summary>
+    /// <returns>Time of the invicibility</returns>
     IEnumerator TheInvicibility()
     {
         invincibility = true;
@@ -154,9 +174,13 @@ public class HeroStats : MonoBehaviour
         invincibility = false;
     }
 
+    /// <summary>
+    /// Create a feedback flash while the player is invincible
+    /// </summary>
+    /// <returns>Time between each flash of the invicibility</returns>
     IEnumerator FlashInvicibility()
     {
-        while (invincibility && !isDead && GameManager.instance.gameLaunched)
+        while (invincibility && !isDead && HeroMovement.instance.canPlayerMove)
         {
         graphics.color = new Color(1f, 1f, 1f, 0f);
         yield return new WaitForSeconds(flashDelay);
@@ -164,4 +188,6 @@ public class HeroStats : MonoBehaviour
         yield return new WaitForSeconds(flashDelay);
         }
     }
+
+    /// <summary>
 }

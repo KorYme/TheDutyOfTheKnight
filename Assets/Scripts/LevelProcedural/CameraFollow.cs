@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script managing the tracking of the player in the camera
+/// </summary>
 public class CameraFollow : MonoBehaviour
 {
     public static CameraFollow instance;
-
+    //Singleton initilization
     private void Awake()
     {
         if (instance != null)
@@ -19,7 +20,7 @@ public class CameraFollow : MonoBehaviour
     private GameObject mainCamera;
     private GameObject player;
     private RoomManager roomManager;
-    public Vector2 playerCoordinates;    
+    [HideInInspector] public Vector2 playerCoordinates;    
 
     private void Start()
     {
@@ -28,9 +29,13 @@ public class CameraFollow : MonoBehaviour
         roomManager = RoomManager.instance;
     }
 
+    /// <summary>
+    /// Change the position of the camera when the player gets out of its range and teleport the player inside of the new room
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             HeroAbility.instance.EndDash();
             if (Mathf.Abs(player.transform.position.x-mainCamera.transform.position.x)> Mathf.Abs(player.transform.position.y - mainCamera.transform.position.y))

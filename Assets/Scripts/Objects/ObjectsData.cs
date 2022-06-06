@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName ="ObjectsData", menuName = "MyGame/ObjectsData")]
 public class ObjectsData : ScriptableObject
 {
+    public Sprite sprite;
     public string objectName;
     [TextArea (4,10)]
     public string description;
-    public Sprite sprite;
     public string clipToPlay;
     public int coinCost;
     public int coinGiven;

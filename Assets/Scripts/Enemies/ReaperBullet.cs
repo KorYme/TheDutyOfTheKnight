@@ -26,7 +26,7 @@ public class ReaperBullet : Enemies
         if (launched)
         {
             base.FixedUpdate();
-            transform.Translate(direction* enemySpeed * Time.fixedDeltaTime);
+            transform.Translate(enemySpeed * Time.fixedDeltaTime * direction);
         }
         if (boss.dead && !dead)
         {

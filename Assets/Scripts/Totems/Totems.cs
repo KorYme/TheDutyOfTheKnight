@@ -1,20 +1,21 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script managing all the totems
+/// </summary>
 public class Totems : MonoBehaviour
 {
+    private DialogueManager dialogueManager;
+    private HeroStats heroStats;
     private bool inRange;
     private bool isPraying;
     private bool eToClose;
     private bool firstInteraction;
     private float prayTime;
-    private DialogueManager dialogueManager;
-    private HeroStats heroStats;
-    public List<GameObject> totemsList;
+    [HideInInspector] public List<GameObject> totemsList;
     [HideInInspector] public bool hasAlreadyPrayed;
 
-    [Header ("To define values")]
     public TotemsData totemsData;
     public InputData inputData;
 
@@ -100,6 +101,10 @@ public class Totems : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Check if the player has already prayed in this room
+    /// </summary>
+    /// <returns>True if the player has alreadyPrayed, else false</returns>
     bool HasPlayerAlreadyPrayed()
     {
         foreach (var item in totemsList)
@@ -112,18 +117,26 @@ public class Totems : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Check if the player is in range of the totem
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             inRange = true;
             firstInteraction = true;
         }
     }
 
+    /// <summary>
+    /// Check if the player is not anymore in range of the totem
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.transform.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             inRange = false;
             isPraying = false;

@@ -1,19 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script managing all the objects behaviour
+/// </summary>
 public class ObjectGenerator : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
-    private bool isInRange;
     private PNJDialogue merchant;
-    private bool firstTimeTouched;
     private DialogueManager dialogueManager;
     private HeroStats heroStats;
     private PlayerInventory playerInventory;
+    private SpriteRenderer spriteRenderer;
     private Animator animator;
-    public ObjectsData objectData;
-    public InputData inputData;
+    private bool isInRange;
+    private bool firstTimeTouched;
+
+    [SerializeField] private ObjectsData objectData;
+    [SerializeField] private InputData inputData;
 
     private void Start()
     {
@@ -27,6 +29,9 @@ public class ObjectGenerator : MonoBehaviour
         animator = transform.GetChild(0).GetComponent<Animator>();
     }
 
+    /// <summary>
+    /// Take an object and add its stats to the player
+    /// </summary>
     public void TakeObject()
     {
         heroStats.IncreaseMaxHealthHero(objectData.maxHealthGiven);
@@ -45,11 +50,17 @@ public class ObjectGenerator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Create a appearance effect on the objects when entering a shop
+    /// </summary>
     public void ResetAnimator()
     {
         animator.SetTrigger("EnterRoom");
     }
 
+    /// <summary>
+    /// Initialize the merchant for the dialogue
+    /// </summary>
     private void InitializeMerchant()
     {
         if (merchant == null)
@@ -152,17 +163,25 @@ public class ObjectGenerator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Check if the player is in range of the object
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             isInRange = true;
         }
     }
 
+    /// <summary>
+    /// Check if the player is not anymore in range of the object
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             isInRange = false;
             firstTimeTouched = true;

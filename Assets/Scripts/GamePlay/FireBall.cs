@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -14,7 +15,7 @@ public class FireBall : MonoBehaviour
 
     private void Start()
     {
-        Invoke("DestroyProjectile", 5);
+        StartCoroutine(DestroyTime());
     }
 
     private void FixedUpdate()
@@ -22,7 +23,7 @@ public class FireBall : MonoBehaviour
         //Give the movement to the fireball
         if (HeroMovement.instance.canPlayerMove)
         {
-            transform.Translate(Vector3.right * fireBallSpeed * Time.fixedDeltaTime);
+            transform.Translate(fireBallSpeed * Time.fixedDeltaTime * Vector3.right);
         }
     }
 
@@ -45,6 +46,16 @@ public class FireBall : MonoBehaviour
     }
 
     /// <summary>
+    /// Destroy the fireball after some time
+    /// </summary>
+    /// <returns>5 seconds</returns>
+    IEnumerator DestroyTime()
+    {
+        yield return new WaitForSeconds(5f);
+        DestroyProjectile();
+    }
+
+    /// <summary>
     /// Check if the fireball meets an obstacle or a target
     /// </summary>
     /// <param name="collision"></param>
@@ -54,14 +65,14 @@ public class FireBall : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else if (targets == (targets | (1 << collision.gameObject.layer)) && collision.tag != "Coordinates")
+        else if (targets == (targets | (1 << collision.gameObject.layer)) && !collision.CompareTag("Coordinates"))
         {
-            if (playerFireball && collision.tag != "Player")
+            if (playerFireball && !collision.CompareTag("Player"))
             {
                 collision.gameObject.SendMessage("TakeDamage", HeroStats.instance.fireDamage);
                 Destroy(gameObject);
             }
-            else if (!playerFireball && collision.tag == "Player")
+            else if (!playerFireball && collision.CompareTag("Player"))
             {
                 collision.gameObject.SendMessage("TakeDamageHero", fireBallDamage);
                 Destroy(gameObject);

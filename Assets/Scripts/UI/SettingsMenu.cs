@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using System.Linq;
-using UnityEngine.SceneManagement;
-using System.Collections;
 using TMPro;
 
+/// <summary>
+/// Script managing all the game windows settings
+/// </summary>
 public class SettingsMenu : MonoBehaviour
 {
-    public AudioMixer audioMixer;
-    public TMP_Dropdown dropdown;
-    public GameObject entryMenu;
     private Resolution[] resolutions;
-    public bool isFullScreen;
-    public int currentIndexResolutions;
+    [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private TMP_Dropdown dropdown;
+    [SerializeField] private GameObject entryMenu;
+    [SerializeField] private bool isFullScreen;
+    [SerializeField] private int currentIndexResolutions;
 
     private void Awake()
     {
@@ -41,18 +42,33 @@ public class SettingsMenu : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Set the volume of the game -
+    /// Called on slider movement
+    /// </summary>
+    /// <param name="volume">Volume of the game</param>
     public void SetVolume(float volume)
     {
         audioMixer.SetFloat("volume", volume);
         GameManager.instance.currentVolume = volume;
     }
 
+    /// <summary>
+    /// Set the game in full screen or not -
+    /// Called on click
+    /// </summary>
+    /// <param name="isFullScreen"></param>
     public void SetFullScreen(bool isFullScreen)
     {
         AudioManager.instance.PlayClip("ButtonSound");
         Screen.fullScreen = isFullScreen;
     }
 
+    /// <summary>
+    /// Change the resolution of the game -
+    /// Called on dropdown change
+    /// </summary>
+    /// <param name="resolutionIndex"></param>
     public void SetResolution(int resolutionIndex)
     {
         AudioManager.instance.PlayClip("ButtonSound");
@@ -61,6 +77,10 @@ public class SettingsMenu : MonoBehaviour
         GameManager.instance.currentIndexResolutions = resolutionIndex;
     }
 
+    /// <summary>
+    /// Close the settings panel -
+    /// Called on click
+    /// </summary>
     public void CloseSettings()
     {
         AudioManager.instance.PlayClip("ButtonSound");

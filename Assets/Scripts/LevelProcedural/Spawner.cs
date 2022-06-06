@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script managing the spawn of monsters
+/// </summary>
 public class Spawner : MonoBehaviour
 {
-    public GameObject[] monsters;
+    [SerializeField] private GameObject[] monsters;
 
     private void Start()
     {
@@ -14,9 +15,12 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Choose a random monster among the list and instantiate it
+    /// </summary>
     public void Spawn()
     {
-        GameObject enemy = Instantiate(monsters[Random.Range(0, monsters.Length)], transform.position, Quaternion.identity);
+        Instantiate(monsters[Random.Range(0, monsters.Length)], transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

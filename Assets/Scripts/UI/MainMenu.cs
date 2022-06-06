@@ -1,26 +1,39 @@
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using TMPro;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
+/// <summary>
+/// Script managing the main menu
+/// </summary>
 public class MainMenu : MonoBehaviour
 {
-    public string levelToLoad;
-    public GameObject settingsWindow;
-
     [Header("Loading Panel")]
     [SerializeField] private Slider loadingBar;
     [SerializeField] private TMP_Text loadingText;
     [SerializeField] private TMP_Text percentage;
     [SerializeField] private Animator animator;
 
+    [Header("Other variables to fill")]
+    [SerializeField] private GameObject settingsWindow;
+    [SerializeField] private string levelToLoad;
+
+    /// <summary>
+    /// Launch a game - 
+    /// Called on click
+    /// </summary>
     public void StartGame()
     {
         AudioManager.instance.PlayClip("ButtonSound");
         Time.timeScale = 1f;
         StartCoroutine(LoadingNewScene(levelToLoad));
     }
+
+    /// <summary>
+    /// Open the settings menu -
+    /// Called on click
+    /// </summary>
     public void Settings()
     {
         AudioManager.instance.PlayClip("ButtonSound");
@@ -28,12 +41,20 @@ public class MainMenu : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Close the game window -
+    /// Called on click
+    /// </summary>
     public void QuitGame()
     {
         AudioManager.instance.PlayClip("ButtonSound");
         Application.Quit();
     }
 
+    /// <summary>
+    /// Return to the main menu -
+    /// Called on click
+    /// </summary>
     public void MainMenuButton()
     {
         AudioManager.instance.PlayClip("ButtonSound");
@@ -41,6 +62,11 @@ public class MainMenu : MonoBehaviour
         StartCoroutine(LoadingNewScene("_MainMenu"));
     }
 
+    /// <summary>
+    /// Load asynchroneously the scene and display a loading screen
+    /// </summary>
+    /// <param name="sceneToLoad">The sceen to load</param>
+    /// <returns></returns>
     IEnumerator LoadingNewScene(string sceneToLoad)
     {
         yield return null;

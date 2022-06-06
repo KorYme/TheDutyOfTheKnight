@@ -1816,7 +1816,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1654731949}
   m_HandleRect: {fileID: 0}
@@ -2031,17 +2031,16 @@ MonoBehaviour:
   speed: 250
   flashDelay: 0.15
   invincibilityDelay: 2
-  invincibility: 0
-  isDead: 0
   fireDamage: 50
   shieldDamage: 25
   shieldDuration: 3
   dashDamage: 50
   explosionDamage: 100
-  capHeroLow: 10
   graphics: {fileID: 401620116}
   animator: {fileID: 401620111}
   healthBar: {fileID: 1720771904}
+  invincibility: 0
+  isDead: 0
 --- !u!50 &401620114
 Rigidbody2D:
   serializedVersion: 4
@@ -2204,12 +2203,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d114251df1c0df438d7a61aec681a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
+  miniMap: {fileID: 719263231}
   nbCoins: 0
   nbPotionRefresh: 0
   nbKeyBoss: 0
   miniMapOpen: 0
-  inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
-  miniMap: {fileID: 719263231}
 --- !u!1 &408643892
 GameObject:
   m_ObjectHideFlags: 0
@@ -6168,10 +6167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5723579f846b6c4a8b5e803a5012b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
   isMoving: 0
   panelOpen: 0
   currentPanelUser: {fileID: 0}
-  inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
 --- !u!95 &1234496435
 Animator:
   serializedVersion: 3
@@ -7071,13 +7070,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 941a5b33211597342b73fca11a3fefe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenuUI: {fileID: 238275122}
-  levelGenerator: {fileID: 1358435963}
+  inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
+  theBigGrid: {fileID: 732598715}
   hud: {fileID: 1397955654}
   endGameMenu: {fileID: 1469111987}
-  inputData: {fileID: 11400000, guid: d6aa720fbaf04bf4bbfc306f044d5e5f, type: 2}
+  pauseMenuUI: {fileID: 238275122}
   pauseMenu: 0
-  theBigGrid: {fileID: 732598715}
 --- !u!4 &1358435962
 Transform:
   m_ObjectHideFlags: 0
@@ -7104,17 +7102,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b6a057e10934884d8e5e081356bbaab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  theBigGrid: {fileID: 732598715}
   levelHeight: 5
   levelWidth: 5
   spawnCentered: 0
-  theBigGrid: {fileID: 732598715}
   nbShopAsked: 2
   nbAbilityAsked: 2
   nbRoomsAsked: 12
   nbChestRoomsAsked: 6
   spawnX: 0
   spawnY: 0
-  rooms: []
   testMode: 1
 --- !u!114 &1358435964
 MonoBehaviour:

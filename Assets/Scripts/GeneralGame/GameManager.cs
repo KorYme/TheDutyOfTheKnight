@@ -1,12 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
+/// <summary>
+/// The game manager
+/// </summary>
 public class GameManager : MonoBehaviour
 {
-    [field:HideInInspector]
-    public bool gameLaunched;
+    [HideInInspector] public bool gameLaunched;
     public bool victory;
     public float score;
     public int timer;
@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour
     public int currentIndexResolutions = -1;
     public float currentVolume;
 
-    //Create the Singleton
     public static GameManager instance;
+    //Singleton initialization
     private void Awake()
     {
         if (instance != null)

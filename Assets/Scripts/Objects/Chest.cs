@@ -1,14 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script for the chests
+/// </summary>
 public class Chest : MonoBehaviour
 {
+    [Header ("Inputs data")]
+    [SerializeField] private InputData inputData;
+    
     private Animator animator;
+    private GameObject sprinkleGameobject;
     private bool canBeOpen;
     private bool isInRange;
-    public InputData inputData;
-    private GameObject sprinkleGameobject;
 
     void Start()
     {
@@ -26,6 +29,10 @@ public class Chest : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Set the openable or not
+    /// </summary>
+    /// <param name="that">True, openable and false if not</param>
     public void CanBeOpen(bool that)
     {
         canBeOpen = that;
@@ -33,6 +40,9 @@ public class Chest : MonoBehaviour
         tag = that ? "Chest" : "Untagged";
     }
 
+    /// <summary>
+    /// Play the opening animation
+    /// </summary>
     public void OpenTheChest()
     {
         animator.SetTrigger("Opening");
@@ -41,22 +51,33 @@ public class Chest : MonoBehaviour
         CanBeOpen(false);
     }
 
+    /// <summary>
+    /// Spawn the object in the chest
+    /// </summary>
     public void InstantiateItem()
     {
         Instantiate(LootManager.instance.GetALoot(), transform.position, Quaternion.identity);
     }
 
+    /// <summary>
+    /// Check if the player is in range of the chest
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Coordinates")
+        if (other.CompareTag("Coordinates"))
         {
             isInRange = true;
         }
     }
 
+    /// <summary>
+    /// Check if the player is not anymore in range of the chest
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Coordinates")
+        if (other.CompareTag("Coordinates"))
         {
             isInRange = false;
         }

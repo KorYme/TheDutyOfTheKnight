@@ -142,7 +142,7 @@ public class HeroAbility : MonoBehaviour
         GameObject bulletLaunch = Instantiate(fireBall, transform.position, Quaternion.identity);
         bulletLaunch.GetComponent<FireBall>().SetDirection(mouseDirection.normalized);
         bulletLaunch.GetComponent<FireBall>().fireBallSpeed = fireBallSpeed;
-        rb.velocity += mouseDirection.normalized * -1 * knockBackFireBall;
+        rb.velocity -= mouseDirection.normalized * knockBackFireBall;
         AudioManager.instance.PlayClip("Fireball");
     }
 

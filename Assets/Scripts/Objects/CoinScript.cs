@@ -1,35 +1,29 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CoinScript : MonoBehaviour
 {
     [SerializeField] private ObjectsData objectsData;
-    [SerializeField] private float timeToDestroying;
-    private float flashDelay;
-    Vector3 currentPosition;
 
+    [Header ("Parameters")]
+    [SerializeField] private float timeToDestroying;
+
+    private float flashDelay = 0.2f;
 
     private void Start()
     {
         GetComponent<CircleCollider2D>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
         StartCoroutine(WaitToStartToggle());
-        flashDelay = 0.2f;
-        currentPosition = transform.position;
     }
 
-    private void Update()
-    {
-        if (transform.position != currentPosition)
-        {
-            Debug.Log("LA");
-        }
-    }
-
+    /// <summary>
+    /// Check if the coin has been taken
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             AudioManager.instance.PlayClip(objectsData.clipToPlay);
             PlayerInventory.instance.AddToInventory(objectsData);
@@ -37,16 +31,26 @@ public class CoinScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Display the coin
+    /// </summary>
     void ActivateCoinSprite()
     {
         GetComponent<SpriteRenderer>().enabled = true; 
     }
 
+    /// <summary>
+    /// Make it tangible
+    /// </summary>
     void ActivateCoinCollider()
     {
         GetComponent<CircleCollider2D>().enabled = true;
     }
-    
+
+    /// <summary>
+    /// Manage the effects of the coin disappearance
+    /// </summary>
+    /// <returns></returns>
     IEnumerator WaitToStartToggle()
     {
         yield return new WaitForSeconds(timeToDestroying / 2);
@@ -57,6 +61,10 @@ public class CoinScript : MonoBehaviour
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Create the blinking effect on the screen
+    /// </summary>
+    /// <returns></returns>
     IEnumerator IsToggling()
     {
         GetComponent<SpriteRenderer>().enabled = !GetComponent<SpriteRenderer>().enabled;

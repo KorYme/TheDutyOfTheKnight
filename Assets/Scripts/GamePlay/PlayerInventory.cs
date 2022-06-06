@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
+/// <summary>
+/// Script managing the player's inventory and the minimap
+/// </summary>
 public class PlayerInventory : MonoBehaviour
 {
     public static PlayerInventory instance;
-
+    //Singleton initialization
     private void Awake()
     {
         if (instance != null)
@@ -17,14 +17,16 @@ public class PlayerInventory : MonoBehaviour
         instance = this;
     }
 
+    [SerializeField] private InputData inputData;
+    [SerializeField] private GameObject miniMap;
+
     [Header ("Current stuff")]
     public int nbCoins;
     public int nbPotionRefresh;
     public int nbKeyBoss;
+
     private InventoryPanel inventoryPanel;
     [HideInInspector] public bool miniMapOpen;
-    [SerializeField] private InputData inputData;
-    [SerializeField] private GameObject miniMap;
 
     private void Start()
     {
@@ -67,6 +69,10 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Add an object to the inventory
+    /// </summary>
+    /// <param name="objectData">The object's data</param>
     public void AddToInventory(ObjectsData objectData)
     {
         nbCoins += objectData.coinGiven;
@@ -77,6 +83,9 @@ public class PlayerInventory : MonoBehaviour
         inventoryPanel.ShowInventory();
     }
 
+    /// <summary>
+    /// Refresh all the cooldowns and remove a refresh potion of the inventory if the player has already one
+    /// </summary>
     void UseRefreshPotion()
     {
         if (nbPotionRefresh > 0)
@@ -89,12 +98,18 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Enable the minimap
+    /// </summary>
     public void MiniMapEnable()
     {
         miniMapOpen = true;
         miniMap.SetActive(true);
     }
 
+    /// <summary>
+    /// Disable the minimap
+    /// </summary>
     public void MiniMapDisable()
     {
         miniMapOpen = false;

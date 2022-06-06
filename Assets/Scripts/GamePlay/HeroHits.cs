@@ -17,7 +17,6 @@ public class HeroHits : MonoBehaviour
         instance = this;
     }
 
-    [Header("Input Data")]
     [SerializeField] private InputData inputdata;
 
     [Header ("Hits Variables")]

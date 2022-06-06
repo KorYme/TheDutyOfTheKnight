@@ -1,28 +1,36 @@
 using UnityEngine;
-using System.Collections.Generic;
 using UnityEngine.UI;
-using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using TMPro;
 
+/// <summary>
+/// Script managing the score menu
+/// </summary>
 public class ScoreMenu : MonoBehaviour
 {
-    public TMP_Text victoryOrNot;
-    public TMP_Text recapText;
-
+    [Header("EndGame Panel")]
+    [SerializeField] private TMP_Text victoryOrNot;
+    [SerializeField] private TMP_Text recapText;
     [Header("Loading Panel")]
     [SerializeField] private Slider loadingBar;
     [SerializeField] private TMP_Text loadingText;
     [SerializeField] private TMP_Text percentage;
     [SerializeField] private Animator animator;
 
-
+    /// <summary>
+    /// Update the endgame menu with the score and the timer -
+    /// </summary>
     public void UpdateTheScore()
     {
         victoryOrNot.text = GameManager.instance.victory ? "Victory" : "Defeat";
         recapText.text = (GameManager.instance.victory ? "You've survived to the dungeon!" : "You died in the donjon!") + " Your journey lasts " + (GameManager.instance.timer / 60).ToString() + " minutes and " + (GameManager.instance.timer % 60).ToString() + " seconds, you also dealt " + GameManager.instance.score.ToString() + " damages to enemies.";
     }
 
+    /// <summary>
+    /// Reload the level -
+    /// Called on click
+    /// </summary>
     public void RetryButton()
     {
         AudioManager.instance.PlayClip("ButtonSound");
@@ -30,6 +38,10 @@ public class ScoreMenu : MonoBehaviour
         StartCoroutine(LoadingNewScene("Etage1"));
     }
 
+    /// <summary>
+    /// Return to the main menu -
+    /// Called on click
+    /// </summary>
     public void MainMenuButton()
     {
         AudioManager.instance.PlayClip("ButtonSound");
@@ -37,6 +49,11 @@ public class ScoreMenu : MonoBehaviour
         StartCoroutine(LoadingNewScene("_MainMenu"));
     }
 
+    /// <summary>
+    /// Load asynchroneously the scene and display a loading screen
+    /// </summary>
+    /// <param name="sceneToLoad">The sceen to load</param>
+    /// <returns></returns>
     IEnumerator LoadingNewScene(string sceneToLoad)
     {
         yield return null;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,8 +5,19 @@ public class CoolDownManager : MonoBehaviour
 {
     public static CoolDownManager instance;
 
-    HeroHits heroHits;
-    HeroAbility heroAbility;
+    //Singleton initialization
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.Log("There is more than one CoolDownManager in the game");
+            return;
+        }
+        instance = this;
+    }
+
+    private HeroHits heroHits;
+    private HeroAbility heroAbility;
 
     [Header("All CoolDown Images")]
     [SerializeField] Image imageCDHit;
@@ -20,16 +29,6 @@ public class CoolDownManager : MonoBehaviour
     [SerializeField] GameObject keyButtonWind;
     [SerializeField] GameObject keyButtonFire;
 
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            Debug.Log("There is more than one CoolDownManager in the game");
-            return;
-        }
-        instance = this;
-    }
-
     private void Start()
     {
         InitializeAllObjects();
@@ -37,12 +36,19 @@ public class CoolDownManager : MonoBehaviour
         DisplayRefreshKeyButton();
     }
 
+    /// <summary>
+    /// Initialize all the references
+    /// </summary>
     void InitializeAllObjects()
     {
         heroHits = HeroHits.instance;
         heroAbility = HeroAbility.instance;
     }
 
+    /// <summary>
+    /// Set up all cooldowns to 0
+    /// </summary>
+    /// <param name="notStart"></param>
     public void InitializeCDTo0(bool notStart = true)
     {
         if (!notStart)
@@ -57,6 +63,9 @@ public class CoolDownManager : MonoBehaviour
         heroAbility.fireInCooldown = false;
     }
 
+    /// <summary>
+    /// Check if it can display the key of each ability
+    /// </summary>
     public void DisplayRefreshKeyButton()
     {
         keyButtonHit.SetActive(!heroHits.isInReloadTime);
@@ -72,6 +81,9 @@ public class CoolDownManager : MonoBehaviour
         CheckCD();
     }
 
+    /// <summary>
+    /// Check if an ability is on cooldown and decrease its remaining time 
+    /// </summary>
     void CheckCD()
     {
         if (heroHits.isInReloadTime)
@@ -112,6 +124,11 @@ public class CoolDownManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Set up a cooldown to 1 -
+    /// Called after using an ability
+    /// </summary>
+    /// <param name="name">Ability's name</param>
     public void ResetCoolDown(string name)
     {
         switch (name)

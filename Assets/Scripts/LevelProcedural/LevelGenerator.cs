@@ -1,31 +1,36 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script generating all the level
+/// </summary>
 public class LevelGenerator : MonoBehaviour
 {
     public static LevelGenerator instance;
 
     [Header("Level Parameters")]
     public RoomType[,] level;
-    public int levelHeight;
-    public int levelWidth;
-    public bool spawnCentered;
-    public GameObject theBigGrid;
+    [SerializeField] private GameObject theBigGrid;
+    [SerializeField] private int levelHeight;
+    [SerializeField] private int levelWidth;
+    [SerializeField] private bool spawnCentered;
 
     [Header ("Number of rooms asked")]
-    public int nbShopAsked;
-    public int nbAbilityAsked;
-    public int nbRoomsAsked;
+    [SerializeField] private int nbShopAsked;
+    [SerializeField] private int nbAbilityAsked;
+    [SerializeField] private int nbRoomsAsked;
     public int nbChestRoomsAsked;
     [HideInInspector] public int spawnX;
     [HideInInspector] public int spawnY;
+
+    [Header ("Test Mode")]
+    public bool testMode;
 
     private int totalNumberRoomsAsked;
     private int totalNumberRoomsCreated;
     private int abilityRoomCreated;
     private int shopRoomCreated;
-
+    
     [HideInInspector]
     public enum RoomType
     {
@@ -38,17 +43,15 @@ public class LevelGenerator : MonoBehaviour
     }
 
     private List<GameObject> allRooms;
+    private List<Vector2> roomsWithChest;
     private GameObject spawnRoom;
     private GameObject shopRoom;
     private GameObject bossRoom;
     private GameObject abilityRoom;
     private GameObject miniMapBlock;
     private Transform miniMapBlocks;
-    [HideInInspector] public List<Vector2> rooms;
 
-    [Header ("Test Mode")]
-    public bool testMode;
-
+    //Singleton initialization
     private void Awake()
     {
         if (instance != null)
@@ -57,13 +60,16 @@ public class LevelGenerator : MonoBehaviour
             return;
         }
         instance = this;
-        InitializingValue();
+        InitializingValues();
         CenteringSpawn(spawnCentered);
         CameraFollow.instance.playerCoordinates = new Vector2(spawnX, spawnY);
         FillRoomList();
     }
 
-    void InitializingValue()
+    /// <summary>
+    /// Initialize all the values
+    /// </summary>
+    void InitializingValues()
     {
         totalNumberRoomsAsked = 2 + nbRoomsAsked + nbShopAsked + nbAbilityAsked;
         nbChestRoomsAsked = nbChestRoomsAsked > nbRoomsAsked ? nbRoomsAsked : nbChestRoomsAsked;
@@ -75,10 +81,13 @@ public class LevelGenerator : MonoBehaviour
         totalNumberRoomsCreated = 0;
         abilityRoomCreated = 0;
         shopRoomCreated = 0;
-        rooms = new List<Vector2>();
+        roomsWithChest = new List<Vector2>();
         miniMapBlocks = theBigGrid.transform.Find("MiniMapBlocks");
     }
 
+    /// <summary>
+    /// Take every prefabs from the resources folder
+    /// </summary>
     void FillRoomList()
     {
         allRooms = new List<GameObject>();
@@ -94,6 +103,10 @@ public class LevelGenerator : MonoBehaviour
         miniMapBlock = Resources.Load<GameObject>("SpecialRooms/MiniMapBlock");
     }
 
+    /// <summary>
+    /// Position the spawn in the level
+    /// </summary>
+    /// <param name="isCentered">If true, position it in the middle</param>
     void CenteringSpawn(bool isCentered)
     {
         if (isCentered || testMode)
@@ -108,9 +121,12 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Create all the level
+    /// </summary>
     public void CreatingLevel()
     {
-        rooms.Clear();
+        roomsWithChest.Clear();
         level = new RoomType[levelHeight, levelWidth];
         for (int i = 0; i < levelHeight; i++)
         {
@@ -127,7 +143,7 @@ public class LevelGenerator : MonoBehaviour
             int width = Random.Range(0, levelWidth);
             if (HowManyRoundAround(height, width) > 0 && level[height, width] == RoomType.Null)
             {
-                rooms.Add(new Vector2(height,width));
+                roomsWithChest.Add(new Vector2(height,width));
                 level[height, width] = RoomType.Room;
                 totalNumberRoomsCreated++;
             }
@@ -146,7 +162,7 @@ public class LevelGenerator : MonoBehaviour
                     GameObject ARoom = Instantiate(ChooseTheRightRoom(level[i,y]), theBigGrid.transform, false);
                     ARoom.name = level[i,y] + " [" + (i - spawnX).ToString() + "," + (y - spawnY).ToString() + "]";
                     ARoom.transform.position = new Vector3((i - spawnX) * 20 - 0.5f, (y - spawnY) * 12, 0);
-                    if (rooms.Contains(new Vector2(i,y)))
+                    if (roomsWithChest.Contains(new Vector2(i,y)))
                     {
                         ARoom.name += " CHEST IN";
                     }
@@ -161,16 +177,15 @@ public class LevelGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// Test Mode
-    /// Place rooms in very specificate places
+    /// Position rooms in very specific places
     /// </summary>
     void TestMode()
     {
         if (testMode)
         {
-            rooms.Remove(new Vector2(spawnX, spawnY + 1));
-            rooms.Remove(new Vector2(1+spawnX, spawnY));
-            rooms.Remove(new Vector2(spawnX, spawnY-1));
+            roomsWithChest.Remove(new Vector2(spawnX, spawnY + 1));
+            roomsWithChest.Remove(new Vector2(1+spawnX, spawnY));
+            roomsWithChest.Remove(new Vector2(spawnX, spawnY-1));
             level[spawnX, spawnY + 1] = RoomType.Boss;
             level[spawnX + 1, spawnY] = RoomType.Ability;
             level[spawnX, spawnY - 1] = RoomType.Shop;
@@ -208,19 +223,19 @@ public class LevelGenerator : MonoBehaviour
     public List<string> WhichRoundAround(int height, int width)
     {
         List<string> cardinalsPoints = new List<string>();
-        if (height > 0 ? level[height - 1, width] != RoomType.Null : false)
+        if (height > 0 ? level[height - 1, width] != RoomType.Null : height > 0)
         {
             cardinalsPoints.Add("West");
         }
-        if (height < levelHeight - 1 ? level[height + 1, width] != RoomType.Null : false)
+        if (height < levelHeight - 1 ? level[height + 1, width] != RoomType.Null : height < levelHeight - 1)
         {
             cardinalsPoints.Add("East");
         }
-        if (width > 0 ? level[height, width - 1] != RoomType.Null : false)
+        if (width > 0 ? level[height, width - 1] != RoomType.Null : width > 0)
         {
             cardinalsPoints.Add("South");
         }
-        if (width < levelWidth - 1 ? level[height, width + 1] != RoomType.Null : false)
+        if (width < levelWidth - 1 ? level[height, width + 1] != RoomType.Null : width < levelWidth - 1)
         {
             cardinalsPoints.Add("North");
         }
@@ -234,19 +249,14 @@ public class LevelGenerator : MonoBehaviour
     /// <returns>The room at this place</returns>
     GameObject ChooseTheRightRoom(RoomType room)
     {
-        switch (room)
+        return room switch
         {
-            case RoomType.Spawn:
-                return spawnRoom;
-            case RoomType.Shop:
-                return shopRoom;
-            case RoomType.Boss:
-                return bossRoom;
-            case RoomType.Ability:
-                return abilityRoom;
-            default:
-                return ChooseAmongAllRoomsInit();
-        }
+            RoomType.Spawn => spawnRoom,
+            RoomType.Shop => shopRoom,
+            RoomType.Boss => bossRoom,
+            RoomType.Ability => abilityRoom,
+            _ => ChooseAmongAllRoomsInit(),
+        };
     }
 
     /// <summary>
@@ -268,6 +278,9 @@ public class LevelGenerator : MonoBehaviour
         return thisRoom;
     }
 
+    /// <summary>
+    /// Position the boss room in one of the less accessible room of the level
+    /// </summary>
     void PlacingBossRoom()
     {
         List<Vector2> coordinates = new List<Vector2>();
@@ -292,10 +305,13 @@ public class LevelGenerator : MonoBehaviour
             }
         }
         Vector2 bossRoom = coordinates[Random.Range(0,coordinates.Count)];
-        rooms.Remove(bossRoom);
+        roomsWithChest.Remove(bossRoom);
         level[(int)bossRoom.x,(int)bossRoom.y] = RoomType.Boss;
     }
 
+    /// <summary>
+    /// Position all special rooms except the boss one
+    /// </summary>
     void PlacingOtherRooms()
     {
         while (nbAbilityAsked>abilityRoomCreated)
@@ -304,7 +320,7 @@ public class LevelGenerator : MonoBehaviour
             int width = Random.Range(0, levelWidth);
             if (level[height, width] == RoomType.Room)
             {
-                rooms.Remove(new Vector2(height, width));
+                roomsWithChest.Remove(new Vector2(height, width));
                 level[height, width] = RoomType.Ability;
                 abilityRoomCreated++;
             }
@@ -315,18 +331,21 @@ public class LevelGenerator : MonoBehaviour
             int width = Random.Range(0, levelWidth);
             if (level[height, width] == RoomType.Room)
             {
-                rooms.Remove(new Vector2(height, width));
+                roomsWithChest.Remove(new Vector2(height, width));
                 level[height, width] = RoomType.Shop;
                 shopRoomCreated++;
             }
         }
     }
 
+    /// <summary>
+    /// Position all the chest in the level
+    /// </summary>
     void PlaceChestRooms()
     {
-        while (rooms.Count > nbChestRoomsAsked)
+        while (roomsWithChest.Count > nbChestRoomsAsked)
         {
-            rooms.Remove(rooms[Random.Range(0, rooms.Count-1)]);
+            roomsWithChest.Remove(roomsWithChest[Random.Range(0, roomsWithChest.Count-1)]);
         }
     }
 }

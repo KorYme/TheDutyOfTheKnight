@@ -7,14 +7,17 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
-    [SerializeField]
-    private AudioMixerGroup audioMixerGroup;
+    [Header("Main Mixer")]
+    [SerializeField] private AudioMixerGroup audioMixerGroup;
+    
+    [Header("All the clips")]
+    [SerializeField] private Sounds[] sounds;
 
-    public Sounds[] sounds;
     private Sounds currentSoundtrack;
     private string nextSoundtrack;
     private List<Sounds> liSTCurrentlyPlayed;
 
+    //Singleton initialization
     private void Awake()
     {
         if (instance != null)
@@ -27,6 +30,9 @@ public class AudioManager : MonoBehaviour
         liSTCurrentlyPlayed = new List<Sounds>();
     }
 
+    /// <summary>
+    /// Create an audio source for each clip and set it with the right parameter
+    /// </summary>
     void InitializeAllClips()
     {
         foreach (Sounds s in sounds)
@@ -50,13 +56,17 @@ public class AudioManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (currentSoundtrack !=null ? !currentSoundtrack.source.isPlaying : false)
+        if (currentSoundtrack != null ? !currentSoundtrack.source.isPlaying : currentSoundtrack != null)
         {
             PlayClip(nextSoundtrack);
         }
         IncreaseOrDecreaseVolumeOtherST();
     }
 
+    /// <summary>
+    /// Play a clip
+    /// </summary>
+    /// <param name="name">The name of the clip</param>
     public void PlayClip(string name)
     {
         if (name == "")
@@ -82,6 +92,9 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
+    /// <summary>
+    /// Switch between two soundtracks with a downscaling effect
+    /// </summary>
     void IncreaseOrDecreaseVolumeOtherST()
     {
         for (int i = 0; i < liSTCurrentlyPlayed.Count; i++)
@@ -106,6 +119,9 @@ public class AudioManager : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Stop every soundtracks with a downscaling effect
+    /// </summary>
     public void StopAllSoundTrack()
     {
         currentSoundtrack = null;
@@ -119,6 +135,9 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Stop every clips immediately
+    /// </summary>
     public void StopAllClips()
     {
         foreach (Sounds s in sounds)

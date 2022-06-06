@@ -1,12 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Script managing the "E" key under the player
+/// </summary>
 public class Interaction_Player : MonoBehaviour
 {
     public static Interaction_Player instance;
-
+    //Singleton initialization
     private void Awake()
     {
         if (instance != null)
@@ -22,7 +24,7 @@ public class Interaction_Player : MonoBehaviour
     private float interactions;
 
     [Header("List with tag for interaction")]
-    public List<string> allTags;
+    [SerializeField] private List<string> allTags;
 
     private void Start()
     {
@@ -33,6 +35,9 @@ public class Interaction_Player : MonoBehaviour
         UI_Player.SetActive(false);
     }
 
+    /// <summary>
+    /// Simulate the exit from the range of an interactable object
+    /// </summary>
     public void ForceExit()
     {
         if (interactions > 0)
@@ -41,16 +46,27 @@ public class Interaction_Player : MonoBehaviour
             if (interactions <= 0)
             {
                 interactions = 0;
-                UI_Player?.SetActive(false);
+                if (UI_Player != null)
+                {
+                    UI_Player.SetActive(false);
+                }
             }
         }
     }
 
+    /// <summary>
+    /// Fill the "E" key to render a completion
+    /// </summary>
+    /// <param name="value">Percentage of filling</param>
     public void SetImagE(float value)
     {
         imagE.fillAmount = value;
     }
 
+    /// <summary>
+    /// Check if the player is in range of an interactable object
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (allTags.Contains(collision.tag))
@@ -58,11 +74,18 @@ public class Interaction_Player : MonoBehaviour
             interactions++;
             if (interactions > 0)
             {
-                UI_Player?.SetActive(true);
+                if (UI_Player != null)
+                {
+                    UI_Player.SetActive(true);
+                }
             }
         }
     }
 
+    /// <summary>
+    /// Check if the player is not anymore in range of an interactable object
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (allTags.Contains(collision.tag))
@@ -71,7 +94,10 @@ public class Interaction_Player : MonoBehaviour
             if (interactions <= 0)
             {
                 interactions = 0;
-                UI_Player?.SetActive(false);
+                if (UI_Player != null)
+                {
+                    UI_Player.SetActive(false);
+                }
             }
         }
     }

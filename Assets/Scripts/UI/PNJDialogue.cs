@@ -1,15 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script of the PNJs
+/// </summary>
 public class PNJDialogue : MonoBehaviour
 {
     private SpriteRenderer sprite;
     private Transform playerPos;
     private bool isInRange;
     private int sentencesIndex;
-    [SerializeField] private InputData inputData;
     private DialogueManager dialogueManager;
+
+    [SerializeField] private InputData inputData;
     public string namePNJ;
     public SentencesPNJ[] dialogue;
 
@@ -75,17 +77,25 @@ public class PNJDialogue : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Check if the player is in range of a PNJ
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             isInRange = true;
         }
     }
 
+    /// <summary>
+    /// Check if the player is not anymore in range of a PNJ
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             isInRange = false;
             if (dialogueManager.currentPanelUser == gameObject)

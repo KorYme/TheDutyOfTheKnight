@@ -22,12 +22,12 @@ public class BossFight : Enemies
     private float healthBossInitial;
     private float nbMinionsAlive;
 
+    [SerializeField] private InputData inputData;
+
     [Header("To Spawn GameObject")]
     [SerializeField] private GameObject reaperBullet;
     [SerializeField] private GameObject reaperMinion;
 
-    [Header("Inputs")]
-    [SerializeField] public InputData inputData;
 
     [Header("Boss Variables")]
     public float reaperFireBallSpeed;
@@ -266,7 +266,6 @@ public class BossFight : Enemies
     }
 
     /// <summary>
-    /// (NOT USED)
     /// Play the second ability of the boss
     /// </summary>
     void BossAbility2()
@@ -376,7 +375,7 @@ public class BossFight : Enemies
     /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             isInRange = true;
         }
@@ -389,7 +388,7 @@ public class BossFight : Enemies
     /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             isInRange = false;
             firstInteraction = true;

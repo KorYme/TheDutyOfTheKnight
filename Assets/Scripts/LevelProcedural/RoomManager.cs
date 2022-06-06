@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script managing all the behaviour related to the rooms
+/// </summary>
 public class RoomManager : MonoBehaviour
 {
     public static RoomManager instance;
-
+    //Singleton initialization
     private void Awake()
     {
         if (instance != null)
@@ -61,6 +64,9 @@ public class RoomManager : MonoBehaviour
         heroAbility.fireUnlocked = true;
     }
 
+    /// <summary>
+    /// Change all the variables related to the current room
+    /// </summary>
     public void ChangingRoom()
     {
         camPos = Camera.main.transform.position;
@@ -76,6 +82,9 @@ public class RoomManager : MonoBehaviour
         AreEnemiesIn();
     }
 
+    /// <summary>
+    /// Activates all the enemies in the room
+    /// </summary>
     public void ActivateEnemies()
     {
         allSpawner = Physics2D.OverlapBoxAll(camPos, camSize, 0f, spawner);
@@ -85,6 +94,9 @@ public class RoomManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Activate all the objects in the shop
+    /// </summary>
     void ActivateObjects()
     {
         if (IsItShop())
@@ -148,11 +160,6 @@ public class RoomManager : MonoBehaviour
             OpenOrCloseTheDoors(true);
             OpenTheChestInTheRoom();
         }
-    }
-
-    public bool IsNotInFight()
-    {
-        return Physics2D.OverlapBox(camPos, camSize, 0f, enemyLayer) == null;
     }
 
     /// <summary>
@@ -236,11 +243,18 @@ public class RoomManager : MonoBehaviour
         return Physics2D.OverlapBox(camPos, camSize, 0f, shopLayer);
     }
 
+    /// <summary>
+    /// Take the merchant inthe room
+    /// </summary>
+    /// <returns>The merchant gameobject</returns>
     public GameObject GiveMeMerchant()
     {
         return Physics2D.OverlapBox(camPos, camSize, 0f, shopLayer).gameObject;
     }
 
+    /// <summary>
+    /// Respawn the player in the room and on the closest respawn point
+    /// </summary>
     public void RespawnInRoom()
     {
         float dist = 2000f;
@@ -254,7 +268,6 @@ public class RoomManager : MonoBehaviour
             }
         }
         player.transform.position = tpPlace;
-        HeroMovement.instance.AllowMovement(true);
         HeroStats.instance.invincibility = false;
         HeroStats.instance.TakeDamageHero(voidDamage);
         EnemiesMoveEnable(true);

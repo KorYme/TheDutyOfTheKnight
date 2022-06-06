@@ -6,8 +6,8 @@ using UnityEngine;
 public class AnimationFunctions : MonoBehaviour
 {
     [Header ("Enemies GameObjects")]
-    [SerializeField] public Skeleton skeleton;
-    [SerializeField] public Host host;
+    [SerializeField] private Skeleton skeleton;
+    [SerializeField] private Host host;
 
     /// <summary>
     /// Call the HasHitted function -

@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Script managing all the behaviour related to the inventory panel
+/// </summary>
 public class InventoryPanel : MonoBehaviour
 {
     public static InventoryPanel instance;
-
+    //Singleton initialization
     private void Awake()
     {
         if (instance != null)
@@ -17,15 +18,16 @@ public class InventoryPanel : MonoBehaviour
         instance = this;
     }
 
+    private Animator animator;
+    private bool isMoving;
+    private bool inventoryOpen;
+    private float timeToClose;
+
     [SerializeField] private InputData inputData;
     [SerializeField] private PlayerInventory playerInventory;
     [SerializeField] private TMP_Text[] inventoryCount;
     [SerializeField] private TMP_Text textInventory;
-    private Animator animator;
-    private bool isMoving;
-    private bool inventoryOpen;
-    public float initialTimeToClose;
-    private float timeToClose;
+    [SerializeField] private float initialTimeToClose;
 
     void Start()
     {
@@ -85,11 +87,18 @@ public class InventoryPanel : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Allow the inventory panel to be moved again -
+    /// Called at the end of the opening and closing animations
+    /// </summary>
     public void StopMovement()
     {
         isMoving = false;
     }
 
+    /// <summary>
+    /// Update the number of items in the inventory
+    /// </summary>
     public void UpdateInventory()
     {
         inventoryCount[0].text = playerInventory.nbCoins.ToString();

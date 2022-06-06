@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script managing the scene and the level
+/// </summary>
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
 
+    //Singleton initialization
     private void Awake()
     {
         if (instance != null)
@@ -16,13 +18,18 @@ public class LevelManager : MonoBehaviour
         instance = this;
     }
 
-    [HideInInspector] public GameObject pauseMenuUI;
-    public LevelGenerator levelGenerator;
-    public GameObject hud;
-    public GameObject endGameMenu;
-    public InputData inputData;
-    [HideInInspector] public bool pauseMenu;
+    private LevelGenerator levelGenerator;
+
+    [Header ("Inputs Data")]
+    [SerializeField] private InputData inputData;
+
+    [Header ("GameObjects to fill")]
     [SerializeField] private GameObject theBigGrid;
+    [SerializeField] private GameObject hud;
+    [SerializeField] private GameObject endGameMenu;
+
+    [HideInInspector] public GameObject pauseMenuUI;
+    [HideInInspector] public bool pauseMenu;
 
     private void Start()
     {
@@ -44,6 +51,9 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Destroy every gameobjects in the level and create a new level
+    /// </summary>
     public void Recreatelevel()
     {
         foreach (Transform item in theBigGrid.transform)
@@ -63,6 +73,9 @@ public class LevelManager : MonoBehaviour
         levelGenerator.CreatingLevel();
     }
 
+    /// <summary>
+    /// Pause or unpause the game
+    /// </summary>
     public void PauseAndUnpause()
     {
         pauseMenu = !pauseMenu;
@@ -70,11 +83,17 @@ public class LevelManager : MonoBehaviour
         InvertTime();
     }
 
+    /// <summary>
+    /// Invert the time scale
+    /// </summary>
     public void InvertTime()
     {
         Time.timeScale = Mathf.Abs(Time.timeScale - 1f);
     }
 
+    /// <summary>
+    /// Display the end game menu
+    /// </summary>
     public void EndGameMenu()
     {
         hud.SetActive(false);
