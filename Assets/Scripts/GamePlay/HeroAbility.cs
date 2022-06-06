@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script with all the player's abilities
+/// </summary>
 public class HeroAbility : MonoBehaviour
 {
     public static HeroAbility instance;
+    //Singleton initialization
     private void Awake()
     {
         instance = null;
@@ -31,24 +35,24 @@ public class HeroAbility : MonoBehaviour
     public float cooldownEarth;
 
     [Header("KeyCodes")]
-    public InputData inputData;
+    [SerializeField] private InputData inputData;
 
     [Header("To Define Values")]
-    public HeroStats heroStats;
-    public GameObject fireBall;
-    public GameObject explosion;
-    public float fireBallSpeed;
-    public float radiusCharacter;
-    public float knockBackFireBall;
-    public float dashTime;
-    public bool isDashing;
-    public LayerMask enemyLayer;
-    public LayerMask cantTPLayer;
+    [SerializeField] private HeroStats heroStats;
+    [SerializeField] private GameObject fireBall;
+    [SerializeField] private GameObject explosion;
+    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private LayerMask cantTPLayer;
+    [SerializeField] private float fireBallSpeed;
+    [SerializeField] private float radiusCharacter;
+    [SerializeField] private float knockBackFireBall;
+    [SerializeField] private float dashTime;
 
     [HideInInspector] public bool shieldOpen;
     [HideInInspector] public bool damagingShield;
     [HideInInspector] public Vector3 cursorPosition;
     [HideInInspector] public Vector3 tpPosition;
+    private bool isDashing;
     private bool explosionWithTP;
     private float dashDistance;
     private Vector2 destinationDash;
@@ -233,6 +237,9 @@ public class HeroAbility : MonoBehaviour
 
     //OTHER FUNCTIONS FOR ABILITY
 
+    /// <summary>
+    /// Disable all the effects of the dash
+    /// </summary>
     public void EndDash()
     {
         isDashing = false;
@@ -283,6 +290,10 @@ public class HeroAbility : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Teleport the player to the newposition and play the explosion if needed -
+    /// Called between the fade and the reappear animation of the TP
+    /// </summary>
     public void TP()
     {
         transform.position = tpPosition;
@@ -299,12 +310,20 @@ public class HeroAbility : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Allow the player to move again -
+    /// Called at the end of the reappear animation 
+    /// </summary>
     public void TPEnded()
     {
         HeroMovement.instance.canPlayerMove = true;
         RoomManager.instance.EnemiesMoveEnable(true);
     }
 
+    /// <summary>
+    /// Check if the player has touched an enemy while dashing and deal damage to him if it's the case
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isDashing)
@@ -317,7 +336,7 @@ public class HeroAbility : MonoBehaviour
     }
 
     /// <summary>
-    /// Update the cooldowns aftter an upgrade
+    /// Update the cooldowns after an upgrade
     /// </summary>
     public void UpgradeCD(TotemsData totemsData)
     {

@@ -402,7 +402,7 @@ MonoBehaviour:
     soundtrack: 0
     nextSoundName: 
     source: {fileID: 0}
-  - name: DamageEnemies
+  - name: DamageEnemy
     clip: {fileID: 8300000, guid: 74e0ba1dec0acf64388d5725236761b1, type: 3}
     volume: 0.15
     pitch: 1

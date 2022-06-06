@@ -1,12 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script of the skull -
+/// Inherit from the Enemies class
+/// </summary>
 public class Skull : Enemies
 {
+    [SerializeField] private bool canDash;
     public float coolDownDashSkull;
     public float distanceToDetect;
-    [SerializeField]public bool canDash;
     public Rigidbody2D rb;
     private Vector2 direction;
     public LayerMask obstacles;
@@ -15,7 +18,7 @@ public class Skull : Enemies
     protected override void Start()
     {
         base.Start();
-        StartCoroutine(CoolDown(1f));
+        StartCoroutine(CoolDown(Random.Range(1f, 2f)));
     }
 
     protected override void FixedUpdate()
@@ -31,6 +34,9 @@ public class Skull : Enemies
         }
     }
 
+    /// <summary>
+    /// Make the skull dash in the direction of the player
+    /// </summary>
     void Dash()
     {
         StartCoroutine(CoolDown(coolDownDashSkull));
@@ -45,11 +51,17 @@ public class Skull : Enemies
         rb.velocity = direction * enemySpeed;
     }
 
+    /// <inheritdoc />
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
     }
 
+    /// <summary>
+    /// Wait before giving the permission to the skull to dash again
+    /// </summary>
+    /// <param name="cd">Time to wait</param>
+    /// <returns>Time to wait</returns>
     IEnumerator CoolDown(float cd)
     {
         canDash = false;
@@ -60,6 +72,7 @@ public class Skull : Enemies
         canDash = true;
     }
 
+    /// <inheritdoc />
     protected override void IsDying()
     {
         base.IsDying();
@@ -68,12 +81,14 @@ public class Skull : Enemies
         animator.SetTrigger("Dying");
     }
 
+    /// <inheritdoc />
     public override void StartMoving()
     {
         base.StartMoving();
         rb.velocity = initialVelocity;
     }
 
+    /// <inheritdoc />
     public override void StopMoving()
     {
         base.StopMoving();
@@ -81,6 +96,10 @@ public class Skull : Enemies
         rb.velocity = Vector2.zero;
     }
 
+    /// <summary>
+    /// I tried to make it bounce against wall
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (obstacles == (obstacles | (1 << collision.gameObject.layer)))

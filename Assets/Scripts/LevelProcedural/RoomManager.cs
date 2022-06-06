@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class RoomManager : MonoBehaviour
 {
@@ -19,6 +18,10 @@ public class RoomManager : MonoBehaviour
 
     private HeroAbility heroAbility;
     private GameObject player;
+    private Collider2D[] theClosedDoorsHere, theOpenedDoorsHere, insideEnemies, allSpawner, theClosedDoorsBoss;
+    private Collider2D enemiesIn;
+    private Transform lightsBoss;
+    private Vector2 camPos, camSize;
 
     [Header ("Filling values")]
     [SerializeField] private InputData inputData;
@@ -37,10 +40,6 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private LayerMask chestLayer;
     [SerializeField] private LayerMask miniMapBlocks;
     [SerializeField] private LayerMask objectsLayer;
-
-    private Collider2D[] theClosedDoorsHere, theOpenedDoorsHere, insideEnemies, allSpawner, theClosedDoorsBoss;
-    private Collider2D enemiesIn;
-    private Vector2 camPos, camSize;
 
     void Start()
     {
@@ -108,6 +107,7 @@ public class RoomManager : MonoBehaviour
         if (levelGenerator.level[(int)CameraFollow.instance.playerCoordinates.x, (int)CameraFollow.instance.playerCoordinates.y] == LevelGenerator.RoomType.Boss)
         {
             theClosedDoorsHere = theClosedDoorsBoss;
+            lightsBoss = theClosedDoorsBoss[0].transform.parent.parent.Find("Lights");
         }
         if (that)
         {
@@ -258,5 +258,18 @@ public class RoomManager : MonoBehaviour
         HeroStats.instance.invincibility = false;
         HeroStats.instance.TakeDamageHero(voidDamage);
         EnemiesMoveEnable(true);
+    }
+
+    /// <summary>
+    /// Turn on the boss lights one by one
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator BossLights()
+    {
+        foreach (Transform item in lightsBoss)
+        {
+            item.GetComponent<Animator>().SetTrigger("TurnOn");
+            yield return new WaitForSeconds(0.75f);
+        }
     }
 }

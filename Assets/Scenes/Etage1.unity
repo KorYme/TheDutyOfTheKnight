@@ -11656,10 +11656,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5332987533604518572, guid: bb4e862b8200e78478ef8426c59b641a, type: 3}
-      propertyPath: sounds.Array.data[51].name
-      value: DamageEnemy
-      objectReference: {fileID: 0}
     - target: {fileID: 5332987533604518575, guid: bb4e862b8200e78478ef8426c59b641a, type: 3}
       propertyPath: m_Name
       value: AudioManager

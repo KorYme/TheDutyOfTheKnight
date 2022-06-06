@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script which manages all the sword attack of the player
+/// </summary>
 public class HeroHits : MonoBehaviour
 {
     public static HeroHits instance;
-
+    //Singleton initialization
     private void Awake()
     {
         if (instance != null)
@@ -17,30 +18,27 @@ public class HeroHits : MonoBehaviour
     }
 
     [Header("Input Data")]
-    public InputData inputdata;
+    [SerializeField] private InputData inputdata;
 
     [Header ("Hits Variables")]
-    public float heroRange;
-    public LayerMask enemyLayers;
-    public LayerMask fireballLayer;
-
-    [SerializeField][HideInInspector] public Vector3 worldPosition;
-    private Animator animator;
-    private float horizontalCursor;
-    private float verticalCursor;
-    private Camera cam;
-
+    [SerializeField] private LayerMask enemyLayers;
+    [SerializeField] private LayerMask fireballLayer;
+    [SerializeField] private float heroRange;
+    
     [Header ("Animator System")]
     public float reloadTime;
     public bool isInReloadTime;
 
-    //Points System
+    private CoolDownManager coolDownManager;  
+    private Camera cam;
+    private Animator animator;
+    [HideInInspector] public Vector3 worldPosition;
     [HideInInspector] public string direction;
-    private CoolDownManager coolDownManager;    
+    private float horizontalCursor;
+    private float verticalCursor;
 
     void Start()
     {
-        //Variable definition
         animator = GetComponent<Animator>();
         cam = Camera.main;
         isInReloadTime = false;
@@ -57,6 +55,9 @@ public class HeroHits : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Send the direction the player is looking at to the animator
+    /// </summary>
     void LookingAtDirection()
     {
         //Check the mouse coordinates in the world space
@@ -117,7 +118,10 @@ public class HeroHits : MonoBehaviour
         coolDownManager.ResetCoolDown("Hit");
         coolDownManager.DisplayRefreshKeyButton();
     }
-
+    
+    /// <summary>
+    /// Deal the damage to the enemies in the range of the attack
+    /// </summary>
     void HasHitted()
     {
         AudioManager.instance.PlayClip("SwordSwing" + Random.Range(1,6));

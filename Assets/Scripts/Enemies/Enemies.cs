@@ -1,29 +1,29 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// Parent class of every enemy class
+/// </summary>
 public class Enemies : MonoBehaviour
 {
-    //Useful access to others classes and objects
-
     protected GameObject player;
+    [HideInInspector] public bool dead = false;
 
     [Header("Enemy Variables")]
-    [HideInInspector] public bool dead = false;
-    public float enemyHP = 10f;
-    public float enemyDamage = 0f;
-    public float enemySpeed = 0f;
-    public SpriteRenderer sprite;
     public Animator animator;
-    public bool invulnerable = false;
-    public bool isTouchDamage = true;
-    public bool canMove;
+    public SpriteRenderer sprite;
     public Slider slider;
     public GameObject[] drops;
     public LayerMask playerLayer;
+    public float enemyHP = 10f;
+    public float enemyDamage = 0f;
+    public float enemySpeed = 0f;
+    public bool invulnerable = false;
+    public bool isTouchDamage = true;
+    public bool canMove;
     
-
     protected virtual void Start()
     {
         player = HeroStats.instance.gameObject;
@@ -45,6 +45,9 @@ public class Enemies : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Check if the player has touched this enemy and if the enemy's hitbox deal damage if it's true, damage the player
+    /// </summary>
     protected virtual void DamagingHero()
     {
         if (isTouchDamage && GetComponent<Collider2D>().IsTouching(player.GetComponent<Collider2D>()) && canMove)
@@ -53,6 +56,10 @@ public class Enemies : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Deal damage to this enemy
+    /// </summary>
+    /// <param name="damage">Number of damage</param>
     public virtual void TakeDamage(float damage)
     {
         if (dead)
@@ -74,23 +81,36 @@ public class Enemies : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Allow this enemy to move and to be animated
+    /// </summary>
     public virtual void StartMoving()
     {
         canMove = true;
         animator.speed = 1;
     }
 
+    /// <summary>
+    /// Stop the movement of this enemy and the animation too
+    /// </summary>
     public virtual void StopMoving()
     {
         canMove = false;
         animator.speed = 0;
     }
 
+    /// <summary>
+    /// Toggle this enemy invulnerability
+    /// </summary>
     protected virtual void ToggleInvulnerability()
     {
         invulnerable = !invulnerable;
     }
 
+    /// <summary>
+    /// Create a feedback when the enemy is touched
+    /// </summary>
+    /// <returns>Time of the stagger animation</returns>
     protected virtual IEnumerator Stagger()
     {
         sprite.color = new Color(255, 0, 0);
@@ -98,6 +118,9 @@ public class Enemies : MonoBehaviour
         sprite.color = new Color(255, 255, 255);
     }
 
+    /// <summary>
+    /// Play the dying animation and make the enemy harmless
+    /// </summary>
     protected virtual void IsDying()
     {
         dead = true;
@@ -112,6 +135,10 @@ public class Enemies : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Drop items on the position of the enemy
+    /// </summary>
+    /// <param name="nbItems">Number of drops to spawn</param>
     protected virtual void DropItems(int nbItems)
     {
         if (drops.Length != 0)
@@ -132,6 +159,12 @@ public class Enemies : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Check if an item can spawn
+    /// </summary>
+    /// <param name="position">The position where the item is gonna spawn</param>
+    /// <param name="gameObject">The item to instantiate</param>
+    /// <returns></returns>
     protected bool CanPopItem(Vector3 position, GameObject gameObject)
     {
         foreach (Collider2D item in Physics2D.OverlapCircleAll(position, gameObject.GetComponent<CircleCollider2D>().radius))
@@ -144,6 +177,10 @@ public class Enemies : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Disable all the enemy behaviour
+    /// Called when the player dies or kills the boss
+    /// </summary>
     protected virtual void StopPlaying()
     {
         if (transform.Find("Canvas") != null)
@@ -159,6 +196,10 @@ public class Enemies : MonoBehaviour
         enemySpeed = 0;
     }
 
+    /// <summary>
+    /// Destroy the enemy -
+    /// Called at the end of the dying animation of this enemy
+    /// </summary>
     protected virtual void Die()
     {
         Destroy(gameObject);

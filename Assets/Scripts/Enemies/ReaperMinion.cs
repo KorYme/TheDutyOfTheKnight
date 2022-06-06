@@ -1,7 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script of the boss' minions -
+/// Inherit from the Enemies class
+/// </summary>
 public class ReaperMinion : Enemies
 {
     private BossFight boss;
@@ -18,17 +20,23 @@ public class ReaperMinion : Enemies
         enemyDamage = boss.reaperMinionBallDamage;
     }
 
+    /// <summary>
+    /// Allow the minion to move
+    /// Called after it spawns
+    /// </summary>
     public void HasBeenLaunched()
     {
         launched = true;
     }
 
+    /// <inheritdoc />
     protected override void StopPlaying()
     {
         base.StopPlaying();
         Destroy(transform.Find("ColliderBounce").gameObject);
     }
 
+    /// <inheritdoc />
     protected override void IsDying()
     {
         dead = true;

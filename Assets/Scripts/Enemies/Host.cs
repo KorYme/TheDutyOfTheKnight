@@ -1,14 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script of the host -
+/// Inherit from the Enemies class
+/// </summary>
 public class Host : Enemies
 {
     [Header ("Host Special Variables")]
-    [SerializeField] public GameObject fireBall;
-    [SerializeField] public float fireBallSpeed;
-    [SerializeField] public Transform shotPoint;
-
+    [SerializeField] private GameObject fireBall;
+    [SerializeField] private Transform shotPoint;
+    [SerializeField] private float fireBallSpeed;
 
     protected override void Start()
     {
@@ -17,14 +19,19 @@ public class Host : Enemies
         isTouchDamage = false;
     }
 
+    /// <summary>
+    /// Launch a fireball in the direction of the player
+    /// </summary>
     public void FireBallCast()
     {
         GameObject bulletLaunch = Instantiate(fireBall, shotPoint.position, Quaternion.identity);
         bulletLaunch.GetComponent<FireBall>().SetDirection((player.transform.position - transform.position).normalized);
         bulletLaunch.GetComponent<FireBall>().fireBallSpeed = fireBallSpeed;
         bulletLaunch.GetComponent<FireBall>().fireBallDamage = enemyDamage;
+        AudioManager.instance.PlayClip("EnemyFireBall");
     }
 
+    /// <inheritdoc/>
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
@@ -34,13 +41,18 @@ public class Host : Enemies
         }
     }
 
-    protected virtual IEnumerator NoStagger()
+    /// <summary>
+    /// Create a feedback when the enemy is touched but invicible
+    /// </summary>
+    /// <returns>Time of the no stagger animation</returns>
+    protected IEnumerator NoStagger()
     {
         sprite.color = Color.gray;
         yield return new WaitForSeconds(0.1f);
         sprite.color = new Color(255, 255, 255);
     }
 
+    /// <inheritdoc/>
     protected override void IsDying()
     {
         base.IsDying(); 

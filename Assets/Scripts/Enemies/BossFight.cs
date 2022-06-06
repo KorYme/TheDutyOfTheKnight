@@ -1,14 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
+/// <summary>
+/// Script of the boss -
+/// Inherit from the Enemies class
+/// </summary>
 public class BossFight : Enemies
 {
+    private DialogueManager dialogueManager;
+    private GameObject healthBar;
     private Transform hitPoint1;
     private Transform hitPoint2;
     private SpriteRenderer shieldSprite;
-    private GameObject healthBar;
     private CapsuleCollider2D bossCollider;
     private CircleCollider2D rangeCollider;
     private bool hasFightStarted;
@@ -18,9 +21,8 @@ public class BossFight : Enemies
     private bool secondInteraction;
     private float healthBossInitial;
     private float nbMinionsAlive;
-    private DialogueManager dialogueManager;
 
-    [Header("Useful GameObject")]
+    [Header("To Spawn GameObject")]
     [SerializeField] private GameObject reaperBullet;
     [SerializeField] private GameObject reaperMinion;
 
@@ -42,6 +44,9 @@ public class BossFight : Enemies
         DisableBossStart();
     }
 
+    /// <summary>
+    /// Initialize all the values
+    /// </summary>
     void InitializeValues()
     {
         base.Start();
@@ -60,11 +65,14 @@ public class BossFight : Enemies
         isInRange = false;
         firstInteraction = true;
         secondInteraction = true;
+        invulnerable = true;
         healthBossInitial = enemyHP;
         nbMinionsAlive = 0;
-        invulnerable = true;
     }
 
+    /// <summary>
+    /// Make the boss inactive
+    /// </summary>
     void DisableBossStart()
     {
         bossCollider.enabled = false;
@@ -72,6 +80,9 @@ public class BossFight : Enemies
         tag = "SleepingBoss";
     }
 
+    /// <summary>
+    /// Play the summon animation and close the door
+    /// </summary>
     public void Summoning()
     {
         Destroy(transform.Find("SleepingBossHitBox").gameObject);
@@ -84,8 +95,12 @@ public class BossFight : Enemies
         hasFightStarted=true;
         tag = "Boss";
         AudioManager.instance.PlayClip("BossTheme");
+        StartCoroutine(RoomManager.instance.BossLights());
     }
 
+    /// <summary>
+    /// Enable the the boss for the fight
+    /// </summary>
     void StartFight()
     {
         canMove = true;
@@ -161,6 +176,10 @@ public class BossFight : Enemies
         }
     }
 
+    /// <summary>
+    /// Allow the boss to play its first attack
+    /// </summary>
+    /// <returns>Time between each call</returns>
     IEnumerator Ability1Manager()
     {
         yield return new WaitForSeconds(timeBetweenAbility1);
@@ -168,7 +187,9 @@ public class BossFight : Enemies
         StartCoroutine(Ability1Manager());
     }
 
-
+    /// <summary>
+    /// Move the boss towards the player position
+    /// </summary>
     void DirectionBoss()
     {
         if (transform.position.x > player.transform.position.x)
@@ -184,6 +205,9 @@ public class BossFight : Enemies
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, enemySpeed * Time.fixedDeltaTime);
     }
 
+    /// <summary>
+    /// Check if the player is in range of the boss melee attack
+    /// </summary>
     void IsPlayerInRange()
     {
         if (Physics2D.OverlapCircle(hitPoint1.position, 1.5f, playerLayer) != null)
@@ -193,23 +217,37 @@ public class BossFight : Enemies
         }
     }
 
+    /// <summary>
+    /// Allow the boss to move and use its ability - 
+    /// Called at the first frame of the idle animation
+    /// </summary>
     void IdleAnimation()
     {
         canMove = true;
     }
 
+    /// <summary>
+    /// Reset the trigger for the boss abilities -
+    /// Called at the end of each ability and attack of the boss
+    /// </summary>
     void HasAttacked()
     {
         animator.ResetTrigger("Attack");
         animator.ResetTrigger("Ability1");
     }
 
+    /// <summary>
+    /// Play the first melee attack of the boss
+    /// </summary>
     void AttackBoss1()
     {
         if (Physics2D.OverlapCircle(hitPoint1.position, 1.6f, playerLayer) != null)
             HeroStats.instance.TakeDamageHero(enemyDamage);
     }
 
+    /// <summary>
+    /// Play the second melee attack of the boss
+    /// </summary>
     void AttackBoss2()
     {
 
@@ -217,6 +255,9 @@ public class BossFight : Enemies
             HeroStats.instance.TakeDamageHero(enemyDamage);
     }
 
+    /// <summary>
+    /// Play the first ability of the boss
+    /// </summary>
     void BossAbility1()
     {
         animator.SetTrigger("Ability1");
@@ -224,6 +265,10 @@ public class BossFight : Enemies
         bossAbility1 = false;
     }
 
+    /// <summary>
+    /// (NOT USED)
+    /// Play the second ability of the boss
+    /// </summary>
     void BossAbility2()
     {
         canMove = false;
@@ -233,7 +278,8 @@ public class BossFight : Enemies
 
     /// <summary>
     /// The boss launches 8 bullets which deals damage to the player
-    /// The bullets spawn on the boss transform and go in a cardinal direction
+    /// The bullets spawn on the boss transform and go in a cardinal direction -
+    /// Called at the beginning of the first ability
     /// </summary>
     protected void LaunchBullets()
     {
@@ -250,6 +296,9 @@ public class BossFight : Enemies
         }
     }
 
+    /// <summary>
+    /// Create four minions at the beginning of the second phase
+    /// </summary>
     protected void SpawnMinion()
     {
         for (int i = -1; i < 2; i+=2)
@@ -264,6 +313,9 @@ public class BossFight : Enemies
         }
     }
 
+    /// <summary>
+    /// Check if all the minions are dead and disable the shield of the boss if it's true
+    /// </summary>
     public void AreMinionsStillAlive()
     {
         nbMinionsAlive--;
@@ -274,6 +326,7 @@ public class BossFight : Enemies
         }
     }
 
+    /// <inheritdoc />
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
@@ -281,6 +334,10 @@ public class BossFight : Enemies
             animator.SetBool("Phase2", true);
     }
 
+    /// <summary>
+    /// Launch the second phase
+    /// Called at the moment the boss is mid-life
+    /// </summary>
     protected void Phase2()
     {
         canMove = false;
@@ -293,6 +350,7 @@ public class BossFight : Enemies
         reaperBullet.GetComponent<ReaperBullet>().enemyDamage *= multiplierDamagePhase2;
     }
 
+    /// <inheritdoc />
     protected override void IsDying()
     {
         animator.speed /= multiplierSpeedPhase2;
@@ -302,6 +360,7 @@ public class BossFight : Enemies
         HeroStats.instance.StopHero();
     }
 
+    /// <inheritdoc />
     protected override void Die()
     {
         animator.ResetTrigger("Death");
@@ -311,6 +370,10 @@ public class BossFight : Enemies
         AudioManager.instance.PlayClip("VictoryTheme");
     }
 
+    /// <summary>
+    /// Check if the player is in range of the boss
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
@@ -319,6 +382,11 @@ public class BossFight : Enemies
         }
     }
 
+    /// <summary>
+    /// Check if the player is not anymore in the range of the boss.
+    /// Disable the dialogue panel, it's open
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.tag == "Player")

@@ -1,14 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script of the boss' bullets -
+/// Inherit from the Enemies class
+/// </summary>
 public class ReaperBullet : Enemies
 {
-    public Vector2 direction;
-    bool launched;
-    BossFight boss;
-    public LayerMask obstacles;
-    public LayerMask targets;
+    private BossFight boss;
+    private bool launched;
+    [HideInInspector] public Vector2 direction;
+    [Header("Layers to fill")]
+    [SerializeField] private LayerMask obstacles;
+    [SerializeField] private LayerMask targets;
 
     protected override void Start()
     {
@@ -31,6 +34,10 @@ public class ReaperBullet : Enemies
         }
     }
 
+    /// <summary>
+    /// Destroy this enemy when it meets a wall or the player
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (obstacles == (obstacles | (1 << collision.gameObject.layer)))
@@ -44,11 +51,16 @@ public class ReaperBullet : Enemies
         }
     }
 
+    /// <summary>
+    /// Allow the bullets to move -
+    /// Called at the end of its spawn animation
+    /// </summary>
     public void HasBeenLaunched()
     {
         launched = true;
     }
 
+    /// <inheritdoc />
     protected override void IsDying()
     {
         animator.SetTrigger("Death");

@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script to create a bouncing effect on the gameObject
+/// </summary>
 public class BounceEffect : MonoBehaviour
 {
     private GameObject parent;
     private ReaperMinion reaperMinion;
-    private LayerMask obstacles;
     private Rigidbody2D rb;
+    private LayerMask obstacles;
     private Vector3 initialVelocity;
     private Vector3 lastPosition;
     private int frameNoMove;
@@ -21,6 +22,7 @@ public class BounceEffect : MonoBehaviour
         initialVelocity = reaperMinion.direction * reaperMinion.enemySpeed;
         lastPosition = transform.position;
     }
+
     void FixedUpdate()
     {
         if (reaperMinion.launched)
@@ -43,6 +45,10 @@ public class BounceEffect : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Check if this object touches an obstacle and create a bounce effect on it
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (obstacles == (obstacles | (1 << collision.gameObject.layer)))

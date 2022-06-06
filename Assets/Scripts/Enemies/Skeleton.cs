@@ -1,12 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script of the skeleton -
+/// Inherit from the Enemies class
+/// </summary>
 public class Skeleton : Enemies
 {
-    Vector2 lastPos;
-    bool isHitting;
-    string dir;
+    private Vector2 lastPos;
+    private bool isHitting;
+    private string dir;
 
     protected override void Start()
     {
@@ -23,6 +25,9 @@ public class Skeleton : Enemies
         IsPlayerClose();
     }
 
+    /// <summary>
+    /// Send to the animator the direction in which the skeleton is going
+    /// </summary>
     protected void ChooseDirectionRun()
     {
         if (Mathf.Abs(lastPos.y - transform.position.y) < Mathf.Abs(lastPos.x - transform.position.x))
@@ -56,6 +61,9 @@ public class Skeleton : Enemies
         lastPos = transform.position;
     }
 
+    /// <summary>
+    /// Check if the player is close enough from the skeleton
+    /// </summary>
     protected void IsPlayerClose()
     {
         if (Vector3.Distance(transform.position, player.transform.position) <= 1.0f && !isHitting && !dead)
@@ -66,6 +74,9 @@ public class Skeleton : Enemies
         }
     }
 
+    /// <summary>
+    /// Create the damaging zone of the sword with the direction in which the skeleton is looking at
+    /// </summary>
     public void Hit()
     {
         if (dir == "Top")
@@ -96,14 +107,19 @@ public class Skeleton : Enemies
                 player.SendMessage("TakeDamageHero", enemyDamage);
             }
         }
+        AudioManager.instance.PlayClip("EnemySwing" + Random.Range(1, 6));
     }
 
+    /// <summary>
+    /// Allow the skeleton to hit again
+    /// </summary>
     public void HasHitted()
     {
         isHitting = false;
         SendMessage("MoveIA", enemySpeed);
     }
 
+    /// <inheritdoc />
     public override void StartMoving()
     {
         base.StartMoving();
@@ -113,18 +129,21 @@ public class Skeleton : Enemies
         }
     }
 
+    /// <inheritdoc />
     public override void StopMoving()
     {
         base.StopMoving();
         SendMessage("StopMovingIA");
     }
 
+    /// <inheritdoc />
     protected override void StopPlaying()
     {
         base.StopPlaying();
         SendMessage("StopMovingIA");
     }
 
+    /// <inheritdoc />
     protected override void IsDying()
     {
         animator.SetBool("Dying", true);
