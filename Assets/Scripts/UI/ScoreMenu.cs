@@ -58,6 +58,7 @@ public class ScoreMenu : MonoBehaviour
     {
         GameManager.instance.gameLaunched = false;
         HeroMovement.instance.canPlayerMove = false;
+        RoomManager.instance.EnemiesMoveEnable(false);
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneToLoad);
         async.allowSceneActivation = false;
         loadingText.text = "Loading ...";
