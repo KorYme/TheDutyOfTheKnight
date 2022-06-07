@@ -7113,7 +7113,7 @@ MonoBehaviour:
   nbChestRoomsAsked: 6
   spawnX: 0
   spawnY: 0
-  testMode: 1
+  testMode: 0
 --- !u!114 &1358435964
 MonoBehaviour:
   m_ObjectHideFlags: 0

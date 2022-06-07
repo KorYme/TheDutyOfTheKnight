@@ -19,6 +19,11 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject settingsWindow;
     [SerializeField] private string levelToLoad;
 
+    private void Start()
+    {
+        AudioManager.instance.PlayClip("TitleTheme");
+    }
+
     /// <summary>
     /// Launch a game - 
     /// Called on click
