@@ -70,7 +70,6 @@ public class MainMenu : MonoBehaviour
     IEnumerator LoadingNewScene(string sceneToLoad)
     {
         GameManager.instance.gameLaunched = false;
-        HeroMovement.instance.canPlayerMove = false;
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneToLoad);
         async.allowSceneActivation = false;
         loadingText.text = "Loading ...";

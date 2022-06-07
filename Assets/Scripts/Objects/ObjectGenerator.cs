@@ -99,7 +99,7 @@ public class ObjectGenerator : MonoBehaviour
                         {
                             AudioManager.instance.PlayClip("Close");
                             AudioManager.instance.PlayClip("ShopAngry");
-                            dialogueManager.UpdateTheScreen(merchant.namePNJ, "You don't have enough money, you'll need <color=blue>" + (objectData.coinCost - playerInventory.nbCoins).ToString() + "</color>  more coins to buy it !");
+                            dialogueManager.UpdateTheScreen(merchant.namePNJ, "You don't have enough money, you'll need <color=blue>" + (objectData.coinCost - playerInventory.nbCoins).ToString() + "</color> more coins to buy it !");
                             firstTimeTouched = true;
                         }
                         else
