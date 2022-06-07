@@ -93,8 +93,9 @@ public class MainMenu : MonoBehaviour
                 loadingText.text = "Press any key to continue";
                 if (Input.anyKey)
                 {
-                    animator.SetTrigger("Close");
+                    AudioManager.instance.PlayClip("ButtonSound");
                     async.allowSceneActivation = true;
+                    animator.SetTrigger("Close");
                 }
             }
             yield return null;

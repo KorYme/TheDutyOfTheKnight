@@ -76,6 +76,7 @@ public class ScoreMenu : MonoBehaviour
                 loadingText.text = "Press any key to continue";
                 if (Input.anyKey)
                 {
+                    AudioManager.instance.PlayClip("ButtonSound");
                     animator.SetTrigger("Close");
                     async.allowSceneActivation = true;
                 }
